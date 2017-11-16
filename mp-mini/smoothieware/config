@@ -144,24 +144,27 @@ temperature_control.bed.designator           B                #
 #temperature_control.bed.max_pwm             64               # max pwm, 64 is a good value if driving a 12v resistor with 24v.
 
 # Switch module for fan control
-switch.fan.enable                            false             #
-switch.fan.input_on_command                  M106             #
-switch.fan.input_off_command                 M107             #
-switch.fan.output_pin                        0.26              #
+switch.part_cooling_fan.enable               true             # Enable this module
+switch.part_cooling_fan.input_on_command     M106             # Command that will turn this switch on
+switch.part_cooling_fan.input_off_command    M107             # Command that will turn this switch off
+switch.part_cooling_fan.output_pin           1.22             # Pin this module controls
+switch.part_cooling_fan.output_type          pwm              # PWM output settable with S parameter in the input_on_comand
+#switch.part_cooling_fan.max_pwm             255              # Set max pwm for the pin default is 255
 
-switch.misc.enable                           false            #
-switch.misc.input_on_command                 M42              #
-switch.misc.input_off_command                M43              #
-switch.misc.output_pin                       1.22              #
+switch.case_fan.enable                       true             # Enable this module
+switch.case_fan.input_on_command             M42              # Command that will turn this switch on
+switch.case_fan.input_off_command            M43              # Command that will turn this switch off
+switch.case_fan.output_pin                   0.26             # Pin this module controls
+switch.case_fan.output_type                  digital          # Digital means this is just an on or off pin
 
 # automatically toggle a switch at a specified temperature. Different ones of these may be defined to monitor different temperatures and switch different swithxes
 # useful to turn on a fan or water pump to cool the hotend
-#temperatureswitch.hotend.enable                true             #
-#temperatureswitch.hotend.designator          T                # first character of the temperature control designator to use as the temperature sensor to monitor
-#temperatureswitch.hotend.switch              misc             # select which switch to use, matches the name of the defined switch
-#temperatureswitch.hotend.threshold_temp      60.0             # temperature to turn on (if rising) or off the switch
-#temperatureswitch.hotend.heatup_poll         15               # poll heatup at 15 sec intervals
-#temperatureswitch.hotend.cooldown_poll       60               # poll cooldown at 60 sec intervals
+temperatureswitch.hotend.enable	             true             # enable this module
+temperatureswitch.hotend.switch              case_fan         # select which MOSFET to use, must match a switch configuration (fan2 below)
+temperatureswitch.hotend.designator          T                # first character of the temperature control designator to use as the temperature sensor to monitor
+temperatureswitch.hotend.threshold_temp      60.0             # temperature to turn on (if rising) or off the switch
+temperatureswitch.hotend.heatup_poll         15               # poll heatup at 15 sec intervals
+temperatureswitch.hotend.cooldown_poll       60               # poll cooldown at 60 sec intervals
 
 # filament out detector
 #filament_detector.enable                     true             #
