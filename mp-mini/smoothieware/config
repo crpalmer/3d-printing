@@ -5,9 +5,9 @@ mm_per_arc_segment                           0.5              # Arcs are cut int
 #mm_per_line_segment                          5                # Lines can be cut into segments ( not usefull with cartesian coordinates robots ).
 
 # Arm solution configuration : Cartesian robot. Translates mm positions into stepper positions
-alpha_steps_per_mm                           80               # Steps per mm for alpha stepper
-beta_steps_per_mm                            80               # Steps per mm for beta stepper
-gamma_steps_per_mm                           80       # Steps per mm for gamma stepper 1637.7953 
+alpha_steps_per_mm                           186.0            # Steps per mm for alpha stepper (1/32 micro-stepping)
+beta_steps_per_mm                            186.0            # Steps per mm for beta stepper (1/32 micro-stepping)
+gamma_steps_per_mm                           2195.0           # Steps per mm for gamma stepper (1/32 micro-stepping)
 
 # Planner module configuration : Look-ahead and acceleration configuration
 planner_queue_size                           32               # DO NOT CHANGE THIS UNLESS YOU KNOW EXACTLY WHAT YOUR ARE DOING
@@ -22,25 +22,25 @@ microseconds_per_step_pulse                  1                # Duration of step
 base_stepping_frequency                      100000           # Base frequency for stepping
 # Stepper module pins ( ports, and pin numbers, appending "!" to the number will invert a pin )
 alpha_step_pin                               2.1              # Pin for alpha stepper step signal
-alpha_dir_pin                                0.11             # Pin for alpha stepper direction
-alpha_en_pin                                 0.10            # Pin for alpha enable pin 0.10
-alpha_current                                1.0             # X stepper current
+alpha_dir_pin                                0.11!            # Pin for alpha stepper direction
+alpha_en_pin                                 0.10             # Pin for alpha enable pin 0.10
+alpha_current                                1.0              # X stepper current
 x_axis_max_speed                             30000            # mm/min
 alpha_max_rate                               30000.0          # mm/min actuator max speed
 
 beta_step_pin                                2.2              # Pin for beta stepper step signal
 beta_dir_pin                                 0.20             # Pin for beta stepper direction
 beta_en_pin                                  0.19             # Pin for beta enable
-beta_current                                 1.0             # Y stepper current
+beta_current                                 1.0              # Y stepper current
 y_axis_max_speed                             30000            # mm/min
 beta_max_rate                                30000.0          # mm/min actuator max speed
 
 gamma_step_pin                               2.3              # Pin for gamma stepper step signal
-gamma_dir_pin                                0.22             # Pin for gamma stepper direction
+gamma_dir_pin                                0.22!            # Pin for gamma stepper direction
 gamma_en_pin                                 0.21             # Pin for gamma enable
 gamma_current                                1.0              # Z stepper current
-z_axis_max_speed                             30000              # mm/min
-gamma_max_rate                               30000.0            # mm/min actuator max speed
+z_axis_max_speed                             200              # mm/min
+gamma_max_rate                               200.0            # mm/min actuator max speed
 
 # Serial communications configuration ( baud rate default to 9600 if undefined )
 uart0.baud_rate                              115200           # Baud rate for the default hardware serial port
@@ -50,7 +50,7 @@ second_usb_serial_enable                     false            # This enables a s
 
 # Extruder module configuration
 extruder.hotend.enable                          true             # Whether to activate the extruder module at all. All configuration is ignored if false
-extruder.hotend.steps_per_mm                    140              # Steps per mm for extruder stepper
+extruder.hotend.steps_per_mm                    204.0            # Steps per mm for extruder stepper
 extruder.hotend.default_feed_rate               600              # Default rate ( mm/minute ) for moves where only the extruder moves
 extruder.hotend.acceleration                    500              # Acceleration for the stepper motor mm/sec²
 extruder.hotend.max_speed                       50               # mm/s
@@ -71,7 +71,7 @@ extruder.hotend.z_offset                        0                # z offset from
 #extruder.hotend.retract_recover_feedrate        8               # recover feedrate in mm/sec (should be less than retract feedrate)
 #extruder.hotend.retract_zlift_length            0               # zlift on retract in mm, 0 disables
 #extruder.hotend.retract_zlift_feedrate          6000            # zlift feedrate in mm/min (Note mm/min NOT mm/sec)
-delta_current                                    1.0                 # Extruder 1 stepper current.
+delta_current                                    0.55            # Extruder 1 stepper current.
 
 # Second extruder module configuration
 extruder.hotend2.enable                          true             # Whether to activate the extruder module at all. All configuration is ignored if false
