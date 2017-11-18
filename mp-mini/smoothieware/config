@@ -191,7 +191,7 @@ alpha_max                                    120              # this gets loaded
 beta_min_endstop                             1.25!            #
 #beta_max_endstop                            1.28^            #
 beta_homing_direction                        home_to_min      #
-beta_min                                     0                #
+beta_min				     -3		      # account for offset bed, may not be needed on most mp-minis.
 beta_max                                     120              #
 gamma_min_endstop                            1.26!            #
 #gamma_max_endstop                           1.29^            #
