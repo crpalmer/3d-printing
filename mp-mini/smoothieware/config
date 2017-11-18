@@ -108,9 +108,9 @@ temperature_control.hotend.set_m_code        104              #
 temperature_control.hotend.set_and_wait_m_code 109            #
 temperature_control.hotend.designator        T                #
 
-#temperature_control.hotend.p_factor          13.7             #
-#temperature_control.hotend.i_factor          0.097            #
-#temperature_control.hotend.d_factor          24               #
+temperature_control.hotend.p_factor          18.2             #
+temperature_control.hotend.i_factor          0.951            #
+temperature_control.hotend.d_factor          87               #
 
 #temperature_control.hotend.max_pwm          64               # max pwm, 64 is a good value if driving a 12v resistor with 24v.
 
@@ -140,6 +140,10 @@ temperature_control.bed.thermistor           Honeywell100K    # see http://smoot
 temperature_control.bed.set_m_code           140              #
 temperature_control.bed.set_and_wait_m_code  190              #
 temperature_control.bed.designator           B                #
+
+temperature_control.bed.p_factor             72.8             #
+temperature_control.bed.i_factor             5.210            #
+temperature_control.bed.d_factor             254              #
 
 #temperature_control.bed.max_pwm             64               # max pwm, 64 is a good value if driving a 12v resistor with 24v.
 
