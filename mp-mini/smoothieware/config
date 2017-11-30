@@ -245,28 +245,27 @@ kill_button_enable                           true             # set to true to e
 kill_button_pin                              2.12             # kill button pin. 
 
 # Panel See http://smoothieware.org/panel
-panel.enable                                 false           # set to true to enable the panel code
-
-# Example viki2 config for an azteeg miniV2 with IDC cable
-panel.lcd                                    viki2             # set type of panel
+panel.enable                                 true              # set to true to enable the panel code
+panel.lcd                                    ssd1306_oled      # set type of panel
 panel.spi_channel                            0                 # set spi channel to use P0_18,P0_15 MOSI,SCLK
-panel.spi_cs_pin                             0.16              # set spi chip select
-panel.encoder_a_pin                          3.25!^            # encoder pin
-panel.encoder_b_pin                          3.26!^            # encoder pin
-panel.click_button_pin                       2.11!^            # click button
-panel.a0_pin                                 2.6               # st7565 needs an a0
-panel.contrast                               0                 # override contrast setting (default is 9)
-panel.encoder_resolution                     1                 # override number of clicks to move 1 item (default is 4)
+panel.spi_cs_pin                             3.26              # set spi chip select
+panel.a0_pin                                 3.25              # st7565 needs an a0
+panel.rst_pin                                0.17              #
+panel.encoder_a_pin                          nc                # encoder pin
+panel.encoder_b_pin                          nc                # encoder pin
+panel.click_button_pin                       nc                # click button
+#panel.contrast                               0                 # override contrast setting (default is 9)
+#panel.encoder_resolution                     1                 # override number of clicks to move 1 item (default is 4)
 #panel.button_pause_pin                      1.30^             # kill/pause set one of these for the auxilliary button on viki2
 #panel.back_button_pin                       1.22!^            # back button recommended to use this on EXP1
-panel.buzz_pin                               1.31              # pin for buzzer on EXP2
-panel.red_led_pin                            1.19              # pin for red led on viki2 on EXP1
-panel.blue_led_pin                           1.20              # pin for blue led on viki2 on EXP1
-panel.external_sd                            true              # set to true if there is an extrernal sdcard on the panel
-panel.external_sd.spi_channel                0                 # set spi channel the sdcard is on
-panel.external_sd.spi_cs_pin                 1.21              # set spi chip select for the sdcard
-panel.external_sd.sdcd_pin                    1.18!^           # sd detect signal (set to nc if no sdcard detect) 1.18!^
-panel.menu_offset                            1                 # some panels will need 1 here
+#panel.buzz_pin                               1.31              # pin for buzzer on EXP2
+#panel.red_led_pin                            1.19              # pin for red led on viki2 on EXP1
+#panel.blue_led_pin                           1.20              # pin for blue led on viki2 on EXP1
+#panel.external_sd                            true              # set to true if there is an extrernal sdcard on the panel
+#panel.external_sd.spi_channel                0                 # set spi channel the sdcard is on
+#panel.external_sd.spi_cs_pin                 1.21              # set spi chip select for the sdcard
+#panel.external_sd.sdcd_pin                    1.18!^           # sd detect signal (set to nc if no sdcard detect) 1.18!^
+#panel.menu_offset                            1                 # some panels will need 1 here
 
 # Example miniviki2 config
 #panel.lcd                                    mini_viki2        # set type of panel
@@ -280,23 +279,23 @@ panel.menu_offset                            1                 # some panels wil
 ##panel.encoder_resolution                     2                # override number of clicks to move 1 item (default is 2)
 #panel.menu_offset                            1                 # here controls how sensitive the menu is. some panels will need 1
 
-panel.alpha_jog_feedrate                     6000              # x jogging feedrate in mm/min
-panel.beta_jog_feedrate                      6000              # y jogging feedrate in mm/min
-panel.gamma_jog_feedrate                     200               # z jogging feedrate in mm/min
+#panel.alpha_jog_feedrate                     6000              # x jogging feedrate in mm/min
+#panel.beta_jog_feedrate                      6000              # y jogging feedrate in mm/min
+#panel.gamma_jog_feedrate                     200               # z jogging feedrate in mm/min
 
-panel.hotend_temperature                     185               # temp to set hotend when preheat is selected
-panel.T1_temperature                         185               # temp to set hotend when preheat is selected
-panel.bed_temperature                        60                # temp to set bed when preheat is selected
+#panel.hotend_temperature                     185               # temp to set hotend when preheat is selected
+#panel.T1_temperature                         185               # temp to set hotend when preheat is selected
+#panel.bed_temperature                        60                # temp to set bed when preheat is selected
 
 # Example of a custom menu entry, which will show up in the Custom entry.
 # NOTE _ gets converted to space in the menu and commands, | is used to separate multiple commands
-custom_menu.power_on.enable                true              #
-custom_menu.power_on.name                  Power_on          #
-custom_menu.power_on.command               M80               #
+#custom_menu.power_on.enable                true              #
+#custom_menu.power_on.name                  Power_on          #
+#custom_menu.power_on.command               M80               #
 
-custom_menu.power_off.enable               true              #
-custom_menu.power_off.name                 Power_off         #
-custom_menu.power_off.command              M81               #
+#custom_menu.power_off.enable               true              #
+#custom_menu.power_off.name                 Power_off         #
+#custom_menu.power_off.command              M81               #
 
 # Azteeg specific settings do not change
 currentcontrol_module_enable                 true            #
