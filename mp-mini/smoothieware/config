@@ -108,9 +108,9 @@ temperature_control.hotend.set_m_code        104              #
 temperature_control.hotend.set_and_wait_m_code 109            #
 temperature_control.hotend.designator        T                #
 
-temperature_control.hotend.p_factor          18.2             #
-temperature_control.hotend.i_factor          0.951            #
-temperature_control.hotend.d_factor          87               #
+temperature_control.hotend.p_factor          46.2             #
+temperature_control.hotend.i_factor          3.452            #
+temperature_control.hotend.d_factor          154              #
 
 #temperature_control.hotend.max_pwm          64               # max pwm, 64 is a good value if driving a 12v resistor with 24v.
 
