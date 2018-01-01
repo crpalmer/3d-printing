@@ -10,7 +10,7 @@ fi
 (
      cd /home/crpalmer/kisslicer-configs/$1
      if [ ! -e KISSlicer ]; then
-          ln -s ../KISSlicer
+          ln -s ../bin/KISSlicer
      fi
      ./KISSlicer &
 )
