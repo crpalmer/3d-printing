@@ -396,3 +396,6 @@ currentcontrol_module_enable                 true             # Control stepper 
 
 on_boot_gcode							/sd/bootup.gco	#
 on_boot_gcode_enable						true			#
+
+# after suspend gcode: retract a bit, move up a bit from the print, move all the way to the left, remove filament
+after_suspend_gcode			     G91|G0_E-1|G0_Z10|G90|G0_X-135_Y0|G91|G0_E-100|G90
