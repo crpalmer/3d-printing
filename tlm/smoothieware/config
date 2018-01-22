@@ -358,7 +358,7 @@ custom_menu.bl_test.command            M280_S8.4 	        #
 
 custom_menu.auto_calibrate.enable         true            	  #
 custom_menu.auto_calibrate.name           Auto_Calibrate			#
-custom_menu.auto_calibrate.command       	M280_S10.6|G28|M280_S3|M190_S80|G32|G31|M374|M500|M280_S7|G28|M140_S0|M84|reset#
+custom_menu.auto_calibrate.command       	G28|M190_S80|G32|G31|M374|M500|G28|M140_S0|M84|reset#
 
 ## Network settings
 # See http://smoothieware.org/network
