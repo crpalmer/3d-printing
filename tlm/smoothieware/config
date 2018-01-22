@@ -27,9 +27,9 @@ arm_radius                                   157.0741            # This is the h
 
 # Planner module configuration : Look-ahead and acceleration configuration
 # See http://smoothieware.org/motion-control
-acceleration                                 1500             # Acceleration in mm/second/second.
+acceleration                                 5000             # Acceleration in mm/second/second.
 #z_acceleration                              500              # Acceleration for Z only moves in mm/s^2, 0 uses acceleration which is the default. DO NOT SET ON A DELTA
-junction_deviation                           0.03             # See http://smoothieware.org/motion-control#junction-deviation
+junction_deviation                           0.05             # See http://smoothieware.org/motion-control#junction-deviation
 #z_junction_deviation                        0.0              # For Z only moves, -1 uses junction_deviation, zero disables junction_deviation on z moves DO NOT SET ON A DELTA
 
 # Cartesian axis speed limits
