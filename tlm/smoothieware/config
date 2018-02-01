@@ -203,12 +203,12 @@ switch.hotendfan.output_pin                       2.6              #
 switch.hotendfan.output_type                      digital     	   # "digital" is just an on or off pin
 
 # Switch module for servo control
-switch.servo.enable					true		#
-switch.servo.input_on_command			M280		# M280 S7.5 would be midway
-switch.servo.input_off_command			M281		# same as M280 S0 0% duty cycle, servo off
-switch.servo.output_pin				1.23		# must be a PWM capable pin
-switch.servo.output_type				hwpwm		# H/W pwm output settable with S parameter
-switch.servo.pwm_period_ms				20		# set period to 20ms (50Hz), default 50Hz
+switch.servo.enable					false		#
+#switch.servo.input_on_command			M280		# M280 S7.5 would be midway
+#switch.servo.input_off_command			M281		# same as M280 S0 0% duty cycle, servo off
+#switch.servo.output_pin				1.23		# must be a PWM capable pin
+#switch.servo.output_type				hwpwm		# H/W pwm output settable with S parameter
+#switch.servo.pwm_period_ms				20		# set period to 20ms (50Hz), default 50Hz
 
 ## Temperatureswitch
 # See http://smoothieware.org/temperatureswitch
