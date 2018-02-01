@@ -71,9 +71,9 @@ extruder.hotend.dir_pin                         0.22          # Pin for extruder
 extruder.hotend.en_pin                          0.21          # Pin for extruder enable signal
 
 # Extruder offset
-#extruder.hotend.x_offset                        0            # X offset from origin in mm
-#extruder.hotend.y_offset                        0            # Y offset from origin in mm
-#extruder.hotend.z_offset                        0            # Z offset from origin in mm
+extruder.hotend.x_offset                        9           # X offset from origin in mm
+extruder.hotend.y_offset                        0            # Y offset from origin in mm
+extruder.hotend.z_offset                        0            # Z offset from origin in mm
 
 # Firmware retract settings when using G10/G11, these are the defaults if not defined, must be defined for each extruder if not using the defaults
 #extruder.hotend.retract_length                  3            # Retract length in mm
@@ -86,21 +86,21 @@ extruder.hotend.en_pin                          0.21          # Pin for extruder
 delta_current                                    0.55         # First extruder stepper motor current
 
 # Second extruder module configuration
-#extruder.hotend2.enable                         true         # Whether to activate the extruder module at all. All configuration is ignored if false
-#extruder.hotend2.steps_per_mm                   140          # Steps per mm for extruder stepper
-#extruder.hotend2.default_feed_rate              600          # Default rate ( mm/minute ) for moves where only the extruder moves
-#extruder.hotend2.acceleration                   500          # Acceleration for the stepper motor, as of 0.6, arbitrary ratio
-#extruder.hotend2.max_speed                      50           # mm/s
+extruder.hotend2.enable                         true         # Whether to activate the extruder module at all. All configuration is ignored if false
+extruder.hotend2.steps_per_mm                   200          # Steps per mm for extruder stepper
+extruder.hotend2.default_feed_rate              600          # Default rate ( mm/minute ) for moves where only the extruder moves
+extruder.hotend2.acceleration                   500          # Acceleration for the stepper motor, as of 0.6, arbitrary ratio
+extruder.hotend2.max_speed                      50           # mm/s
 
-#extruder.hotend2.step_pin                       2.8          # Pin for extruder step signal
-#extruder.hotend2.dir_pin                        2.13         # Pin for extruder dir signal ( add '!' to reverse direction )
-#extruder.hotend2.en_pin                         4.29         # Pin for extruder enable signal
+extruder.hotend2.step_pin                       2.8          # Pin for extruder step signal
+extruder.hotend2.dir_pin                        2.13!        # Pin for extruder dir signal ( add '!' to reverse direction )
+extruder.hotend2.en_pin                         4.29         # Pin for extruder enable signal
 
-#extruder.hotend2.x_offset                       0            # x offset from origin in mm
-#extruder.hotend2.y_offset                       25.0         # y offset from origin in mm
-#extruder.hotend2.z_offset                       0            # z offset from origin in mm
+extruder.hotend2.x_offset                       -9            # x offset from origin in mm
+extruder.hotend2.y_offset                       0            # y offset from origin in mm
+extruder.hotend2.z_offset                       0            # z offset from origin in mm
 
-#epsilon_current                                 1.5          # Second extruder stepper motor current
+epsilon_current                                 0.55         # Second extruder stepper motor current
 
 ## Laser module configuration
 # See http://smoothieware.org/laser
@@ -123,7 +123,7 @@ laser_module_pwm_pin                          2.5             # This pin will be
 temperature_control.hotend.enable            true             # Whether to activate this ( "hotend" ) module at all.
 temperature_control.hotend.thermistor_pin    0.23             # Pin for the thermistor to read
 temperature_control.hotend.heater_pin        2.7              # Pin that controls the heater, set to nc if a readonly thermistor is being defined
-temperature_control.hotend.thermistor        EPCOS100K        # See http://smoothieware.org/temperaturecontrol#toc5
+temperature_control.hotend.thermistor        Semitec          # See http://smoothieware.org/temperaturecontrol#toc5
 #temperature_control.hotend.beta             4066             # Or set the beta value
 temperature_control.hotend.set_m_code        104              # M-code to set the temperature for this module
 temperature_control.hotend.set_and_wait_m_code 109            # M-code to set-and-wait for this module
@@ -143,26 +143,26 @@ temperature_control.hotend.p_factor         47.4             # P ( proportional 
 temperature_control.hotend.i_factor         4.839            # I ( integral ) factor
 temperature_control.hotend.d_factor         116               # D ( derivative ) factor
 
-temperature_control.hotend.max_pwm          255               # Max pwm, 64 is a good value if driving a 12v resistor with 24v.
+temperature_control.hotend.max_pwm          127               # Max pwm, 64 is a good value if driving a 12v resistor with 24v.
 
 # Second hotend configuration
-#temperature_control.hotend2.enable            true           # Whether to activate this ( "hotend" ) module at all.
-#temperature_control.hotend2.thermistor_pin    0.25           # Pin for the thermistor to read
-#temperature_control.hotend2.heater_pin        1.23           # Pin that controls the heater
-#temperature_control.hotend2.thermistor        EPCOS100K      # See http://smoothieware.org/temperaturecontrol#thermistor
+temperature_control.hotend2.enable            true           # Whether to activate this ( "hotend" ) module at all.
+temperature_control.hotend2.thermistor_pin    0.24           # Pin for the thermistor to read
+temperature_control.hotend2.heater_pin        2.6            # Pin that controls the heater
+temperature_control.hotend2.thermistor        Semitec        # See http://smoothieware.org/temperaturecontrol#thermistor
 ##temperature_control.hotend2.beta             4066           # or set the beta value
-#temperature_control.hotend2.set_m_code        104            # M-code to set the temperature for this module
-#temperature_control.hotend2.set_and_wait_m_code 109          # M-code to set-and-wait for this module
-#temperature_control.hotend2.designator        T1             # Designator letter for this module
+temperature_control.hotend2.set_m_code        104            # M-code to set the temperature for this module
+temperature_control.hotend2.set_and_wait_m_code 109          # M-code to set-and-wait for this module
+temperature_control.hotend2.designator        T1             # Designator letter for this module
 
-#temperature_control.hotend2.p_factor          13.7           # P ( proportional ) factor
-#temperature_control.hotend2.i_factor          0.097          # I ( integral ) factor
-#temperature_control.hotend2.d_factor          24             # D ( derivative ) factor
+temperature_control.hotend2.p_factor         47.4             # P ( proportional ) factor
+temperature_control.hotend2.i_factor         4.839            # I ( integral ) factor
+temperature_control.hotend2.d_factor         116               # D ( derivative ) factor
 
-#temperature_control.hotend2.max_pwm          64              # Max pwm, 64 is a good value if driving a 12v resistor with 24v.
+temperature_control.hotend2.max_pwm          127              # Max pwm, 64 is a good value if driving a 12v resistor with 24v.
 
 temperature_control.bed.enable               true             # Whether to activate this ( "hotend" ) module at all.
-temperature_control.bed.thermistor_pin       0.24             # Pin for the thermistor to read
+temperature_control.bed.thermistor_pin       0.25             # Pin for the thermistor to read
 temperature_control.bed.heater_pin           2.5              # Pin that controls the heater
 temperature_control.bed.thermistor           EPCOS100K	    # See http://smoothieware.org/temperaturecontrol#thermistor
 #temperature_control.bed.beta                4066             # Or set the beta value
@@ -199,8 +199,9 @@ switch.fan.startup_value				  255
 switch.hotendfan.enable                           true             #
 switch.hotendfan.input_on_command                 M42              #
 switch.hotendfan.input_off_command                M43              #
-switch.hotendfan.output_pin                       2.6              #
+switch.hotendfan.output_pin                       1.24!v           #
 switch.hotendfan.output_type                      digital     	   # "digital" is just an on or off pin
+switch.hotendfan.startup_state			  true
 
 # Switch module for servo control
 switch.servo.enable					false		#
@@ -214,12 +215,12 @@ switch.servo.enable					false		#
 # See http://smoothieware.org/temperatureswitch
 # Automatically toggle a switch at a specified temperature. Different ones of these may be defined to monitor different temperatures and switch different swithxes
 # Useful to turn on a fan or water pump to cool the hotend
-temperatureswitch.hotend.enable              true            #
-temperatureswitch.hotend.designator          T               # first character of the temperature control designator to use as the temperature sensor to monitor
-temperatureswitch.hotend.switch              hotendfan            # select which switch to use, matches the name of the defined switch
-temperatureswitch.hotend.threshold_temp      50.0            # temperature to turn on (if rising) or off the switch
-temperatureswitch.hotend.heatup_poll         15              # poll heatup at 15 sec intervals
-temperatureswitch.hotend.cooldown_poll       60              # poll cooldown at 60 sec intervals
+temperatureswitch.hotend.enable              false           #
+#temperatureswitch.hotend.designator          T               # first character of the temperature control designator to use as the temperature sensor to monitor
+#temperatureswitch.hotend.switch              hotendfan            # select which switch to use, matches the name of the defined switch
+#temperatureswitch.hotend.threshold_temp      50.0            # temperature to turn on (if rising) or off the switch
+#temperatureswitch.hotend.heatup_poll         15              # poll heatup at 15 sec intervals
+#temperatureswitch.hotend.cooldown_poll       60              # poll cooldown at 60 sec intervals
 
 ## Endstops
 # See http://smoothieware.org/endstops
