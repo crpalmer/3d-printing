@@ -143,7 +143,7 @@ temperature_control.hotend.p_factor         47.4             # P ( proportional 
 temperature_control.hotend.i_factor         4.839            # I ( integral ) factor
 temperature_control.hotend.d_factor         116               # D ( derivative ) factor
 
-temperature_control.hotend.max_pwm          127               # Max pwm, 64 is a good value if driving a 12v resistor with 24v.
+temperature_control.hotend.max_pwm          160               # Max pwm, 64 is a good value if driving a 12v resistor with 24v.
 
 # Second hotend configuration
 temperature_control.hotend2.enable            true           # Whether to activate this ( "hotend" ) module at all.
@@ -165,8 +165,9 @@ temperature_control.hotend2.p_factor         47.4             # P ( proportional
 temperature_control.hotend2.i_factor         4.839            # I ( integral ) factor
 temperature_control.hotend2.d_factor         116               # D ( derivative ) factor
 
-temperature_control.hotend2.max_pwm          127              # Max pwm, 64 is a good value if driving a 12v resistor with 24v.
+temperature_control.hotend2.max_pwm          160              # Max pwm, 64 is a good value if driving a 12v resistor with 24v.
 
+# Heated bed configuration
 temperature_control.bed.enable               true             # Whether to activate this ( "hotend" ) module at all.
 temperature_control.bed.thermistor_pin       0.25             # Pin for the thermistor to read
 temperature_control.bed.heater_pin           2.5              # Pin that controls the heater
