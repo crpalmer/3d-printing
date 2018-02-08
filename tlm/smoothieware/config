@@ -100,7 +100,7 @@ extruder.hotend2.x_offset                       -9            # x offset from or
 extruder.hotend2.y_offset                       0            # y offset from origin in mm
 extruder.hotend2.z_offset                       0            # z offset from origin in mm
 
-epsilon_current                                 0.55         # Second extruder stepper motor current
+epsilon_current                                 1.0          # Second extruder stepper motor current
 
 ## Laser module configuration
 # See http://smoothieware.org/laser
