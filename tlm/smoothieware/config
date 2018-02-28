@@ -246,7 +246,7 @@ beta_max                                     0                # This gets loaded
 gamma_min_endstop                            nc               # Pin to read min endstop, add a ! to invert if endstop is NO connected to ground
 gamma_max_endstop                            1.29v            # Pin to read max endstop, uncomment this and comment the above if using max endstops
 gamma_homing_direction                       home_to_max      # Or set to home_to_max and set alpha_max and uncomment the alpha_max_endstop
-gamma_max                                    520              # This gets loaded as the current position after homing when home_to_max is set
+gamma_max                                    525              # This gets loaded as the current position after homing when home_to_max is set
 
 alpha_max_travel                             1000             # Max travel in mm for alpha/X axis when homing
 beta_max_travel                              1000             # Max travel in mm for beta/Y axis when homing
