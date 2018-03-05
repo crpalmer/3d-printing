@@ -296,8 +296,8 @@ leveling-strategy.delta-calibration.radius   140             # the probe radius
 
 # Example for the delta grid leveling strategy
 leveling-strategy.delta-grid.enable          true            # Enable grid leveling
-leveling-strategy.delta-grid.radius          160              # Grid radius in millimeters
-leveling-strategy.delta-grid.size            17               # Grid size, must be an odd number
+leveling-strategy.delta-grid.radius          140              # Grid radius in millimeters
+leveling-strategy.delta-grid.size            5               # Grid size, must be an odd number
 leveling-strategy.delta-grid.do_home         true            # Whether to home before calibration
 leveling-strategy.delta-grid.save            true            # Whether to automatically save the grid
 leveling-strategy.delta-grid.initial_height  3               # Height at which to start probling
