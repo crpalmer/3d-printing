@@ -280,9 +280,9 @@ gamma_trim                                    0                # Software trim f
 
 ## Z-probe
 # See http://smoothieware.org/zprobe
-zprobe.enable                                true           # Set to true to enable a zprobe
+zprobe.enable                                true            # Set to true to enable a zprobe
 zprobe.probe_pin                             1.28^!          # Pin probe is attached to, if NC remove the !
-zprobe.slow_feedrate                         5.0             # Mm/sec probe feed rate
+zprobe.slow_feedrate                         2.0             # Mm/sec probe feed rate
 #zprobe.debounce_count                       100             # Set if noisy
 zprobe.fast_feedrate                         500             # Move feedrate mm/sec
 zprobe.probe_height                          3               # How much above bed to start probe
