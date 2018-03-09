@@ -1,5 +1,11 @@
 G28
-M190 S60		; preheat the bed to the temp we are likely to be using
+
+; preheat the extruders & bed to probing temps
+T1 M104 S170
+T0 M104 S170
+M190 S70
+T1 M109 S170
+T0 M109 S170
 
 G32			; delta arm calibration
 G31			; delta bed calibration
