@@ -294,8 +294,19 @@ zprobe.tolerance                             0.002
 # Levelling strategy
 
 # Example for the delta calibration strategy
-leveling-strategy.delta-calibration.enable   true            # Enable basic delta calibration
-leveling-strategy.delta-calibration.radius   140             # the probe radius
+#leveling-strategy.delta-calibration.enable   true            # Enable basic delta calibration
+#leveling-strategy.delta-calibration.radius   140             # the probe radius
+
+# LSQ ###################################################################################################
+# associated with zprobe the leveling strategy to use
+leveling-strategy.lsq-delta-calibration.enable       true    # Least squares (David Crocker variant) delta calibration
+leveling-strategy.lsq-delta-calibration.radius       140.0   # the maximum probe radius
+leveling-strategy.lsq-delta-calibration.sample_count 13      # the number of sample points; should be 6xN+1 (i.e. 7, 13, 19)
+leveling-strategy.lsq-delta-calibration.factors      6       # the number factors to calibration: 
+                                                             #    3=endstop
+                                                             #    4=towers + delta radius
+                                                             #    6=endstops + delta radius + tower A,B angles,
+                                                             #    7=endstops + delta radius + tower A,B angles + rod length
 
 # Example for the delta grid leveling strategy
 leveling-strategy.delta-grid.enable          true            # Enable grid leveling
