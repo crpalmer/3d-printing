@@ -87,9 +87,9 @@ delta_current                                    0.55         # First extruder s
 
 # Second extruder module configuration
 extruder.hotend2.enable                         true         # Whether to activate the extruder module at all. All configuration is ignored if false
-extruder.hotend2.steps_per_mm                   194          # Steps per mm for extruder stepper
-extruder.hotend2.default_feed_rate              600          # Default rate ( mm/minute ) for moves where only the extruder moves
-extruder.hotend2.acceleration                   500          # Acceleration for the stepper motor, as of 0.6, arbitrary ratio
+extruder.hotend2.steps_per_mm                   5400         # Steps per mm for extruder stepper
+extruder.hotend2.default_feed_rate              100          # Default rate ( mm/minute ) for moves where only the extruder moves
+extruder.hotend2.acceleration                   120          # Acceleration for the stepper motor, as of 0.6, arbitrary ratio
 extruder.hotend2.max_speed                      50           # mm/s
 
 extruder.hotend2.step_pin                       2.8          # Pin for extruder step signal
@@ -100,7 +100,7 @@ extruder.hotend2.x_offset                       -8.75         # x offset from or
 extruder.hotend2.y_offset                       0.325        # y offset from origin in mm
 extruder.hotend2.z_offset                       0             # z offset from origin in mm
 
-epsilon_current                                 1.0          # Second extruder stepper motor current
+epsilon_current                                 0.5          # Second extruder stepper motor current
 
 ## Laser module configuration
 # See http://smoothieware.org/laser
