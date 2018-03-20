@@ -289,7 +289,7 @@ zprobe.probe_height                          2               # How much above be
 #gamma_min_endstop                           nc              # Normally 1.28. Change to nc to prevent conflict,
 zprobe.n_samples                             3
 zprobe.max_tries                             3
-zprobe.tolerance                             0.002
+zprobe.tolerance                             0.010
 
 # Levelling strategy
 
