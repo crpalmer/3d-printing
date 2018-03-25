@@ -71,8 +71,8 @@ extruder.hotend.dir_pin                         0.22          # Pin for extruder
 extruder.hotend.en_pin                          0.21          # Pin for extruder enable signal
 
 # Extruder offset
-extruder.hotend.x_offset                        8.75          # X offset from origin in mm
-extruder.hotend.y_offset                        -0.325        # Y offset from origin in mm
+extruder.hotend.x_offset                        9.00          # X offset from origin in mm
+extruder.hotend.y_offset                        0.00          # Y offset from origin in mm
 extruder.hotend.z_offset                        0             # Z offset from origin in mm
 
 # Firmware retract settings when using G10/G11, these are the defaults if not defined, must be defined for each extruder if not using the defaults
@@ -96,8 +96,8 @@ extruder.hotend2.step_pin                       2.8          # Pin for extruder 
 extruder.hotend2.dir_pin                        2.13!        # Pin for extruder dir signal ( add '!' to reverse direction )
 extruder.hotend2.en_pin                         4.29         # Pin for extruder enable signal
 
-extruder.hotend2.x_offset                       -8.75         # x offset from origin in mm
-extruder.hotend2.y_offset                       0.325        # y offset from origin in mm
+extruder.hotend2.x_offset                       -9.00         # x offset from origin in mm
+extruder.hotend2.y_offset                       0.00         # y offset from origin in mm
 extruder.hotend2.z_offset                       0             # z offset from origin in mm
 
 epsilon_current                                 0.5          # Second extruder stepper motor current
