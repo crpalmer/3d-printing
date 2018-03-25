@@ -15,9 +15,9 @@ delta_segments_per_second                    100              # For deltas only,
 
 # Arm solution configuration : Cartesian robot. Translates mm positions into stepper positions
 # See http://smoothieware.org/stepper-motors
-alpha_steps_per_mm                           159.53              # Steps per mm for alpha ( X ) stepper and tower
-beta_steps_per_mm                            159.53              # Steps per mm for beta ( Y ) stepper and tower
-gamma_steps_per_mm                           159.53              # Steps per mm for gamma ( Z ) stepper and tower
+alpha_steps_per_mm                           160.00              # Steps per mm for alpha ( X ) stepper and tower
+beta_steps_per_mm                            160.00              # Steps per mm for beta ( Y ) stepper and tower
+gamma_steps_per_mm                           160.00              # Steps per mm for gamma ( Z ) stepper and tower
 
 # Delta configuration
 # See http://smoothieware.org/delta
