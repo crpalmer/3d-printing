@@ -1,0 +1,37 @@
+## Z-probe
+# See http://smoothieware.org/zprobe
+zprobe.enable                                true            # Set to true to enable a zprobe
+zprobe.probe_pin                             1.28^!          # Pin probe is attached to, if NC remove the !
+zprobe.slow_feedrate                         3.0             # Mm/sec probe feed rate
+#zprobe.debounce_count                       100             # Set if noisy
+zprobe.fast_feedrate                         500             # Move feedrate mm/sec
+zprobe.probe_height                          5               # How much above bed to start probe
+#gamma_min_endstop                           nc              # Normally 1.28. Change to nc to prevent conflict,
+zprobe.n_samples                             3
+zprobe.max_tries                             3
+zprobe.tolerance                             0.010
+
+# Levelling strategy
+
+# Example for the delta calibration strategy
+#leveling-strategy.delta-calibration.enable   true            # Enable basic delta calibration
+#leveling-strategy.delta-calibration.radius   140             # the probe radius
+
+# LSQ ###################################################################################################
+# associated with zprobe the leveling strategy to use
+leveling-strategy.lsq-delta-calibration.enable       true    # Least squares (David Crocker variant) delta calibration
+leveling-strategy.lsq-delta-calibration.radius       140.0   # the maximum probe radius
+leveling-strategy.lsq-delta-calibration.sample_count 13      # the number of sample points; should be 6xN+1 (i.e. 7, 13, 19)
+leveling-strategy.lsq-delta-calibration.factors      6       # the number factors to calibration: 
+                                                             #    3=endstop
+                                                             #    4=towers + delta radius
+                                                             #    6=endstops + delta radius + tower A,B angles,
+                                                             #    7=endstops + delta radius + tower A,B angles + rod length
+
+# Example for the delta grid leveling strategy
+leveling-strategy.delta-grid.enable          true            # Enable grid leveling
+leveling-strategy.delta-grid.radius          140             # Grid radius in millimeters
+leveling-strategy.delta-grid.size            11              # Grid size, must be an odd number
+leveling-strategy.delta-grid.do_home         true            # Whether to home before calibration
+leveling-strategy.delta-grid.save            true            # Whether to automatically save the grid
+leveling-strategy.delta-grid.initial_height  10              # Height at which to start probling
