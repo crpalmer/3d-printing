@@ -22,7 +22,7 @@ gamma_steps_per_mm                           160.00              # Steps per mm 
 # Delta configuration
 # See http://smoothieware.org/delta
 arm_solution                                 linear_delta     # Selects the linear delta arm solution
-arm_length                                   397.1900            # This is the length of an arm from hinge to hinge
+arm_length                                   398.0000            # This is the length of an arm from hinge to hinge
 arm_radius                                   157.0741            # This is the horizontal distance from hinge to hinge when the effector is centered
 
 # Planner module configuration : Look-ahead and acceleration configuration
