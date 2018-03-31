@@ -11,7 +11,7 @@ extruder.hotend.dir_pin                         0.22          # Pin for extruder
 extruder.hotend.en_pin                          0.21          # Pin for extruder enable signal
 
 # Extruder offset
-extruder.hotend.x_offset                        9.00          # X offset from origin in mm
+extruder.hotend.x_offset                        0.00          # X offset from origin in mm
 extruder.hotend.y_offset                        0.00          # Y offset from origin in mm
 extruder.hotend.z_offset                        0             # Z offset from origin in mm
 
