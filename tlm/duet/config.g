@@ -46,9 +46,9 @@ M557 R140 S20                             ; Define mesh grid
 
 ; Heaters
 M301 H0 S1.00 P10 I0.1 D200 T0.4 W180 B30 ; Use PID on bed heater (may require further tuning)
-M305 P0 T10000 B3988 C0 R4700             ; Set thermistor + ADC parameters for heater 0
+M305 P0 R4700 T100000 B4148 C2.117e-7	  ; Set thermistor + ADC parameters for bed heater
 M143 H0 S120                              ; Set temperature limit for heater 0 to 120C
-M305 P1 T10000 B3988 C0 R4700             ; Set thermistor + ADC parameters for heater 1
+M305 P1 R4700 T100000 B4148 C2.117e-7	  ; Set thermistor + ADC parameters for heater 1
 M143 H1 S285                              ; Set temperature limit for heater 1 to 285C
 M305 P2 T100000 B4725 C7.060000e-8 R4700  ; Set thermistor + ADC parameters for heater 2
 M143 H2 S285                              ; Set temperature limit for heater 2 to 285C
