@@ -30,10 +30,10 @@ M569 P4 S0                                ; Drive 4 goes backwards
 M350 E32 I0 				  ; Configure microstepping without interpolation
 M350 X32 Y32 Z32 I1 			  ; Configure microstepping with interpolation
 M92 X160 Y160 Z160 E810:5400 		  ; Set steps per mm
-M566 X1500 Y1500 Z1500 E300:300           ; Set maximum instantaneous speed changes (mm/min)
-M203 X39960 Y39960 Z39960 E1200:1200	  ; Set maximum speeds (mm/min)
+M566 X1500 Y1500 Z1500 E1500:300           ; Set maximum instantaneous speed changes (mm/min)
+M203 X39960 Y39960 Z39960 E3000:3000	  ; Set maximum speeds (mm/min)
 ;M201 X5000 Y5000 Z5000 E500:120          ; Set accelerations (mm/s^2)
-M201 X1000 Y1000 Z1000 E500:120    	  ; Set accelerations (mm/s^2)
+M201 X1000 Y1000 Z1000 E1500:120    	  ; Set accelerations (mm/s^2)
 M906 X1100 Y1100 Z1100 E880:500 I30	  ; Set motor currents (mA) and motor idle factor in per cent
 M84 S30					  ; Set idle timeout
 
