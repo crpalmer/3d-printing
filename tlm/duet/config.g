@@ -27,8 +27,9 @@ M569 P1 S0                                ; Drive 1 goes backwards
 M569 P2 S0                                ; Drive 2 goes backwards
 M569 P3 S0                                ; Drive 3 goes backwards
 M569 P4 S1                                ; Drive 4 goes forwards
-M350 X64 Y64 Z64 E32:E32 I1 		  ; Configure microstepping with interpolation
-M92 X320 Y320 Z320 E837:837 		  ; Set steps per mm
+M92 E837:837
+M350 X64 Y64 Z64 E32:32 I1 		  ; Configure microstepping with interpolation
+M92 X320 Y320 Z320	 		  ; Set steps per mm
 M566 X1500 Y1500 Z1500 E1300:1300           ; Set maximum instantaneous speed changes (mm/min)
 M203 X39960 Y39960 Z39960 E3000:3000	  ; Set maximum speeds (mm/min)
 ;M201 X5000 Y5000 Z5000 E500:500          ; Set accelerations (mm/s^2)
@@ -56,7 +57,7 @@ M106 P0 S0 I0 F500 H-1                    ; Set fan 0 value, PWM signal inversio
 M106 P1 S1 I0 F500 H-1                    ; Set fan 1 value, PWM signal inversion and frequency. Thermostatic control is turned off
 M106 P2 S1 I0 F500 H-1                    ; Set fan 2 value, PWM signal inversion and frequency. Thermostatic control is turned off
 
-M98 P/sys/hotend-e3dv6.g
+M98 P/sys/hotend-chimera.g
 
 ; Automatic saving after power loss is not enabled
 

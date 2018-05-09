@@ -12,6 +12,5 @@ M563 P1 D1 H2 S"Right"                    ; Define tool 1
 G10 P1 X9 Y0 Z0                      ; Set tool 1 axis offsets
 G10 P1 R0 S0                              ; Set initial tool 1 active and standby temperatures to 0C
 
-; Redefine the delta parameters:
-; Chimera is shorter and we lose some printable area for it
-M665 H530 B165
+; Redefine height to accomodate chimera's size
+M665 H538
