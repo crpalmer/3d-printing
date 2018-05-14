@@ -27,7 +27,7 @@ M569 P1 S0                                ; Drive 1 goes backwards
 M569 P2 S0                                ; Drive 2 goes backwards
 M569 P3 S0                                ; Drive 3 goes backwards
 M569 P4 S1                                ; Drive 4 goes forwards
-M92 E837:837
+M92 E815:815
 M350 X64 Y64 Z64 E32:32 I1 		  ; Configure microstepping with interpolation
 M92 X320 Y320 Z320	 		  ; Set steps per mm
 M566 X1500 Y1500 Z1500 E1300:1300           ; Set maximum instantaneous speed changes (mm/min)
