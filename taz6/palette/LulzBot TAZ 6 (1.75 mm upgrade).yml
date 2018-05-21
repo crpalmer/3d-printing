@@ -27,10 +27,10 @@ bowdenTube: false
 firmwarePurge: 0
 transitions:
   method: 1
-  purgeLength: 130
-  minPurgeLength: 130
-  initialPurgeLength: 130
-  purgeTarget: 0.4
+  purgeLength: 160
+  minPurgeLength: 70
+  initialPurgeLength: 160
+  purgeTarget: 0.2
   transitionInInfill: true
   transitionInSupport: false
   towers:
@@ -56,6 +56,6 @@ pings:
   pingOffTower: false
   mechanicalPingGCode: ''
 calibration:
-  loadingOffset: 19490
-  printValue: 117831
-  calibrationGCodeLength: 3901.4979699998653
+  loadingOffset: 21319
+  printValue: 118013
+  calibrationGCodeLength: 3895.178849999878

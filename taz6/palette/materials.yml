@@ -1,0 +1,7 @@
+Default PLA:
+  type: PLA
+  combinations:
+    Default PLA:
+      heatFactor: 5
+      compressionFactor: 4
+      reverse: false
