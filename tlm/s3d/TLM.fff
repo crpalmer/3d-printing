@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
-<profile name="TLM" version="2018-05-20 10:15:18" app="S3D-Software 4.0.1">
+<profile name="TLM" version="2018-06-04 05:49:34" app="S3D-Software 4.0.1">
   <baseProfile>Default</baseProfile>
   <printMaterial>PLA</printMaterial>
   <printQuality>Medium</printQuality>
-  <printExtruders></printExtruders>
+  <printExtruders>Both Extruders</printExtruders>
   <extruder name="Left">
     <toolheadNumber>0</toolheadNumber>
     <diameter>0.4</diameter>
@@ -36,7 +36,7 @@
     <useWipe>0</useWipe>
     <wipeDistance>5</wipeDistance>
   </extruder>
-  <primaryExtruder>0</primaryExtruder>
+  <primaryExtruder>1</primaryExtruder>
   <layerHeight>0.2</layerHeight>
   <topSolidLayers>4</topSolidLayers>
   <bottomSolidLayers>4</bottomSolidLayers>
@@ -59,23 +59,23 @@
   <raftTopInfill>100</raftTopInfill>
   <aboveRaftSpeedMultiplier>0.3</aboveRaftSpeedMultiplier>
   <useSkirt>1</useSkirt>
-  <skirtExtruder>0</skirtExtruder>
+  <skirtExtruder>1</skirtExtruder>
   <skirtLayers>1</skirtLayers>
   <skirtOutlines>1</skirtOutlines>
   <skirtOffset>6</skirtOffset>
-  <usePrimePillar>0</usePrimePillar>
+  <usePrimePillar>1</usePrimePillar>
   <primePillarExtruder>999</primePillarExtruder>
   <primePillarWidth>12</primePillarWidth>
-  <primePillarLocation>7</primePillarLocation>
+  <primePillarLocation>6</primePillarLocation>
   <primePillarSpeedMultiplier>1</primePillarSpeedMultiplier>
-  <useOozeShield>1</useOozeShield>
+  <useOozeShield>0</useOozeShield>
   <oozeShieldExtruder>999</oozeShieldExtruder>
   <oozeShieldOffset>10</oozeShieldOffset>
   <oozeShieldOutlines>1</oozeShieldOutlines>
   <oozeShieldSidewallShape>0</oozeShieldSidewallShape>
   <oozeShieldSidewallAngle>30</oozeShieldSidewallAngle>
   <oozeShieldSpeedMultiplier>1</oozeShieldSpeedMultiplier>
-  <infillExtruder>0</infillExtruder>
+  <infillExtruder>1</infillExtruder>
   <internalInfillPattern>Fast Honeycomb</internalInfillPattern>
   <externalInfillPattern>Rectilinear</externalInfillPattern>
   <infillPercentage>15</infillPercentage>
@@ -87,7 +87,7 @@
   <overlapInternalInfillAngles>0</overlapInternalInfillAngles>
   <externalInfillAngles>45,-45</externalInfillAngles>
   <generateSupport>1</generateSupport>
-  <supportExtruder>0</supportExtruder>
+  <supportExtruder>1</supportExtruder>
   <supportInfillPercentage>30</supportInfillPercentage>
   <supportExtraInflation>0</supportExtraInflation>
   <supportBaseLayers>1</supportBaseLayers>
@@ -107,7 +107,7 @@
     <isHeatedBed>0</isHeatedBed>
     <relayBetweenLayers>0</relayBetweenLayers>
     <relayBetweenLoops>0</relayBetweenLoops>
-    <stabilizeAtStartup>1</stabilizeAtStartup>
+    <stabilizeAtStartup>0</stabilizeAtStartup>
     <setpoint layer="1" temperature="205"/>
   </temperatureController>
   <temperatureController name="Bed">
@@ -116,15 +116,15 @@
     <relayBetweenLayers>0</relayBetweenLayers>
     <relayBetweenLoops>0</relayBetweenLoops>
     <stabilizeAtStartup>1</stabilizeAtStartup>
-    <setpoint layer="1" temperature="70"/>
+    <setpoint layer="1" temperature="60"/>
   </temperatureController>
   <temperatureController name="Right">
     <temperatureNumber>1</temperatureNumber>
     <isHeatedBed>0</isHeatedBed>
     <relayBetweenLayers>0</relayBetweenLayers>
     <relayBetweenLoops>0</relayBetweenLoops>
-    <stabilizeAtStartup>1</stabilizeAtStartup>
-    <setpoint layer="1" temperature="190"/>
+    <stabilizeAtStartup>0</stabilizeAtStartup>
+    <setpoint layer="1" temperature="205"/>
   </temperatureController>
   <fanSpeed>
     <setpoint layer="1" speed="0"/>
@@ -170,7 +170,7 @@
   <baudRateOverride>115200</baudRateOverride>
   <overridePrinterModels>0</overridePrinterModels>
   <printerModelsOverride></printerModelsOverride>
-  <startingGcode>G92 E0,G28,M140 S[bed0_temperature]	; start warming the bed,; Ensure we get both tools active/standby when we heat,G10 P0 S0 R0,G10 P1 S0 R0,T1,; Wait for probe temps,G10 P0 S140 R140,G10 P1 S140 R140,T0,M190 S[bed0_temperature]	; wait for bed temp,;G32,G28,G1 X0 Y0 Z5 F6000,G30,G1 X0 Y0 Z100 F25000	; move back away from the bed,G10 P0 S[extruder0_temperature],M109 S[extruder0_temperature],G10 P1 S[extruder1_temperature]	; fool s3d into thinking we're actually heating this so it doesn't do M109 S.. for us!,M106 S[fan_speed_percentage]</startingGcode>
+  <startingGcode>G92 E0,G28,,; Ensure no toolhead is selected before we set temperatures,G10 P0 S0 R0,G10 P1 S0 R0,T-1,,; Set temperatures to fool s3d into not cranking both up to printing temps,; Note: We ensure no toolhead is selected to ensure we don't want for a temperature change here,G10 P0 S[extruder0_temperature] R140,G10 P1 S[extruder1_temperature] R140,,M190 S[bed0_temperature]	; wait for bed temp,G1 X0 Y0 Z5 F6000,G30,G1 X0 Y0 Z100 F6000	; move back away from the bed,</startingGcode>
   <layerChangeGcode>;  M106 S[fan_speed]</layerChangeGcode>
   <retractionGcode></retractionGcode>
   <toolChangeGcode>; Move out of the way,G1 X-140 Y0  F36000,; M106 S0.5,G10 P[old_tool] R140,{IF NEWTOOL=0}G10 P[new_tool] S[extruder0_temperature],{IF NEWTOOL=1}G10 P[new_tool] S[extruder1_temperature],; Switching tools causes both extruders to set a new temp,T[new_tool],; TODO: can we make the 140 a parameter?,; TODO: use the fan for cooling</toolChangeGcode>
@@ -179,12 +179,12 @@
   <celebration>0</celebration>
   <celebrationSong>Looney Toons</celebrationSong>
   <postProcessing></postProcessing>
-  <defaultSpeed>3600</defaultSpeed>
+  <defaultSpeed>4500</defaultSpeed>
   <outlineUnderspeed>0.6</outlineUnderspeed>
   <solidInfillUnderspeed>0.7</solidInfillUnderspeed>
   <supportUnderspeed>0.6</supportUnderspeed>
-  <rapidXYspeed>4800</rapidXYspeed>
-  <rapidZspeed>4800</rapidZspeed>
+  <rapidXYspeed>12000</rapidXYspeed>
+  <rapidZspeed>12000</rapidZspeed>
   <minBridgingArea>50</minBridgingArea>
   <bridgingExtraInflation>0</bridgingExtraInflation>
   <bridgingExtrusionMultiplier>1</bridgingExtrusionMultiplier>
@@ -211,8 +211,8 @@
   <onlyWipeOutlines>1</onlyWipeOutlines>
   <avoidCrossingOutline>0</avoidCrossingOutline>
   <maxMovementDetourFactor>3</maxMovementDetourFactor>
-  <toolChangeRetractionDistance>5</toolChangeRetractionDistance>
-  <toolChangeExtraRestartDistance>-0.5</toolChangeExtraRestartDistance>
+  <toolChangeRetractionDistance>0</toolChangeRetractionDistance>
+  <toolChangeExtraRestartDistance>0</toolChangeExtraRestartDistance>
   <toolChangeRetractionSpeed>2100</toolChangeRetractionSpeed>
   <externalThinWallType>0</externalThinWallType>
   <internalThinWallType>2</internalThinWallType>
@@ -223,7 +223,7 @@
   <singleExtrusionEndpointExtension>0.2</singleExtrusionEndpointExtension>
   <horizontalSizeCompensation>0</horizontalSizeCompensation>
   <autoConfigureMaterial name="PLA">
-    <globalBedTemperature>70</globalBedTemperature>
+    <globalBedTemperature>60</globalBedTemperature>
     <globalExtrusionMultiplier>1</globalExtrusionMultiplier>
     <fanSpeed>
       <setpoint layer="1" speed="0"/>
@@ -304,14 +304,14 @@
     <toggleTemperatureController name="Right" status="on" stabilize="off"/>
   </autoConfigureExtruders>
   <autoConfigureExtruders name="Both Extruders" allowedToolheads="2">
-    <primaryExtruder>0</primaryExtruder>
-    <raftExtruder>1</raftExtruder>
-    <skirtExtruder>0</skirtExtruder>
-    <infillExtruder>0</infillExtruder>
-    <supportExtruder>0</supportExtruder>
-    <useSkirt>0</useSkirt>
-    <usePrimePillar>0</usePrimePillar>
-    <useOozeShield>1</useOozeShield>
+    <primaryExtruder>1</primaryExtruder>
+    <raftExtruder>0</raftExtruder>
+    <skirtExtruder>1</skirtExtruder>
+    <infillExtruder>1</infillExtruder>
+    <supportExtruder>1</supportExtruder>
+    <useSkirt>1</useSkirt>
+    <usePrimePillar>1</usePrimePillar>
+    <useOozeShield>0</useOozeShield>
     <toggleTemperatureController name="Right" status="on" stabilize="off"/>
     <toggleTemperatureController name="Left" status="on" stabilize="off"/>
   </autoConfigureExtruders>
