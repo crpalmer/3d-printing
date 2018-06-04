@@ -279,4 +279,40 @@
     <infillPercentage>30</infillPercentage>
     <supportInfillPercentage>40</supportInfillPercentage>
   </autoConfigureQuality>
+  <autoConfigureExtruders name="Left Extruder Only" allowedToolheads="1">
+    <primaryExtruder>0</primaryExtruder>
+    <raftExtruder>0</raftExtruder>
+    <skirtExtruder>0</skirtExtruder>
+    <infillExtruder>0</infillExtruder>
+    <supportExtruder>0</supportExtruder>
+    <useSkirt>1</useSkirt>
+    <usePrimePillar>0</usePrimePillar>
+    <useOozeShield>0</useOozeShield>
+    <toggleTemperatureController name="Left" status="on" stabilize="off"/>
+    <toggleTemperatureController name="Right" status="off" stabilize="off"/>
+  </autoConfigureExtruders>
+  <autoConfigureExtruders name="Right Extruder Only" allowedToolheads="1">
+    <primaryExtruder>1</primaryExtruder>
+    <raftExtruder>1</raftExtruder>
+    <skirtExtruder>1</skirtExtruder>
+    <infillExtruder>1</infillExtruder>
+    <supportExtruder>1</supportExtruder>
+    <useSkirt>1</useSkirt>
+    <usePrimePillar>0</usePrimePillar>
+    <useOozeShield>0</useOozeShield>
+    <toggleTemperatureController name="Left" status="off" stabilize="off"/>
+    <toggleTemperatureController name="Right" status="on" stabilize="off"/>
+  </autoConfigureExtruders>
+  <autoConfigureExtruders name="Both Extruders" allowedToolheads="2">
+    <primaryExtruder>0</primaryExtruder>
+    <raftExtruder>1</raftExtruder>
+    <skirtExtruder>0</skirtExtruder>
+    <infillExtruder>0</infillExtruder>
+    <supportExtruder>0</supportExtruder>
+    <useSkirt>0</useSkirt>
+    <usePrimePillar>0</usePrimePillar>
+    <useOozeShield>1</useOozeShield>
+    <toggleTemperatureController name="Right" status="on" stabilize="off"/>
+    <toggleTemperatureController name="Left" status="on" stabilize="off"/>
+  </autoConfigureExtruders>
 </profile>
