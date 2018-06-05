@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<profile name="TLM" version="2018-06-04 05:49:34" app="S3D-Software 4.0.1">
+<profile name="TLM" version="2018-06-04 06:06:09" app="S3D-Software 4.0.1">
   <baseProfile>Default</baseProfile>
-  <printMaterial>PLA</printMaterial>
+  <printMaterial>PLA + PVA</printMaterial>
   <printQuality>Medium</printQuality>
   <printExtruders>Both Extruders</printExtruders>
   <extruder name="Left">
@@ -36,7 +36,7 @@
     <useWipe>0</useWipe>
     <wipeDistance>5</wipeDistance>
   </extruder>
-  <primaryExtruder>1</primaryExtruder>
+  <primaryExtruder>0</primaryExtruder>
   <layerHeight>0.2</layerHeight>
   <topSolidLayers>4</topSolidLayers>
   <bottomSolidLayers>4</bottomSolidLayers>
@@ -75,7 +75,7 @@
   <oozeShieldSidewallShape>0</oozeShieldSidewallShape>
   <oozeShieldSidewallAngle>30</oozeShieldSidewallAngle>
   <oozeShieldSpeedMultiplier>1</oozeShieldSpeedMultiplier>
-  <infillExtruder>1</infillExtruder>
+  <infillExtruder>0</infillExtruder>
   <internalInfillPattern>Fast Honeycomb</internalInfillPattern>
   <externalInfillPattern>Rectilinear</externalInfillPattern>
   <infillPercentage>15</infillPercentage>
@@ -86,13 +86,13 @@
   <internalInfillAngles>0</internalInfillAngles>
   <overlapInternalInfillAngles>0</overlapInternalInfillAngles>
   <externalInfillAngles>45,-45</externalInfillAngles>
-  <generateSupport>1</generateSupport>
-  <supportExtruder>1</supportExtruder>
+  <generateSupport>0</generateSupport>
+  <supportExtruder>0</supportExtruder>
   <supportInfillPercentage>30</supportInfillPercentage>
   <supportExtraInflation>0</supportExtraInflation>
   <supportBaseLayers>1</supportBaseLayers>
   <denseSupportExtruder>1</denseSupportExtruder>
-  <denseSupportLayers>1</denseSupportLayers>
+  <denseSupportLayers>0</denseSupportLayers>
   <denseSupportInfillPercentage>100</denseSupportInfillPercentage>
   <supportLayerInterval>1</supportLayerInterval>
   <supportHorizontalPartOffset>0</supportHorizontalPartOffset>
@@ -124,7 +124,7 @@
     <relayBetweenLayers>0</relayBetweenLayers>
     <relayBetweenLoops>0</relayBetweenLoops>
     <stabilizeAtStartup>0</stabilizeAtStartup>
-    <setpoint layer="1" temperature="205"/>
+    <setpoint layer="1" temperature="200"/>
   </temperatureController>
   <fanSpeed>
     <setpoint layer="1" speed="0"/>
@@ -183,8 +183,8 @@
   <outlineUnderspeed>0.6</outlineUnderspeed>
   <solidInfillUnderspeed>0.7</solidInfillUnderspeed>
   <supportUnderspeed>0.6</supportUnderspeed>
-  <rapidXYspeed>12000</rapidXYspeed>
-  <rapidZspeed>12000</rapidZspeed>
+  <rapidXYspeed>9000</rapidXYspeed>
+  <rapidZspeed>9000</rapidZspeed>
   <minBridgingArea>50</minBridgingArea>
   <bridgingExtraInflation>0</bridgingExtraInflation>
   <bridgingExtrusionMultiplier>1</bridgingExtrusionMultiplier>
@@ -225,35 +225,17 @@
   <autoConfigureMaterial name="PLA">
     <globalBedTemperature>60</globalBedTemperature>
     <globalExtrusionMultiplier>1</globalExtrusionMultiplier>
+    <denseSupportLayers>0</denseSupportLayers>
     <fanSpeed>
       <setpoint layer="1" speed="0"/>
       <setpoint layer="5" speed="80"/>
     </fanSpeed>
-  </autoConfigureMaterial>
-  <autoConfigureMaterial name="ABS">
-    <globalExtruderTemperature>225</globalExtruderTemperature>
-    <globalBedTemperature>100</globalBedTemperature>
-    <globalExtrusionMultiplier>1</globalExtrusionMultiplier>
-    <fanSpeed>
-      <setpoint layer="1" speed="0"/>
-    </fanSpeed>
-  </autoConfigureMaterial>
-  <autoConfigureMaterial name="PVA">
-    <globalExtruderTemperature>195</globalExtruderTemperature>
-    <globalBedTemperature>80</globalBedTemperature>
-    <globalExtrusionMultiplier>1</globalExtrusionMultiplier>
-    <fanSpeed>
-      <setpoint layer="1" speed="0"/>
-      <setpoint layer="2" speed="100"/>
-    </fanSpeed>
-  </autoConfigureMaterial>
-  <autoConfigureMaterial name="Nylon">
-    <globalExtruderTemperature>220</globalExtruderTemperature>
-    <globalBedTemperature>80</globalBedTemperature>
-    <globalExtrusionMultiplier>1</globalExtrusionMultiplier>
-    <fanSpeed>
-      <setpoint layer="1" speed="0"/>
-    </fanSpeed>
+    <temperatureController name="Left">
+      <setpoint layer="1" temperature="205"/>
+    </temperatureController>
+    <temperatureController name="Right">
+      <setpoint layer="1" temperature="205"/>
+    </temperatureController>
   </autoConfigureMaterial>
   <autoConfigureQuality name="Fast">
     <layerHeight>0.3</layerHeight>
@@ -304,15 +286,32 @@
     <toggleTemperatureController name="Right" status="on" stabilize="off"/>
   </autoConfigureExtruders>
   <autoConfigureExtruders name="Both Extruders" allowedToolheads="2">
-    <primaryExtruder>1</primaryExtruder>
+    <primaryExtruder>0</primaryExtruder>
     <raftExtruder>0</raftExtruder>
     <skirtExtruder>1</skirtExtruder>
-    <infillExtruder>1</infillExtruder>
-    <supportExtruder>1</supportExtruder>
+    <infillExtruder>0</infillExtruder>
+    <supportExtruder>0</supportExtruder>
     <useSkirt>1</useSkirt>
     <usePrimePillar>1</usePrimePillar>
     <useOozeShield>0</useOozeShield>
     <toggleTemperatureController name="Right" status="on" stabilize="off"/>
     <toggleTemperatureController name="Left" status="on" stabilize="off"/>
   </autoConfigureExtruders>
+  <autoConfigureMaterial name="PLA + PVA">
+    <globalBedTemperature>60</globalBedTemperature>
+    <globalExtrusionMultiplier>1</globalExtrusionMultiplier>
+    <supportExtruder>0</supportExtruder>
+    <denseSupportExtruder>1</denseSupportExtruder>
+    <denseSupportLayers>1</denseSupportLayers>
+    <fanSpeed>
+      <setpoint layer="1" speed="0"/>
+      <setpoint layer="5" speed="80"/>
+    </fanSpeed>
+    <temperatureController name="Left">
+      <setpoint layer="1" temperature="205"/>
+    </temperatureController>
+    <temperatureController name="Right">
+      <setpoint layer="1" temperature="200"/>
+    </temperatureController>
+  </autoConfigureMaterial>
 </profile>
