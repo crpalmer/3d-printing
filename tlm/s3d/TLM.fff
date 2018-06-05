@@ -59,11 +59,11 @@
   <raftTopInfill>100</raftTopInfill>
   <aboveRaftSpeedMultiplier>0.3</aboveRaftSpeedMultiplier>
   <useSkirt>1</useSkirt>
-  <skirtExtruder>1</skirtExtruder>
+  <skirtExtruder>0</skirtExtruder>
   <skirtLayers>1</skirtLayers>
-  <skirtOutlines>1</skirtOutlines>
+  <skirtOutlines>2</skirtOutlines>
   <skirtOffset>6</skirtOffset>
-  <usePrimePillar>1</usePrimePillar>
+  <usePrimePillar>0</usePrimePillar>
   <primePillarExtruder>999</primePillarExtruder>
   <primePillarWidth>12</primePillarWidth>
   <primePillarLocation>6</primePillarLocation>
