@@ -13,7 +13,7 @@
     <useRetract>1</useRetract>
     <retractionDistance>5</retractionDistance>
     <extraRestartDistance>0</extraRestartDistance>
-    <retractionZLift>0</retractionZLift>
+    <retractionZLift>0.2</retractionZLift>
     <retractionSpeed>2100</retractionSpeed>
     <useCoasting>0</useCoasting>
     <coastingDistance>0.5</coastingDistance>
@@ -29,7 +29,7 @@
     <useRetract>1</useRetract>
     <retractionDistance>5</retractionDistance>
     <extraRestartDistance>0</extraRestartDistance>
-    <retractionZLift>0</retractionZLift>
+    <retractionZLift>0.2</retractionZLift>
     <retractionSpeed>2100</retractionSpeed>
     <useCoasting>0</useCoasting>
     <coastingDistance>0.2</coastingDistance>
