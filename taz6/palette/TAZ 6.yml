@@ -1,5 +1,5 @@
 version: 2
-name: LulzBot TAZ 6 (1.75 mm upgrade)
+name: TAZ 6
 preset: lulzbot_taz6
 gpxProfile: false
 gpxConfigPath: ''
