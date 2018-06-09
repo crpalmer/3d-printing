@@ -9,8 +9,12 @@ G21					  ; Work in millimetres
 M555 P1					  ; Set firmware compatibility to look like RepRapFirmare
 G90                                       ; Send absolute coordinates...
 M83                                       ; ...but relative extruder moves
-M665 L375 R165 H533 B175                  ; Set delta radius, diagonal rod length, printable radius and homed height
-M666 X0 Y0 Z0                             ; Put your endstop adjustments here, or let auto calibration find them
+; M665 R165.22 L375.00 H535 B150.00 X0.18 Y-0.29 Z0.00
+; M666 X0.23 Y-0.16 Z-0.07
+;M665 R165.25 L375.00 H535 B150.00 X0.18 Y-0.30 Z0.00 ; Set delta radius, diagonal rod length, printable radius and homed height
+;M666 X0.23 Y-0.17 Z-0.06                  ; Put your endstop adjustments here, or let auto calibration find them
+M665 R165.29 L375.00 H535.03 B150.00 X0.17 Y-0.32 Z0.00
+M666 X-0.14 Y-0.00 Z0.14
 
 ; Network
 M550 Ptlm-duet                            ; Set machine name
@@ -34,7 +38,8 @@ M566 X1500 Y1500 Z1500 E1300:1300           ; Set maximum instantaneous speed ch
 M203 X39960 Y39960 Z39960 E3000:3000	  ; Set maximum speeds (mm/min)
 ;M201 X5000 Y5000 Z5000 E500:500          ; Set accelerations (mm/s^2)
 M201 X1000 Y1000 Z1000 E1500:1500    	  ; Set accelerations (mm/s^2)
-M906 X1400 Y1400 Z1400 E500:500 I30	  ; Set motor currents (mA) and motor idle factor in per cent
+; 2018-06-03: change from 1.4A / 500A, below
+M906 X1200 Y1200 Z1200 E750:750 I30	  ; Set motor currents (mA) and motor idle factor in per cent
 M84 S30					  ; Set idle timeout
 
 ; Axis Limits
@@ -42,10 +47,6 @@ M208 Z-10 S1                              ; Set minimum Z
 
 ; Endstops
 M574 X2 Y2 Z2 S1                          ; Set active high endstops
-
-; Z-Probe
-M98 P/sys/zprobe-fsr.g
-M557 R140 S20                             ; Define mesh grid
 
 ; Heaters (further extended by the selected hotend included below)
 M301 H0 S1.00 P10 I0.1 D200 T0.4 W180 B30 ; Use PID on bed heater (may require further tuning)
@@ -57,7 +58,12 @@ M106 P0 S0 I0 F500 H-1                    ; Set fan 0 value, PWM signal inversio
 M106 P1 S1 I0 F500 H-1                    ; Set fan 1 value, PWM signal inversion and frequency. Thermostatic control is turned off
 M106 P2 S1 I0 F500 H-1                    ; Set fan 2 value, PWM signal inversion and frequency. Thermostatic control is turned off
 
+; Hotend
 M98 P/sys/hotend-chimera.g
+
+; Z-Probe
+M98 P/sys/zprobe-ir.g
+M557 R140 S20                             ; Define mesh grid
 
 ; Automatic saving after power loss is not enabled
 
@@ -65,3 +71,4 @@ M98 P/sys/hotend-chimera.g
 
 ; Miscellaneous
 M501                                      ; Load saved parameters from non-volatile memory
+M375					  ; Load the grid probing mesh
