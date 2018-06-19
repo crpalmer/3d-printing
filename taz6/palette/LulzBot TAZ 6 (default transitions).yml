@@ -1,5 +1,5 @@
 version: 2
-name: TAZ 6
+name: LulzBot TAZ 6 (default transitions)
 preset: lulzbot_taz6
 gpxProfile: false
 gpxConfigPath: ''
@@ -27,14 +27,14 @@ bowdenTube: false
 firmwarePurge: 0
 transitions:
   method: 1
-  purgeLength: 160
-  minPurgeLength: 70
-  initialPurgeLength: 160
-  purgeTarget: 0.2
+  purgeLength: 130
+  minPurgeLength: 130
+  initialPurgeLength: 130
+  purgeTarget: 0.4
   transitionInInfill: true
   transitionInSupport: false
   towers:
-    printSpeed: 50
+    printSpeed: auto
     extrusionWidth: auto
     minDensity: 0.05
     minBottomDensity: 0.8

@@ -1,5 +1,5 @@
 version: 2
-name: TAZ 6
+name: TAZ 6 + Soluble Supports
 preset: lulzbot_taz6
 gpxProfile: false
 gpxConfigPath: ''
@@ -27,14 +27,14 @@ bowdenTube: false
 firmwarePurge: 0
 transitions:
   method: 1
-  purgeLength: 160
-  minPurgeLength: 70
-  initialPurgeLength: 160
+  purgeLength: 125
+  minPurgeLength: 125
+  initialPurgeLength: 125
   purgeTarget: 0.2
-  transitionInInfill: true
+  transitionInInfill: false
   transitionInSupport: false
   towers:
-    printSpeed: 50
+    printSpeed: 30
     extrusionWidth: auto
     minDensity: 0.05
     minBottomDensity: 0.8
@@ -53,7 +53,7 @@ transitions:
 pings:
   jogPauses: false
   retraction: auto
-  pingOffTower: false
+  pingOffTower: true
   mechanicalPingGCode: ''
 calibration:
   loadingOffset: 21490
