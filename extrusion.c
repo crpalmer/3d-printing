@@ -24,6 +24,13 @@ typedef struct {
 
 static char buf[1024*1024];
 
+static double last_z = 0, start_e = 0, last_e = 0, last_e_z = 0, acc_e = 0, last_reported_z = -1;
+static int tool = 0;
+static int seen_tool = 0;
+static double tower_z = -1;
+static int in_tower = 0;
+static int validate_only = 0;
+
 static int
 find_arg(const char *buf, char arg, double *val)
 {
@@ -49,8 +56,8 @@ get_next_token()
     while (fgets(buf, sizeof(buf), stdin) != NULL) {
 	if (STRNCMP(buf, "G1 ") == 0) {
 	    t.t = MOVE;
-	    if (! find_arg(buf, 'Z', &t.x.move.z)) t.x.move.z = NAN;
-	    if (! find_arg(buf, 'E', &t.x.move.e)) t.x.move.e = NAN;
+	    if (! find_arg(buf, 'Z', &t.x.move.z)) t.x.move.z = last_z;
+	    if (! find_arg(buf, 'E', &t.x.move.e)) t.x.move.e = last_e;
 	    return t;
 	}
 	if (STRNCMP(buf, "; finishing tower layer") == 0 ||
@@ -77,13 +84,6 @@ get_next_token()
     return t;
 }
 
-static double last_z = 0, start_e = 0, last_e = 0, acc_e = 0, last_reported_z = -1;
-static int tool = 0;
-static int seen_tool = 0;
-static double tower_z = -1;
-static int in_tower = 0;
-static int validate_only = 0;
-
 static void
 accumulate()
 {
@@ -100,18 +100,18 @@ reset_state()
 static void
 show_extrusion(char chr, int force)
 {
-    int new_z = last_reported_z != last_z;
-    int bad = in_tower && tower_z != last_z && acc_e > 0;
+    int new_z = last_reported_z != last_e_z;
+    int bad = in_tower && tower_z != last_e_z && acc_e > 0;
 
-    last_reported_z = last_z;
+    last_reported_z = last_e_z;
     if ((seen_tool && new_z) || bad || acc_e > 0 || force) {
 	if (validate_only && ! bad) return;
 
 	printf("%c", chr);
 	if (seen_tool) printf(" T%d", tool);
-	printf(" Z %.02f", last_z);
+	printf(" Z %.02f", last_e_z);
 	if (acc_e > 0) printf(" E %7.02f", acc_e);
-	if (bad) printf(" *********** z delta = %.02f", last_z - tower_z);
+	if (bad) printf(" *********** z delta = %.02f", last_e_z - tower_z);
 	printf("\n");
     }
 }
@@ -124,19 +124,20 @@ int main(int argc, char **argv)
 	token_t t = get_next_token();
 	switch(t.t) {
 	case MOVE:
-	    if (t.x.move.e > last_e) last_e = t.x.move.e;
-	    if (! isnan(t.x.move.z) && t.x.move.z != last_z) {
+	    if (t.x.move.e != last_e && t.x.move.z != last_e_z) {
 		accumulate();
 		show_extrusion('+', 0);
-		last_z = t.x.move.z;
+		last_e_z = t.x.move.z;
 		reset_state();
 	    }
+	    last_e = t.x.move.e;
+	    last_z = t.x.move.z;
 	    break;
 	case START_TOWER:
 	    accumulate();
 	    show_extrusion('+', 0);
 	    reset_state();
-	    tower_z = last_z;
+	    tower_z = last_e_z;
 	    in_tower = 1;
 	    show_extrusion('>', 1);
 	    break;
