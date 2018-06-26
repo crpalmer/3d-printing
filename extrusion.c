@@ -42,6 +42,7 @@ static char buf[1024*1024];
 
 static int validate_only = 0;
 static int summary = 0;
+static int trace = 0;
 
 static double last_z = 0, start_e = 0, last_e = 0, last_e_z = 0, acc_e = 0, last_reported_z = -1;
 static int tool = 0;
@@ -72,7 +73,7 @@ find_arg(const char *buf, char arg, double *val)
 #define STRNCMP(a, b) strncmp(a, b, strlen(b))
 
 static token_t
-get_next_token()
+get_next_token_wrapped()
 {
     token_t t;
 
@@ -115,6 +116,26 @@ get_next_token()
     }
 
     t.t = DONE;
+    return t;
+}
+
+static token_t
+get_next_token()
+{
+    token_t t = get_next_token_wrapped();
+    if (trace) {
+	printf("%8ld ", t.pos);
+	switch (t.t) {
+	case MOVE: printf("MOVE z=%f, e=%f\n", t.x.move.z, t.x.move.e); break;
+	case START_TOWER: printf("START_TOWER\n"); break;
+	case END_TOWER: printf("END_TOWER\n"); break;
+	case PING: printf("PING %d.%d\n", t.x.ping.num, t.x.ping.step); break;
+	case SET_E: printf("SET_E %f\n", t.x.e); break;
+	case START: printf("START\n"); break;
+	case TOOL: printf("TOOL %d\n", t.x.tool); break;
+	default: printf("*** UNKNOWN TOKEN ****\n");
+        }
+    }
     return t;
 }
 
@@ -254,6 +275,7 @@ int main(int argc, char **argv)
     while (argc > 1) {
 	    if (strcmp(argv[1], "--validate") == 0) validate_only = 1;
 	    else if (strcmp(argv[1], "--summary") == 0) summary = 1;
+	    else if (strcmp(argv[1], "--trace") == 0) trace = 1;
 	    else break;
 	    argc--;
 	    argv++;
