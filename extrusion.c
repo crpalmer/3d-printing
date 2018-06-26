@@ -164,9 +164,9 @@ show_extrusion(char chr, int force)
 
 	printf("%c", chr);
 	if (seen_tool) printf(" T%d", tool);
-	printf(" Z %.02f", last_e_z);
-	if (acc_e != 0) printf(" E %7.02f", acc_e);
-	if (bad) printf(" *********** z delta = %.02f", last_e_z - tower_z);
+	printf(" Z %f", last_e_z);
+	if (acc_e != 0) printf(" E %f", acc_e);
+	if (bad) printf(" *********** z delta = %f", last_e_z - tower_z);
 	if (seen_ping) printf(" [ping]");
 	printf("\n");
     }
