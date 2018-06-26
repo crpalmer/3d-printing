@@ -131,13 +131,13 @@ show_extrusion(char chr, int force)
     int bad = in_tower && tower_z != last_e_z && acc_e > 0;
 
     last_reported_z = last_e_z;
-    if (bad || acc_e > 0 || force) {
+    if (bad || acc_e != 0 || force) {
 	if (validate_only && ! bad) return;
 
 	printf("%c", chr);
 	if (seen_tool) printf(" T%d", tool);
 	printf(" Z %.02f", last_e_z);
-	if (acc_e > 0) printf(" E %7.02f", acc_e);
+	if (acc_e != 0) printf(" E %7.02f", acc_e);
 	if (bad) printf(" *********** z delta = %.02f", last_e_z - tower_z);
 	if (seen_ping) printf(" [ping]");
 	printf("\n");
@@ -147,7 +147,7 @@ show_extrusion(char chr, int force)
 static void
 add_run()
 {
-    if (acc_e > 0) {
+    if (acc_e != 0) {
 	runs[n_runs].z = last_e_z;
 	runs[n_runs].e = acc_e;
 	runs[n_runs].t = tool;
