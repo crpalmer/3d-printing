@@ -14,6 +14,7 @@ typedef struct {
 	SET_E,
 	TOOL,
 	PING,
+	START,
 	DONE
     } t;
     union {
@@ -48,6 +49,7 @@ static int seen_tool = 0;
 static double tower_z = -1;
 static int in_tower = 0;
 static int seen_ping = 0;
+static int started = 0;
 
 static run_t runs[MAX_RUNS];
 static int n_runs = 0;
@@ -99,6 +101,11 @@ get_next_token()
 	if (STRNCMP(buf, "G92 ") == 0) {
 	    t.t = SET_E;
 	    if (find_arg(buf, 'E', &t.x.e)) return t;
+	}
+	if (STRNCMP(buf, "; *** Main G-code ***") == 0 ||
+	    STRNCMP(buf, "; layer 1, ") == 0) {
+	    t.t = START;
+	    return t;
 	}
 	if (buf[0] == 'T' && isdigit(buf[1])) {
 	    t.t = TOOL;
@@ -168,8 +175,10 @@ static void process(const char *fname)
 	case MOVE:
 	    if (t.x.move.e != last_e && t.x.move.z != last_e_z) {
 		accumulate();
-		add_run();
-		show_extrusion('+', 0);
+		if (started) {
+		    add_run();
+		    show_extrusion('+', 0);
+		}
 		last_e_z = t.x.move.z;
 		reset_state();
 	    }
@@ -197,6 +206,10 @@ static void process(const char *fname)
 	    break;
 	case TOOL:
 	    if (tool != t.x.tool) {
+		if (! started) {
+		    fprintf(stderr, "** ERROR *** Tool change before in prefix gcode\n");
+		    exit(1);
+		}
 		accumulate();
 		add_run();
 		if (validate_only && acc_e == 0) printf("Z %.02f ******* Tool change with no extrusion, chroma may screw this up\n", last_z);
@@ -208,6 +221,11 @@ static void process(const char *fname)
 	    break;
 	case PING:
 	    seen_ping = 1;
+	    break;
+	case START:
+	    started = 1;
+	    accumulate();
+	    reset_state();
 	    break;
 	case DONE:
 	    goto done;
