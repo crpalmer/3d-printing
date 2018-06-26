@@ -4,6 +4,8 @@
 #include <string.h>
 #include <math.h>
 
+#define MAX_RUNS	100000
+
 typedef struct {
     enum {
 	MOVE,
@@ -22,6 +24,12 @@ typedef struct {
     } x;
 } token_t;
 
+typedef struct {
+    double z;
+    double e;
+    int	   t;
+} run_t;
+
 static char buf[1024*1024];
 
 static double last_z = 0, start_e = 0, last_e = 0, last_e_z = 0, acc_e = 0, last_reported_z = -1;
@@ -30,6 +38,9 @@ static int seen_tool = 0;
 static double tower_z = -1;
 static int in_tower = 0;
 static int validate_only = 0;
+
+static run_t runs[MAX_RUNS];
+static int n_runs = 0;
 
 static int
 find_arg(const char *buf, char arg, double *val)
@@ -100,11 +111,10 @@ reset_state()
 static void
 show_extrusion(char chr, int force)
 {
-    int new_z = last_reported_z != last_e_z;
     int bad = in_tower && tower_z != last_e_z && acc_e > 0;
 
     last_reported_z = last_e_z;
-    if ((seen_tool && new_z) || bad || acc_e > 0 || force) {
+    if (bad || acc_e > 0 || force) {
 	if (validate_only && ! bad) return;
 
 	printf("%c", chr);
@@ -116,16 +126,39 @@ show_extrusion(char chr, int force)
     }
 }
 
+static void
+add_run()
+{
+    if (acc_e > 0) {
+	runs[n_runs].z = last_e_z;
+	runs[n_runs].e = acc_e;
+	runs[n_runs].t = tool;
+	n_runs++;
+    }
+}
+
 int main(int argc, char **argv)
 {
-    if (argc > 1 && strcmp(argv[1], "--validate") == 0) validate_only = 1;
+    int summary = 0;
+
+    while (argc > 1) {
+	    if (strcmp(argv[1], "--validate") == 0) validate_only = 1;
+	    else if (strcmp(argv[1], "--summary") == 0) summary = 1;
+	    else {
+		fprintf(stderr, "usage: [ --validate ] [ --summary ]\n");
+		exit(1);
+	    }
+	    argc--;
+	    argv++;
+    }
 
     while (1) {
 	token_t t = get_next_token();
 	switch(t.t) {
 	case MOVE:
-	    if (t.x.move.e != last_e && t.x.move.z != last_e_z) {
+	    if ((acc_e > 0 || t.x.move.e != last_e) && t.x.move.z != last_e_z) {
 		accumulate();
+		add_run();
 		show_extrusion('+', 0);
 		last_e_z = t.x.move.z;
 		reset_state();
@@ -155,6 +188,7 @@ int main(int argc, char **argv)
 	case TOOL:
 	    if (tool != t.x.tool) {
 		accumulate();
+		add_run();
 		if (validate_only && acc_e == 0) printf("Z %.02f ******* Tool change with no extrusion, chroma may screw this up\n", last_z);
 		show_extrusion('+', 0);
 		reset_state();
@@ -163,7 +197,20 @@ int main(int argc, char **argv)
 	    }
 	    break;
 	case DONE:
-	    return 0;
+	    goto done;
+	}
+    }
+
+done:
+    if (summary) {
+	int i, j;
+
+	for (i = 0; i < n_runs; i = j) {
+	    printf("%6.02f", runs[i].z);
+	    for (j = i; j < n_runs && runs[i].z == runs[j].z; j++) {
+		printf(" %10.2f [%d]", runs[j].e, runs[j].t);
+	    }
+	    printf("\n");
 	}
     }
 }
