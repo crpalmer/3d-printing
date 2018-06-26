@@ -149,26 +149,18 @@ add_run()
     }
 }
 
-int main(int argc, char **argv)
+static void process(const char *fname)
 {
-    int summary = 0;
-
-    while (argc > 1) {
-	    if (strcmp(argv[1], "--validate") == 0) validate_only = 1;
-	    else if (strcmp(argv[1], "--summary") == 0) summary = 1;
-	    else {
-		fprintf(stderr, "usage: [ --validate ] [ --summary ]\n");
-		exit(1);
-	    }
-	    argc--;
-	    argv++;
+    if ((f = fopen(fname, "r")) == NULL) {
+	perror(fname);
+	return;
     }
 
     while (1) {
 	token_t t = get_next_token();
 	switch(t.t) {
 	case MOVE:
-	    if ((acc_e > 0 || t.x.move.e != last_e) && t.x.move.z != last_e_z) {
+	    if (t.x.move.e != last_e && t.x.move.z != last_e_z) {
 		accumulate();
 		add_run();
 		show_extrusion('+', 0);
