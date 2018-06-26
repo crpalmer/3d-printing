@@ -167,7 +167,7 @@ show_extrusion(char chr, int force)
 	printf(" Z %f", last_e_z);
 	if (acc_e != 0) printf(" E %f", acc_e);
 	if (bad) printf(" *********** z delta = %f", last_e_z - tower_z);
-	if (seen_ping) printf(" [ping]");
+	if (seen_ping) printf(" [ping %d]", seen_ping);
 	printf("\n");
     }
 }
@@ -241,7 +241,7 @@ static void process(const char *fname)
 	    }
 	    break;
 	case PING:
-	    seen_ping = 1;
+	    seen_ping = t.x.ping.num;
 	    break;
 	case START:
 	    started = 1;
