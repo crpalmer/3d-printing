@@ -26,6 +26,7 @@ typedef struct {
 	double e;
 	int tool;
     } x;
+    long pos;
 } token_t;
 
 typedef struct {
@@ -34,14 +35,18 @@ typedef struct {
     int	   t;
 } run_t;
 
+static FILE *f;
+
 static char buf[1024*1024];
+
+static int validate_only = 0;
+static int summary = 0;
 
 static double last_z = 0, start_e = 0, last_e = 0, last_e_z = 0, acc_e = 0, last_reported_z = -1;
 static int tool = 0;
 static int seen_tool = 0;
 static double tower_z = -1;
 static int in_tower = 0;
-static int validate_only = 0;
 static int seen_ping = 0;
 
 static run_t runs[MAX_RUNS];
@@ -69,7 +74,8 @@ get_next_token()
 {
     token_t t;
 
-    while (fgets(buf, sizeof(buf), stdin) != NULL) {
+    while (fgets(buf, sizeof(buf), f) != NULL) {
+	t.pos = ftell(f);
 	if (STRNCMP(buf, "G1 ") == 0) {
 	    t.t = MOVE;
 	    if (! find_arg(buf, 'Z', &t.x.move.z)) t.x.move.z = last_z;
@@ -209,6 +215,7 @@ static void process(const char *fname)
     }
 
 done:
+    fclose(f);
     if (summary) {
 	int i, j;
 
@@ -219,5 +226,22 @@ done:
 	    }
 	    printf("\n");
 	}
+    }
+}
+
+int main(int argc, char **argv)
+{
+    int i;
+
+    while (argc > 1) {
+	    if (strcmp(argv[1], "--validate") == 0) validate_only = 1;
+	    else if (strcmp(argv[1], "--summary") == 0) summary = 1;
+	    else break;
+	    argc--;
+	    argv++;
+    }
+
+    for (i = 1; i < argc; i++) {
+	process(argv[i]);
     }
 }
