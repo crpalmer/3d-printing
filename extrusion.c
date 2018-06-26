@@ -257,13 +257,30 @@ done:
     fclose(f);
     if (summary) {
 	int i, j;
+	double tool_total[10] = { 0, };
 
+	printf("Layer by layer extrusions\n");
+	printf("-------------------------\n");
 	for (i = 0; i < n_runs; i = j) {
 	    printf("%6.02f", runs[i].z);
 	    for (j = i; j < n_runs && runs[i].z == runs[j].z; j++) {
 		printf(" %10.2f [%d]", runs[j].e, runs[j].t);
 	    }
 	    printf("\n");
+	}
+	printf("\n");
+	printf("Extruder by extruder extrusions\n");
+	printf("-------------------------------\n");
+	for (i = 0; i < n_runs; i = j) {
+	    double total = 0;
+	    for (j = i; j < n_runs && runs[i].t == runs[j].t; j++) {
+		total += runs[j].e;
+	    }
+	    tool_total[runs[i].t] += total;
+	    printf("T%d %10.4f mm\n", runs[i].t, total);
+	}
+	for (i = 0; i < 10; i++) {
+	    if (tool_total[i] != 0) printf("   TOTAL: T%d %10.2f mm\n", i, tool_total[i]);
 	}
     }
 }
