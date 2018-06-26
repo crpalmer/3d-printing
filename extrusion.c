@@ -13,12 +13,16 @@ typedef struct {
 	END_TOWER,
 	SET_E,
 	TOOL,
+	PING,
 	DONE
     } t;
     union {
 	struct {
 	    double z, e;
 	} move;
+	struct {
+	    int num, step;
+	} ping;
 	double e;
 	int tool;
     } x;
@@ -38,6 +42,7 @@ static int seen_tool = 0;
 static double tower_z = -1;
 static int in_tower = 0;
 static int validate_only = 0;
+static int seen_ping = 0;
 
 static run_t runs[MAX_RUNS];
 static int n_runs = 0;
@@ -80,6 +85,11 @@ get_next_token()
 	    t.t = END_TOWER;
 	    return t;
 	}
+	if (STRNCMP(buf, "; ping ") == 0) {
+	    t.t = PING;
+	    sscanf(buf, "; ping %d pause %d", &t.x.ping.num, &t.x.ping.step);
+	    return t;
+	}
 	if (STRNCMP(buf, "G92 ") == 0) {
 	    t.t = SET_E;
 	    if (find_arg(buf, 'E', &t.x.e)) return t;
@@ -106,6 +116,7 @@ reset_state()
 {
     start_e = last_e;
     acc_e = 0;
+    seen_ping = 0;
 }
 
 static void
@@ -122,6 +133,7 @@ show_extrusion(char chr, int force)
 	printf(" Z %.02f", last_e_z);
 	if (acc_e > 0) printf(" E %7.02f", acc_e);
 	if (bad) printf(" *********** z delta = %.02f", last_e_z - tower_z);
+	if (seen_ping) printf(" [ping]");
 	printf("\n");
     }
 }
@@ -195,6 +207,9 @@ int main(int argc, char **argv)
 		tool = t.x.tool;
 		seen_tool = 1;
 	    }
+	    break;
+	case PING:
+	    seen_ping = 1;
 	    break;
 	case DONE:
 	    goto done;
