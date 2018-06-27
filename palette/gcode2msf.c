@@ -537,7 +537,7 @@ prune_transition_tower()
 	if (layers[n_layers-1].n_transitions > 1 || t->from != t->to) break;
 	n_layers--;
     }
-    n_transitions = layers[n_layers-1].transition0 + layers[n_layers-1].n_transitions - 1;
+    n_transitions = layers[n_layers-1].transition0 + layers[n_layers-1].n_transitions;
     for (i = 0; i < n_runs; i++) {
 	if (runs[i].pre_transition > n_transitions) runs[i].pre_transition = -1;
 	if (runs[i].post_transition > n_transitions) runs[i].post_transition = -1;
