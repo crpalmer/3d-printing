@@ -1,0 +1,76 @@
+Default PLA:
+  type: PLA
+  combinations:
+    Default PLA:
+      heatFactor: 4
+      compressionFactor: 2
+      reverse: false
+    Default PETG:
+      heatFactor: 0
+      compressionFactor: 0
+      reverse: false
+    Default Soluble:
+      heatFactor: 9
+      compressionFactor: 4
+      reverse: false
+    Polymaker PLA and Support:
+      heatFactor: 9
+      compressionFactor: 2
+      reverse: false
+Default PETG:
+  type: PETG
+  combinations:
+    Default PLA:
+      heatFactor: 0
+      compressionFactor: 0
+      reverse: false
+    Default PETG:
+      heatFactor: 2
+      compressionFactor: 2
+      reverse: false
+    Default Soluble:
+      heatFactor: 0
+      compressionFactor: 0
+      reverse: false
+    Polymaker PLA and Support:
+      heatFactor: 0
+      compressionFactor: 0
+      reverse: false
+Default Soluble:
+  type: Soluble
+  combinations:
+    Default PLA:
+      heatFactor: 9
+      compressionFactor: 4
+      reverse: false
+    Default PETG:
+      heatFactor: 0
+      compressionFactor: 0
+      reverse: false
+    Default Soluble:
+      heatFactor: 0
+      compressionFactor: 0
+      reverse: false
+    Polymaker PLA and Support:
+      heatFactor: 0
+      compressionFactor: 0
+      reverse: false
+Polymaker PLA and Support:
+  type: PLA
+  combinations:
+    Default PLA:
+      heatFactor: 9
+      compressionFactor: 2
+      reverse: false
+    Default PETG:
+      heatFactor: 0
+      compressionFactor: 0
+      reverse: false
+    Default Soluble:
+      heatFactor: 6
+      compressionFactor: 4
+      reverse: false
+    Polymaker PLA and Support:
+      heatFactor: 9
+      compressionFactor: 2
+      reverse: false

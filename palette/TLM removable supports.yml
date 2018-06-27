@@ -1,11 +1,11 @@
 version: 2
-name: TAZ 6 + Snappable Supports
-preset: lulzbot_taz6
+name: TLM removable supports
+preset: tevo_littlemonster
 gpxProfile: false
 gpxConfigPath: ''
 inputs:
   - gcode
-engine: marlin
+engine: reprap
 postprocessing: false
 volumetric: false
 independentExtruderAxes: false
@@ -15,31 +15,31 @@ nozzleDiameter: 0.4
 extruderCount: 1
 printExtruder: false
 printBed:
-  circular: false
-  x: 298
-  'y': 275
-  diameter: 0
-  origin: bottomleft
+  circular: true
+  x: 0
+  'y': 0
+  diameter: 300
+  origin: middle
   originOffsets:
-    x: 0
-    'y': 0
-bowdenTube: false
+    x: 150
+    'y': 150
+bowdenTube: 725
 firmwarePurge: 0
 transitions:
   method: 1
-  purgeLength: 125
-  minPurgeLength: 125
-  initialPurgeLength: 125
+  purgeLength: 100
+  minPurgeLength: 100
+  initialPurgeLength: 100
   purgeTarget: 0.2
-  transitionInInfill: true
+  transitionInInfill: false
   transitionInSupport: false
   towers:
-    printSpeed: auto
+    printSpeed: 70
     extrusionWidth: auto
     minDensity: 0.05
     minBottomDensity: 0.8
     maxDensity: 1
-    perimeterSpeedMultiplier: 0.5
+    perimeterSpeedMultiplier: 1
     forceBottomPerimeter: true
     infillPerimeterOverlap: auto
   sideTransitions:
@@ -56,6 +56,6 @@ pings:
   pingOffTower: true
   mechanicalPingGCode: ''
 calibration:
-  loadingOffset: 21490
-  printValue: 118013
-  calibrationGCodeLength: 3895.178849999878
+  loadingOffset: 25821
+  printValue: 125272
+  calibrationGCodeLength: 4161.907720000043
