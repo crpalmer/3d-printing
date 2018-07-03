@@ -13,7 +13,7 @@ Default PLA:
       heatFactor: 9
       compressionFactor: 4
       reverse: false
-    Polymaker PLA and Support:
+    Polysupport:
       heatFactor: 9
       compressionFactor: 2
       reverse: false
@@ -32,7 +32,7 @@ Default PETG:
       heatFactor: 0
       compressionFactor: 0
       reverse: false
-    Polymaker PLA and Support:
+    Polysupport:
       heatFactor: 0
       compressionFactor: 0
       reverse: false
@@ -51,11 +51,11 @@ Default Soluble:
       heatFactor: 0
       compressionFactor: 0
       reverse: false
-    Polymaker PLA and Support:
+    Polysupport:
       heatFactor: 0
       compressionFactor: 0
       reverse: false
-Polymaker PLA and Support:
+Polysupport:
   type: PLA
   combinations:
     Default PLA:
@@ -70,7 +70,7 @@ Polymaker PLA and Support:
       heatFactor: 6
       compressionFactor: 4
       reverse: false
-    Polymaker PLA and Support:
+    Polysupport:
       heatFactor: 9
       compressionFactor: 2
       reverse: false
