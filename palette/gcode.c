@@ -133,6 +133,7 @@ find_arg(const char *buf, char arg, double *val)
 	     return 0;
 	}
     }
+    return 0;
 }
 
 static void
@@ -443,6 +444,7 @@ extrusion_speed()
 
     if (infill_mm_per_min > 0) return infill_mm_per_min;
     if (printer->print_speed > 0) return printer->print_speed;
+    return 30;
 }
 
 static void
@@ -485,11 +487,11 @@ undo_retraction()
 }
 
 static void
-add_splice(int drive, double mm, double waste)
+add_splice(int drive, double mm)
 {
     splices[n_splices].drive = drive;
     splices[n_splices].mm = mm;
-    splices[n_splices].waste = waste;
+    splices[n_splices].waste = 0;
     n_splices++;
 }
 
@@ -552,6 +554,7 @@ layer_to_corner(layer_t *l)
     case 2: return TOP_RIGHT;
     case 3: return BOTTOM_RIGHT;
     }
+    assert(0);
 }
 
 static double
@@ -564,6 +567,7 @@ transition_block_corner_x(int corner, double early)
     case 2: return transition_block.x + transition_block.w;
     case 3: return transition_block.x + early;
     }
+    assert(0);
 }
 
 static double
@@ -576,6 +580,7 @@ transition_block_corner_y(int corner, double early)
     case 2: return transition_block.y + transition_block.h - early;
     case 3: return transition_block.y + transition_block.h;
     }
+    assert(0);
 }
 
 static double
@@ -712,7 +717,7 @@ transition_fill(layer_t *l, transition_t *t)
     if (corner == TOP_LEFT || corner == TOP_RIGHT) y_stride = -y_stride;
 
     pct_to_xy(l, 0, transition_pct, &xy);
-    while ((is_last || transition_e - transition_starting_e < t->mm + t->extra_mm) && transition_pct < 1 - EPSILON) {
+    while ((is_last || transition_e - transition_starting_e < t->pre_mm + t->post_mm) && transition_pct < 1 - EPSILON) {
 	int is_y_first;
 
 	for (is_y_first = 0; is_y_first < 2 && transition_pct < 1 - EPSILON; is_y_first++) {
@@ -748,18 +753,17 @@ generate_transition(layer_t *l, transition_t *t, double *total_e)
 {
     double original_e;
     double actual_e;
-    double waste;
     xy_t start_xy;
 
     original_e = transition_e = last_e;
 
-    waste =  t->mm * printer->transition_target + t->extra_mm;
     if (t->from != t->to) {
-	if (n_splices > 0) splices[n_splices-1].waste += (1-printer->transition_target) * t->mm;
-	add_splice(t->from, *total_e + waste, waste);
+	if (n_splices > 0) splices[n_splices-1].waste += t->post_mm;
+	add_splice(t->from, *total_e + t->pre_mm);
+	splices[n_splices-1].waste += t->pre_mm;
     }
 
-    fprintf(o, "; Transition: %d->%d with %f + %f mm\n", t->from, t->to, t->mm, t->extra_mm);
+    fprintf(o, "; Transition: %d->%d with %f || %f mm\n", t->from, t->to, t->pre_mm, t->post_mm);
     // assume retraction was done just before tool change: do_retraction();
     move_to(NAN, NAN, l->z + z_hop);
 
@@ -804,13 +808,12 @@ generate_transition(layer_t *l, transition_t *t, double *total_e)
     // assume unretraction will done just immediately after tool change: undo_retraction();
 
     fprintf(o, "G92 E%f\n", original_e);
-    fprintf(o, "; Done transition: %d->%d actually used %f mm for %f + %f mm\n", t->from, t->to, actual_e, t->mm, t->extra_mm);
+    fprintf(o, "; Done transition: %d->%d actually used %f mm for %f + %f mm\n", t->from, t->to, actual_e, t->pre_mm, t->post_mm);
 
     *total_e += actual_e;
     layer_transition_e += actual_e;
 
     assert(t->num != l->transition0 + l->n_transitions - 1 || fabs(transition_pct - 1) < 0.001);
-    assert(t->num != l->transition0 + l->n_transitions - 1 || l->mm - 1 <= layer_transition_e <= l->mm+5);
 }
 
 static void
@@ -822,7 +825,7 @@ produce_gcode()
     int seen_tool = 0;
     int tool = 0;
     int started = 0;
-    double total_e;
+    double total_e = 0;
 
     last_e = last_x = last_y = last_z = 0;
 
@@ -877,7 +880,7 @@ produce_gcode()
 	    break;
 	case DONE:
 	    total_e += printer->bowden_len > 0 ? printer->bowden_len : EXTRA_FILAMENT;
-	    add_splice(tool, total_e, 0);
+	    add_splice(tool, total_e);
 	    return;
 	}
     }

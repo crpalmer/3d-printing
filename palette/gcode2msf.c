@@ -19,10 +19,6 @@ output_summary()
     int i, j;
     int layer = 1;
     double last_layer_z = 0;
-    double tool_mm[N_DRIVES] = { 0, };
-    double tool_waste[N_DRIVES] = { 0, };
-    double tool_infill[N_DRIVES] = { 0, };
-    double tool_support[N_DRIVES] = { 0, };
 
     printf("Layer by layer extrusions\n");
     printf("-------------------------\n");
@@ -35,34 +31,7 @@ output_summary()
 	printf("\n");
     }
     printf("\n");
-    printf("Extruder by extruder extrusions\n");
-    printf("-------------------------------\n");
-    for (i = 0; i < n_runs; i = j) {
-	double mm = 0, waste = 0;
-	double leading_support_mm = runs[i].leading_support_mm;
-	double trailing_infill_mm = runs[i].trailing_infill_mm;
-	for (j = i; j < n_runs && runs[i].t == runs[j].t; j++) {
-	    mm += runs[j].e;
-	    waste += get_pre_transition_mm(j) + get_post_transition_mm(j);
-	    trailing_infill_mm = runs[i].trailing_infill_mm;
-	}
-	tool_mm[runs[i].t] += mm;
-	tool_waste[runs[i].t] += waste;
-	tool_infill[runs[i].t] += trailing_infill_mm;
-	tool_support[runs[i].t] += leading_support_mm;
-	printf("T%d %10.4f mm %10.4f waste %10.4f support %10.4f infill\n", runs[i].t, mm, waste, leading_support_mm, trailing_infill_mm);
-    }
-    for (i = 0; i < N_DRIVES; i++) {
-	if (tool_mm[i] + tool_waste[i] != 0) printf("   TOTAL: T%d %10.2f mm %10.2f waste %10.2f support %10.2f infill\n", i, tool_mm[i], tool_waste[i], tool_support[i], tool_infill[i]);
-    }
-    printf("\n");
-    double t_xy[2];
-    transition_block_size(t_xy);
-    printf("Transition block: area %f transition_block=(%f,%f)x(%f,%f)\n", t_xy[0] * t_xy[1], transition_block.x, transition_block.y, transition_block.w, transition_block.h);
-    printf("----------------\n");
-    for (i = 0; i < n_layers; i++) {
-	printf("z=%-6.2f height=%-4.2f mm=%-6.2f n-transitions=%d bb=(%f,%f),(%f,%f)\n", layers[i].z, layers[i].h, layers[i].mm, layers[i].n_transitions, BB_PRINTF_ARGS(&layers[i].bb));
-    }
+    transition_block_dump_transitions(stdout);
 }
 
 static char *

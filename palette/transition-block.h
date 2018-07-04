@@ -10,7 +10,6 @@ typedef struct {
     double h;
     int transition0;
     int n_transitions;
-    double mm;
     double density;
     int    use_perimeter;
 } layer_t;
@@ -18,8 +17,13 @@ typedef struct {
 typedef struct {
     int num;
     int from, to;
-    double mm;
-    double extra_mm;
+    double transition_length;
+    double mm_pre_transition;
+    double infill_mm;
+    double pre_mm, post_mm;
+    double support_mm;
+    double avail_infill;
+    double avail_support;
     int ping;
 } transition_t;
 
@@ -40,9 +44,6 @@ void transition_block_size(double xy[2]);
 
 void transition_block_create_from_runs();
 
-/* temporarily export these two until I get the gcode produced with proper splice information */
-double get_pre_transition_mm(int j);
-double get_post_transition_mm(int j);
-
+void transition_block_dump_transitions(FILE *o);
 
 #endif
