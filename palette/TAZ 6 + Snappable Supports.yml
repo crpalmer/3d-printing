@@ -27,9 +27,9 @@ bowdenTube: false
 firmwarePurge: 0
 transitions:
   method: 1
-  purgeLength: 125
-  minPurgeLength: 125
-  initialPurgeLength: 125
+  purgeLength: 75
+  minPurgeLength: 75
+  initialPurgeLength: 100
   purgeTarget: 0.2
   transitionInInfill: false
   transitionInSupport: false
@@ -37,7 +37,7 @@ transitions:
     printSpeed: auto
     extrusionWidth: auto
     minDensity: 0.05
-    minBottomDensity: 0.8
+    minBottomDensity: 0.4
     maxDensity: 1
     perimeterSpeedMultiplier: 0.5
     forceBottomPerimeter: true

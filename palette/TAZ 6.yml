@@ -37,7 +37,7 @@ transitions:
     printSpeed: 50
     extrusionWidth: auto
     minDensity: 0.05
-    minBottomDensity: 0.8
+    minBottomDensity: 0.4
     maxDensity: 1
     perimeterSpeedMultiplier: 0.5
     forceBottomPerimeter: true
