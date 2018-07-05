@@ -32,7 +32,7 @@ transitions:
   initialPurgeLength: 160
   purgeTarget: 0.2
   transitionInInfill: true
-  transitionInSupport: false
+  transitionInSupport: true
   towers:
     printSpeed: 50
     extrusionWidth: auto
