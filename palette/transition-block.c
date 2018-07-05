@@ -9,6 +9,8 @@
 #include "materials.h"
 #include "transition-block.h"
 
+#define EXTRA_FILAMENT  75
+
 layer_t layers[MAX_RUNS];
 int n_layers;
 double layer_mm[MAX_RUNS];
@@ -16,6 +18,8 @@ transition_t transitions[MAX_RUNS];
 int n_transitions = 0;
 transition_block_t transition_block;
 int reduce_pings = 0;
+double transition_final_mm;
+double transition_final_waste;
 
 #define MIN_FIRST_SPLICE_LEN	141	/* There appears to be some epsilon error with 140 causing it to error */
 #define MIN_SPLICE_LEN		 80
@@ -122,14 +126,6 @@ add_extra_block_purge(transition_t *t, double extra_mm)
 }
 
 static void
-add_extra_purge(transition_t *t, double extra_mm)
-{
-    move_purge(&extra_mm, &t->infill_mm, &t->avail_infill);
-    move_purge(&extra_mm, &t->support_mm, &t->avail_support);
-    add_extra_block_purge(t, extra_mm);
-}
-
-static void
 layer_add_extra_block_purge(layer_t *l, double extra_mm)
 {
     int i;
@@ -164,7 +160,7 @@ get_ping_threshold(double total_mm)
 }
 
 static void
-add_transition(int from, int to, double z, run_t *run, run_t *pre_run, double *total_mm, double *filament_mm)
+add_transition(int from, int to, double z, run_t *run, run_t *pre_run, double *mm_from_runs, double *total_mm, double *filament_mm)
 {
     transition_t *t;
     layer_t *layer;
@@ -192,21 +188,29 @@ add_transition(int from, int to, double z, run_t *run, run_t *pre_run, double *t
     t->from = from;
     t->to = to;
     t->ping = 0;
+    t->mm_from_runs = *mm_from_runs;
     t->mm_pre_transition = *filament_mm;
+    t->offset = pre_run->offset;
 
     t->avail_infill = printer->transition_in_infill && pre_run->trailing_infill_mm > 0 ? pre_run->trailing_infill_mm : 0;
     t->avail_support = printer->transition_in_support && run->leading_support_mm > 0 ? run->leading_support_mm : 0;
 
-    mm = t->transition_length = transition_length(from, to, *total_mm);
+    mm = transition_length(from, to, *total_mm);
     t->pre_mm = printer->transition_target * mm;
     t->post_mm = mm - t->pre_mm;
     t->infill_mm = t->support_mm = 0;
 
     move_purge(&t->pre_mm, &t->infill_mm, &t->avail_infill);
     move_purge(&t->post_mm, &t->support_mm, &t->avail_support);
+    move_purge(&t->post_mm, &t->infill_mm, &t->avail_infill);
+    move_purge(&t->pre_mm, &t->support_mm, &t->avail_support);
 
-    if (from != to) (*filament_mm) = t->post_mm;
-    else (*filament_mm) += t->pre_mm + t->post_mm;
+    if (from != to) {
+	(*mm_from_runs) = 0;
+	(*filament_mm) = t->post_mm;
+    } else {
+	(*filament_mm) += t->pre_mm + t->post_mm;
+    }
 
     (*total_mm) += t->pre_mm + t->post_mm;
 
@@ -218,31 +222,34 @@ static void
 compute_transition_tower()
 {
     int i;
-    double total_mm, filament_mm;
+    double mm_from_runs, total_mm, filament_mm;
     double last_ping_at = 0;
     double ping_threshold;
 
-    total_mm = filament_mm = runs[0].e;
+    mm_from_runs = total_mm = filament_mm = runs[0].e;
     ping_threshold = get_ping_threshold(total_mm);
 
     for (i = 1; i < n_runs; i++) {
 	double ping_delta;
 
 	if (runs[i-1].t != runs[i].t) {
-	    add_transition(runs[i-1].t, runs[i].t, runs[i].z, &runs[i], &runs[i-1], &total_mm, &filament_mm);
+	    add_transition(runs[i-1].t, runs[i].t, runs[i].z, &runs[i], &runs[i-1], &mm_from_runs, &total_mm, &filament_mm);
 	} else if (runs[i-1].z != runs[i].z && (n_layers == 0 || layers[n_layers-1].z != runs[i-1].z)) {
-	    add_transition(runs[i-1].t, runs[i-1].t, runs[i-1].z, &runs[i-1], &runs[i-1], &total_mm, &filament_mm);
+	    add_transition(runs[i-1].t, runs[i-1].t, runs[i-1].z, &runs[i-1], &runs[i-1], &mm_from_runs, &total_mm, &filament_mm);
 	}
 
 	ping_delta = total_mm - last_ping_at;
-        if (ping_delta > ping_threshold || (i+1 < n_runs && ping_delta+runs[i+1].e > ping_threshold*2)) {
+        if (ping_delta > ping_threshold || (total_mm > ping_threshold && i+1 < n_runs && ping_delta+runs[i+1].e > ping_threshold*2)) {
 	    last_ping_at = total_mm;
 	    transitions[n_transitions-1].ping = 1;
 	    ping_threshold = get_ping_threshold(total_mm);
 	}
 	total_mm += runs[i].e;
 	filament_mm += runs[i].e;
+	mm_from_runs += runs[i].e;
     }
+    transition_final_mm = mm_from_runs;
+    transition_final_waste = (printer->bowden_len > 0 ? printer->bowden_len : 0) + EXTRA_FILAMENT;
 }
 
 static void
@@ -265,9 +272,9 @@ reduce_pings_when_no_splices()
     int i, j;
 
     for (i = 0; i < n_transitions; i++) {
-	if (transitions[i].ping) {
+	if (transitions[i].ping && transitions[i].from == transitions[i].to) {
 	    transitions[i].ping = 0;
-	    for (j = i; j < n_transitions && transitions[j].from == transitions[j].to; j++) {
+	    for (j = i+1; j < n_transitions && transitions[j].from == transitions[j].to; j++) {
 		transitions[j].ping = 0;
 	    }
 	    transitions[j-1].ping = 1;
@@ -430,7 +437,7 @@ fix_constraints()
 
 	for (t = t0, j = 0; j < l->n_transitions; t++, j++) {
 	    if (t->num == 0 && t->mm_pre_transition + t->pre_mm < MIN_FIRST_SPLICE_LEN) {
-		add_extra_purge(t, MIN_FIRST_SPLICE_LEN - (t->mm_pre_transition + t->pre_mm));
+		t->pre_mm += MIN_FIRST_SPLICE_LEN - (t->mm_pre_transition + t->pre_mm);
 	    } else if (t->from != t->to && t->mm_pre_transition + t->pre_mm < MIN_SPLICE_LEN) {
 		double needed = MIN_SPLICE_LEN - (t->mm_pre_transition + t->pre_mm);
 		move_purge(&t->support_mm, &t->pre_mm, &needed);
@@ -475,6 +482,10 @@ transition_block_dump_transitions(FILE *o)
     layer_t *l;
     transition_t *t;
     int i, j;
+    double mm[N_DRIVES] = { 0, };
+    double infill[N_DRIVES] = { 0, };
+    double waste[N_DRIVES] = {0, };
+    double support[N_DRIVES] = { 0, };
 
     fprintf(o, "Transitions\n");
     fprintf(o, "-----------\n");
@@ -482,7 +493,24 @@ transition_block_dump_transitions(FILE *o)
 	fprintf(o, "z=%-8.2f h=%-4.2f density=%-4.2f %9s ", l->z, l->h, l->density, l->use_perimeter ? "perimeter" : "");
 	for (t = &transitions[l->transition0], j = 0; j < l->n_transitions; t++, j++) {
 	    if (j > 0) fprintf(o, "%41c", ' ');
-	    fprintf(o, "t%d -> t%d *** %6.2f [ %6.2f || %6.2f ] %.2f%s\n", t->from, t->to, t->infill_mm, t->pre_mm, t->post_mm, t->support_mm, t->ping ? " ping" : "");
+	    fprintf(o, "t%d -> t%d ||| %7.2f -> %6.2f [ %6.2f || %6.2f ] %-6.2f%s", t->from, t->to, t->mm_from_runs, t->infill_mm, t->pre_mm, t->post_mm, t->support_mm, t->ping ? " ping" : "     ");
+	    if (t->from != t->to) mm[t->from] += t->mm_from_runs;
+	    waste[t->from] += t->pre_mm;
+	    infill[t->from] += t->infill_mm;
+	    waste[t->to] += t->post_mm;
+	    support[t->to] += t->support_mm;
+	    fprintf(o, "  ###  %12.2f | %-10.2f / %12.2f | %-10.2f", mm[t->from], waste[t->from], mm[t->to], waste[t->to]);
+	    fprintf(o, " offset=%ld", t->offset);
+	    fprintf(o, "\n");
+	}
+    }
+
+    mm[transitions[n_transitions-1].to] += transition_final_mm;
+    waste[transitions[n_transitions-1].to] += transition_final_waste;
+
+    for (i = 0; i < N_DRIVES; i++) {
+	if (mm[i] > 0) {
+	    fprintf(o, "T%d: %7.2f, %6.2f wasted, %6.2f + %.2f saved\n", i, mm[i], waste[i], infill[i], support[i]);
 	}
     }
 }

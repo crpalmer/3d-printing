@@ -27,12 +27,12 @@ bowdenTube: 725
 firmwarePurge: 0
 transitions:
   method: 1
-  purgeLength: 130
+  purgeLength: 160
   minPurgeLength: 70
-  initialPurgeLength: 130
+  initialPurgeLength: 160
   purgeTarget: 0.2
-  transitionInInfill: false
-  transitionInSupport: false
+  transitionInInfill: true
+  transitionInSupport: true
   towers:
     printSpeed: 70
     extrusionWidth: auto

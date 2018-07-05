@@ -17,7 +17,8 @@ typedef struct {
 typedef struct {
     int num;
     int from, to;
-    double transition_length;
+    long offset;
+    double mm_from_runs;
     double mm_pre_transition;
     double infill_mm;
     double pre_mm, post_mm;
@@ -37,6 +38,8 @@ extern int n_layers;
 extern transition_t transitions[MAX_RUNS];
 extern int n_transitions;
 extern transition_block_t transition_block;
+extern double transition_final_mm;
+extern double transition_final_waste;
 
 extern int reduce_pings;
 
