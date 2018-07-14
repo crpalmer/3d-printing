@@ -27,9 +27,9 @@ bowdenTube: 725
 firmwarePurge: 0
 transitions:
   method: 1
-  purgeLength: 75
-  minPurgeLength: 75
-  initialPurgeLength: 100
+  purgeLength: 70
+  minPurgeLength: 70
+  initialPurgeLength: 70
   purgeTarget: 0.2
   transitionInInfill: true
   transitionInSupport: true
