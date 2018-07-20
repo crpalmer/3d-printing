@@ -9,12 +9,14 @@ G21					  ; Work in millimetres
 M555 P1					  ; Set firmware compatibility to look like RepRapFirmare
 G90                                       ; Send absolute coordinates...
 M83                                       ; ...but relative extruder moves
-; M665 R165.22 L375.00 H535 B150.00 X0.18 Y-0.29 Z0.00
-; M666 X0.23 Y-0.16 Z-0.07
-;M665 R165.25 L375.00 H535 B150.00 X0.18 Y-0.30 Z0.00 ; Set delta radius, diagonal rod length, printable radius and homed height
-;M666 X0.23 Y-0.17 Z-0.06                  ; Put your endstop adjustments here, or let auto calibration find them
-M665 R165.29 L375.00 H535.03 B150.00 X0.17 Y-0.32 Z0.00
-M666 X-0.14 Y-0.00 Z0.14
+;M665 R165 L375.00 H535.03 B150.00 X0 Y0 Z0
+;M666 X0 Y0 Z0
+; Manual leveling with aluminum plate:
+;M665 R164.733 L375.00 H533.655 B150.00 X0.027 Y-0.293 Z0
+;M666 X-0.05 Y0.17 Z-0.13
+
+M665 R165.000 L375.00 H535 B150.00 X0 Y0 Z0
+M666 X0 Y0 Z0
 
 ; Network
 M550 Ptlm-duet                            ; Set machine name
@@ -30,8 +32,8 @@ M569 P0 S0                                ; Drive 0 goes backwards
 M569 P1 S0                                ; Drive 1 goes backwards
 M569 P2 S0                                ; Drive 2 goes backwards
 M569 P3 S0                                ; Drive 3 goes backwards
-M569 P4 S1                                ; Drive 4 goes forwards
-M92 E815:815
+M569 P4 S0                                ; Drive 4 goes backwards
+M92 E809.25:809.25
 M350 X64 Y64 Z64 E32:32 I1 		  ; Configure microstepping with interpolation
 M92 X320 Y320 Z320	 		  ; Set steps per mm
 M566 X1500 Y1500 Z1500 E1300:1300           ; Set maximum instantaneous speed changes (mm/min)
@@ -39,7 +41,7 @@ M203 X39960 Y39960 Z39960 E3000:3000	  ; Set maximum speeds (mm/min)
 ;M201 X5000 Y5000 Z5000 E500:500          ; Set accelerations (mm/s^2)
 M201 X1000 Y1000 Z1000 E1500:1500    	  ; Set accelerations (mm/s^2)
 ; 2018-06-03: change from 1.4A / 500A, below
-M906 X1200 Y1200 Z1200 E750:750 I30	  ; Set motor currents (mA) and motor idle factor in per cent
+M906 X1500 Y1500 Z1500 E1000:1000 I30	  ; Set motor currents (mA) and motor idle factor in per cent
 M84 S30					  ; Set idle timeout
 
 ; Axis Limits
@@ -59,11 +61,14 @@ M106 P1 S1 I0 F500 H-1                    ; Set fan 1 value, PWM signal inversio
 M106 P2 S1 I0 F500 H-1                    ; Set fan 2 value, PWM signal inversion and frequency. Thermostatic control is turned off
 
 ; Hotend
-M98 P/sys/hotend-chimera.g
+M98 P/sys/hotend-e3dv6.g
 
 ; Z-Probe
-M98 P/sys/zprobe-ir.g
-M557 R140 S20                             ; Define mesh grid
+M98 P/sys/zprobe-fsr.g
+M557 R150 S20                             ; Define mesh grid
+
+; Filament sensor (connected to E1 endstop)
+M591 D1 C4 S1
 
 ; Automatic saving after power loss is not enabled
 
