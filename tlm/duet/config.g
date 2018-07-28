@@ -32,8 +32,8 @@ M569 P0 S0                                ; Drive 0 goes backwards
 M569 P1 S0                                ; Drive 1 goes backwards
 M569 P2 S0                                ; Drive 2 goes backwards
 M569 P3 S0                                ; Drive 3 goes backwards
-M569 P4 S0                                ; Drive 4 goes backwards
-M92 E809.25:809.25
+M569 P4 S1                                ; Drive 4 goes forward
+M92 E415:415
 M350 X64 Y64 Z64 E32:32 I1 		  ; Configure microstepping with interpolation
 M92 X320 Y320 Z320	 		  ; Set steps per mm
 M566 X1500 Y1500 Z1500 E1300:1300           ; Set maximum instantaneous speed changes (mm/min)
@@ -41,7 +41,7 @@ M203 X39960 Y39960 Z39960 E3000:3000	  ; Set maximum speeds (mm/min)
 ;M201 X5000 Y5000 Z5000 E500:500          ; Set accelerations (mm/s^2)
 M201 X1000 Y1000 Z1000 E1500:1500    	  ; Set accelerations (mm/s^2)
 ; 2018-06-03: change from 1.4A / 500A, below
-M906 X1500 Y1500 Z1500 E1000:1000 I30	  ; Set motor currents (mA) and motor idle factor in per cent
+M906 X1200 Y1200 Z1200 E500:500 I30	  ; Set motor currents (mA) and motor idle factor in per cent
 M84 S30					  ; Set idle timeout
 
 ; Axis Limits
