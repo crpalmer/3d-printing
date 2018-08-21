@@ -1,0 +1,5 @@
+config.g.bak
+*.bin
+mac-address
+passwords.g
+resurrect.g
