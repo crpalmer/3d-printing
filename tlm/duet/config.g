@@ -15,7 +15,7 @@ M83                                       ; ...but relative extruder moves
 ;M665 R164.733 L375.00 H533.655 B150.00 X0.027 Y-0.293 Z0
 ;M666 X-0.05 Y0.17 Z-0.13
 
-M665 R165.000 L375.00 H535 B150.00 X0 Y0 Z0
+M665 R165.400 L375.00 H535 B150.00 X0 Y0 Z0
 M666 X0 Y0 Z0
 
 ; Network
