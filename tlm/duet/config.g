@@ -42,6 +42,10 @@ M201 X1000 Y1000 Z1000 E1000:1000    	  ; Set accelerations (mm/s^2)
 M906 X1200 Y1200 Z1200 E500:500 I30	  ; Set motor currents (mA) and motor idle factor in per cent
 M84 S30					  ; Set idle timeout
 
+; Enable pressure advance
+M572 D0 S0.2
+M572 D1 S0.2
+
 ; Axis Limits
 M208 Z-10 S1                              ; Set minimum Z
 
