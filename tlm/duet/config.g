@@ -36,8 +36,8 @@ M906 X1200 Y1200 Z1200 E500:500 I30	  ; Set motor currents (mA) and motor idle f
 M84 S30					  ; Set idle timeout
 
 ; Enable pressure advance
-M572 D0 S0.2
-M572 D1 S0.2
+;M572 D0 S0.2
+;M572 D1 S0.2
 
 ; Axis Limits
 M208 Z-10 S1                              ; Set minimum Z
