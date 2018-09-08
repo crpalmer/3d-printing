@@ -60,7 +60,7 @@ M98 P/sys/hotend-e3dv6.g
 
 ; Z-Probe
 M98 P/sys/zprobe-fsr.g
-M557 R150 S20                             ; Define mesh grid
+M557 R140 S20                             ; Define mesh grid
 
 ; Filament sensor (connected to E1 endstop)
 M591 D1 C4 S1
