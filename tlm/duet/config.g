@@ -9,14 +9,7 @@ G21					  ; Work in millimetres
 M555 P1					  ; Set firmware compatibility to look like RepRapFirmare
 G90                                       ; Send absolute coordinates...
 M83                                       ; ...but relative extruder moves
-;M665 R165 L375.00 H535.03 B150.00 X0 Y0 Z0
-;M666 X0 Y0 Z0
-; Manual leveling with aluminum plate:
-;M665 R164.733 L375.00 H533.655 B150.00 X0.027 Y-0.293 Z0
-;M666 X-0.05 Y0.17 Z-0.13
-
-M665 R165.400 L375.00 H535 B150.00 X0 Y0 Z0
-M666 X0 Y0 Z0
+M98 P/sys/bed-default.g
 
 ; Network
 M550 Ptlm-duet                            ; Set machine name
