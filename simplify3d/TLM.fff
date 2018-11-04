@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<profile name="TLM" version="2018-11-04 06:54:34" app="S3D-Software 4.0.1">
-  <baseProfile>TEVO Little Monster Delta</baseProfile>
-  <printMaterial>PLA</printMaterial>
+<profile name="TLM" version="2018-11-04 07:03:37" app="S3D-Software 4.0.1">
+  <baseProfile>Default</baseProfile>
+  <printMaterial>Veracity Pro PLA</printMaterial>
   <printQuality>Medium</printQuality>
   <printExtruders></printExtruders>
   <extruder name="Primary Extruder">
@@ -103,6 +103,14 @@
     <stabilizeAtStartup>1</stabilizeAtStartup>
     <setpoint layer="1" temperature="70"/>
   </temperatureController>
+  <temperatureController name="Extruder Softening">
+    <temperatureNumber>5</temperatureNumber>
+    <isHeatedBed>0</isHeatedBed>
+    <relayBetweenLayers>0</relayBetweenLayers>
+    <relayBetweenLoops>0</relayBetweenLoops>
+    <stabilizeAtStartup>1</stabilizeAtStartup>
+    <setpoint layer="1" temperature="140"/>
+  </temperatureController>
   <fanSpeed>
     <setpoint layer="1" speed="0"/>
     <setpoint layer="6" speed="100"/>
@@ -147,7 +155,7 @@
   <baudRateOverride>250000</baudRateOverride>
   <overridePrinterModels>1</overridePrinterModels>
   <printerModelsOverride></printerModelsOverride>
-  <startingGcode>G90,M82,G92 E0,M140 S[bed0_temperature]	; start warming the bed,G28,M109 S165 ; wait for probe temp,M190 S[bed0_temperature]	; wait for bed temp,,; Smash down anything on the nozzle,G1 X0 Y0 Z50 F12000,G1 X0 Y-150 Z5 F6000,G30 S-1,G1 X0 Y-150 Z5 F6000,G30 S-1,G1 X0 Y-150 Z5 F6000,G30 S-1,G1 X0 Y0 Z50 F6000,,; Now run delta auto-calibration,G32,G1 X0 Y0 Z50 F6000	; move back away from the bed,M109 S[extruder0_temperature]</startingGcode>
+  <startingGcode>G90,M82,G92 E0,M140 S[bed0_temperature]	; start warming the bed,G28,M109 S[extruder5_temperature] ; wait for probe temp,M190 S[bed0_temperature]	; wait for bed temp,,; Smash down anything on the nozzle,G1 X0 Y0 Z50 F12000,G1 X0 Y-150 Z5 F6000,G30 S-1,G1 X0 Y-150 Z5 F6000,G30 S-1,G1 X0 Y-150 Z5 F6000,G30 S-1,G1 X0 Y0 Z50 F6000,,; Now run delta auto-calibration,G32,G1 X0 Y0 Z50 F6000	; move back away from the bed,M109 S[extruder0_temperature]</startingGcode>
   <layerChangeGcode></layerChangeGcode>
   <retractionGcode></retractionGcode>
   <toolChangeGcode></toolChangeGcode>
@@ -199,7 +207,40 @@
   <singleExtrusionMaxPrintingWidthPercentage>200</singleExtrusionMaxPrintingWidthPercentage>
   <singleExtrusionEndpointExtension>0.2</singleExtrusionEndpointExtension>
   <horizontalSizeCompensation>0</horizontalSizeCompensation>
-  <autoConfigureMaterial name="PLA">
+  <autoConfigureMaterial name="Veracity PLA">
+    <temperatureController name="Extruder Softening">
+      <temperatureNumber>5</temperatureNumber>
+      <isHeatedBed>0</isHeatedBed>
+      <relayBetweenLayers>0</relayBetweenLayers>
+      <relayBetweenLoops>0</relayBetweenLoops>
+      <stabilizeAtStartup>1</stabilizeAtStartup>
+      <setpoint layer="1" temperature="140"/>
+    </temperatureController>
+    <temperatureController name="Primary Extruder">
+      <temperatureNumber>0</temperatureNumber>
+      <isHeatedBed>0</isHeatedBed>
+      <relayBetweenLayers>0</relayBetweenLayers>
+      <relayBetweenLoops>0</relayBetweenLoops>
+      <stabilizeAtStartup>1</stabilizeAtStartup>
+      <setpoint layer="1" temperature="210"/>
+      <setpoint layer="2" temperature="205"/>
+    </temperatureController>
+    <globalBedTemperature>60</globalBedTemperature>
+    <globalExtrusionMultiplier>0.87</globalExtrusionMultiplier>
+    <fanSpeed>
+      <setpoint layer="1" speed="0"/>
+      <setpoint layer="6" speed="100"/>
+    </fanSpeed>
+  </autoConfigureMaterial>
+  <autoConfigureMaterial name="Veracity Pro PLA">
+    <temperatureController name="Extruder Softening">
+      <temperatureNumber>5</temperatureNumber>
+      <isHeatedBed>0</isHeatedBed>
+      <relayBetweenLayers>0</relayBetweenLayers>
+      <relayBetweenLoops>0</relayBetweenLoops>
+      <stabilizeAtStartup>1</stabilizeAtStartup>
+      <setpoint layer="1" temperature="165"/>
+    </temperatureController>
     <temperatureController name="Primary Extruder">
       <temperatureNumber>0</temperatureNumber>
       <isHeatedBed>0</isHeatedBed>
@@ -214,31 +255,6 @@
     <fanSpeed>
       <setpoint layer="1" speed="0"/>
       <setpoint layer="6" speed="100"/>
-    </fanSpeed>
-  </autoConfigureMaterial>
-  <autoConfigureMaterial name="ABS">
-    <globalExtruderTemperature>225</globalExtruderTemperature>
-    <globalBedTemperature>80</globalBedTemperature>
-    <globalExtrusionMultiplier>1</globalExtrusionMultiplier>
-    <fanSpeed>
-      <setpoint layer="1" speed="0"/>
-    </fanSpeed>
-  </autoConfigureMaterial>
-  <autoConfigureMaterial name="PVA">
-    <globalExtruderTemperature>195</globalExtruderTemperature>
-    <globalBedTemperature>80</globalBedTemperature>
-    <globalExtrusionMultiplier>1</globalExtrusionMultiplier>
-    <fanSpeed>
-      <setpoint layer="1" speed="0"/>
-      <setpoint layer="2" speed="100"/>
-    </fanSpeed>
-  </autoConfigureMaterial>
-  <autoConfigureMaterial name="Nylon">
-    <globalExtruderTemperature>220</globalExtruderTemperature>
-    <globalBedTemperature>80</globalBedTemperature>
-    <globalExtrusionMultiplier>1</globalExtrusionMultiplier>
-    <fanSpeed>
-      <setpoint layer="1" speed="0"/>
     </fanSpeed>
   </autoConfigureMaterial>
   <autoConfigureQuality name="Fast">
