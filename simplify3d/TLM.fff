@@ -2,7 +2,7 @@
 <profile name="TLM" version="2018-11-04 07:03:37" app="S3D-Software 4.0.1">
   <baseProfile>Default</baseProfile>
   <printMaterial>Veracity Pro PLA</printMaterial>
-  <printQuality>Medium</printQuality>
+  <printQuality>default</printQuality>
   <printExtruders></printExtruders>
   <extruder name="Primary Extruder">
     <toolheadNumber>0</toolheadNumber>
@@ -257,15 +257,7 @@
       <setpoint layer="6" speed="100"/>
     </fanSpeed>
   </autoConfigureMaterial>
-  <autoConfigureQuality name="Fast">
-    <layerHeight>0.3</layerHeight>
-    <topSolidLayers>3</topSolidLayers>
-    <bottomSolidLayers>3</bottomSolidLayers>
-    <skirtLayers>1</skirtLayers>
-    <infillPercentage>15</infillPercentage>
-    <supportInfillPercentage>25</supportInfillPercentage>
-  </autoConfigureQuality>
-  <autoConfigureQuality name="Medium">
+  <autoConfigureQuality name="default">
     <layerHeight>0.1618</layerHeight>
     <topSolidLayers>6</topSolidLayers>
     <bottomSolidLayers>6</bottomSolidLayers>
@@ -273,12 +265,14 @@
     <infillPercentage>20</infillPercentage>
     <supportInfillPercentage>20</supportInfillPercentage>
   </autoConfigureQuality>
-  <autoConfigureQuality name="High">
-    <layerHeight>0.1</layerHeight>
-    <topSolidLayers>4</topSolidLayers>
-    <bottomSolidLayers>4</bottomSolidLayers>
-    <skirtLayers>2</skirtLayers>
-    <infillPercentage>30</infillPercentage>
-    <supportInfillPercentage>40</supportInfillPercentage>
+  <autoConfigureQuality name="factory">
+    <layerHeight>0.1618</layerHeight>
+    <topSolidLayers>6</topSolidLayers>
+    <bottomSolidLayers>6</bottomSolidLayers>
+    <skirtLayers>1</skirtLayers>
+    <infillPercentage>20</infillPercentage>
+    <supportInfillPercentage>20</supportInfillPercentage>
+    <perimeterOutlines>3</perimeterOutlines>
+    <infillPercentage>50</infillPercentage>
   </autoConfigureQuality>
 </profile>
