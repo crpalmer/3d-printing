@@ -226,7 +226,7 @@
       <setpoint layer="2" temperature="205"/>
     </temperatureController>
     <globalBedTemperature>60</globalBedTemperature>
-    <globalExtrusionMultiplier>0.87</globalExtrusionMultiplier>
+    <globalExtrusionMultiplier>0.92</globalExtrusionMultiplier>
     <fanSpeed>
       <setpoint layer="1" speed="0"/>
       <setpoint layer="6" speed="100"/>
