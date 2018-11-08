@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <profile name="TLM" version="2018-11-04 07:03:37" app="S3D-Software 4.0.1">
   <baseProfile>Default</baseProfile>
-  <printMaterial>Veracity Pro PLA</printMaterial>
+  <printMaterial>PLA Veracity Pro</printMaterial>
   <printQuality>default</printQuality>
   <printExtruders></printExtruders>
   <extruder name="Primary Extruder">
@@ -207,7 +207,7 @@
   <singleExtrusionMaxPrintingWidthPercentage>200</singleExtrusionMaxPrintingWidthPercentage>
   <singleExtrusionEndpointExtension>0.2</singleExtrusionEndpointExtension>
   <horizontalSizeCompensation>0</horizontalSizeCompensation>
-  <autoConfigureMaterial name="Veracity PLA">
+  <autoConfigureMaterial name="PLA Veracity">
     <temperatureController name="Extruder Softening">
       <temperatureNumber>5</temperatureNumber>
       <isHeatedBed>0</isHeatedBed>
@@ -232,7 +232,7 @@
       <setpoint layer="6" speed="100"/>
     </fanSpeed>
   </autoConfigureMaterial>
-  <autoConfigureMaterial name="Veracity Pro PLA">
+  <autoConfigureMaterial name="PLA Veracity Pro">
     <temperatureController name="Extruder Softening">
       <temperatureNumber>5</temperatureNumber>
       <isHeatedBed>0</isHeatedBed>
