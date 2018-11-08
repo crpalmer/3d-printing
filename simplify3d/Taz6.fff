@@ -207,6 +207,31 @@
   <singleExtrusionMaxPrintingWidthPercentage>200</singleExtrusionMaxPrintingWidthPercentage>
   <singleExtrusionEndpointExtension>0.2</singleExtrusionEndpointExtension>
   <horizontalSizeCompensation>0</horizontalSizeCompensation>
+  <autoConfigureMaterial name="PETG eSun">
+    <temperatureController name="Extruder Softening">
+      <temperatureNumber>5</temperatureNumber>
+      <isHeatedBed>0</isHeatedBed>
+      <relayBetweenLayers>0</relayBetweenLayers>
+      <relayBetweenLoops>0</relayBetweenLoops>
+      <stabilizeAtStartup>1</stabilizeAtStartup>
+      <setpoint layer="1" temperature="170"/>
+    </temperatureController>
+    <temperatureController name="Primary Extruder">
+      <temperatureNumber>0</temperatureNumber>
+      <isHeatedBed>0</isHeatedBed>
+      <relayBetweenLayers>0</relayBetweenLayers>
+      <relayBetweenLoops>0</relayBetweenLoops>
+      <stabilizeAtStartup>1</stabilizeAtStartup>
+      <setpoint layer="1" temperature="240"/>
+      <setpoint layer="2" temperature="240"/>
+    </temperatureController>
+    <globalBedTemperature>70</globalBedTemperature>
+    <globalExtrusionMultiplier>0.92</globalExtrusionMultiplier>
+    <fanSpeed>
+      <setpoint layer="1" speed="0"/>
+      <setpoint layer="6" speed="100"/>
+    </fanSpeed>
+  </autoConfigureMaterial>
   <autoConfigureMaterial name="PLA Veracity">
     <temperatureController name="Extruder Softening">
       <temperatureNumber>5</temperatureNumber>
