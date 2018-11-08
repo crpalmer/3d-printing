@@ -209,19 +209,9 @@
   <horizontalSizeCompensation>0</horizontalSizeCompensation>
   <autoConfigureMaterial name="PLA Veracity">
     <temperatureController name="Extruder Softening">
-      <temperatureNumber>5</temperatureNumber>
-      <isHeatedBed>0</isHeatedBed>
-      <relayBetweenLayers>0</relayBetweenLayers>
-      <relayBetweenLoops>0</relayBetweenLoops>
-      <stabilizeAtStartup>1</stabilizeAtStartup>
       <setpoint layer="1" temperature="140"/>
     </temperatureController>
     <temperatureController name="Primary Extruder">
-      <temperatureNumber>0</temperatureNumber>
-      <isHeatedBed>0</isHeatedBed>
-      <relayBetweenLayers>0</relayBetweenLayers>
-      <relayBetweenLoops>0</relayBetweenLoops>
-      <stabilizeAtStartup>1</stabilizeAtStartup>
       <setpoint layer="1" temperature="210"/>
       <setpoint layer="2" temperature="205"/>
     </temperatureController>
@@ -234,19 +224,9 @@
   </autoConfigureMaterial>
   <autoConfigureMaterial name="PLA Veracity Pro">
     <temperatureController name="Extruder Softening">
-      <temperatureNumber>5</temperatureNumber>
-      <isHeatedBed>0</isHeatedBed>
-      <relayBetweenLayers>0</relayBetweenLayers>
-      <relayBetweenLoops>0</relayBetweenLoops>
-      <stabilizeAtStartup>1</stabilizeAtStartup>
       <setpoint layer="1" temperature="165"/>
     </temperatureController>
     <temperatureController name="Primary Extruder">
-      <temperatureNumber>0</temperatureNumber>
-      <isHeatedBed>0</isHeatedBed>
-      <relayBetweenLayers>0</relayBetweenLayers>
-      <relayBetweenLoops>0</relayBetweenLoops>
-      <stabilizeAtStartup>1</stabilizeAtStartup>
       <setpoint layer="1" temperature="210"/>
       <setpoint layer="2" temperature="210"/>
     </temperatureController>
