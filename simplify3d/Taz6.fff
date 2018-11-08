@@ -257,22 +257,45 @@
       <setpoint layer="6" speed="100"/>
     </fanSpeed>
   </autoConfigureMaterial>
+  <autoConfigureQuality name="calibration cube">
+    <layerHeight>0.2</layerHeight>
+    <topSolidLayers>0</topSolidLayers>
+    <bottomSolidLayers>2</bottomSolidLayers>
+    <perimeterOutlines>2</perimeterOutlines>
+    <skirtLayers>1</skirtLayers>
+    <infillPercentage>0</infillPercentage>
+    <supportInfillPercentage>20</supportInfillPercentage>
+    <extruder name="Primary Extruder">
+      <autoWidth>0</autoWidth>
+      <width>0.4</width>
+    </extruder>
+  </autoConfigureQuality>
   <autoConfigureQuality name="default">
     <layerHeight>0.2</layerHeight>
     <topSolidLayers>5</topSolidLayers>
     <bottomSolidLayers>5</bottomSolidLayers>
+    <perimeterOutlines>2</perimeterOutlines>
     <skirtLayers>1</skirtLayers>
     <infillPercentage>20</infillPercentage>
     <supportInfillPercentage>20</supportInfillPercentage>
+    <extruder name="Primary Extruder">
+      <autoWidth>1</autoWidth>
+      <width>0.48</width>
+    </extruder>
   </autoConfigureQuality>
   <autoConfigureQuality name="factory">
     <layerHeight>0.2</layerHeight>
     <topSolidLayers>5</topSolidLayers>
     <bottomSolidLayers>5</bottomSolidLayers>
+    <perimeterOutlines>2</perimeterOutlines>
     <skirtLayers>1</skirtLayers>
     <infillPercentage>20</infillPercentage>
     <supportInfillPercentage>20</supportInfillPercentage>
     <perimeterOutlines>3</perimeterOutlines>
     <infillPercentage>50</infillPercentage>
+    <extruder name="Primary Extruder">
+      <autoWidth>1</autoWidth>
+      <width>0.48</width>
+    </extruder>
   </autoConfigureQuality>
 </profile>
