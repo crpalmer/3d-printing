@@ -11,7 +11,7 @@
     <width>0.72</width>
     <extrusionMultiplier>0.87</extrusionMultiplier>
     <useRetract>1</useRetract>
-    <retractionDistance>5</retractionDistance>
+    <retractionDistance>1.25</retractionDistance>
     <extraRestartDistance>0</extraRestartDistance>
     <retractionZLift>0.2</retractionZLift>
     <retractionSpeed>1980</retractionSpeed>
