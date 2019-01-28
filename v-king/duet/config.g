@@ -12,48 +12,62 @@ M667 S1                                    ; Select CoreXY mode
 ; Network
 M550 P"v-king"                             ; Set machine name
 M98 P/sys/passwords.g
-M552 P0.0.0.0 S1                           ; Enable network and acquire dynamic address via DHCP
+M553 P255.255.255.0			   ; Set netmask
+M554 P192.168.1.1                          ; Set gateway
+M552 P192.168.1.8 S1                       ; Enable network
 M586 P0 S1                                 ; Enable HTTP
 M586 P1 S0                                 ; Disable FTP
 M586 P2 S0                                 ; Disable Telnet
 
-; Drives
-M569 P0 S1                                 ; Drive 0 goes forwards
-M569 P1 S1                                 ; Drive 1 goes forwards
-M569 P2 S1                                 ; Drive 2 goes forwards
-M569 P3 S1                                 ; Drive 3 goes forwards
-M350 X32 Y32 Z32 E32 I1                    ; Configure microstepping with interpolation
-M92 X80.00 Y80.00 Z3200.00 E418.00         ; Set steps per mm
-M566 X900.00 Y900.00 Z18.00 E900.00        ; Set maximum instantaneous speed changes (mm/min)
-M203 X12000.00 Y12000.00 Z6000.00 E6000.00 ; Set maximum speeds (mm/min)
-M201 X1500.00 Y100.00 Z100.00 E1500.00     ; Set accelerations (mm/s^2)
-M906 X1200.00 Y1200.00 Z500.00 E500.00 I30 ; Set motor currents (mA) and motor idle factor in per cent
+; Endstops
+M574 X1 Y1 Z1 S1                           ; Set active high x/y/z min endstops
+
+; Drive directions
+M569 P0 S1                                 ; Drive 0 goes forwards (x)
+M569 P1 S1                                 ; Drive 1 goes forwards (y)
+M569 P2 S1                                 ; Drive 2 goes forwards (z back-left)
+M569 P3 S1                                 ; Drive 3 goes forwards (e0)
+M569 P5 S1                                 ; Drive 5 goes forwards (z back-right)
+M569 P5 S1                                 ; Drive 6 goes forwards (z front)
+
+; Z drive setup
+M584 X0 Y1 Z2:5:6                          ; three Z motors connected to driver outputs 2, 5 and 6
+M671 X28:272:154 Y477:477:-41 S0.5
+
+; Drive steps per mm
+; z = 360/0.067/40*16*2 = 4298.5
+; 0.067 is step angle from spec sheet, 40 = belt mm for 1 full rotation, 16 micro stepping, 2 = "double belt resolution"
+; but it only moved 46mm when requested to move 50mm which would then be adjusted to 4672.3
+M92 X160 Y160 Z4298.5 E415:415             ; Set steps per mm at 1/16 micro stepping
+M350 X32 Y32 Z16 E32:32 I0                 ; Configure microstepping without interpolation
+
+; Drive speeds and currents
+M566 X600 Y600 Z18 E300:300                ; Set maximum instantaneous speed changes (mm/min)
+M203 X12000 Y12000 Z120 E6000:6000         ; Set maximum speeds (mm/min)
+M201 X1000 Y1000 Z500 E1500:1500          ; Set accelerations (mm/s^2)
+M906 X1200 Y1200 Z600 E750:750 I30         ; Set motor currents (mA) and motor idle factor in per cent
 M84 S30                                    ; Set idle timeout
 
 ; Axis Limits
-M208 X0 Y0 Z0 S1                           ; Set axis minima
-M208 X340 Y380 Z330 S0                     ; Set axis maxima
-
-; Endstops
-M574 X2 Y0 S0                              ; Set active low and disabled endstops
+M208 X0 Y0 Z-5 S1                          ; Set axis minima
+M208 X310 Y360 Z325 S0                     ; Set axis maxima
 
 ; Z-Probe
-M574 Z1 S2                                 ; Set endstops controlled by probe
-M558 P5 R0.4 H5 F1200 T6000                ; Set Z probe type to effector and the dive height + speeds
-G31 P500 X0 Y0 Z2.5                        ; Set Z probe trigger value, offset and trigger height
-M557 X15:0 Y15:195 S20                     ; Define mesh grid
+M558 P4 H5 T9000 I1 R0.5 A30 S0.01	   ; configure piezo probe (would be P5 (or P8?) on z probe)
+G31 P500 X0 Y0 Z-0.1			   ; probe sensitivity and offset
+M557 X2:308 Y1:358 S51                      ; Define mesh grid
 
 ; Heaters
 M307 H0 B0 S1.00                           ; Disable bang-bang mode for the bed heater and set PWM limit
-M305 P0 T10000 B3988 R2200                 ; Set thermistor + ADC parameters for heater 0
+M305 P0 T100000 B4388 R2200                 ; Set thermistor + ADC parameters for heater 0
 M143 H0 S120                               ; Set temperature limit for heater 0 to 120C
 M305 P1 T100000 B4388 C7.060000e-8 R2200   ; Set thermistor + ADC parameters for heater 1
 M143 H1 S280                               ; Set temperature limit for heater 1 to 280C
 
 ; Fans
-M106 P0 S1 I0 F500 H-1                     ; Set fan 0 value, PWM signal inversion and frequency. Thermostatic control is turned off
-M106 P1 S1 I0 F500 H1 T45                  ; Set fan 1 value, PWM signal inversion and frequency. Thermostatic control is turned on
-M106 P2 S0 I0 F500 H-1                     ; Set fan 2 value, PWM signal inversion and frequency. Thermostatic control is turned off
+M106 P0 S0 I0 F500 H-1                     ; part cooling fan: PWM signal inversion and frequency. Thermostatic control is turned off
+M106 P1 S1 I0 F500 H1 T35                  ; hotend fan: PWM signal inversion and frequency. Thermostatic control is turned on
+M106 P2 S1 I0 F500 H-1                     ; case fan: PWM signal inversion and frequency. Thermostatic control is turned off, Fan on
 
 ; Tools
 M563 P0 D0 H1                              ; Define tool 0
@@ -66,4 +80,3 @@ G10 P0 R0 S0                               ; Set initial tool 0 active and stand
 
 ; Miscellaneous
 T0                                         ; Select first tool
-
