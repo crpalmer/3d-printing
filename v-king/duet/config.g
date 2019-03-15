@@ -32,7 +32,7 @@ M569 P5 S1                                 ; Drive 6 goes forwards (z front)
 
 ; Z drive setup
 M584 X0 Y1 Z2:5:6                          ; three Z motors connected to driver outputs 2, 5 and 6
-M671 X28:272:154 Y477:477:-41 S0.5
+M671 X28:273:156 Y480:480:-38 S0.5
 
 ; Drive steps per mm
 ; z = 360/0.067/40*16*2 = 4298.5
@@ -53,9 +53,8 @@ M208 X0 Y0 Z-5 S1                          ; Set axis minima
 M208 X310 Y360 Z325 S0                     ; Set axis maxima
 
 ; Z-Probe
-M558 P4 H5 T9000 I1 R0.5 A30 S0.01	   ; configure piezo probe (would be P5 (or P8?) on z probe)
-G31 P500 X0 Y0 Z-0.1			   ; probe sensitivity and offset
-M557 X2:308 Y1:358 S51                      ; Define mesh grid
+M98 P/sys/zprobe.g
+M557 X0:310 Y0:360 S77.5:72               ; Define mesh grid
 
 ; Heaters
 M307 H0 B0 S1.00                           ; Disable bang-bang mode for the bed heater and set PWM limit
