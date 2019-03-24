@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<profile name="Taz6" version="2018-11-04 07:36:13" app="S3D-Software 4.0.1">
+<profile name="Taz6" version="2018-11-04 07:36:13" app="S3D-Software 4.1.0">
   <baseProfile>Default</baseProfile>
   <printMaterial>PLA Veracity Pro</printMaterial>
   <printQuality>default</printQuality>
@@ -70,7 +70,7 @@
   <internalInfillAngles>0</internalInfillAngles>
   <overlapInternalInfillAngles>0</overlapInternalInfillAngles>
   <externalInfillAngles>45,-45</externalInfillAngles>
-  <generateSupport>0</generateSupport>
+  <generateSupport>1</generateSupport>
   <supportExtruder>0</supportExtruder>
   <supportInfillPercentage>20</supportInfillPercentage>
   <supportExtraInflation>0</supportExtraInflation>
@@ -89,8 +89,6 @@
   <temperatureController name="Primary Extruder">
     <temperatureNumber>0</temperatureNumber>
     <isHeatedBed>0</isHeatedBed>
-    <relayBetweenLayers>0</relayBetweenLayers>
-    <relayBetweenLoops>0</relayBetweenLoops>
     <stabilizeAtStartup>1</stabilizeAtStartup>
     <setpoint layer="1" temperature="210"/>
     <setpoint layer="2" temperature="210"/>
@@ -98,16 +96,12 @@
   <temperatureController name="Heated Bed">
     <temperatureNumber>0</temperatureNumber>
     <isHeatedBed>1</isHeatedBed>
-    <relayBetweenLayers>0</relayBetweenLayers>
-    <relayBetweenLoops>0</relayBetweenLoops>
     <stabilizeAtStartup>1</stabilizeAtStartup>
     <setpoint layer="1" temperature="70"/>
   </temperatureController>
   <temperatureController name="Extruder Softening">
     <temperatureNumber>5</temperatureNumber>
     <isHeatedBed>0</isHeatedBed>
-    <relayBetweenLayers>0</relayBetweenLayers>
-    <relayBetweenLoops>0</relayBetweenLoops>
     <stabilizeAtStartup>1</stabilizeAtStartup>
     <setpoint layer="1" temperature="165"/>
   </temperatureController>
@@ -216,11 +210,13 @@
       <setpoint layer="2" temperature="240"/>
     </temperatureController>
     <globalBedTemperature>70</globalBedTemperature>
-    <globalExtrusionMultiplier>0.92</globalExtrusionMultiplier>
     <fanSpeed>
       <setpoint layer="1" speed="0"/>
-      <setpoint layer="6" speed="100"/>
+      <setpoint layer="6" speed="20"/>
     </fanSpeed>
+    <extruder name="Primary Extruder">
+      <extrusionMultiplier>0.999</extrusionMultiplier>
+    </extruder>
   </autoConfigureMaterial>
   <autoConfigureMaterial name="PLA Veracity">
     <temperatureController name="Extruder Softening">
@@ -231,11 +227,13 @@
       <setpoint layer="2" temperature="205"/>
     </temperatureController>
     <globalBedTemperature>60</globalBedTemperature>
-    <globalExtrusionMultiplier>0.92</globalExtrusionMultiplier>
     <fanSpeed>
       <setpoint layer="1" speed="0"/>
       <setpoint layer="6" speed="100"/>
     </fanSpeed>
+    <extruder name="Primary Extruder">
+      <extrusionMultiplier>0.92</extrusionMultiplier>
+    </extruder>
   </autoConfigureMaterial>
   <autoConfigureMaterial name="PLA Veracity Pro">
     <temperatureController name="Extruder Softening">
@@ -245,8 +243,9 @@
       <setpoint layer="1" temperature="210"/>
       <setpoint layer="2" temperature="210"/>
     </temperatureController>
-    <globalBedTemperature>70</globalBedTemperature>
-    <globalExtrusionMultiplier>0.92</globalExtrusionMultiplier>
+    <extruder name="Primary Extruder">
+      <extrusionMultiplier>0.92</extrusionMultiplier>
+    </extruder>
     <fanSpeed>
       <setpoint layer="1" speed="0"/>
       <setpoint layer="6" speed="100"/>
@@ -260,10 +259,6 @@
     <skirtLayers>1</skirtLayers>
     <infillPercentage>0</infillPercentage>
     <supportInfillPercentage>20</supportInfillPercentage>
-    <extruder name="Primary Extruder">
-      <autoWidth>0</autoWidth>
-      <width>0.4</width>
-    </extruder>
   </autoConfigureQuality>
   <autoConfigureQuality name="default">
     <layerHeight>0.2</layerHeight>
@@ -273,10 +268,6 @@
     <skirtLayers>1</skirtLayers>
     <infillPercentage>20</infillPercentage>
     <supportInfillPercentage>20</supportInfillPercentage>
-    <extruder name="Primary Extruder">
-      <autoWidth>1</autoWidth>
-      <width>0.48</width>
-    </extruder>
   </autoConfigureQuality>
   <autoConfigureQuality name="factory">
     <layerHeight>0.2</layerHeight>
@@ -288,9 +279,5 @@
     <supportInfillPercentage>20</supportInfillPercentage>
     <perimeterOutlines>3</perimeterOutlines>
     <infillPercentage>50</infillPercentage>
-    <extruder name="Primary Extruder">
-      <autoWidth>1</autoWidth>
-      <width>0.48</width>
-    </extruder>
   </autoConfigureQuality>
 </profile>

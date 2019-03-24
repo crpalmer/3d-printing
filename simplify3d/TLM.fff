@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<profile name="TLM" version="2018-11-04 07:03:37" app="S3D-Software 4.0.1">
+<profile name="TLM" version="2018-11-12 15:02:40" app="S3D-Software 4.1.0">
   <baseProfile>Default</baseProfile>
   <printMaterial>PLA Veracity</printMaterial>
   <printQuality>default</printQuality>
@@ -9,7 +9,7 @@
     <diameter>0.6</diameter>
     <autoWidth>1</autoWidth>
     <width>0.72</width>
-    <extrusionMultiplier>0.87</extrusionMultiplier>
+    <extrusionMultiplier>0.92</extrusionMultiplier>
     <useRetract>1</useRetract>
     <retractionDistance>1.25</retractionDistance>
     <extraRestartDistance>0</extraRestartDistance>
@@ -89,40 +89,34 @@
   <temperatureController name="Primary Extruder">
     <temperatureNumber>0</temperatureNumber>
     <isHeatedBed>0</isHeatedBed>
-    <relayBetweenLayers>0</relayBetweenLayers>
-    <relayBetweenLoops>0</relayBetweenLoops>
     <stabilizeAtStartup>1</stabilizeAtStartup>
     <setpoint layer="1" temperature="210"/>
-    <setpoint layer="2" temperature="210"/>
+    <setpoint layer="2" temperature="205"/>
   </temperatureController>
   <temperatureController name="Heated Bed">
     <temperatureNumber>0</temperatureNumber>
     <isHeatedBed>1</isHeatedBed>
-    <relayBetweenLayers>0</relayBetweenLayers>
-    <relayBetweenLoops>0</relayBetweenLoops>
     <stabilizeAtStartup>1</stabilizeAtStartup>
-    <setpoint layer="1" temperature="70"/>
+    <setpoint layer="1" temperature="60"/>
   </temperatureController>
   <temperatureController name="Extruder Softening">
     <temperatureNumber>5</temperatureNumber>
     <isHeatedBed>0</isHeatedBed>
-    <relayBetweenLayers>0</relayBetweenLayers>
-    <relayBetweenLoops>0</relayBetweenLoops>
     <stabilizeAtStartup>1</stabilizeAtStartup>
     <setpoint layer="1" temperature="140"/>
   </temperatureController>
   <fanSpeed>
     <setpoint layer="1" speed="0"/>
-    <setpoint layer="6" speed="100"/>
+    <setpoint layer="7" speed="80"/>
   </fanSpeed>
   <blipFanToFullPower>0</blipFanToFullPower>
   <adjustSpeedForCooling>1</adjustSpeedForCooling>
   <minSpeedLayerTime>6</minSpeedLayerTime>
   <minCoolingSpeedSlowdown>20</minCoolingSpeedSlowdown>
-  <increaseFanForCooling>0</increaseFanForCooling>
-  <minFanLayerTime>45</minFanLayerTime>
+  <increaseFanForCooling>1</increaseFanForCooling>
+  <minFanLayerTime>15</minFanLayerTime>
   <maxCoolingFanSpeed>100</maxCoolingFanSpeed>
-  <increaseFanForBridging>0</increaseFanForBridging>
+  <increaseFanForBridging>1</increaseFanForBridging>
   <bridgingFanSpeed>100</bridgingFanSpeed>
   <use5D>1</use5D>
   <relativeEdistances>0</relativeEdistances>
@@ -178,7 +172,7 @@
   <fixedBridgingAngle>0</fixedBridgingAngle>
   <applyBridgingToPerimeters>0</applyBridgingToPerimeters>
   <filamentDiameters>1.75|1.75|1.75|1.75|1.75|1.75</filamentDiameters>
-  <filamentPricesPerKg>46|46|46|46|46|46</filamentPricesPerKg>
+  <filamentPricesPerKg>20|46|46|46|46|46</filamentPricesPerKg>
   <filamentDensities>1.25|1.25|1.25|1.25|1.25|1.25</filamentDensities>
   <useMinPrintHeight>0</useMinPrintHeight>
   <minPrintHeight>0</minPrintHeight>
@@ -209,34 +203,85 @@
   <horizontalSizeCompensation>0</horizontalSizeCompensation>
   <autoConfigureMaterial name="PLA Veracity">
     <temperatureController name="Extruder Softening">
+      <temperatureNumber>5</temperatureNumber>
+      <isHeatedBed>0</isHeatedBed>
+      <stabilizeAtStartup>1</stabilizeAtStartup>
       <setpoint layer="1" temperature="140"/>
     </temperatureController>
     <temperatureController name="Primary Extruder">
+      <temperatureNumber>0</temperatureNumber>
+      <isHeatedBed>0</isHeatedBed>
+      <stabilizeAtStartup>1</stabilizeAtStartup>
       <setpoint layer="1" temperature="210"/>
       <setpoint layer="2" temperature="205"/>
     </temperatureController>
     <globalBedTemperature>60</globalBedTemperature>
-    <globalExtrusionMultiplier>0.87</globalExtrusionMultiplier>
     <fanSpeed>
       <setpoint layer="1" speed="0"/>
-      <setpoint layer="6" speed="100"/>
+      <setpoint layer="7" speed="80"/>
     </fanSpeed>
+    <extruder name="Primary Extruder">
+      <toolheadNumber>0</toolheadNumber>
+      <diameter>0.6</diameter>
+      <autoWidth>1</autoWidth>
+      <width>0.72</width>
+      <extrusionMultiplier>0.92</extrusionMultiplier>
+      <useRetract>1</useRetract>
+      <retractionDistance>1.25</retractionDistance>
+      <extraRestartDistance>0</extraRestartDistance>
+      <retractionZLift>0.2</retractionZLift>
+      <retractionSpeed>1980</retractionSpeed>
+      <useCoasting>0</useCoasting>
+      <coastingDistance>0.2</coastingDistance>
+      <useWipe>0</useWipe>
+      <wipeDistance>5</wipeDistance>
+    </extruder>
   </autoConfigureMaterial>
   <autoConfigureMaterial name="PLA Veracity Pro">
     <temperatureController name="Extruder Softening">
+      <temperatureNumber>5</temperatureNumber>
+      <isHeatedBed>0</isHeatedBed>
+      <stabilizeAtStartup>1</stabilizeAtStartup>
       <setpoint layer="1" temperature="165"/>
     </temperatureController>
     <temperatureController name="Primary Extruder">
+      <temperatureNumber>0</temperatureNumber>
+      <isHeatedBed>0</isHeatedBed>
+      <stabilizeAtStartup>1</stabilizeAtStartup>
       <setpoint layer="1" temperature="210"/>
       <setpoint layer="2" temperature="210"/>
     </temperatureController>
     <globalBedTemperature>70</globalBedTemperature>
-    <globalExtrusionMultiplier>0.87</globalExtrusionMultiplier>
     <fanSpeed>
       <setpoint layer="1" speed="0"/>
       <setpoint layer="6" speed="100"/>
     </fanSpeed>
+    <extruder name="Primary Extruder">
+      <toolheadNumber>0</toolheadNumber>
+      <diameter>0.6</diameter>
+      <autoWidth>0</autoWidth>
+      <width>0.6</width>
+      <extrusionMultiplier>0.92</extrusionMultiplier>
+      <useRetract>1</useRetract>
+      <retractionDistance>5</retractionDistance>
+      <extraRestartDistance>0</extraRestartDistance>
+      <retractionZLift>0.2</retractionZLift>
+      <retractionSpeed>1980</retractionSpeed>
+      <useCoasting>0</useCoasting>
+      <coastingDistance>0.2</coastingDistance>
+      <useWipe>0</useWipe>
+      <wipeDistance>5</wipeDistance>
+    </extruder>
   </autoConfigureMaterial>
+  <autoConfigureQuality name="calibration cube">
+    <layerHeight>0.1618</layerHeight>
+    <topSolidLayers>0</topSolidLayers>
+    <bottomSolidLayers>2</bottomSolidLayers>
+    <perimeterOutlines>2</perimeterOutlines>
+    <skirtLayers>1</skirtLayers>
+    <infillPercentage>0</infillPercentage>
+    <supportInfillPercentage>20</supportInfillPercentage>
+  </autoConfigureQuality>
   <autoConfigureQuality name="default">
     <layerHeight>0.1618</layerHeight>
     <topSolidLayers>6</topSolidLayers>
