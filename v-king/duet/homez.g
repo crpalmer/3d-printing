@@ -5,6 +5,4 @@
 G91                    ; relative positioning
 G1 Z2 F6000 S2         ; lift Z relative to current position
 G90                    ; absolute positioning
-G1 X155 Y180 F12000    ; Move to the center
-G4 P500                ; make sure the probe isn't triggered by that fast move
-G30                    ; home Z by probing the bed
+M98 P"/sys/homez-common.g"         

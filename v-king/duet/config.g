@@ -32,25 +32,26 @@ M569 P5 S1                                 ; Drive 6 goes forwards (z front)
 
 ; Z drive setup
 M584 X0 Y1 Z2:5:6                          ; three Z motors connected to driver outputs 2, 5 and 6
-M671 X28:273:156 Y480:480:-38 S0.5
+M671 X56.5:308:182.5 Y445:445:-75 S0.5
 
 ; Drive steps per mm
 ; z = 360/0.067/40*16*2 = 4298.5
 ; 0.067 is step angle from spec sheet, 40 = belt mm for 1 full rotation, 16 micro stepping, 2 = "double belt resolution"
 ; but it only moved 46mm when requested to move 50mm which would then be adjusted to 4672.3
-M92 X160 Y160 Z4298.5 E415:415             ; Set steps per mm at 1/16 micro stepping
-M350 X32 Y32 Z16 E32:32 I0                 ; Configure microstepping without interpolation
+;M92 X160 Y160 Z4298.5 E2872                ; Set steps per mm at 1/16 micro stepping
+M92 X160 Y160 Z4298.5 E415                ; Set steps per mm at 1/16 micro stepping
+M350 X32 Y32 Z16 E16 I0                 ; Configure microstepping without interpolation
 
 ; Drive speeds and currents
 M566 X600 Y600 Z18 E300:300                ; Set maximum instantaneous speed changes (mm/min)
-M203 X12000 Y12000 Z120 E6000:6000         ; Set maximum speeds (mm/min)
-M201 X1000 Y1000 Z500 E1500:1500          ; Set accelerations (mm/s^2)
+M203 X24000 Y24000 Z120 E6000:6000         ; Set maximum speeds (mm/min)
+M201 X2000 Y2000 Z500 E1500:1500          ; Set accelerations (mm/s^2)
 M906 X1200 Y1200 Z600 E750:750 I30         ; Set motor currents (mA) and motor idle factor in per cent
 M84 S30                                    ; Set idle timeout
 
 ; Axis Limits
 M208 X0 Y0 Z-5 S1                          ; Set axis minima
-M208 X310 Y360 Z325 S0                     ; Set axis maxima
+M208 X325 Y380 Z340 S0                     ; Set axis maxima
 
 ; Z-Probe
 M98 P/sys/zprobe.g
@@ -64,12 +65,13 @@ M305 P1 T100000 B4388 C7.060000e-8 R2200   ; Set thermistor + ADC parameters for
 M143 H1 S280                               ; Set temperature limit for heater 1 to 280C
 
 ; Fans
-M106 P0 S0 I0 F500 H-1                     ; part cooling fan: PWM signal inversion and frequency. Thermostatic control is turned off
-M106 P1 S1 I0 F500 H1 T35                  ; hotend fan: PWM signal inversion and frequency. Thermostatic control is turned on
+; DEAD: M106 P0 S0 I0 F500 H-1                     ; part cooling fan: PWM signal inversion and frequency. Thermostatic control is turned off
+; TEMPORARILY MOVED TO ALWAYS ON: M106 P1 S1 I0 F500 H1 T35                  ; hotend fan: PWM signal inversion and frequency. Thermostatic control is turned on
+M106 P1 S0 I0 H-1
 M106 P2 S1 I0 F500 H-1                     ; case fan: PWM signal inversion and frequency. Thermostatic control is turned off, Fan on
 
 ; Tools
-M563 P0 D0 H1                              ; Define tool 0
+M563 P0 D0 H1 F1                           ; Define tool 0
 G10 P0 X0 Y0 Z0                            ; Set tool 0 axis offsets
 G10 P0 R0 S0                               ; Set initial tool 0 active and standby temperatures to 0C
 
