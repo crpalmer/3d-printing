@@ -1,4 +1,4 @@
-all:	grid-show hex2ascii clean-slic3r-bundle slic3r.ini
+all:	grid-show hex2ascii clean-slic3r-bundle slic3r.ini stl2ascii
 
 grid-show: grid-show.c
 	$(CC) grid-show.c -o grid-show -lm
@@ -11,3 +11,6 @@ clean-slic3r-bundle: clean-slic3r-bundle.c
 
 slic3r.ini: clean-slic3r-bundle Slic3r_config_bundle.ini
 	./clean-slic3r-bundle < Slic3r_config_bundle.ini > slic3r.ini
+
+stl2ascii: stl2ascii.c
+	$(CC) stl2ascii.c -o stl2ascii
