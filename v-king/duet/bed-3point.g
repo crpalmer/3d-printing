@@ -1,9 +1,11 @@
-M98 P"/macros/probe/back-left"
-G4 P500
+G1 X185 Y5 F12000
+G4 P100 
 G30 P0 Z-99999
-M98 P"/macros/probe/back-right"
-G4 P500
-G30 P1 Z-99999
-M98 P"/macros/probe/front-middle"
-G4 P500
-G30 P2 Z-99999 S3
+
+G1 X5 Y380 F12000
+G4 P100
+G30 P1 Z-99999 H0.02
+
+G1 X330 Y380 F12000
+G4 P100
+G30 P2 Z-99999 S3 H0.01

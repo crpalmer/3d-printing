@@ -7,5 +7,5 @@ G1 E-1 F3600   ; retract 1mm of filament
 G91            ; relative positioning
 G1 Z5 F360     ; lift Z by 5mm
 G90            ; absolute positioning
-G1 X0 Y360 F6000 ; move out of the way
+G1 X5 Y5 F6000 ; move out of the way
 
