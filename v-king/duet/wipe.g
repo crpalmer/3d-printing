@@ -1,11 +1,11 @@
 ; This wiping script is based on the one used by the taz6 printer...
 
-M208 X360 S0            ; Allow us to move over to the wiping pad
+M208 X365 S0            ; Allow us to move over to the wiping pad
 
 ; Touch the pad
 G1 Z5
-G1 X353 Y4 F12000
-G1 Z0
+G1 X356 Y30 F12000
+G1 Z-1
 
 ; Do the wipe using relative moves so we only need to change the entry point, above
 G91
@@ -43,6 +43,6 @@ G1 X2 Y2
 G1 Z5
 G90
 
-; Back to the normal print bed
-G1 X300 F12000
+; Back to the normal print bed (front right probe point in case we are about to a G32)
+G1 X305 Y0 F12000
 M98 P/sys/axis-limits.g

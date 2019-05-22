@@ -1,17 +1,22 @@
 ; bed.g
 ; called to perform automatic bed compensation via G32
 
+; Probe front right
 G1 Z2
-; G1 X162.5 Y190 F12000 ; Zero at the center of the bed
-G1 X185 Y5 F12000  ; Zero at the front probe point
-G30
+G1 X305 Y0 F12000
+G30 P0 Z-99999
 
-; Probe it
-M98 P/sys/bed-3point.g
+; Probe front left
+G1 X75 Y0 F12000
+G4 P100
+G30 P1 Z-99999
 
-; The G32 calibration seems to calibrate to something other than the right offset.  Either G30, G28 Z to try to fix it or manually adjust it
-; G28 Z
-;G1 Z5
-;G92 Z5.065
-;G1 Z5
-;G30
+; Probe back left
+G1 X75 Y380 F12000
+G4 P100
+G30 P2 Z-99999
+
+; Probe back right
+G1 X305 Y380 F12000
+G4 P100
+G30 P3 Z-99999 S4
