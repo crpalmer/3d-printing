@@ -9,8 +9,8 @@ hex2ascii: hex2ascii.c
 clean-slic3r-bundle: clean-slic3r-bundle.c
 	$(CC) clean-slic3r-bundle.c -o clean-slic3r-bundle
 
-slic3r.ini: clean-slic3r-bundle Slic3r_config_bundle.ini
-	./clean-slic3r-bundle < Slic3r_config_bundle.ini > slic3r.ini
+slic3r.ini: clean-slic3r-bundle PrusaSlicer_config_bundle.ini
+	./clean-slic3r-bundle < PrusaSlicer_config_bundle.ini > slic3r.ini
 
 stl2ascii: stl2ascii.c
 	$(CC) stl2ascii.c -o stl2ascii

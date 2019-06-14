@@ -6,6 +6,6 @@ grid-show
 grid-show.exe
 clean-slic3r-bundle
 clean-slic3r-bundle.exe
-Slic3r_config_bundle.ini
+PrusaSlicer_config_bundle.ini
 stl2ascii
 stl2ascii.exe
