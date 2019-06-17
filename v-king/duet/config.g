@@ -25,11 +25,11 @@ M574 X1 Y1 Z1 S1                           ; Set active high x/y/z min endstops
 ; Drive directions
 M569 P0 S1                                 ; Drive 0 direction (x)
 M569 P1 S1                                 ; Drive 1 direction (y)
-M569 P2 S1                                 ; Drive 2 direction (z back-left)
+M569 P2 S1                                 ; Drive 2 direction (z back)
 M569 P3 S1                                 ; Drive 3 direction (e0)
-M569 P4 S1                                 ; Drive 4 direction (e1 -> z back right)
-M569 P5 S0                                 ; Drive 5 direction (z back-right)
-M569 P6 S0                                 ; Drive 6 direction (z front-left)
+M569 P4 S1                                 ; Drive 4 direction (e1 -> z front)
+; M569 P5 S1                                 ; Drive 5 direction (z back-right)
+; M569 P6 S1                                 ; Drive 6 direction (z front-left)
 
 ; Z drive setup
 M584 X0 Y1 E3 Z2:5:6:4                   ; 4 Z motors connected to driver outputs 2 (z), 5 and 6 (breakout board), 4 (e1)
