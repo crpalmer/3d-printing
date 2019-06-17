@@ -32,21 +32,23 @@ M569 P4 S1                                 ; Drive 4 direction (e1 -> z front)
 ; M569 P6 S1                                 ; Drive 6 direction (z front-left)
 
 ; Z drive setup
-M584 X0 Y1 E3 Z2:5:6:4                   ; 4 Z motors connected to driver outputs 2 (z), 5 and 6 (breakout board), 4 (e1)
-M671 X75:305:75:305 Y453:453:-70:-70 S0.5
+M584 X0 Y1 E3 Z2:4                     ; 4 Z motors connected to driver outputs 2 (z), 5 and 6 (breakout board), 4 (e1)
+M671 X170:170 Y440:-80 S1
 
 ; Drive steps per mm
 ; z = 360/0.067/40*16*2 = 4298.5
 ; 0.067 is step angle from spec sheet, 40 = belt mm for 1 full rotation, 16 micro stepping, 2 = "double belt resolution"
-M92 X160 Y160 Z4298.5 E2700                ; Set steps per mm at 1/16 micro stepping
-M350 Z8 E16 I0                            ; Configure microstepping without interpolation
+; z = 360/1.8*26.85/40*16*2 = 4296
+; 1.8 is the normal step angle, 26.85 is the gear ratio, 2 = "double belt resolution"
+M92 X160 Y160 Z4297 E2700                ; Set steps per mm at 1/16 micro stepping
+M350 Z8 E16 I0                             ; Configure microstepping without interpolation
 M350 X32 Y32 I1                            ; Configure microstepping with interpolation
 
 ; Drive speeds and currents
 M566 X600 Y600 Z18 E40                     ; Set maximum instantaneous speed changes (mm/min)
 M203 X24000 Y24000 Z120 E6000              ; Set maximum speeds (mm/min)
 M201 X2000 Y2000 Z500 E120                 ; Set accelerations (mm/s^2)
-M906 X1200 Y1200 Z600 E500 I30             ; Set motor currents (mA) and motor idle factor in per cent
+M906 X1200 Y1200 Z840 E500 I30             ; Set motor currents (mA) and motor idle factor in per cent
 M84 S30                                    ; Set idle timeout
 
 ; Axis Limits
@@ -54,7 +56,7 @@ M98 P/sys/axis-limits.g
 
 ; Z-Probe
 M98 P/sys/zprobe.g
-M557 X0:310 Y0:360 S10:10                  ; Define mesh grid
+M557 X10:330 Y10:370 S31:36                  ; Define mesh grid
 M376 H5
 ;G29 S1
 
