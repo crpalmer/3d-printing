@@ -26,7 +26,7 @@ M574 X1 Y1 Z1 S1                           ; Set active high x/y/z min endstops
 M569 P0 S1                                 ; Drive 0 direction (x)
 M569 P1 S1                                 ; Drive 1 direction (y)
 M569 P2 S1                                 ; Drive 2 direction (z back)
-M569 P3 S1                                 ; Drive 3 direction (e0)
+M569 P3 S0                                 ; Drive 3 direction (e0)
 M569 P4 S1                                 ; Drive 4 direction (e1 -> z front)
 ; M569 P5 S1                                 ; Drive 5 direction (z back-right)
 ; M569 P6 S1                                 ; Drive 6 direction (z front-left)
@@ -40,14 +40,14 @@ M671 X170:170 Y440:-80 S1
 ; 0.067 is step angle from spec sheet, 40 = belt mm for 1 full rotation, 16 micro stepping, 2 = "double belt resolution"
 ; z = 360/1.8*26.85/40*16*2 = 4296
 ; 1.8 is the normal step angle, 26.85 is the gear ratio, 2 = "double belt resolution"
-M92 X160 Y160 Z4297 E2700                ; Set steps per mm at 1/16 micro stepping
-M350 Z8 E16 I0                             ; Configure microstepping without interpolation
-M350 X32 Y32 I1                            ; Configure microstepping with interpolation
+M92 X160 Y160 Z4297 E415                ; Set steps per mm at 1/16 micro stepping
+M350 Z8 I0                              ; Configure microstepping without interpolation
+M350 X16 Y16 E16 I1                     ; Configure microstepping with interpolation
 
 ; Drive speeds and currents
-M566 X600 Y600 Z18 E40                     ; Set maximum instantaneous speed changes (mm/min)
+M566 X600 Y600 Z18 E1200                     ; Set maximum instantaneous speed changes (mm/min)
 M203 X24000 Y24000 Z120 E6000              ; Set maximum speeds (mm/min)
-M201 X2000 Y2000 Z500 E120                 ; Set accelerations (mm/s^2)
+M201 X2000 Y2000 Z500 E3000                 ; Set accelerations (mm/s^2)
 M906 X1200 Y1200 Z840 E500 I30             ; Set motor currents (mA) and motor idle factor in per cent
 M84 S30                                    ; Set idle timeout
 
@@ -77,6 +77,9 @@ M106 P2 S1 I0 F500 H-1                     ; case fan: PWM signal inversion and 
 M563 P0 D0 H1 F1                           ; Define tool 0
 G10 P0 X0 Y0 Z0                            ; Set tool 0 axis offsets
 G10 P0 R0 S0                               ; Set initial tool 0 active and standby temperatures to 0C
+
+; Pressure advance
+; M572 D0 S0.2
 
 ; Automatic saving after power loss is not enabled
 
