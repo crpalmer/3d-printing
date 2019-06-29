@@ -43,7 +43,7 @@ M84 S30					  ; Set idle timeout
 M208 Z-10 S1                              ; Set minimum Z
 
 ; Endstops
-M574 X2 Y2 Z2 S1                          ; Set active high endstops
+M574 X2 Z2 Y2 S0                          ; Set NO high endstops
 
 ; Heaters (further extended by the selected hotend included below)
 M301 H0 S1.00 P10 I0.1 D200 T0.4 W180 B30 ; Use PID on bed heater (may require further tuning)
