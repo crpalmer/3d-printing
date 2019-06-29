@@ -72,3 +72,4 @@ M591 D1 C4 S1
 ; Miscellaneous
 M501                                      ; Load saved parameters from non-volatile memory
 M375					  ; Load the grid probing mesh
+T0					  ; activate the default tool
