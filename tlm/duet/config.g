@@ -51,9 +51,9 @@ M305 P0 R4700 T100000 B4148 C2.117e-7     ; Set thermistor + ADC parameters for 
 M143 H0 S120                              ; Set temperature limit for heater 0 to 120C
 
 ; Fans
-M106 P0 S0 I0 F500 H-1                    ; Set fan 0 value, PWM signal inversion and frequency. Thermostatic control is turned off
-M106 P1 S1 I0 F500 H-1                    ; Set fan 1 value, PWM signal inversion and frequency. Thermostatic control is turned off
-M106 P2 S1 I0 F500 H-1                    ; Set fan 2 value, PWM signal inversion and frequency. Thermostatic control is turned off
+; fan 0 is dead due to stupidly short circuiting it... M106 P0 S0 I0 F500 H-1                    ; Set fan 0 value, PWM signal inversion and frequency. Thermostatic control is turned off
+M106 P1 S1 I0 F500 H-1                    ; Set fan 1 (hotend) value, PWM signal inversion and frequency. Thermostatic control is turned off
+M106 P2 S0 I0 F500 H-1                    ; Set fan 2 (part cooling) value, PWM signal inversion and frequency. Thermostatic control is turned off
 
 ; Hotend
 M98 P/sys/hotend-e3dv6.g
