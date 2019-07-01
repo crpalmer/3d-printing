@@ -9,7 +9,7 @@ fatal_fread(void *ptr, size_t s, size_t n, FILE *f)
 
     res = fread(ptr, s, n, f);
     if (res != n) {
-	fprintf(stderr, "bad read (%d, %d) at %d: ", res, n, ftell(f));
+	fprintf(stderr, "bad read (%d, %d) at %d: ", (int) res, (int) n, (int) ftell(f));
 	perror(NULL);
 	exit(5);
     }
