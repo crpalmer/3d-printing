@@ -62,9 +62,9 @@ M376 H5
 
 ; Heaters
 M307 H0 B0 S1.00                           ; Disable bang-bang mode for the bed heater and set PWM limit
-M305 P0 T100000 B4388                      ; Set thermistor + ADC parameters for heater 0
+M305 P0 T100000 B4138                      ; Set thermistor + ADC parameters for heater 0
 M143 H0 S120                               ; Set temperature limit for heater 0 to 120C
-M305 P1 T100000 B4388 C7.060000e-8         ; Set thermistor + ADC parameters for heater 1
+M305 P1 T100000 B4725 C7.060000e-8         ; Set thermistor + ADC parameters for heater 1
 M143 H1 S280                               ; Set temperature limit for heater 1 to 280C
 
 ; Fans
