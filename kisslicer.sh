@@ -3,12 +3,13 @@
 set -e
 
 if [ "$1" = "" ]; then
-    echo "usage: <printer>"
-    exit 1
+    printer=kisslicer
+else
+    printer=$1
 fi
 
 (
-     cd /home/crpalmer/kisslicer-configs/$1
+     cd /home/crpalmer/kisslicer-configs/$printer
      if [ ! -e KISSlicer ]; then
           ln -s ../bin/KISSlicer
      fi
