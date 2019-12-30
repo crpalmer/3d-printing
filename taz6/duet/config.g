@@ -49,13 +49,20 @@ G31 P500 X0 Y0 Z0.8                      ; set Z probe trigger value, offset and
 M557 X-10:288 Y-9:285 P2                  ; define mesh grid
 
 ; Bed heater
-M307 H0 B0 S1.00                          ; disable bang-bang mode for the bed heater and set PWM limit
 M305 P0 T100000 B3972 C7.060000e-8 R2200  ; set thermistor + ADC parameters for heater 0
 M143 H0 S120                              ; set temperature limit for heater 0 to 120C
+; Heater 0 model: gain 130.2, time constant 313.5, dead time 1.8, max PWM 1.00, calibration voltage 23.9, mode PID, inverted no, frequency default
+; Computed PID parameters for setpoint change: P236.6, I9.917, D300.8
+; Computed PID parameters for load change: P2
+M307 H0 A130.2 C313.5 D1.8 S1.00 V23.9 B0
 
 ; Hotend heater
 M305 P1 T100000 B4725 R2200 A31          ; set thermistor + ADC parameters for heater 1
 M143 H1 S280                              ; set temperature limit for heater 1 to 280C
+; Heater 1 model: gain 187.6, time constant 126.7, dead time 0.9, max PWM 1.00, calibration voltage 24.2, mode PID, inverted no, frequency default
+; Computed PID parameters for setpoint change: P139.2, I13.300, D84.4
+; Computed PID parameters for load change: P1
+M307 H1 A187.6 C126.7 D0.9 S1.00 V24.2 B0
 
 ; Fans
 M106 P0 S1 I0 F500 H1 T45                 ; set fan 1 value, PWM signal inversion and frequency. Thermostatic control is turned on
