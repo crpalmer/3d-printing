@@ -26,13 +26,12 @@ M569 P1 S0                                ; Drive 1 goes backwards
 M569 P2 S0                                ; Drive 2 goes backwards
 M569 P3 S0                                ; Drive 3 goes backwards
 M569 P4 S1                                ; Drive 4 goes forward
-M92 X80 Y80 Z80 E418:418 		  ; Set steps per mm
-M350 X64 Y64 Z64 E16:16 I1 		  ; Configure microstepping with interpolation
-M566 X1200 Y1200 Z1200 E300:300           ; Set maximum instantaneous speed changes (mm/min)
-;M203 X39960 Y39960 Z39960 E3000:3000	  ; Set maximum speeds (mm/min)
-M203 X9000 Y9000 Z9000 E3000:3000	  ; Set maximum speeds (mm/min)
-M201 X1000 Y1000 Z1000 E1000:1000    	  ; Set accelerations (mm/s^2)
-M906 X1200 Y1200 Z1200 E500:500 I30	  ; Set motor currents (mA) and motor idle factor in per cent
+M92 X160 Y160 Z160 E398.1:418 		  ; Set steps per mm
+M350 X16 Y16 Z16 E16:16 I1 		  ; Configure microstepping with interpolation
+M566 X1200 Y1200 Z1200 E300               ; Set maximum instantaneous speed changes (mm/min)
+M203 X20000 Y20000 Z20000 E3600   	  ; Set maximum speeds (mm/min)
+M201 X1000 Y1000 Z1000 E1000     	  ; Set accelerations (mm/s^2)
+M906 X1200 Y1200 Z1200 E500 I30	          ; Set motor currents (mA) and motor idle factor in per cent
 M84 S30					  ; Set idle timeout
 
 ; Enable pressure advance
