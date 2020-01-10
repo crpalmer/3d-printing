@@ -45,6 +45,7 @@ M208 Z-10 S1                              ; Set minimum Z
 M574 X2 Z2 Y2 S0                          ; Set NO high endstops
 
 ; Heaters (further extended by the selected hotend included below)
+M307 H1 A354.5 C721.7 D3.7 V24.1 B0       ; pid tuned at 60
 M301 H0 S1.00 P10 I0.1 D200 T0.4 W180 B30 ; Use PID on bed heater (may require further tuning)
 M305 P0 R4700 T100000 B4148 C2.117e-7     ; Set thermistor + ADC parameters for bed heater
 M143 H0 S120                              ; Set temperature limit for heater 0 to 120C

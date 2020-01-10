@@ -1,4 +1,5 @@
 ; Heaters
+M307 H1 A465.9 C265.7 D4.2 V23.8 B0       ; pid autotune @ 205
 M305 P1 T100000 B4725 C7.060000e-8 R4700  ; Set thermistor + ADC parameters for heater 1 (e3d)
 ; M305 P1 B4388
 M143 H1 S285                              ; Set temperature limit for heater 2 to 285C
