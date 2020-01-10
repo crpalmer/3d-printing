@@ -56,10 +56,18 @@ M106 P1 S1 I0 F500 H-1                    ; Set fan 1 (hotend) value, PWM signal
 M106 P2 S0 I0 F500 H-1                    ; Set fan 2 (part cooling) value, PWM signal inversion and frequency. Thermostatic control is turned off
 
 ; Hotend
-M98 P/sys/hotend-e3dv6.g
+M307 H1 A465.9 C265.7 D4.2 V23.8 B0       ; pid autotune @ 205
+M305 P1 T100000 B4725 C7.060000e-8 R4700  ; Set thermistor + ADC parameters for heater 1 (e3d)
+M143 H1 S285                              ; Set temperature limit for heater 2 to 285C
+
+; Tools
+M563 P0 D0 H1 S"E3D v6" F2                 ; Define tool 0 (E1)
+G10 P0 X0 Y0 Z0                           ; Set tool 0 axis offsets
+G10 P0 R0 S0                              ; Set initial tool 0 active and standby temperatures to 0C
 
 ; Z-Probe
-M98 P/sys/zprobe-fsr.g
+M558 P4 H2.5 F120 I1 A30 S0.025
+G31 P250 X0 Y0 Z-0.25
 M557 R150 S16                             ; Define mesh grid
 
 ; Filament sensor (connected to E1 endstop)
