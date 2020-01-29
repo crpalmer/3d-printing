@@ -25,25 +25,25 @@ M574 X1 Y1 Z1 S1                           ; Set active high x/y/z min endstops
 ; Drive directions
 M569 P0 S1                                 ; Drive 0 direction (x)
 M569 P1 S1                                 ; Drive 1 direction (y)
-M569 P2 S1                                 ; Drive 2 direction (z back)
+M569 P2 S1                                 ; Drive 2 direction (z back left) (z)
 M569 P3 S1                                 ; Drive 3 direction (e0)
-M569 P4 S1                                 ; Drive 4 direction (e1 -> z front)
-; M569 P5 S1                                 ; Drive 5 direction (breakout 1)
-; M569 P6 S1                                 ; Drive 6 direction (breakout 2)
+M569 P4 S1                                 ; Drive 4 direction (z front right) (e1)
+M569 P5 S0                                 ; Drive 5 direction (z back right) (breakout 1)
+M569 P6 S0                                 ; Drive 6 direction (z front left) (breakout 2)
 
 ; Z drive setup
-M584 X0 Y1 E3 Z2:4                     ; 4 Z motors connected to driver outputs 2 (z), 5 and 6 (breakout board), 4 (e1)
-M671 X170:170 Y440:-80 S1
+M584 X0 Y1 E3 Z2:5:6:4                         ; 4 Z motors connected to driver outputs 2 (z), 4 (e1), 5 and 6 (breakout board)
+M671 X-15:370:-15:370 Y440:440:-75:-75 S2
 
 ; Drive steps per mm
 ; z = 360/0.067/40*16*2 = 4298.5
 ; 0.067 is step angle from spec sheet, 40 = belt mm for 1 full rotation, 16 micro stepping, 2 = "double belt resolution"
 ; z = 360/1.8*26.85/40*16*2 = 4296
 ; 1.8 is the normal step angle, 26.85 is the gear ratio, 2 = "double belt resolution"
-M92 X160 Y160 Z4297 E2700                ; Set steps per mm at 1/16 micro stepping (E recommended is 2700)
-;M350 X64 Y64 E16 Z8 I0                              ; Configure microstepping without interpolation
-M350 E16 I0                                ; Configure microstepping without interpolation
-M350 X16 Y16 Z16 I1             	   ; Configure microstepping with interpolation
+M92 X160 Y160 Z2148 E2700                ; Set steps per mm at 1/16 micro stepping (E recommended is 2700)
+M350 X64 Y64 E16 Z16 I0                              ; Configure microstepping without interpolation
+;M350 E16 I0                                ; Configure microstepping without interpolation
+;M350 X16 Y16 Z16 I1             	   ; Configure microstepping with interpolation
 
 ; Drive speeds and currents
 M566 X600 Y600 Z18 E40                     ; Set maximum instantaneous speed changes (mm/min)
@@ -62,11 +62,14 @@ M376 H5
 ;G29 S1
 
 ; Heaters
-M307 H0 B0 S1.00                           ; Disable bang-bang mode for the bed heater and set PWM limit
+M307 H1 A159.7 C501.4 D3.1 V24.2 B0
 M305 P0 T100000 B4138                      ; Set thermistor + ADC parameters for heater 0
 M143 H0 S120                               ; Set temperature limit for heater 0 to 120C
-M305 P1 T100000 B4725 C7.060000e-8         ; Set thermistor + ADC parameters for heater 1
-M143 H1 S280                               ; Set temperature limit for heater 1 to 280C
+; M307 H2 A448.4 C218.1 D4.1 V24.1 B0        ; pid autotune @ 205 with heater 1
+M307 H2 A368.6 C224.6 D3.4 V24.1
+; M307 H1 A352.6 C122.2 D8.0 S1 B0           ; e3d "should look like" values
+M305 P2 B4725 C7.060000e-8         ; Set thermistor + ADC parameters for heater 1
+M143 H2 S280                               ; Set temperature limit for heater 1 to 280C
 
 ; Fans
 ; DEAD: M106 P0 S0 I0 F500 H-1                     ; part cooling fan: PWM signal inversion and frequency. Thermostatic control is turned off
@@ -75,7 +78,7 @@ M106 P1 S0 I0 H-1
 M106 P2 S1 I0 F500 H-1                     ; case fan: PWM signal inversion and frequency. Thermostatic control is turned off, Fan on
 
 ; Tools
-M563 P0 D0 H1 F1                           ; Define tool 0
+M563 P0 D0 H2 F1                           ; Define tool 0
 G10 P0 X0 Y0 Z0                            ; Set tool 0 axis offsets
 G10 P0 R0 S0                               ; Set initial tool 0 active and standby temperatures to 0C
 
