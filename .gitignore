@@ -2,6 +2,7 @@ _KS_backup_profiles.ini
 hex2ascii
 hex2ascii.exe
 KISSlicer
+!kisslicer/
 grid-show
 grid-show.exe
 clean-slic3r-bundle
