@@ -1,0 +1,6 @@
+[presets]
+print = default - 0.2mm - 2 perimeters
+sla_print = floating
+sla_material = - default -
+printer = Prusa SL1 for Elegoo Mars
+filament = PLA

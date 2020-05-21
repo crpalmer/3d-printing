@@ -10,3 +10,6 @@ clean-slic3r-bundle.exe
 PrusaSlicer_config_bundle.ini
 stl2ascii
 stl2ascii.exe
+slic3r-to-files
+slic3r-to-files.exe
+slic3r/timestamp
