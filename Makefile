@@ -1,5 +1,5 @@
 all:	grid-show hex2ascii clean-slic3r-bundle slic3r-to-files stl2ascii \
-	slic3r.ini slic3r/timestamp
+	slic3r.ini slic3r/timestamp slic3r-bundle.ini
 
 grid-show: grid-show.c
 	$(CC) grid-show.c -o grid-show -lm
@@ -18,6 +18,10 @@ slic3r-to-files: slic3r-to-files.c
 
 slic3r.ini: clean-slic3r-bundle PrusaSlicer_config_bundle.ini
 	./clean-slic3r-bundle < PrusaSlicer_config_bundle.ini > slic3r.ini
+
+.PHONY: slic3r-bundle.ini
+slic3r-bundle.ini:
+	git ls-files slic3r | while read i; do cat "$$i" ; awk 'BEGIN { printf("%c", 10); }' < /dev/null; done >$@
 
 slic3r/timestamp: slic3r.ini slic3r-to-files
 	mkdir -p slic3r
