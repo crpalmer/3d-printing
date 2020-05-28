@@ -1,7 +1,7 @@
 [printer:Ender 5 - 0.4mm]
 bed_custom_model = 
 bed_custom_texture = 
-bed_shape = 0x0,200x0,200x200,0x200
+bed_shape = 0x0,220x0,220x220,0x220
 before_layer_gcode = 
 between_objects_gcode = 
 cooling_tube_length = 5
@@ -9,7 +9,7 @@ cooling_tube_retraction = 91.5
 default_filament_profile = ""
 default_print_profile = 
 deretract_speed = 0
-end_gcode = G91\nG1 E-3 F1800   ; Retract some extra filament\nG1 Z+10        ; Move the bed down\nG90\nG1 X0 Y0 F6000 ; Move the print head out of the way\nM106 S0        ; Turn off cooling fan\nM104 S0        ; Turn off extruder\nM140 S0        ; Turn off bed\nM84            ; Disable motors
+end_gcode = G91\nG1 E-3 F1800   ; Retract some extra filament\nG1 Z+10        ; Move the bed down\nG90\nG1 X0 Y0 F6000 ; Move the print head out of the way\nM400              ; wait for all planned moves to finish!\nM106 S0        ; Turn off cooling fan\nM104 S0        ; Turn off extruder\nM140 S0        ; Turn off bed\nM84            ; Disable motors
 extra_loading_move = -2
 extruder_colour = ""
 extruder_offset = 0x0
