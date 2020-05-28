@@ -26,11 +26,13 @@ int main(int argc, char **argv)
 	}
 
 	if (starting_new && line[0] == '[') {
-	    char *output_fname = strdup(&line[1]);
+	    char *output_fname = malloc(strlen(&line[1]) + 100);
 	    char *dir;
 
+	    strcpy(output_fname, &line[1]);
 	    for (i = strlen(output_fname)-1; i > 0 && (isspace(output_fname[i]) || output_fname[i] == ']'); i--) {}
 	    output_fname[i+1] = '\0';
+	    strcat(output_fname, ".ini");
 
 	    if (output_fname) {
 		output_f = fopen(output_fname, "w");
