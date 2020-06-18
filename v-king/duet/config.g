@@ -20,7 +20,8 @@ M586 P1 S0                                 ; Disable FTP
 M586 P2 S0                                 ; Disable Telnet
 
 ; Endstops
-M574 X1 Y1 Z1 S1                           ; Set active high x/y/z min endstops
+M574 X1 Y1 Z0 S0                              ; Set active low x/y min endstops
+;M574 Z1 S2                                 ; Set z-probe z min endstop
 
 ; Drive directions
 M569 P0 S1                                 ; Drive 0 direction (x)
@@ -33,21 +34,20 @@ M569 P6 S0                                 ; Drive 6 direction (z front left) (b
 
 ; Z drive setup
 M584 X0 Y1 E3 Z2:5:6:4                         ; 4 Z motors connected to driver outputs 2 (z), 4 (e1), 5 and 6 (breakout board)
-M671 X-15:370:-15:370 Y440:440:-75:-75 S2
+M671 X-10:408:-10:408 Y440:440:-42:-42 S2
 
 ; Drive steps per mm
 ; z = 360/0.067/40*16*2 = 4298.5
 ; 0.067 is step angle from spec sheet, 40 = belt mm for 1 full rotation, 16 micro stepping, 2 = "double belt resolution"
 ; z = 360/1.8*26.85/40*16*2 = 4296
 ; 1.8 is the normal step angle, 26.85 is the gear ratio, 2 = "double belt resolution"
-M92 X160 Y160 Z2148 E2700                ; Set steps per mm at 1/16 micro stepping (E recommended is 2700)
-M350 X64 Y64 E16 Z16 I0                              ; Configure microstepping without interpolation
-;M350 E16 I0                                ; Configure microstepping without interpolation
-;M350 X16 Y16 Z16 I1             	   ; Configure microstepping with interpolation
+M92 X160 Y160 Z2148 E2645                ; Set steps per mm at 1/16 micro stepping (E recommended is 2700)
+M350 X16 Y16 E16 I1                          ; Configure microstepping with interpolation for x/y
+M350 Z16 I0                          ; Configure microstepping without interpolation for e/z
 
 ; Drive speeds and currents
 M566 X600 Y600 Z18 E40                     ; Set maximum instantaneous speed changes (mm/min)
-M203 X24000 Y24000 Z120 E6000              ; Set maximum speeds (mm/min)
+M203 X24000 Y24000 Z360 E6000              ; Set maximum speeds (mm/min)
 M201 X1000 Y1000 Z500 E120                 ; Set accelerations (mm/s^2)
 M906 X1200 Y1200 Z840 E500 I30             ; Set motor currents (mA) and motor idle factor in per cent
 M84 S30                                    ; Set idle timeout
@@ -65,10 +65,8 @@ M376 H5
 M307 H1 A159.7 C501.4 D3.1 V24.2 B0
 M305 P0 T100000 B4138                      ; Set thermistor + ADC parameters for heater 0
 M143 H0 S120                               ; Set temperature limit for heater 0 to 120C
-; M307 H2 A448.4 C218.1 D4.1 V24.1 B0        ; pid autotune @ 205 with heater 1
-M307 H2 A368.6 C224.6 D3.4 V24.1
-; M307 H1 A352.6 C122.2 D8.0 S1 B0           ; e3d "should look like" values
-M305 P2 B4725 C7.060000e-8         ; Set thermistor + ADC parameters for heater 1
+M307 H1 A368.6 C224.6 D3.4 V24.1
+M305 P2 B4725 C7.060000e-8                 ; Set thermistor + ADC parameters for heater 1
 M143 H2 S280                               ; Set temperature limit for heater 1 to 280C
 
 ; Fans
