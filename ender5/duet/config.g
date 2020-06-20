@@ -21,12 +21,16 @@ M569 P1 S0                                             ; physical drive 1 goes b
 M569 P2 S0                                             ; physical drive 2 goes backwards
 M569 P3 S0                                             ; physical drive 3 goes backwards
 M584 X0 Y1 Z2 E3                                       ; set drive mapping
-M350 X16 Y16 Z16 E16 I1                                ; configure microstepping with interpolation
-M92 X80.00 Y80.00 Z400.00 E415.00                      ; set steps per mm
-M566 X900.00 Y900.00 Z12.00 E120.00                    ; set maximum instantaneous speed changes (mm/min)
-M203 X6000.00 Y6000.00 Z180.00 E1200.00                ; set maximum speeds (mm/min)
-M201 X500.00 Y500.00 Z20.00 E250.00                    ; set accelerations (mm/s^2)
-M906 X800 Y800 Z1200 E500 I30                           ; set motor currents (mA) and motor idle factor in per cent
+M92 X80.00 Y80.00 Z400.00 E415.00                      ; set steps per mm (should be e415, tlm had e398.1)
+M350 X16 Y16 I1                                        ; configure microstepping with interpolation X, Y
+M350 Z32 E32 I0                                        ; but no interpolation for Z, E
+M566 X600.00 Y600.00 Z12.00 E2000.00                   ; set maximum instantaneous speed changes (mm/min)
+;+J M566 X1200.00 Y900.00 Z12.00 E3000.00                   ; set maximum instantaneous speed changes (mm/min)
+;-J M566 X100.00 Y100.00 Z12.00 E2000.00                   ; set maximum instantaneous speed changes (mm/min)
+M203 X12000.00 Y12000.00 Z180.00 E3600.00              ; set maximum speeds (mm/min)
+M201 X1000.00 Y1000.00 Z20.00 E3000.00                 ; set accelerations (mm/s^2)
+;-A M201 X100.00 Y100.00 Z20.00 E3000.00                 ; set accelerations (mm/s^2)
+M906 X800 Y1200 Z1200 E500 I30                         ; set motor currents (mA) and motor idle factor in per cent
 M84 S30                                                ; Set idle timeout
 
 ; Axis Limits
@@ -44,9 +48,9 @@ M557 X15:215 Y15:195 S20                               ; define mesh grid
 
 ; Fans
 M950 F0 C"fan0" Q500                                   ; create fan 0 on pin fan0 and set its frequency
-M950 F1 C"fan1" Q500                                   ; create fan 1 on pin fan1 and set its frequency
-M106 P1 S1 H-1                                         ; set fan 1 value. Thermostatic control is turned off
 M106 P0 S0 H-1                                         ; set fan 0 value. Thermostatic control is turned off
+M950 F1 C"fan1" Q500                                   ; create fan 1 on pin fan1 and set its frequency
+M106 P1 S1 T45 H1                                      ; set fan 1 value. Thermostatic control is turned on
 
 ; Bed Heater
 M308 S0 P"bedtemp" Y"thermistor" T100000 B4092         ; configure sensor 0 as thermistor on pin bedtemp
@@ -55,11 +59,11 @@ M307 H0 B0 S1.00 A158.7 C330.4 D1.2 V23.8              ; bed pid tuned @ 70
 M140 H0                                                ; map heated bed to heater 0
 M143 H0 S120                                           ; set temperature limit for heater 0 to 120C
 
-; Hotend-y
+; e3dv6
 M308 S1 P"e0temp" Y"thermistor" T100000 B4725 C7.06e-8 ; configure sensor 1 as thermistor on pin e0temp
 M950 H1 C"e0heat" T1                                   ; create nozzle heater output on e0heat and map it to sensor 1
-M307 H1 B0 S1.00 A668.6 C280.1 D4.9 V23.9              ; nozzle pid tuned at 245
-M563 P0 S"hotend-y" D0 H1 F0                           ; define tool 0
+M307 H1 B0 S1.00 A402.8 C235.9 D3.7 V23.9              ; nozzle pid tuned at 250
+M563 P0 S"E3Dv6" D0 H1 F0                              ; define tool 0
 
 ; Stock ender hotend
 ;M308 S1 P"e0temp" Y"thermistor" T100000 B4092 ; configure sensor 1 as thermistor on pin e0temp
@@ -73,7 +77,7 @@ G10 P0 R0 S0                                           ; set initial tool 0 acti
 
 ; Custom settings are not defined
 M912 P0 S-12.5                                         ; Calibrate MCU temperature
-
+M592 D0 A0.015 B0.0012 L0.2                            ; Configure non-linear extrusion
 ; Miscellaneous
 T0                                                     ; select first tool
 
