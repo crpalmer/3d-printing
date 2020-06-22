@@ -19,15 +19,15 @@ M586 P2 S0                                             ; disable Telnet
 M569 P0 S1                                             ; physical drive 0 goes forwards
 M569 P1 S0                                             ; physical drive 1 goes backwards
 M569 P2 S0                                             ; physical drive 2 goes backwards
-M569 P3 S0                                             ; physical drive 3 goes backwards
+M569 P3 S1                                             ; physical drive 3 goes forwards
 M584 X0 Y1 Z2 E3                                       ; set drive mapping
-M92 X80.00 Y80.00 Z400.00 E415.00                      ; set steps per mm (should be e415, tlm had e398.1)
-M350 X16 Y16 I1                                        ; configure microstepping with interpolation X, Y
-M350 Z32 E32 I0                                        ; but no interpolation for Z, E
+M92 X80.00 Y80.00 Z400.00 E830.00                      ; set steps per mm (should be e415, tlm had e398.1)
+; M350 X16 Y16 I1                                        ; configure microstepping with interpolation X, Y
+M350 X64 Y64 Z32 E32 I0                                        ; but no interpolation for Z, E
 M566 X600.00 Y600.00 Z12.00 E2000.00                   ; set maximum instantaneous speed changes (mm/min)
 ;+J M566 X1200.00 Y900.00 Z12.00 E3000.00                   ; set maximum instantaneous speed changes (mm/min)
 ;-J M566 X100.00 Y100.00 Z12.00 E2000.00                   ; set maximum instantaneous speed changes (mm/min)
-M203 X12000.00 Y12000.00 Z180.00 E3600.00              ; set maximum speeds (mm/min)
+M203 X12000.00 Y12000.00 Z360.00 E3600.00              ; set maximum speeds (mm/min)
 M201 X1000.00 Y1000.00 Z20.00 E3000.00                 ; set accelerations (mm/s^2)
 ;-A M201 X100.00 Y100.00 Z20.00 E3000.00                 ; set accelerations (mm/s^2)
 M906 X800 Y1200 Z1200 E500 I30                         ; set motor currents (mA) and motor idle factor in per cent
@@ -40,10 +40,10 @@ M208 X230 Y225 Z305 S0                                 ; set axis maxima
 ; Endstops
 M574 X1 S1 P"xstop"                                    ; configure active-high endstop for low end on X via pin xstop
 M574 Y1 S1 P"ystop"                                    ; configure active-high endstop for low end on Y via pin ystop
-M574 Z1 S1 P"zstop"                                    ; configure active-high endstop for low end on Z via pin zstop
+; M574 Z1 S1 P"zstop"                                    ; configure active-high endstop for low end on Z via pin zstop
 
 ; Z-Probe
-M558 P0 H5 F120 T6000                                  ; disable Z probe but set dive height, probe speed and travel speed
+M98 P"/sys/zprobe.g"
 M557 X15:215 Y15:195 S20                               ; define mesh grid
 
 ; Fans
@@ -78,6 +78,7 @@ G10 P0 R0 S0                                           ; set initial tool 0 acti
 ; Custom settings are not defined
 M912 P0 S-12.5                                         ; Calibrate MCU temperature
 M592 D0 A0.015 B0.0012 L0.2                            ; Configure non-linear extrusion
+
 ; Miscellaneous
 T0                                                     ; select first tool
 
