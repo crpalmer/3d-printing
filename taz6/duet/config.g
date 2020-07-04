@@ -6,7 +6,7 @@
 ; General preferences
 G90                                       ; send absolute coordinates...
 M83                                       ; ...but relative extruder moves
-M550 P"taz6-duet"                              ; set printer name
+M550 P"taz6"                              ; set printer name
 
 ; Network
 M98 P"password.g"
