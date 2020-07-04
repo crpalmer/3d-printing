@@ -5,10 +5,4 @@
 G91               ; relative positioning
 G1 H2 Z5 F6000    ; lift Z relative to current position
 G90
-G1 X-20 Y255 F6000
-G91               ; relative positioning
-G1 H1 Z-275 F1800 ; move Z down until the endstop is triggered
-G92 Z-0.925       ; set Z position to endstop height
-G1 H2 Z5 F100     ; lift Z relative to current position
-G90               ; absolute positioning
-
+M98 P"/sys/homez-common.g"

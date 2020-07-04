@@ -44,8 +44,8 @@ M574 X1 Y2 S1                             ; set xy active high endstops
 M574 Z1 S0                                ; set z active low endstop
 
 ; Z-Probe
-M558 P4 H3 F60 T9000 I1                   ; set Z probe type to switch and the dive height + speeds
-G31 P500 X0 Y0 Z0.8                      ; set Z probe trigger value, offset and trigger height
+M558 P4 H1.5 F5 T9000 I1 A31 S0.025         ; set Z probe type to switch and the dive height + speeds
+G31 P500 X0 Y0 Z1.2                       ; set Z probe trigger value, offset and trigger height
 M557 X-10:288 Y-9:285 P2                  ; define mesh grid
 
 ; Bed heater

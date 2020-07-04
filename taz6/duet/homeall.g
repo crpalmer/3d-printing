@@ -8,10 +8,4 @@ G1 H1 X-305 Y308 F1800  ; move quickly to X and Y axis endstops and stop there (
 G1 H2 X5 Y-5 F6000      ; go back a few mm
 G1 H1 X-305 Y308 F360   ; move slowly to X and Y axis endstops once more (second pass)
 G90
-G1 X-20 Y255 F6000
-G91
-G1 H1 Z-275 F1800       ; move Z down until the endstop is triggered
-G92 Z-0.925             ; set Z position to endstop height
-G1 H2 Z5 F100           ; lift Z relative to current position
-
-
+M98 P"/sys/homez-common.g"
