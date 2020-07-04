@@ -28,7 +28,7 @@ M671 X370:-110 Y140:140                   ; leadscrew positions
 
 ; Steps and speeds
 M350 X16 Y16 Z16 E16 I1                   ; configure microstepping with interpolation
-M92 X100.50 Y100.50 Z1600.00 E830.00      ; set steps per mm
+M92 X100.50 Y100.50 Z1600.00 E413.00      ; set steps per mm (830 for stock extruder)
 M566 X480.00 Y480.00 Z24.00 E600.00       ; set maximum instantaneous speed changes (mm/min)
 M203 X18000.00 Y18000.00 Z180.00 E1500.00 ; set maximum speeds (mm/min)
 M201 X500.00 Y500.00 Z20.00 E250.00       ; set accelerations (mm/s^2)
@@ -59,10 +59,17 @@ M307 H0 A130.2 C313.5 D1.8 S1.00 V23.9 B0
 ; Hotend heater
 M305 P1 T100000 B4725 R2200 A31          ; set thermistor + ADC parameters for heater 1
 M143 H1 S280                              ; set temperature limit for heater 1 to 280C
+; Stock hotend
 ; Heater 1 model: gain 187.6, time constant 126.7, dead time 0.9, max PWM 1.00, calibration voltage 24.2, mode PID, inverted no, frequency default
 ; Computed PID parameters for setpoint change: P139.2, I13.300, D84.4
 ; Computed PID parameters for load change: P1
-M307 H1 A187.6 C126.7 D0.9 S1.00 V24.2 B0
+;M307 H1 A187.6 C126.7 D0.9 S1.00 V24.2 B0
+
+; ItWorks3d titan aero
+; Heater 1 model: gain 502.2, time constant 320.7, dead time 4.0, max PWM 1.00, calibration voltage 24.1, mode PID, inverted no, frequency default
+; Computed PID parameters for setpoint change: P28.2, I0.785, D79.8
+; Computed PID parameters for load change: P28.
+M307 H1 A502.2 C320.7 D4 V24.1 B0
 
 ; Fans
 M106 P0 S1 I0 F500 H1 T45                 ; set fan 1 value, PWM signal inversion and frequency. Thermostatic control is turned on
