@@ -1,0 +1,13 @@
+m106 - need to change to m950
+m305 - need to define heater and then reference heater
+m558 - need to redo anyway for the bltouch on taz6!
+       add C to specify the input pin and optionally the modulation pin
+       P4 should be either P5 (filtered) or P8 (unfiltered)
+       if you need pullup add '^' before the pin name
+m574 - use a separate M574 for each axis
+       need to name the pin to be used
+       S0 becomes "!pin.name"
+
+
+
+
