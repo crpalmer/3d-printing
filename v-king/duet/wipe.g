@@ -1,1 +1,1 @@
-; no-op
+; M98 P"/sys/wipe-actual.g"

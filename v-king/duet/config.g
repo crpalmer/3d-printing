@@ -11,7 +11,7 @@ M667 S1                                    ; Select CoreXY mode
 
 ; Network
 M550 P"v-king"                             ; Set machine name
-M98 P/sys/passwords.g
+M98 P"/sys/passwords.g"
 M553 P255.255.255.0			   ; Set netmask
 M554 P192.168.1.1                          ; Set gateway
 M552 P192.168.1.8 S1                       ; Enable network
@@ -53,10 +53,10 @@ M906 X1200 Y1200 Z840 E500 I30             ; Set motor currents (mA) and motor i
 M84 S30                                    ; Set idle timeout
 
 ; Axis Limits
-M98 P/sys/axis-limits.g
+M98 P"/sys/axis-limits.g"
 
 ; Z-Probe
-M98 P/sys/zprobe.g
+M98 P"/sys/zprobe.g"
 M557 X10:330 Y10:370 S31:36                  ; Define mesh grid
 M376 H5
 ;G29 S1
