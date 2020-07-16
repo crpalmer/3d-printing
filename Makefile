@@ -21,7 +21,7 @@ slic3r.ini: clean-slic3r-bundle PrusaSlicer_config_bundle.ini
 
 .PHONY: slic3r-bundle.ini
 slic3r-bundle.ini:
-	git ls-files slic3r | while read i; do cat "$$i" ; awk 'BEGIN { printf("%c", 10); }' < /dev/null; done >$@
+	./generate-slic3r-bundle.sh >$@
 
 slic3r/timestamp: slic3r.ini slic3r-to-files
 	mkdir -p slic3r
