@@ -9,7 +9,7 @@ M83                                                    ; ...but relative extrude
 M550 P"ender-5"                                        ; set printer name
 
 ; Network
-M98 P/sys/password.g                                   ; set password
+M98 P"/sys/password.g"                                 ; set password
 M552 P0.0.0.0 S1                                       ; enable network and acquire dynamic address via DHCP
 M586 P0 S1                                             ; enable HTTP
 M586 P1 S0                                             ; disable FTP
@@ -21,16 +21,12 @@ M569 P1 S0                                             ; physical drive 1 goes b
 M569 P2 S0                                             ; physical drive 2 goes backwards
 M569 P3 S1                                             ; physical drive 3 goes forwards
 M584 X0 Y1 Z2 E3                                       ; set drive mapping
-M92 X80.00 Y80.00 Z400.00 E830.00                      ; set steps per mm (should be e415, tlm had e398.1)
-; M350 X16 Y16 I1                                        ; configure microstepping with interpolation X, Y
-M350 X64 Y64 Z32 E32 I0                                        ; but no interpolation for Z, E
-M566 X600.00 Y600.00 Z12.00 E2000.00                   ; set maximum instantaneous speed changes (mm/min)
-;+J M566 X1200.00 Y900.00 Z12.00 E3000.00                   ; set maximum instantaneous speed changes (mm/min)
-;-J M566 X100.00 Y100.00 Z12.00 E2000.00                   ; set maximum instantaneous speed changes (mm/min)
+M92 X80.00 Y80.00 Z400.00 E830                         ; set steps per mm (should be e415, tlm had e398.1,i though 404.5?)*2(0.9degree stepper)
+M350 X16 Y16 Z16 E16 I1                                ; set microstepping to 256 interpolation
+M566 X600.00 Y600.00 Z18.00 E10000.00                  ; set maximum instantaneous speed changes (mm/min)
 M203 X12000.00 Y12000.00 Z360.00 E3600.00              ; set maximum speeds (mm/min)
-M201 X1000.00 Y1000.00 Z20.00 E3000.00                 ; set accelerations (mm/s^2)
-;-A M201 X100.00 Y100.00 Z20.00 E3000.00                 ; set accelerations (mm/s^2)
-M906 X800 Y1200 Z1200 E500 I30                         ; set motor currents (mA) and motor idle factor in per cent
+M201 X500.00 Y500.00 Z100.00 E3000.00                  ; set accelerations (mm/s^2)
+M906 X800 Y1200 Z1200 E1000 I30                        ; set motor currents (mA) and motor idle factor in per cent
 M84 S30                                                ; Set idle timeout
 
 ; Axis Limits
@@ -43,11 +39,13 @@ M574 Y1 S1 P"ystop"                                    ; configure active-high e
 ; M574 Z1 S1 P"zstop"                                    ; configure active-high endstop for low end on Z via pin zstop
 
 ; Z-Probe
-M98 P"/sys/zprobe.g"
-M557 X15:215 Y15:195 S20                               ; define mesh grid
+M950 S0 C"exp.heater3"                                 ; servo pin definition
+M558 P9 C"^zprobe.in" H5 F100 T2000
+G31 X-25 Y0 Z1.04 P25
+M557 X40:190 Y15:195 P3                                ; define mesh grid
 
 ; Fans
-M950 F0 C"fan0" Q500                                   ; create fan 0 on pin fan0 and set its frequency
+M950 F0 C"fan0" Q250                                   ; create fan 0 on pin fan0 and set its frequency
 M106 P0 S0 H-1                                         ; set fan 0 value. Thermostatic control is turned off
 M950 F1 C"fan1" Q500                                   ; create fan 1 on pin fan1 and set its frequency
 M106 P1 S1 T45 H1                                      ; set fan 1 value. Thermostatic control is turned on

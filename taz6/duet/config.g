@@ -47,8 +47,8 @@ M574 Z1 S1 P"!zstop"                      ; configure active-low endstop for low
 ; Z-Probe
 M950 S0 C"zprobe.mod"                     ; servo pin definition
 M558 P9 C"^zprobe.in" H5 F100 T2000
-G31 X0 Y-44 Z4.2 P25
-M557 X5:245 Y5:245 P3                  ; define mesh grid
+G31 X0 Y-44 Z2.85 P25
+M557 X5:245 Y5:245 P9                     ; define mesh grid
 
 ; Bed heater
 M308 S0 P"bedtemp" Y"thermistor" T100000 B3972 C7.060000e-8  ; configure sensor 0 as thermistor on pin bedtemp

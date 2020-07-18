@@ -20,8 +20,8 @@ M586 P1 S0                                 ; Disable FTP
 M586 P2 S0                                 ; Disable Telnet
 
 ; Endstops
-M574 X1 Y1 Z0 S0                              ; Set active low x/y min endstops
-;M574 Z1 S2                                 ; Set z-probe z min endstop
+M574 X1 S1 P"!xstop"                      ; configure active-low endstop for low end on X via pin xstop
+M574 Y1 S1 P"!ystop"                      ; configure active-low endstop for low end on Y via pin ystop
 
 ; Drive directions
 M569 P0 S1                                 ; Drive 0 direction (x)
@@ -56,27 +56,32 @@ M84 S30                                    ; Set idle timeout
 M98 P"/sys/axis-limits.g"
 
 ; Z-Probe
-M98 P"/sys/zprobe.g"
-M557 X10:330 Y10:370 S31:36                  ; Define mesh grid
-M376 H5
-;G29 S1
+M950 S0 C"zprobe.mod"                      ; servo pin definition
+M558 P9 C"^zprobe.in" H5 F100 T2000
+G31 X25 Y0 Z2.0 P25
+M557 X35:315 Y10:370 S31:36                ; Define mesh grid
 
-; Heaters
-M307 H1 A159.7 C501.4 D3.1 V24.2 B0
-M305 P0 T100000 B4138                      ; Set thermistor + ADC parameters for heater 0
+; Bed Heater
+M308 S0 P"bedtemp" Y"thermistor" T100000 B4138 ; configure sensor 0 as thermistor on pin bedtemp
+M950 H0 C"bedheat" T0                      ; create bed heater output on bedheat and map it to sensor 0
+M140 H0
 M143 H0 S120                               ; Set temperature limit for heater 0 to 120C
+M307 H0 A159.7 C501.4 D3.1 V24.2 B0
+
+; Hotend Heater
+M308 S1 P"e1temp" Y"thermistor" T100000 B4725 C7.06e-8 ; configure sensor 1 as thermistor on pin e0temp
+M950 H1 C"e1heat" T1                       ; create nozzle heater output on e0heat
+M143 H1 S280                               ; Set temperature limit for heater 1 to 280C
 M307 H1 A368.6 C224.6 D3.4 V24.1
-M305 P2 B4725 C7.060000e-8                 ; Set thermistor + ADC parameters for heater 1
-M143 H2 S280                               ; Set temperature limit for heater 1 to 280C
 
 ; Fans
-; DEAD: M106 P0 S0 I0 F500 H-1                     ; part cooling fan: PWM signal inversion and frequency. Thermostatic control is turned off
-; TEMPORARILY MOVED TO ALWAYS ON: M106 P1 S1 I0 F500 H1 T35                  ; hotend fan: PWM signal inversion and frequency. Thermostatic control is turned on
-M106 P1 S0 I0 H-1
-M106 P2 S1 I0 F500 H-1                     ; case fan: PWM signal inversion and frequency. Thermostatic control is turned off, Fan on
+; heatend fan is on always on fan due to fan0 being dead
+M950 F0 C"fan1" Q500
+M106 P0 S0                                 ; part cooling fan off by default on fan1
+; TODO move and configure the hotend fan onto fan2
 
 ; Tools
-M563 P0 D0 H2 F1                           ; Define tool 0
+M563 P0 D0 H1 F0                           ; Define tool 0
 G10 P0 X0 Y0 Z0                            ; Set tool 0 axis offsets
 G10 P0 R0 S0                               ; Set initial tool 0 active and standby temperatures to 0C
 
