@@ -11,8 +11,9 @@ do
   then
      if echo "$i" | grep -q 'base.ini$'
      then
-        : # ignore base.ini
+        echo "ignoring   $i" >& /dev/tty
      else
+	echo "processing $i" >& /dev/tty
 	d=`dirname "$i"`
 	head -1 "$i"
         ( 
