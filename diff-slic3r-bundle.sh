@@ -24,5 +24,7 @@ do
 	  cat "$d/base.ini"
         ) | sort --stable --unique -k 1,1 -t ' ' | diff -w - "$name"
      fi
+  else
+     git diff "$i"
   fi
-done
+done | less -e
