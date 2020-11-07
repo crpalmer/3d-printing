@@ -1,5 +1,8 @@
 all:	grid-show hex2ascii clean-slic3r-bundle slic3r-to-files stl2ascii \
-	slic3r.ini slic3r/timestamp slic3r-bundle.ini
+	slic3r.ini slic3r/timestamp 
+
+# Don't autogenerate slic3r-bundle because it overwrites the expanded files
+generate: slic3r-bundle.ini
 
 grid-show: grid-show.c
 	$(CC) grid-show.c -o grid-show -lm
