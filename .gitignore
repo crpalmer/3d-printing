@@ -17,9 +17,22 @@ slic3r-bundle.ini
 slic3r/timestamp.ini
 slic3r/presets.ini
 # Ignore all the ones we generate
+slic3r/print:default - 0.1mm - 2 perimeters - 0.4mm.ini
+slic3r/print:default - 0.1mm - 2 perimeters - 0.6mm.ini
+slic3r/print:default - 0.1mm - 2 perimeters - 0.8mm.ini
+slic3r/print:default - 0.2mm - 2 perimeters - 0.4mm.ini
+slic3r/print:default - 0.2mm - 2 perimeters - 0.6mm.ini
+slic3r/print:default - 0.2mm - 2 perimeters - 0.8mm.ini
+slic3r/print:default - 0.3mm - 2 perimeters - 0.4mm.ini
+slic3r/print:default - 0.3mm - 2 perimeters - 0.6mm.ini
+slic3r/print:default - 0.3mm - 2 perimeters - 0.8mm.ini
+slic3r/printer:Ender 5 - 0.4mm nozzle.ini
+slic3r/printer:Ender 5 - 0.8mm nozzle.ini
+slic3r/physical_printer:Ender 5 - 0.4mm.ini
+slic3r/physical_printer:Ender 5 - 0.8mm.ini
 slic3r/print:factory or climbing (0.4mm slow).ini
 slic3r/print:factory or climbing (0.4mm).ini
 slic3r/print:factory or climbing (0.6mm).ini
+slic3r/print:factory or climbing (0.8mm).ini
 slic3r/print:halloween - head (0.4mm).ini
 slic3r/print:halloween - head (0.6mm).ini
-
