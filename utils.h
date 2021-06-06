@@ -7,6 +7,8 @@ void strip_trailing_ws(char *str);
 
 char *read_line(char *buf, size_t buf_size, FILE *f);
 
+int ends_with(const char *str, const char *suffix);
+
 void ensure_array(void **array, size_t *n_array, size_t desired);
 
 void *Malloc(size_t);

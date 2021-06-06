@@ -20,6 +20,14 @@ void strip_trailing_ws(char *str)
     str[i+1] = '\0';
 }
 
+int ends_with(const char *str, const char *suffix)
+{
+    size_t l_str = strlen(str);
+    size_t l_suffix = strlen(suffix);
+
+    return l_str >= l_suffix && strcmp(&str[l_str - l_suffix], suffix) == 0;
+}
+
 char *read_line(char *buf, size_t buf_size, FILE *f)
 {
     if (fgets(buf, buf_size, f) == NULL) return NULL;

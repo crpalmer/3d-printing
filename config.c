@@ -25,6 +25,38 @@ config_t *config_new(const char *fname, const char *name)
     return c;
 }
 
+static void add_item(config_t *c, const char *line)
+{
+    c->n_s++;
+    ensure_array((void **) &c->s, &c->a_s, c->n_s);
+    c->s[c->n_s-1] = Strdup(line);
+}
+
+config_t *config_new_customization(config_t *base, config_t *custom)
+{
+    size_t i_b, i_c;
+
+    config_t *c = config_new(NULL, custom->name);
+
+    for (i_b = 0, i_c = 0; i_b < base->n_s && i_c < custom->n_s; ) {
+	const char *s_b = base->s[i_b];
+	const char *s_c = custom->s[i_c];
+	const char *e_c = strchr(s_c, '=');
+	size_t l_c = e_c - s_c;
+
+	int cmp = strncmp(s_b, s_c, l_c);
+	if (cmp < 0) add_item(c, base->s[i_b]);
+	else add_item(c, custom->s[i_c]);
+	if (cmp <= 0) i_b++;
+	if (cmp >= 0) i_c++;
+    }
+
+    while (i_b < base->n_s) add_item(c, base->s[i_b++]);
+    while (i_c < custom->n_s) add_item(c, custom->s[i_c++]);
+
+    return c;
+}
+
 void config_destroy(config_t *c)
 {
     Free(c->fname);
@@ -47,6 +79,13 @@ config_t *config_load(const char *fname)
     return c;
 }
 
+static int config_cmp(const void *A, const void *B)
+{
+    const char *a = *((const char **) A);
+    const char *b = *((const char **) B);
+    return strcmp(a, b);
+}
+
 config_t *config_new_f(FILE *f, const char *fname)
 {
     config_t *c = config_new(fname, NULL);
@@ -67,15 +106,16 @@ config_t *config_new_f(FILE *f, const char *fname)
 		strcat(c->fname, ".ini");
 	    }
 	} else {
-	    c->n_s++;
-	    ensure_array((void **) &c->s, &c->a_s, c->n_s);
-	    c->s[c->n_s-1] = Strdup(line);
+	    add_item(c, line);
 	}
     }
     if (feof(f) && c->n_s == 0) {
 	goto error;
     }
     free(line);
+
+    qsort(c->s, c->n_s, sizeof(*c->s), config_cmp);
+
     return c;
 
 error:
@@ -87,6 +127,7 @@ error:
 int config_save(config_t *c)
 {
     FILE *f;
+    int ret;
 
     if (c->fname == NULL) {
 	fprintf(stderr, "Save not possible, there is no fname\n");
@@ -96,9 +137,18 @@ int config_save(config_t *c)
 	perror(c->fname);
 	return -1;
     }
+
+    ret = config_write(c, f);
+    fclose(f);
+
+    return ret;
+}
+
+int config_write(config_t *c, FILE *f)
+{
+
     if (c->name) fprintf(f, "%s\n", c->name);
     for (int i = 0; i < c->n_s; i++) fprintf(f, "%s\n", c->s[i]); 
-    fclose(f);
 
     return c->n_s;
 }
