@@ -3,19 +3,6 @@
 #include "group.h"
 #include "utils.h"
 
-static int is_base_ini(config_t *c)
-{
-    return c != NULL && ends_with(config_get_fname(c), "/base.ini");
-}
-
-static int has_base_ini(group_t *g)
-{
-    for (size_t i = 0; i < g->n_c; i++) {
-	if (g->c[i] && ends_with(config_get_fname(g->c[i]), "/base.ini")) return 1;
-    }
-    return 0;
-}
-
 static void write_config(config_t *c)
 {
     config_write(c, stdout);
@@ -25,18 +12,10 @@ static void write_config(config_t *c)
 static void output_customizations(group_t *g)
 {
     for (size_t i = 0; i < g->n_c; i++) {
-	if (is_base_ini(g->c[i])) {
-	    for (size_t j = 0; j < g->n_c; j++) {
-		if (j != i && g->c[j]) {
-		    config_t *c = config_new_customization(g->c[i], g->c[j]);
-		    write_config(c);
-		    config_destroy(c);
-		}
-	    }
-	    return;
-	}
+	config_t *c = config_new_customization(g->base, g->c[i]);
+	write_config(c);
+	config_destroy(c);
     }
-    fprintf(stderr, "Warning: no base.ini found\n");
 }
 
 static void output_configs(group_t *g)
@@ -49,7 +28,7 @@ static void output_configs(group_t *g)
 static void
 output_group(group_t *g)
 {
-    if (has_base_ini(g)) output_customizations(g);
+    if (g->base) output_customizations(g);
     else output_configs(g);
 }
 

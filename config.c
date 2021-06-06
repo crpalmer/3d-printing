@@ -57,6 +57,32 @@ config_t *config_new_customization(config_t *base, config_t *custom)
     return c;
 }
 
+int advance_to(config_t *c, size_t *i, const char *target)
+{
+    while (*i < c->n_s && strcmp(c->s[*i], target) < 0) (*i)++;
+    return *i < c->n_s && strcmp(c->s[*i], target) == 0;
+}
+
+config_t *config_generate_base_config(const char *fname, config_t **c, size_t n_c)
+{
+    size_t *cur = Malloc(sizeof(*cur) * n_c);
+    config_t *base = config_new(fname, NULL);
+
+fprintf(stderr, "generating %s\n", fname);
+    memset(cur, 0, n_c * sizeof(size_t));
+
+    while (cur[0] < c[0]->n_s) {
+	int add = 1;
+	for (size_t i = 1; i < n_c; i++) {
+	    if (! advance_to(c[i], &cur[i], c[0]->s[cur[0]])) add = 0;
+	}
+	if (add) add_item(base, c[0]->s[cur[0]]);
+	cur[0]++;
+    }
+
+    return base;
+}
+
 void config_destroy(config_t *c)
 {
     Free(c->fname);
@@ -126,6 +152,14 @@ error:
 
 int config_save(config_t *c)
 {
+    config_t *except = config_new(NULL, NULL);
+    int ret = config_save_except(c, except);
+    config_destroy(except);
+    return ret;
+}
+
+int config_save_except(config_t *c, config_t *except)
+{
     FILE *f;
     int ret;
 
@@ -138,7 +172,7 @@ int config_save(config_t *c)
 	return -1;
     }
 
-    ret = config_write(c, f);
+    ret = config_write_except(c, f, except);
     fclose(f);
 
     return ret;
@@ -146,9 +180,20 @@ int config_save(config_t *c)
 
 int config_write(config_t *c, FILE *f)
 {
+    config_t *except = config_new(NULL, NULL);
+    int ret = config_write_except(c, f, except);
+    config_destroy(except);
+    return ret;
+}
+
+int config_write_except(config_t *c, FILE *f, config_t *except)
+{
+    size_t except_i = 0;
 
     if (c->name) fprintf(f, "%s\n", c->name);
-    for (int i = 0; i < c->n_s; i++) fprintf(f, "%s\n", c->s[i]); 
+    for (int i = 0; i < c->n_s; i++) {
+	if (! advance_to(except, &except_i, c->s[i])) fprintf(f, "%s\n", c->s[i]); 
+    }
 
     return c->n_s;
 }
@@ -156,6 +201,12 @@ int config_write(config_t *c, FILE *f)
 const char *config_get_fname(config_t *c)
 {
     return c->fname;
+}
+
+void config_set_fname(config_t *c, const char *fname)
+{
+    Free(c->fname);
+    c->fname = Strdup(fname);
 }
 
 const char *config_get_name(config_t *c)

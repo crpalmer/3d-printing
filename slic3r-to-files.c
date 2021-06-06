@@ -3,8 +3,10 @@
 #include <string.h>
 #include <ctype.h>
 #include "config.h"
+#include "group.h"
 
 static const char *filter[] = {
+    "[presets]",
     "[print:0.05mm ULTRADETAIL]",
     "[print:0.05mm ULTRADETAIL 0.25 nozzle]",
     "[print:0.05mm ULTRADETAIL 0.25 nozzle MK3]",
@@ -118,14 +120,62 @@ static int ignore_config(config_t *c)
     return (*p != NULL);
 }
 
+static void output_customizations(group_t *g)
+{
+    config_t *base;
+
+    fprintf(stderr, "g->base = %s\n", config_get_fname(g->base));
+    base = config_generate_base_config(config_get_fname(g->base), g->c, g->n_c);
+    fprintf(stderr, "base = %s\n", config_get_fname(base));
+
+    for (size_t i = 0; i < g->n_c; i++) {
+	config_save_except(g->c[i], base);
+    }
+
+    config_save(base);
+    config_destroy(base);
+}
+
+static void output_configs(group_t *g)
+{
+    for (size_t i = 0; i < g->n_c; i++) {
+	config_save(g->c[i]);
+    }
+}
+    
+static void output_files(group_t **groups, size_t n_groups)
+{
+    for (size_t i = 0; i < n_groups; i++) {
+	if (groups[i]->base) output_customizations(groups[i]);
+	else output_configs(groups[i]);
+    }
+}
+
 int main(int argc, char **argv)
 {
     config_t *c;
+    size_t n_groups;
+    group_t **groups = group_load_dirs(".", &n_groups);
 
     while ((c = config_new_f(stdin, NULL)) != NULL) {
 	if (ignore_config(c)) printf("Ignoring %s\n", config_get_name(c));
-	else if (config_save(c) > 0) printf("Saved %s\n", config_get_fname(c));
-	config_destroy(c);
+	else {
+	    group_t *g;
+	    size_t i;
+
+	    g = group_find(groups, n_groups, config_get_name(c), &i);
+	    if (g != NULL) {
+		config_set_fname(c, config_get_fname(g->c[i]));
+		config_destroy(g->c[i]);
+		g->c[i] = c;
+	    } else {
+		if (config_save(c) < 0) printf("Failed to save %s\n", config_get_fname(c));
+		config_destroy(c);
+	    }
+	}
     }
+
+    output_files(groups, n_groups);
+
     return 0;
 }
