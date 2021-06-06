@@ -12,6 +12,8 @@ stl2ascii
 stl2ascii.exe
 slic3r-to-files
 slic3r-to-files.exe
+config.o
+utils.o
 slic3r.ini
 slic3r-bundle.ini
 slic3r/timestamp.ini

@@ -2,48 +2,130 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include "config.h"
 
-static char line[1024*1024];
-static char output_fname[1024*1024];
-static int starting_new = 1;
-static FILE *output_f;
+static const char *filter[] = {
+    "[print:0.05mm ULTRADETAIL]",
+    "[print:0.05mm ULTRADETAIL 0.25 nozzle]",
+    "[print:0.05mm ULTRADETAIL 0.25 nozzle MK3]",
+    "[print:0.05mm ULTRADETAIL MK3]",
+    "[print:0.10mm DETAIL]",
+    "[print:0.10mm DETAIL 0.25 nozzle]",
+    "[print:0.10mm DETAIL 0.25 nozzle MK3]",
+    "[print:0.10mm DETAIL 0.6 nozzle MK3]",
+    "[print:0.10mm DETAIL MK3]",
+    "[print:0.15mm 100mms Linear Advance]",
+    "[print:0.15mm 100mms Linear Advance MK2.5]",
+    "[print:0.15mm OPTIMAL]",
+    "[print:0.15mm OPTIMAL 0.25 nozzle]",
+    "[print:0.15mm OPTIMAL 0.25 nozzle MK3]",
+    "[print:0.15mm OPTIMAL 0.6 nozzle]",
+    "[print:0.15mm OPTIMAL 0.6 nozzle MK3]",
+    "[print:0.15mm OPTIMAL MK2.5]",
+    "[print:0.15mm OPTIMAL MK3]",
+    "[print:0.15mm OPTIMAL MK3 SOLUBLE FULL]",
+    "[print:0.15mm OPTIMAL MK3 SOLUBLE INTERFACE]",
+    "[print:0.15mm OPTIMAL SOLUBLE FULL]",
+    "[print:0.15mm OPTIMAL SOLUBLE FULL MK2.5]",
+    "[print:0.15mm OPTIMAL SOLUBLE INTERFACE]",
+    "[print:0.15mm OPTIMAL SOLUBLE INTERFACE MK2.5]",
+    "[print:0.20mm 100mms Linear Advance]",
+    "[print:0.20mm 100mms Linear Advance MK2.5]",
+    "[print:0.20mm FAST 0.6 nozzle MK3]",
+    "[print:0.20mm FAST MK3]",
+    "[print:0.20mm FAST MK3 SOLUBLE FULL]",
+    "[print:0.20mm FAST MK3 SOLUBLE INTERFACE]",
+    "[print:0.20mm NORMAL]",
+    "[print:0.20mm NORMAL 0.6 nozzle]",
+    "[print:0.20mm NORMAL MK2.5]",
+    "[print:0.20mm NORMAL SOLUBLE FULL]",
+    "[print:0.20mm NORMAL SOLUBLE FULL MK2.5]",
+    "[print:0.20mm NORMAL SOLUBLE INTERFACE]",
+    "[print:0.20mm NORMAL SOLUBLE INTERFACE MK2.5]",
+    "[print:0.35mm FAST]",
+    "[print:0.35mm FAST 0.6 nozzle]",
+    "[print:0.35mm FAST MK2.5]",
+    "[print:0.35mm FAST sol full 0.6 nozzle]",
+    "[print:0.35mm FAST sol int 0.6 nozzle]",
+    "[filament:ColorFabb Brass Bronze]",
+    "[filament:ColorFabb HT]",
+    "[filament:ColorFabb PLA-PHA]",
+    "[filament:ColorFabb Woodfil]",
+    "[filament:ColorFabb XT]",
+    "[filament:ColorFabb XT-CF20]",
+    "[filament:ColorFabb nGen]",
+    "[filament:ColorFabb nGen flex]",
+    "[filament:E3D Edge]",
+    "[filament:E3D PC-ABS]",
+    "[filament:Fillamentum ABS]",
+    "[filament:Fillamentum ASA]",
+    "[filament:Fillamentum CPE HG100 HM100]",
+    "[filament:Fillamentum Timberfil]",
+    "[filament:Generic ABS]",
+    "[filament:Generic ABS MMU2]",
+    "[filament:Generic PET]",
+    "[filament:Generic PET MMU2]",
+    "[filament:Generic PLA]",
+    "[filament:Generic PLA MMU2]",
+    "[filament:My Settings]",
+    "[filament:Polymaker PC-Max]",
+    "[filament:Primavalue PVA]",
+    "[filament:Prusa ABS]",
+    "[filament:Prusa ABS MMU2]",
+    "[filament:Prusa HIPS]",
+    "[filament:Prusa PET]",
+    "[filament:Prusa PET MMU2]",
+    "[filament:Prusa PLA]",
+    "[filament:Prusa PLA MMU2]",
+    "[filament:Prusament PET MMU2]",
+    "[filament:Prusament PETG]",
+    "[filament:Prusament PLA]",
+    "[filament:Prusament PLA MMU2]",
+    "[filament:SemiFlex or Flexfill 98A]",
+    "[filament:Taulman Bridge]",
+    "[filament:Taulman T-Glase]",
+    "[filament:Verbatim BVOH]",
+    "[filament:Verbatim BVOH MMU2]",
+    "[filament:Verbatim PP]",
+    "[printer:My Settings]",
+    "[printer:Original Prusa i3 MK2]",
+    "[printer:Original Prusa i3 MK2 0.25 nozzle]",
+    "[printer:Original Prusa i3 MK2 0.6 nozzle]",
+    "[printer:Original Prusa i3 MK2 MMU1]",
+    "[printer:Original Prusa i3 MK2 MMU1 0.6 nozzle]",
+    "[printer:Original Prusa i3 MK2 MMU1 Single]",
+    "[printer:Original Prusa i3 MK2 MMU1 Single 0.6 nozzle]",
+    "[printer:Original Prusa i3 MK2.5]",
+    "[printer:Original Prusa i3 MK2.5 0.25 nozzle]",
+    "[printer:Original Prusa i3 MK2.5 0.6 nozzle]",
+    "[printer:Original Prusa i3 MK2.5 MMU2]",
+    "[printer:Original Prusa i3 MK2.5 MMU2 Single]",
+    "[printer:Original Prusa i3 MK3]",
+    "[printer:Original Prusa i3 MK3 0.25 nozzle]",
+    "[printer:Original Prusa i3 MK3 0.6 nozzle]",
+    "[printer:Original Prusa i3 MK3 MMU2]",
+    "[printer:Original Prusa i3 MK3 MMU2 Single]",
+    NULL
+};
+
+static int ignore_config(config_t *c)
+{
+    const char *name = config_get_name(c);
+    const char **p;
+
+    if (name == NULL) return 0;
+    for (p = filter; *p && strcmp(name, *p) != 0; p++) {}
+    return (*p != NULL);
+}
 
 int main(int argc, char **argv)
 {
-    while (fgets(line, sizeof(line), stdin) != NULL) {
-        int i;
+    config_t *c;
 
-	for (i = strlen(line)-1; i >= 0 && (line[i] == '\r' || line[i] == '\n'); i--) {}
-	line[i+1] = '\0';
-
-	if (line[0] == '\0') {
-	    starting_new = 1;
-	    if (output_f) {
-		fclose(output_f);
-		output_f = NULL;
-	    }
-	    continue;
-	}
-
-	if (starting_new && line[0] == '[') {
-	    char *output_fname = malloc(strlen(&line[1]) + 100);
-	    char *dir;
-
-	    strcpy(output_fname, &line[1]);
-	    for (i = strlen(output_fname)-1; i > 0 && (isspace(output_fname[i]) || output_fname[i] == ']'); i--) {}
-	    output_fname[i+1] = '\0';
-	    strcat(output_fname, ".ini");
-
-	    if (output_fname) {
-		output_f = fopen(output_fname, "w");
-		if (output_f == NULL) perror(output_fname);
-	    }
-
-	    free(output_fname);
-	    starting_new = 0;
-	}
-
-	if (output_f) fprintf(output_f, "%s\n", line);
+    while ((c = config_new_f(stdin, NULL)) != NULL) {
+	if (ignore_config(c)) printf("Ignoring %s\n", config_get_name(c));
+	else if (config_save(c) > 0) printf("Saved %s\n", config_get_fname(c));
+	config_destroy(c);
     }
     return 0;
 }
