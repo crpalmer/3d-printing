@@ -12,6 +12,12 @@ struct configS {
     size_t a_s, n_s;
 };
 
+static const char *ignore_keys[] = {
+    "threads =",
+};
+
+#define N_IGNORE_KEYS (sizeof(ignore_keys) / sizeof(ignore_keys[0]))
+
 #define MAX_LINE_LEN	(1024*1024)
 
 config_t *config_new(const char *fname, const char *name)
@@ -89,15 +95,19 @@ static int n_equal_to(config_t **c, size_t *cur, int n_c, const char *s)
     return n_eq;
 }
 
+static int key_cmp(const char *s1, const char *s2)
+{
+    const char *p = strchr(s1, '=');
+    if (p == NULL) p = s1 + strlen(s1);
+    size_t n_cmp = p - s1;
+    return strncmp(s1, s2, n_cmp);
+}
+
 static void advance_same_key(config_t **c, size_t *cur, int n_c, const char *s)
 {
-    const char *p = strchr(s, '=');
-    if (p == NULL) p = s + strlen(s);
-    size_t n_cmp = p - s;
-
     for (size_t i = 0; i < n_c; i++) {
 	if (cur[i] >= c[i]->n_s) continue;
-	if (strncmp(S(c[i], cur[i]), s, n_cmp) == 0) cur[i]++;
+	if (key_cmp(s, S(c[i], cur[i])) == 0) cur[i]++;
     }
 }
 
@@ -226,13 +236,21 @@ int config_write(config_t *c, FILE *f)
     return ret;
 }
 
+static int ignored_key(const char *s)
+{
+    for (size_t i = 0; i < N_IGNORE_KEYS; i++) {
+	if (key_cmp(ignore_keys[i], s) == 0) return 1;
+    }
+    return 0;
+}
+
 int config_write_except(config_t *c, FILE *f, config_t *except)
 {
     size_t except_i = 0;
 
     if (c->name) fprintf(f, "%s\n", c->name);
     for (int i = 0; i < c->n_s; i++) {
-	if (! advance_to(except, &except_i, c->s[i])) fprintf(f, "%s\n", c->s[i]); 
+	if (! advance_to(except, &except_i, c->s[i]) && ! ignored_key(c->s[i])) fprintf(f, "%s\n", c->s[i]); 
     }
 
     return c->n_s;
