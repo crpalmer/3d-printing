@@ -13,7 +13,7 @@ void ensure_array(void **array, size_t *n_array, size_t desired);
 
 void *Malloc(size_t);
 void *Realloc(void *, size_t);
-void *Free(void *);
+void Free(void *);
 char *Strdup(const char *);
 
 #endif

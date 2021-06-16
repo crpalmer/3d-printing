@@ -14,9 +14,9 @@ void strip_crnl(char *str)
 
 void strip_trailing_ws(char *str)
 {
-    int i;
+    size_t i;
 
-    for (i = strlen(str)-1; i >= 0 && isspace(str[i]); i--) {}
+    for (i = strlen(str)-1; i >= 0 && isspace((unsigned) str[i]); i--) {}
     str[i+1] = '\0';
 }
 
@@ -65,7 +65,7 @@ void *Realloc(void *p, size_t s)
     return p;
 }
 
-void *Free(void *p)
+void Free(void *p)
 {
     free(p);
 }
