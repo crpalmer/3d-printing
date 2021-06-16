@@ -63,21 +63,61 @@ int advance_to(config_t *c, size_t *i, const char *target)
     return *i < c->n_s && strcmp(c->s[*i], target) == 0;
 }
 
+#define S(c, i) ((c)->s[(i)])
+
+static int find_min(config_t **c, size_t *cur, int n_c)
+{
+    int mn = -1;
+
+    for (size_t i = 0; i < n_c; i++) {
+	if (cur[i] >= c[i]->n_s) continue;
+	if (mn < 0 || strcmp(S(c[i], cur[i]), S(c[mn], cur[mn])) < 0) mn = i;
+    }
+
+    return mn;
+}
+
+static int n_equal_to(config_t **c, size_t *cur, int n_c, const char *s)
+{
+    int n_eq = 0;
+
+    for (size_t i = 0; i < n_c; i++) {
+	if (cur[i] >= c[i]->n_s) continue;
+	if (strcmp(S(c[i], cur[i]), s) == 0) n_eq++;
+    }
+
+    return n_eq;
+}
+
+static void advance_same_key(config_t **c, size_t *cur, int n_c, const char *s)
+{
+    const char *p = strchr(s, '=');
+    if (p == NULL) p = s + strlen(s);
+    size_t n_cmp = p - s;
+
+    for (size_t i = 0; i < n_c; i++) {
+	if (cur[i] >= c[i]->n_s) continue;
+	if (strncmp(S(c[i], cur[i]), s, n_cmp) == 0) cur[i]++;
+    }
+}
+
 config_t *config_generate_base_config(const char *fname, config_t **c, size_t n_c)
 {
     size_t *cur = Malloc(sizeof(*cur) * n_c);
     config_t *base = config_new(fname, NULL);
 
-fprintf(stderr, "generating %s\n", fname);
     memset(cur, 0, n_c * sizeof(size_t));
 
-    while (cur[0] < c[0]->n_s) {
-	int add = 1;
-	for (size_t i = 1; i < n_c; i++) {
-	    if (! advance_to(c[i], &cur[i], c[0]->s[cur[0]])) add = 0;
+    while (1) {
+	int mn = find_min(c, cur, n_c);
+	if (mn < 0) break;
+
+	const char *s_mn = S(c[mn], cur[mn]);
+
+	if (n_equal_to(c, cur, n_c, s_mn) >= (n_c+1)/2) {
+	    add_item(base, s_mn);
 	}
-	if (add) add_item(base, c[0]->s[cur[0]]);
-	cur[0]++;
+	advance_same_key(c, cur, n_c, s_mn);
     }
 
     return base;
