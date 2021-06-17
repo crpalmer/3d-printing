@@ -123,10 +123,11 @@ config_t *config_generate_base_config(const char *fname, config_t **c, size_t n_
 	if (mn < 0) break;
 
 	const char *s_mn = S(c[mn], cur[mn]);
+	int n_eq = n_equal_to(c, cur, n_c, s_mn);
 
-	if (n_equal_to(c, cur, n_c, s_mn) >= (n_c+1)/2) {
-	    add_item(base, s_mn);
-	}
+	if (n_eq == n_c) add_item(base, s_mn);
+	else if (n_c > 2 && n_eq >= (n_c+1)/2) add_item(base, s_mn);
+
 	advance_same_key(c, cur, n_c, s_mn);
     }
 
