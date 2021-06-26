@@ -48,8 +48,11 @@ M574 Y1 S1 P"ystop"                                    ; configure active-high e
 ; Z-Probe
 M950 S0 C"exp.heater3"                                 ; servo pin definition
 M558 P9 C"^zprobe.in" H5 F100 T2000
-G31 X-25 Y0 Z1.04 P25
-M557 X40:190 Y15:195 P3                                ; define mesh grid
+G31 X-25 Y0 Z1.975 P25 ; (V6)
+;G31 X-25 Y0 Z3.0 P25 ; (V7-0.25mm)
+;G31 X-25 Y0 Z2.95 P25 ; (V7-0.4mm)
+;G31 X-25 Y0 Z3.0 P25 ; (V7-0.8mm)
+M557 X5:200 Y5:200 P7                                ; define mesh grid
 
 ; Fans
 M950 F0 C"fan0" Q250                                   ; create fan 0 on pin fan0 and set its frequency
@@ -67,7 +70,10 @@ M143 H0 S120                                           ; set temperature limit f
 ; e3dv6
 M308 S1 P"e0temp" Y"thermistor" T100000 B4725 C7.06e-8 ; configure sensor 1 as thermistor on pin e0temp
 M950 H1 C"e0heat" T1                                   ; create nozzle heater output on e0heat and map it to sensor 1
-M307 H1 B0 S1.00 A402.8 C235.9 D3.7 V23.9              ; nozzle pid tuned at 250
+M307 H1 B0 S1.00 A402.8 C235.9 D3.7 V23.9              ; standard v6: nozzle pid tuned at 250
+;M307 H1 B0 S1.00 A895.6 C151.5 D1.6 V23.9              ; heater core: nozzle pid tuned at 250
+;M307 H1 B0 S1.00 A792.8 C158.9 D1.6 V23.9              ; beta v7-2: nozzle pid tuned at 250
+;M307 H1 B0 S1.00 A1136.6 C232.3 D2 V23.9              ; beta v7-3: nozzle pid tuned at 250
 M563 P0 S"E3Dv6" D0 H1 F0                              ; define tool 0
 
 ; Stock ender hotend
