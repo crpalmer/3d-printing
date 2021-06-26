@@ -41,9 +41,9 @@ M671 X-10:390:-10:390 Y475:475:-45:-45 S2  ; motor order: back left, back right,
 ; 0.067 is step angle from spec sheet, 40 = belt mm for 1 full rotation, 16 micro stepping, 2 = "double belt resolution"
 ; z = 360/1.8*26.85/40*16*2 = 4296
 ; 1.8 is the normal step angle, 26.85 is the gear ratio, 2 = "double belt resolution"
-M92 X160 Y160 Z2148 E2645                ; Set steps per mm at 1/16 micro stepping (E recommended is 2700)
-M350 X16 Y16 E16 I1                          ; Configure microstepping with interpolation for x/y
-M350 Z16 I0                          ; Configure microstepping without interpolation for e/z
+M92 X160 Y160 Z2148 E2645                  ; Set steps per mm at 1/16 micro stepping (E recommended is 2700)
+M350 X16 Y16 E16 I1                        ; Configure microstepping with interpolation for x/y
+M350 Z16 I0                                ; Configure microstepping without interpolation for e/z
 
 ; Drive speeds and currents
 M566 X600 Y600 Z18 E40                     ; Set maximum instantaneous speed changes (mm/min)
@@ -58,8 +58,8 @@ M98 P"/sys/axis-limits.g"
 ; Z-Probe
 M950 S0 C"zprobe.mod"                      ; servo pin definition
 M558 P9 C"^zprobe.in" H5 F100 T2000
-G31 X25 Y0 Z2.0 P25
-M557 X35:315 Y10:370 S31:36                ; Define mesh grid
+G31 X25 Y0 Z1.75 P25				     	   ; was z1.8
+M557 X35:300 Y50:350 P11                   ; Define mesh grid
 
 ; Bed Heater
 M308 S0 P"bedtemp" Y"thermistor" T100000 B4138 ; configure sensor 0 as thermistor on pin bedtemp
