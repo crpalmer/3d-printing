@@ -33,8 +33,8 @@ M569 P5 S0                                 ; Drive 5 direction (z back right) (b
 M569 P6 S0                                 ; Drive 6 direction (z front left) (breakout 2)
 
 ; Z drive setup
-M584 X0 Y1 E3 Z2:5:6:4                         ; 4 Z motors connected to driver outputs 2 (z), 4 (e1), 5 and 6 (breakout board)
-M671 X-10:408:-10:408 Y440:440:-42:-42 S2
+M584 X0 Y1 E3 Z2:5:6:4                     ; 4 Z motors connected to driver outputs 2 (z), 5 (breakout board), 4 (e1), 6 (breakout board)
+M671 X-10:390:-10:390 Y475:475:-45:-45 S2  ; motor order: back left, back right, front left, front right
 
 ; Drive steps per mm
 ; z = 360/0.067/40*16*2 = 4298.5
