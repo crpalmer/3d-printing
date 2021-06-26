@@ -8,8 +8,10 @@ G90                                                      ; send absolute coordin
 M83                                                      ; ...but relative extruder moves
 M550 P"tlm-duet"                                         ; set printer name
 M98 P"/sys/passwords.g"
-M665 R170.062 L400.36 B160 H535.665 X0.064 Y-0.118       ; Set delta radius, diagonal rod length, printable radius and homed height
-M666 X-0.35 Y-0.49 Z0.84                                 ; put your endstop adjustments here, or let auto calibration find them
+;Diagonals 400.360:400.360:400.360, delta radius 170.486, homed height 534.188, bed radius 160.0, X 0.090°, Y -0.076°, Z 0.000°
+M665 R170.486 L400.36 B160 H534.188 X0.090 Y-0.076       ; Set delta radius, diagonal rod length, printable radius and homed height
+; Endstop adjustments X-0.81 Y0.70 Z0.11, tilt X0.00% Y0.00%
+M666 X-0.81 Y0.70 Z0.11                                  ; put your endstop adjustments here, or let auto calibration find them
 
 ; Network
 M552 S1                                                  ; enable network
