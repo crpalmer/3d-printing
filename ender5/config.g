@@ -19,14 +19,21 @@ M586 P2 S0                                             ; disable Telnet
 M569 P0 S1                                             ; physical drive 0 goes forwards
 M569 P1 S0                                             ; physical drive 1 goes backwards
 M569 P2 S0                                             ; physical drive 2 goes backwards
-M569 P3 S1                                             ; physical drive 3 goes forwards
-M584 X0 Y1 Z2 E3                                       ; set drive mapping
-M92 X80.00 Y80.00 Z400.00 E830                         ; set steps per mm (should be e415, tlm had e398.1,i though 404.5?)*2(0.9degree stepper)
+;M569 P3 S1                                             ; physical drive 3 goes forwards (bondtech)
+M569 P3 S0                                             ; physical drive 3 goes backwards (zesty nimble)
+M569 P4 S0                                             ; physical drive 4 goes backwards
+M584 X0 Y1 E3 Z2:4                                     ; set drive mapping: Z motors 2 (z) and 4 (e1)
+;M92 X80.00 Y80.00 Z1600.00 E830                        ; set steps per mm (should be e415, tlm had e398.1,i though 404.5?)*2(0.9degree stepper)
+M92 X80.00 Y80.00 Z1600.00 E2645                        ; set steps per mm (nimble should be 2700?_)
 M350 X16 Y16 Z16 E16 I1                                ; set microstepping to 256 interpolation
-M566 X600.00 Y600.00 Z18.00 E10000.00                  ; set maximum instantaneous speed changes (mm/min)
-M203 X12000.00 Y12000.00 Z360.00 E3600.00              ; set maximum speeds (mm/min)
-M201 X500.00 Y500.00 Z100.00 E3000.00                  ; set accelerations (mm/s^2)
-M906 X800 Y1200 Z1200 E1000 I30                        ; set motor currents (mA) and motor idle factor in per cent
+;M566 X600.00 Y600.00 Z18.00 E10000.00                  ; set maximum instantaneous speed changes (mm/min) (bondtech)
+;M203 X12000.00 Y12000.00 Z360.00 E3600.00              ; set maximum speeds (mm/min) (bondtech)
+;M201 X500.00 Y500.00 Z100.00 E3000.00                  ; set accelerations (mm/s^2) (bondtech)
+;M906 X800 Y1200 Z1200 E700 I30                         ; set motor currents (mA) and motor idle factor in per cent (bondtech)
+M566 X600.00 Y600.00 Z18.00 E40.00                     ; set maximum instantaneous speed changes (mm/min) (zesty nimble)
+M203 X12000.00 Y12000.00 Z360.00 E6000.00              ; set maximum speeds (mm/min) (zesty nimble)
+M201 X500.00 Y500.00 Z100.00 E120.00                   ; set accelerations (mm/s^2) (zesty nimble)
+M906 X800 Y1200 Z1200 E500 I30                         ; set motor currents (mA) and motor idle factor in per cent (zesty nimble)
 M84 S30                                                ; Set idle timeout
 
 ; Axis Limits
