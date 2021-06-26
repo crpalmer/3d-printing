@@ -42,9 +42,9 @@ M574 Y2 S1 P"!ystop"                                      ; configure NO endstop
 M574 Z2 S1 P"!zstop"                                      ; configure NO endstop for low end on Z via pin zstop
 
 ; Z-Probe
-M558 P8 R0.4 C"zprobe.in+zprobe.mod" F1200 H5 A31 S0.02  ; set Z probe type to effector and the dive height + speeds
-G31 P100 X0 Y0 Z-0.10                                    ; set Z probe trigger value, offset and trigger height
-M557 R85 S20                                             ; define mesh grid
+M558 P8 R1.4 C"zprobe.in+zprobe.mod" F1200 H5 A31 S0.02  ; set Z probe type to effector and the dive height + speeds
+G31 P100 X0 Y0 Z-0.0                                     ; set Z probe trigger value, offset and trigger height (was 0.1)
+M557 R125 S20                                            ; define mesh grid
 
 ; Heaters
 M308 S0 P"bedtemp" Y"thermistor" T100000 B4148 C2.117e-7 ; configure sensor 0 as thermistor on pin bedtemp
