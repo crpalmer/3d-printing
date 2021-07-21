@@ -1,3 +1,12 @@
+;
+; TODO
+;
+; * try increasing jerk
+; * try decreasing z accel
+
+; -------------------------
+
+
 ; Configuration file for Duet WiFi (firmware version 3)
 ; executed by the firmware on start-up
 ;
@@ -16,7 +25,8 @@ M586 P1 S0                                             ; disable FTP
 M586 P2 S0                                             ; disable Telnet
 
 ; Drives
-M569 P0 S1                                             ; physical drive 0 goes forwards
+;M569 P0 S1                                             ; physical drive 0 goes forwards (stock x)
+M569 P0 S0                                             ; physical drive 0 goes forwards (pancake x)
 M569 P1 S0                                             ; physical drive 1 goes backwards
 M569 P2 S0                                             ; physical drive 2 goes backwards
 ;M569 P3 S1                                             ; physical drive 3 goes forwards (bondtech)
@@ -33,7 +43,8 @@ M350 X16 Y16 Z16 E16 I1                                ; set microstepping to 25
 M566 X600.00 Y600.00 Z18.00 E40.00                     ; set maximum instantaneous speed changes (mm/min) (zesty nimble)
 M203 X12000.00 Y12000.00 Z360.00 E6000.00              ; set maximum speeds (mm/min) (zesty nimble)
 M201 X500.00 Y500.00 Z100.00 E120.00                   ; set accelerations (mm/s^2) (zesty nimble)
-M906 X800 Y1200 Z1200 E500 I30                         ; set motor currents (mA) and motor idle factor in per cent (zesty nimble)
+;M906 X800 Y1200 Z1200 E500 I30                         ; set motor currents (mA) and motor idle factor in per cent (zesty nimble)
+M906 X700 Y1200 Z1200 E500 I30                         ; set motor currents (mA) and motor idle factor in per cent (zesty nimble + pancake on x)
 M84 S30                                                ; Set idle timeout
 
 ; Axis Limits
@@ -48,7 +59,7 @@ M574 Y1 S1 P"ystop"                                    ; configure active-high e
 ; Z-Probe
 M950 S0 C"exp.heater3"                                 ; servo pin definition
 M558 P9 C"^zprobe.in" H5 F100 T2000
-G31 X-25 Y0 Z1.975 P25 ; (V6)
+G31 X-25 Y0 Z1.975 P25 ; (V6 + glass bed)
 ;G31 X-25 Y0 Z3.0 P25 ; (V7-0.25mm)
 ;G31 X-25 Y0 Z2.95 P25 ; (V7-0.4mm)
 ;G31 X-25 Y0 Z3.0 P25 ; (V7-0.8mm)
