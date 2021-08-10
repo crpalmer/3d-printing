@@ -24,13 +24,13 @@ M574 X1 S1 P"!xstop"                      ; configure active-low endstop for low
 M574 Y1 S1 P"!ystop"                      ; configure active-low endstop for low end on Y via pin ystop
 
 ; Drive directions
-M569 P0 S1                                 ; Drive 0 direction (x)
-M569 P1 S1                                 ; Drive 1 direction (y)
-M569 P2 S1                                 ; Drive 2 direction (z back left) (z)
-M569 P3 S1                                 ; Drive 3 direction (e0)
-M569 P4 S1                                 ; Drive 4 direction (z front right) (e1)
-M569 P5 S0                                 ; Drive 5 direction (z back right) (breakout 1)
-M569 P6 S0                                 ; Drive 6 direction (z front left) (breakout 2)
+M569 P0 S1 D2                              ; Drive 0 direction (x)
+M569 P1 S1 D2                              ; Drive 1 direction (y)
+M569 P2 S1 D2                              ; Drive 2 direction (z back left) (z)
+M569 P3 S1 D2                              ; Drive 3 direction (e0)
+M569 P4 S1 D2                              ; Drive 4 direction (z front right) (e1)
+M569 P5 S0 D2                              ; Drive 5 direction (z back right) (breakout 1)
+M569 P6 S0 D2                              ; Drive 6 direction (z front left) (breakout 2)
 
 ; Z drive setup
 M584 X0 Y1 E3 Z2:5:6:4                     ; 4 Z motors connected to driver outputs 2 (z), 5 (breakout board), 4 (e1), 6 (breakout board)
