@@ -78,7 +78,8 @@ M307 H1 B0 R2.652 C205.6 D5.61 S1.00 V24.0 ; 40w heater @ 255C
 ; heatend fan is on always on fan due to fan0 being dead
 M950 F0 C"fan1" Q500
 M106 P0 S0                                 ; part cooling fan off by default on fan1
-; TODO move and configure the hotend fan onto fan2
+M950 F1 C"fan2" Q500                       ; create fan 1 on pin fan2 and set its frequency
+M106 P1 S1 T45 H1                          ; set fan 1 value. Thermostatic control is turned on
 
 ; Tools
 M563 P0 D0 H1 F0                           ; Define tool 0
