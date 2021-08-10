@@ -72,7 +72,7 @@ M307 H0 A159.7 C501.4 D3.1 V24.2 B0
 M308 S1 P"e1temp" Y"thermistor" T100000 B4725 C7.06e-8 ; configure sensor 1 as thermistor on pin e0temp
 M950 H1 C"e1heat" T1                       ; create nozzle heater output on e0heat
 M143 H1 S280                               ; Set temperature limit for heater 1 to 280C
-M307 H1 A368.6 C224.6 D3.4 V24.1
+M307 H1 B0 R2.652 C205.6 D5.61 S1.00 V24.0 ; 40w heater @ 255C
 
 ; Fans
 ; heatend fan is on always on fan due to fan0 being dead
