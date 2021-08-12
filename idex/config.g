@@ -11,17 +11,20 @@ M83                                                    ; ...but relative extrude
 
 ; Drives
 M569 P0 S1 D3                                          ; physical drive 0 goes forwards, stealthchop
-M569 P1 S0 D2                                          ; physical drive 1 goes backwards
-M569 P2 S0 D2                                          ; physical drive 2 goes backwards
-M569 P3 S0 D2                                          ; physical drive 3 goes backwards
-M569 P4 S0 D2                                          ; physical drive 4 goes backwards
-M584 X1 Y2 E0 Z3:4                                     ; set drive mapping
-M92 X80.00 Y80.00 Z800.00 E830                         ; set steps per mm (should be e415, tlm had e398.1,i though 404.5?)*2(0.9degree stepper)
+M569 P1 S0 D3                                          ; physical drive 1 goes backwards
+M569 P2 S0 D3                                          ; physical drive 2 goes backwards
+M569 P3 S0 D3                                          ; physical drive 3 goes backwards
+M569 P4 S0 D3                                          ; physical drive 4 goes backwards
+M569 P1.0 S0 D3                                        ; physical drive 1.0 goes backwards
+M569 P1.1 S0 D3                                        ; physical drive 1.1 goes backwards
+M569 P1.2 S1 D3                                        ; physical drive 1.2 goes forwards
+M584 X0.2 Y0.1:1.2 E0.0 Z0.3:0.4                       ; set drive mapping
+M92 X160.00 Y160.00 Z800.00 E830                       ; set steps per mm (should be e415, tlm had e398.1,i though 404.5?)*2(0.9degree stepper)
 M350 X16 Y16 Z16 E16 I1                                ; set microstepping to 256 interpolation
 M566 X600.00 Y600.00 Z18.00 E1000.00                   ; set maximum instantaneous speed changes (mm/min) (bondtech)
-M203 X12000.00 Y12000.00 Z360.00 E3600.00              ; set maximum speeds (mm/min) (bondtech)
-M201 X500.00 Y500.00 Z100.00 E1000.00                  ; set accelerations (mm/s^2) (bondtech)
-M906 X800 Y800 Z1200 E700 I30                         ; set motor currents (mA) and motor idle factor in per cent (bondtech)
+M203 X24000.00 Y24000.00 Z360.00 E3600.00              ; set maximum speeds (mm/min) (bondtech)
+M201 X1000.00 Y1000.00 Z100.00 E1000.00                ; set accelerations (mm/s^2) (bondtech)
+M906 X500 Y700 Z800 E700 I30                           ; set motor currents (mA) and motor idle factor in per cent (bondtech)
 M84 S30                                                ; Set idle timeout
 
 ; Z drive
