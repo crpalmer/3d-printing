@@ -35,8 +35,8 @@ M208 X0 Y0 Z0 S1                                       ; set axis minima
 M208 X350 Y350 Z420 S0                                 ; set axis maxima
 
 ; Endstops
-M574 X2 S1 P"^io5.in"                                    ; configure active-high endstop for high end on X
-M574 Y2 S1 P"^io6.in"                                    ; configure active-high endstop for high end on Y
+M574 X2 S1 P"^io5.in"                                  ; configure active-high endstop for high end on X
+M574 Y2 S1 P"^io6.in"                                  ; configure active-high endstop for high end on Y
 
 ; Z-Probe
 M950 S0 C"io1.out"                                 ; servo pin definition
@@ -72,4 +72,3 @@ G10 P0 R0 S0                                           ; set initial tool 0 acti
 
 ; Miscellaneous
 T0                                                     ; select first tool
-
