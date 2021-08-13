@@ -28,7 +28,7 @@ M906 X500 Y700 Z800 E700 I30                           ; set motor currents (mA)
 M84 S30                                                ; Set idle timeout
 
 ; Z drive
-M671 X-40:380 Y175:175 S2  							   ; motor order: left, right
+M671 X175:175 Y-35:385 S2  							   ; motor order: front, back
 
 ; Axis Limits
 M208 X0 Y0 Z0 S1                                       ; set axis minima
@@ -41,7 +41,7 @@ M574 Y2 S1 P"^io6.in"                                  ; configure active-high e
 ; Z-Probe
 M950 S0 C"io1.out"                                 ; servo pin definition
 M558 P9 C"^io1.in" H5 F100 T2000
-G31 X27.5 Y0 Z1.45 P25
+G31 X0 Y55 Z1.30 P25
 ;M557 X5:200 Y5:200 P7                                ; define mesh grid
 
 ; Fans
