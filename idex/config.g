@@ -28,7 +28,7 @@ M906 X700 Y700 Z800 E700 I30                           ; set motor currents (mA)
 M84 S30                                                ; Set idle timeout
 
 ; Z drive
-M671 X175:175 Y-35:385 S2  							   ; motor order: front, back
+M671 X175:175 Y-35:385 S2  			       ; motor order: front, back
 
 ; Axis Limits
 M208 X0 Y0 Z0 S1                                       ; set axis minima
@@ -39,10 +39,10 @@ M574 X2 S1 P"^io5.in"                                  ; configure active-high e
 M574 Y2 S1 P"^io6.in"                                  ; configure active-high endstop for high end on Y
 
 ; Z-Probe
-M950 S0 C"io1.out"                                 ; servo pin definition
+M950 S0 C"io1.out"                                     ; servo pin definition
 M558 P9 C"^io1.in" H5 F100 T2000
 G31 X0 Y55 Z1.30 P25
-;M557 X5:200 Y5:200 P7                                ; define mesh grid
+;M557 X5:200 Y5:200 P7                                  ; define mesh grid
 
 ; Fans
 M950 F0 C"out5" Q250                                   ; create fan 0 on pin fan0 and set its frequency
@@ -67,8 +67,8 @@ M563 P0 S"E3Dv6" D0 H1 F0                              ; define tool 0
 G10 P0 X0 Y0 Z0                                        ; set tool 0 axis offsets
 G10 P0 R0 S0                                           ; set initial tool 0 active and standby temperatures to 0C
 
-; Custom settings are not defined
-; TODO M912 P0 S-12.5                                         ; Calibrate MCU temperature
+; MCU DOES NOT WORK ON THE DUET 3 MINI 5+, DON'T CONFIGURE:
+; M912 P0 S-12.5                                       ; Calibrate MCU temperature
 
 ; Miscellaneous
 T0                                                     ; select first tool
