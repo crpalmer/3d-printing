@@ -28,7 +28,7 @@ M906 X700 Y700 Z800 E700 I30                           ; set motor currents (mA)
 M84 S30                                                ; Set idle timeout
 
 ; Z drive
-M671 X175:175 Y-35:385 S2  			       ; motor order: front, back
+M671 X175:175 Y-35:385 S2  			                   ; motor order: front, back
 
 ; Axis Limits
 M208 X0 Y0 Z0 S1                                       ; set axis minima
