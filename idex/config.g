@@ -16,27 +16,28 @@ M569 P2 S0 D3                                          ; physical drive 2 goes b
 M569 P3 S0 D3                                          ; physical drive 3 goes backwards
 M569 P4 S0 D3                                          ; physical drive 4 goes backwards
 M569 P1.0 S0 D3                                        ; physical drive 1.0 goes backwards
-M569 P1.1 S0 D3                                        ; physical drive 1.1 goes backwards
+M569 P1.1 S1 D3                                        ; physical drive 1.1 goes forwards
 M569 P1.2 S1 D3                                        ; physical drive 1.2 goes forwards
-M584 X0.2 Y0.1:1.2 E0.0 Z0.3:0.4                       ; set drive mapping
-M92 X160.00 Y160.00 Z800.00 E830                       ; set steps per mm (should be e415, tlm had e398.1,i though 404.5?)*2(0.9degree stepper)
-M350 X16 Y16 Z16 E16 I1                                ; set microstepping to 256 interpolation
-M566 X600.00 Y600.00 Z18.00 E1000.00                   ; set maximum instantaneous speed changes (mm/min) (bondtech)
-M203 X24000.00 Y24000.00 Z360.00 E3600.00              ; set maximum speeds (mm/min) (bondtech)
-M201 X500.00 Y500.00 Z100.00 E1000.00                  ; set accelerations (mm/s^2) (bondtech)
-M906 X700 Y700 Z800 E700 I30                           ; set motor currents (mA) and motor idle factor in per cent (bondtech)
+M584 X0.2 Y0.1:1.2 u1.1 E0.0 Z0.3:0.4                  ; set drive mapping
+M92 X160.00 Y160.00 U160.00 Z800.00 E830               ; set steps per mm (should be e415, tlm had e398.1,i though 404.5?)*2(0.9degree stepper)
+M350 X16 Y16 U16 Z16 E16 I1                            ; set microstepping to 256 interpolation
+M566 X600.00 Y600.00 U600.00 Z18.00 E1000.00           ; set maximum instantaneous speed changes (mm/min) (bondtech)
+M203 X24000.00 Y24000.00 U24000.00 Z360.00 E3600.00    ; set maximum speeds (mm/min) (bondtech)
+M201 X500.00 Y500.00 U500.00 Z100.00 E1000.00          ; set accelerations (mm/s^2) (bondtech)
+M906 X700 Y700 U700 Z800 E700 I30                      ; set motor currents (mA) and motor idle factor in per cent (bondtech)
 M84 S30                                                ; Set idle timeout
 
 ; Z drive
 M671 X175:175 Y-35:385 S2  			                   ; motor order: front, back
 
 ; Axis Limits
-M208 X0 Y0 Z0 S1                                       ; set axis minima
-M208 X350 Y350 Z420 S0                                 ; set axis maxima
+M208 X10 Y0 Z0 U-50 S1                                 ; set axis minima
+M208 X350 Y350 Z420 U290 S0                            ; set axis maxima
 
 ; Endstops
-M574 X2 S1 P"^0.io5.in"                      ; configure active-high endstop for high end on X
-M574 Y2 S1 P"^0.io6.in+^1.io2.in"                                ; configure active-high endstop for high end on Y
+M574 X2 S1 P"^0.io5.in"                                ; configure active-high endstop for high end on X
+M574 Y2 S1 P"^0.io6.in+^1.io0.in"                      ; configure active-high endstop for high end on Y
+M574 U1 S1 P"^1.io2.in"                                ; configure active-high endstop for high end on U
 
 ; Z-Probe
 M950 S0 C"io1.out"                                     ; servo pin definition
