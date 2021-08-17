@@ -18,7 +18,7 @@ M569 P4 S0 D3                                          ; physical drive 4 goes b
 M569 P1.0 S0 D3                                        ; physical drive 1.0 goes backwards
 M569 P1.1 S1 D3                                        ; physical drive 1.1 goes forwards
 M569 P1.2 S1 D3                                        ; physical drive 1.2 goes forwards
-M584 X0.2 Y0.1:1.2 u1.1 E0.0 Z0.3:0.4                  ; set drive mapping
+M584 X0.2 Y0.1:1.2 u1.1 E0.0:1.0 Z0.3:0.4              ; set drive mapping
 M92 X160.00 Y160.00 U160.00 Z800.00 E830               ; set steps per mm (should be e415, tlm had e398.1,i though 404.5?)*2(0.9degree stepper)
 M350 X16 Y16 U16 Z16 E16 I1                            ; set microstepping to 256 interpolation
 M566 X600.00 Y600.00 U600.00 Z18.00 E1000.00           ; set maximum instantaneous speed changes (mm/min) (bondtech)
@@ -45,28 +45,49 @@ M558 P9 C"^io1.in" H5 F100 T2000
 G31 X0 Y55 Z1.30 P25
 ;M557 X5:200 Y5:200 P7                                  ; define mesh grid
 
-; Fans
-M950 F0 C"out5" Q250                                   ; create fan 0 on pin fan0 and set its frequency
-M106 P0 S0 H-1                                         ; set fan 0 value. Thermostatic control is turned off
-M950 F1 C"out6" Q500                                   ; create fan 1 on pin fan1 and set its frequency
-M106 P1 S1 T45 H1                                      ; set fan 1 value. Thermostatic control is turned on
+; Fans (tool 0)
+M950 F0 C"out5" Q250                                   ; create fan and set its frequency
+M106 P0 S0 H-1                                         ; set fan value (off). Thermostatic control is turned off
+M950 F1 C"out6" Q500                                   ; create fan and set its frequency
+M106 P1 S1 T45 H1                                      ; set fan value (on). Thermostatic control is turned on
+
+; Fans (tool 1)
+M950 F2 C"1.out6" Q500                                 ; create fan and set its frequency
+M106 P2 S1 T45 H2                                      ; set fan value (on). Thermostatic control is turned on
+M950 F3 C"1.out7" Q250                                 ; create fan and set its frequency
+M106 P3 S0 H-1                                         ; set fan value (off). Thermostatic control is turned off
 
 ; Bed Heater
-M308 S0 P"temp0" Y"thermistor" T100000 B4092           ; configure sensor 0
+M308 S0 P"temp0" Y"thermistor" T100000 B4092           ; configure sensor
 M950 H0 C"out0" T0                                     ; create bed heater output and map it to sensor 0
 M307 H0 R0.272 C349.6 D8.37 S1.00 V23.7
 M140 H0                                                ; map heated bed to heater 0
 M143 H0 S120                                           ; set temperature limit for heater 0 to 120C
 
-; e3dv6
-M308 S1 P"temp1" Y"thermistor" T100000 B4725 C7.06e-8  ; configure sensor 1
+; tool 0: e3dv6 40w
+M308 S1 P"temp1" Y"thermistor" T100000 B4725 C7.06e-8  ; configure sensor
 M950 H1 C"out1" T1                                     ; create nozzle heater output and map it to sensor 1
-M307 H1 R2.845 C223.2 D5.79 S1.00 V24.1
+M307 H1 B0 R2.593 C211.1:173.4 D5.20 S1.00 V24.1       ; tuned (new) at 255 10mm off the bed with the part cooling fan
 M563 P0 S"E3Dv6" D0 H1 F0                              ; define tool 0
+G10 P0 X0 Y0 Z0                                        ; set tool 0 axis offsets
+
+; tool 1: e3dv6 40w
+;M308 S2 P"1.temp2" Y"thermistor" T100000 B4725 C7.06e-8  ; configure sensor
+;M950 H2 C"1.out2" T2                                   ; create nozzle heater output and map it to sensor 2
+;M307 H1 B0 R2.508 C225.2 D5.67 S1.00 V24.1             ; tuned 255 10mm off of the bed with the part cooling fan
+;M563 P1 S"E3Dv6" D1 H2 F3                              ; define tool 1
+;G10 P1 X0 Y0 Z0                                        ; set tool 1 axis offsets
+
+; tool 1: e3dv6 volcano 30w
+M308 S2 P"1.temp2" Y"thermistor" T100000 B4725 C7.06e-8  ; configure sensor
+M950 H2 C"1.out2" T2                                   ; create nozzle heater output and map it to sensor 2
+M307 H2 B0 R1.666 C251.2 D4.48 S1.00 V24.3             ; tuned 255 no part cooling fan
+M563 P1 S"volcano" D1 H2 F3                            ; define tool 1
+G10 P1 X0 Y0 Z-10                                      ; set tool 1 axis offsets
 
 ; Tool (common)
-G10 P0 X0 Y0 Z0                                        ; set tool 0 axis offsets
 G10 P0 R0 S0                                           ; set initial tool 0 active and standby temperatures to 0C
+G10 P1 R0 S0                                           ; set initial tool 0 active and standby temperatures to 0C
 
 ; MCU DOES NOT WORK ON THE DUET 3 MINI 5+, DON'T CONFIGURE:
 ; M912 P0 S-12.5                                       ; Calibrate MCU temperature
