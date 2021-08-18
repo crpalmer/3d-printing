@@ -4,3 +4,4 @@ all:
 
 install:
 	sudo cp *.g /opt/dsf/sd/sys/
+	sudo chmod a+rw /opt/dsf/sd/sys/*.g
