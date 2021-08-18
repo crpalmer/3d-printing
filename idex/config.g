@@ -7,6 +7,11 @@
 global xMax = 350
 global uMin = -50
 
+global e3dV6 = 1
+global e3dVolcano = 2
+
+global tool1 = global.e3dVolcano
+
 ; General preferences
 G90                                                    ; send absolute coordinates...
 M83                                                    ; ...but relative extruder moves
@@ -66,26 +71,32 @@ M307 H0 R0.272 C349.6 D8.37 S1.00 V23.7
 M140 H0                                                ; map heated bed to heater 0
 M143 H0 S120                                           ; set temperature limit for heater 0 to 120C
 
-; tool 0: e3dv6 40w
+; tool 0: thermistor (e3d)
 M308 S1 P"temp1" Y"thermistor" T100000 B4725 C7.06e-8  ; configure sensor
 M950 H1 C"out1" T1                                     ; create nozzle heater output and map it to sensor 1
+
+; tool 0: e3dv6 40w
 M307 H1 B0 R2.593 C211.1:173.4 D5.20 S1.00 V24.1       ; tuned (new) at 255 10mm off the bed with the part cooling fan
 M563 P0 S"E3Dv6" D0 H1 F0                              ; define tool 0
 G10 P0 X0 Y0 Z0                                        ; set tool 0 axis offsets
 
-; tool 1: e3dv6 40w
-;M308 S2 P"1.temp2" Y"thermistor" T100000 B4725 C7.06e-8  ; configure sensor
-;M950 H2 C"1.out2" T2                                   ; create nozzle heater output and map it to sensor 2
-;M307 H1 B0 R2.508 C225.2 D5.67 S1.00 V24.1             ; tuned 255 10mm off of the bed with the part cooling fan
-;M563 P1 S"E3Dv6" D1 H2 F3                              ; define tool 1
-;G10 P1 X0 Y0 Z0                                        ; set tool 1 axis offsets
-
-; tool 1: e3dv6 volcano 30w
+; tool 1: thermistor (e3d)
 M308 S2 P"1.temp2" Y"thermistor" T100000 B4725 C7.06e-8  ; configure sensor
 M950 H2 C"1.out2" T2                                   ; create nozzle heater output and map it to sensor 2
-M307 H2 B0 R1.666 C251.2 D4.48 S1.00 V24.3             ; tuned 255 no part cooling fan
-M563 P1 S"volcano" D1 H2 F3                            ; define tool 1
-G10 P1 X0 Y0 Z-9.45                                    ; set tool 1 axis offsets
+
+if global.tool1 == global.e3dV6
+  ; tool 1: e3dv6 40w
+  M307 H1 B0 R2.508 C225.2 D5.67 S1.00 V24.1             ; tuned 255 10mm off of the bed with the part cooling fan
+  M563 P1 S"E3Dv6" D1 H2 F3                              ; define tool 1
+  G10 P1 X0 Y0 Z0                                        ; set tool 1 axis offsets
+elif global.tool1 == global.e3dVolcano
+  ; tool 1: e3dv6 volcano 30w
+  M307 H2 B0 R1.666 C251.2 D4.48 S1.00 V24.3             ; tuned 255 no part cooling fan
+  M563 P1 S"volcano" D1 H2 F3                            ; define tool 1
+  G10 P1 X0 Y0 Z-9.45                                    ; set tool 1 axis offsets
+else
+  abort "Invalid tool for tool1"
+endif
 
 ; Tool (common)
 G10 P0 R0 S0                                           ; set initial tool 0 active and standby temperatures to 0C
