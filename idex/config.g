@@ -4,6 +4,8 @@
 
 ; -------------------------
 
+global xMax = 350
+global uMin = -50
 
 ; General preferences
 G90                                                    ; send absolute coordinates...
@@ -31,8 +33,8 @@ M84 S30                                                ; Set idle timeout
 M671 X175:175 Y-35:385 S2  			                   ; motor order: front, back
 
 ; Axis Limits
-M208 X10 Y0 Z0 U-50 S1                                 ; set axis minima
-M208 X350 Y350 Z420 U290 S0                            ; set axis maxima
+M208 X10 Y0 Z0 U{global.uMin} S1                                 ; set axis minima
+M208 X{global.xMax} Y350 Z420 U290 S0                            ; set axis maxima
 
 ; Endstops
 M574 X2 S1 P"^0.io5.in"                                ; configure active-high endstop for high end on X
@@ -83,7 +85,7 @@ M308 S2 P"1.temp2" Y"thermistor" T100000 B4725 C7.06e-8  ; configure sensor
 M950 H2 C"1.out2" T2                                   ; create nozzle heater output and map it to sensor 2
 M307 H2 B0 R1.666 C251.2 D4.48 S1.00 V24.3             ; tuned 255 no part cooling fan
 M563 P1 S"volcano" D1 H2 F3                            ; define tool 1
-G10 P1 X0 Y0 Z-10                                      ; set tool 1 axis offsets
+G10 P1 X0 Y0 Z-9.45                                    ; set tool 1 axis offsets
 
 ; Tool (common)
 G10 P0 R0 S0                                           ; set initial tool 0 active and standby temperatures to 0C
