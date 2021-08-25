@@ -5,12 +5,13 @@
 ; -------------------------
 
 global xMax = 350
-global uMin = -50
+global uMin = -47.6
+global uMax = 293
 
 global e3dV6 = 1
 global e3dVolcano = 2
 
-global tool1 = global.e3dVolcano
+global tool1 = global.e3dV6
 
 ; General preferences
 G90                                                    ; send absolute coordinates...
@@ -39,7 +40,7 @@ M671 X175:175 Y-35:385 S2  			                   ; motor order: front, back
 
 ; Axis Limits
 M208 X10 Y0 Z0 U{global.uMin} S1                                 ; set axis minima
-M208 X{global.xMax} Y350 Z420 U290 S0                            ; set axis maxima
+M208 X{global.xMax} Y350 Z420 U{global.uMax} S0                            ; set axis maxima
 
 ; Endstops
 M574 X2 S1 P"^0.io5.in"                                ; configure active-high endstop for high end on X
@@ -49,7 +50,7 @@ M574 U1 S1 P"^1.io2.in"                                ; configure active-high e
 ; Z-Probe
 M950 S0 C"io1.out"                                     ; servo pin definition
 M558 P9 C"^io1.in" H5 F100 T2000
-G31 X0 Y55 Z1.30 P25
+G31 X0 Y55 Z1.50 P25                                   ; was 1.4 but I bent the pin...
 ;M557 X5:200 Y5:200 P7                                  ; define mesh grid
 
 ; Fans (tool 0)
@@ -59,10 +60,10 @@ M950 F1 C"out6" Q500                                   ; create fan and set its 
 M106 P1 S1 T45 H1                                      ; set fan value (on). Thermostatic control is turned on
 
 ; Fans (tool 1)
-M950 F2 C"1.out6" Q500                                 ; create fan and set its frequency
-M106 P2 S1 T45 H2                                      ; set fan value (on). Thermostatic control is turned on
-M950 F3 C"1.out7" Q250                                 ; create fan and set its frequency
-M106 P3 S0 H-1                                         ; set fan value (off). Thermostatic control is turned off
+M950 F2 C"1.out7" Q250                                 ; create fan and set its frequency
+M106 P2 S0 H-1                                         ; set fan value (off). Thermostatic control is turned off
+M950 F3 C"1.out6" Q500                                 ; create fan and set its frequency
+M106 P3 S1 T45 H2                                      ; set fan value (on). Thermostatic control is turned on
 
 ; Bed Heater
 M308 S0 P"temp0" Y"thermistor" T100000 B4092           ; configure sensor
@@ -86,24 +87,31 @@ M950 H2 C"1.out2" T2                                   ; create nozzle heater ou
 
 if global.tool1 == global.e3dV6
   ; tool 1: e3dv6 40w
-  M307 H1 B0 R2.508 C225.2 D5.67 S1.00 V24.1             ; tuned 255 10mm off of the bed with the part cooling fan
-  M563 P1 S"E3Dv6" D1 H2 F3                              ; define tool 1
-  G10 P1 X0 Y0 Z0                                        ; set tool 1 axis offsets
+  M307 H2 B0 R2.508 C225.2 D5.67 S1.00 V24.1           ; tuned 255 10mm off of the bed with the part cooling fan
+  M563 P1 S"E3Dv6" D1 H2 X3 F2                         ; define tool 1
+  G10 P1 X0 Y0.3 Z-0.05                                ; set tool 1 axis offsets
 elif global.tool1 == global.e3dVolcano
   ; tool 1: e3dv6 volcano 30w
-  M307 H2 B0 R1.666 C251.2 D4.48 S1.00 V24.3             ; tuned 255 no part cooling fan
-  M563 P1 S"volcano" D1 H2 F3                            ; define tool 1
-  G10 P1 X0 Y0 Z-9.45                                    ; set tool 1 axis offsets
+  M307 H2 B0 R1.666 C251.2 D4.48 S1.00 V24.3           ; tuned 255 no part cooling fan
+  M563 P1 S"volcano" D1 H2 X3 F2                       ; define tool 1
+  G10 P1 X0 Y0 Z-9.45                                  ; set tool 1 axis offsets
 else
   abort "Invalid tool for tool1"
 endif
 
+; Tool 2: duplicating mode
+
+M563 P2 D0:1 H1:2 X0:3 F0:2                            ; tool 2 uses both extruders and hot end heaters, maps X to both X and U, and uses both print cooling fans
+G10 P2 X-90 Y0 U85                                     ; set tool offsets and temperatures for tool 2
+M567 P2 E1:1                                           ; set mix ratio 100% on both extruders
+M568 P2 S1                                             ; turn on mixing for tool 2
+
 ; Tool (common)
 G10 P0 R0 S0                                           ; set initial tool 0 active and standby temperatures to 0C
-G10 P1 R0 S0                                           ; set initial tool 0 active and standby temperatures to 0C
+G10 P1 R0 S0                                           ; set initial tool 1 active and standby temperatures to 0C
+G10 P2 R0 S0                                           ; set initial tool 2 active and standby temperatures to 0C
 
 ; MCU DOES NOT WORK ON THE DUET 3 MINI 5+, DON'T CONFIGURE:
 ; M912 P0 S-12.5                                       ; Calibrate MCU temperature
 
 ; Miscellaneous
-T0                                                     ; select first tool
