@@ -50,7 +50,7 @@ M574 U1 S1 P"^1.io2.in"                                ; configure active-high e
 ; Z-Probe
 M950 S0 C"io1.out"                                     ; servo pin definition
 M558 P9 C"^io1.in" H5 F100 T2000
-G31 X0 Y55 Z1.50 P25                                   ; was 1.4 but I bent the pin...
+G31 X0 Y55 Z1.40 P25
 ;M557 X5:200 Y5:200 P7                                  ; define mesh grid
 
 ; Fans (tool 0)
