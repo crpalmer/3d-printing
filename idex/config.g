@@ -4,9 +4,10 @@
 
 ; -------------------------
 
-global xMax = 350
-global uMin = -47.6
-global uMax = 293
+global xMax = 340
+global uMin = -57.7
+global uMax = 283
+global xCenter = 140
 
 global e3dV6 = 1
 global e3dVolcano = 2
@@ -32,15 +33,16 @@ M350 X16 Y16 U16 Z16 E16 I1                            ; set microstepping to 25
 M566 X600.00 Y600.00 U600.00 Z18.00 E40:40             ; set maximum instantaneous speed changes (mm/min) (nimble v3)
 M203 X24000.00 Y24000.00 U24000.00 Z360.00 E3600:3600  ; set maximum speeds (mm/min)
 M201 X500.00 Y500.00 U500.00 Z100.00 E120:120          ; set accelerations (mm/s^2) (nimble v3)
-M906 X700 Y700 U700 Z800 E500 I30                      ; set motor currents (mA) and motor idle factor in per cent (nimble v3	)
+M906 X1200 Y1200 U1200 Z1200 E500 I30                      ; set motor currents (mA) and motor idle factor in per cent (nimble v3	)
 M84 S30                                                ; Set idle timeout
 
 ; Z drive
-M671 X175:175 Y-35:385 S2  			                   ; motor order: front, back
+;M671 X{global.xCenter, global.xCenter} Y-35:385 S2  			                   ; motor order: front, back
+M671 X140:140 Y-35:385 S2  			                   ; motor order: front, back
 
 ; Axis Limits
-M208 X10 Y0 Z0 U{global.uMin} S1                                 ; set axis minima
-M208 X{global.xMax} Y350 Z420 U{global.uMax} S0                            ; set axis maxima
+M208 X0 Y0 Z0 U{global.uMin} S1                        ; set axis minima
+M208 X{global.xMax} Y350 Z420 U{global.uMax} S0        ; set axis maxima
 
 ; Endstops
 M574 X2 S1 P"^0.io5.in"                                ; configure active-high endstop for high end on X
@@ -102,7 +104,7 @@ endif
 ; Tool 2: duplicating mode
 
 M563 P2 D0:1 H1:2 X0:3 F0:2                            ; tool 2 uses both extruders and hot end heaters, maps X to both X and U, and uses both print cooling fans
-G10 P2 X-90 Y0 U85                                     ; set tool offsets and temperatures for tool 2
+G10 P2 X-70 Y0 U110                                    ; set tool offsets and temperatures for tool 2
 M567 P2 E1:1                                           ; set mix ratio 100% on both extruders
 M568 P2 S1                                             ; turn on mixing for tool 2
 
