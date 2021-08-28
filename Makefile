@@ -25,7 +25,7 @@ group.o: config.h group.h group.c
 utils.o: utils.h utils.c
 
 .PHONY: slic3r-bundle.ini
-slic3r-bundle.ini:
+slic3r-bundle.ini: generate-slic3r-bundle
 	./generate-slic3r-bundle >$@
 
 slic3r/timestamp: PrusaSlicer_config_bundle.ini slic3r-to-files
