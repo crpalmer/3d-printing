@@ -9,6 +9,7 @@ config_t *config_new_f(FILE *f, const char *fname);
 
 config_t *config_new_customization(config_t *base, config_t *custom);
 
+config_t *config_load_path(const char *dir, const char *fname);
 config_t *config_load(const char *fname);
 
 config_t *config_generate_base_config(const char *fname, config_t **c, size_t n_c);

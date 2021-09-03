@@ -142,6 +142,15 @@ void config_destroy(config_t *c)
     Free(c);
 }
 
+config_t *config_load_path(const char *dir, const char *fname)
+{
+    char *full = Malloc(strlen(dir) + strlen(fname) + 2);
+    sprintf(full, "%s/%s", dir, fname);
+    config_t *c = config_load(full);
+    free(full);
+    return c;
+}
+
 config_t *config_load(const char *fname)
 {
     config_t *c;
