@@ -82,3 +82,19 @@ char *Strdup(const char *s)
     }
     return ss;
 }
+
+int file_exists(const char *fname)
+{
+    FILE * f = fopen(fname, "r");
+    fclose(f);
+    return f != NULL;
+}
+
+int file_exists_in_dir(const char *dir, const char *fname)
+{
+    char *full = Malloc(strlen(dir) + 1 + strlen(fname) + 1);
+    sprintf(full, "%s/%s", dir, fname);
+    int res = file_exists(full);
+    free(full);
+    return res;
+}

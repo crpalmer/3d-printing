@@ -11,6 +11,9 @@ int ends_with(const char *str, const char *suffix);
 
 void ensure_array(void **array, size_t *n_array, size_t desired);
 
+int file_exists(const char *fname);
+int file_exists_in_dir(const char *dir, const char *fname);
+
 void *Malloc(size_t);
 void *Realloc(void *, size_t);
 void Free(void *);
