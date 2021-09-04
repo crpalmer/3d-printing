@@ -124,9 +124,7 @@ static void output_customizations(group_t *g)
 {
     config_t *base;
 
-    fprintf(stderr, "g->base = %s\n", config_get_fname(g->base));
     base = config_generate_base_config(config_get_fname(g->base), g->c, g->n_c);
-    fprintf(stderr, "base = %s\n", config_get_fname(base));
 
     for (size_t i = 0; i < g->n_c; i++) {
 	config_save_except(g->c[i], base);
@@ -140,6 +138,13 @@ static void output_configs(group_t *g)
 {
     for (size_t i = 0; i < g->n_c; i++) {
 	config_save(g->c[i]);
+    }
+
+    for (size_t i = 0; i < g->n_variants; i++) {
+	group_t *gv = g->variants[i].variants;
+	for (size_t j = 0; j < gv->n_c; j++) {
+	    config_save(gv->c[j]);
+	}
     }
 }
     
@@ -160,16 +165,8 @@ int main(int argc, char **argv)
     while ((c = config_new_f(stdin, NULL)) != NULL) {
 	if (ignore_config(c)) printf("Ignoring %s\n", config_get_name(c));
 	else {
-	    group_t *g;
-	    size_t i;
-
-	    g = group_find(groups, n_groups, config_get_name(c), &i);
-	    if (g != NULL) {
-		config_set_fname(c, config_get_fname(g->c[i]));
-		config_destroy(g->c[i]);
-		g->c[i] = c;
-	    } else {
-		if (config_save(c) < 0) printf("Failed to save %s\n", config_get_fname(c));
+	    if (! group_replace_matching(groups, n_groups, c)) {
+		fprintf(stderr, "warning: config [%s] could not be matched and was not saved.\n", config_get_name(c));
 		config_destroy(c);
 	    }
 	}

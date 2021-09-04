@@ -7,8 +7,33 @@ static void write_config(config_t *c)
 {
     config_write(c, stdout);
     printf("\n");
+    fflush(stdout);
 }
 
+static void output_one_variant(group_t *g, config_t *base, size_t level)
+{
+    if (level >= g->n_variants) {
+	write_config(base);
+	return;
+    }
+
+    group_t *v = g->variants[level].variants;
+    for (size_t i = 0; i < v->n_c; i++) {
+	config_t *c = config_new_variant(base, v->c[i]);
+	if (c != NULL) {
+	    output_one_variant(g, c, level+1);
+	    config_destroy(c);
+	}
+    }
+}
+
+static void output_variants(group_t *g)
+{
+    for (size_t i = 0; i < g->n_c; i++) {
+	output_one_variant(g, g->c[i], 0);
+    }
+}
+    
 static void output_customizations(group_t *g)
 {
     for (size_t i = 0; i < g->n_c; i++) {
@@ -28,7 +53,8 @@ static void output_configs(group_t *g)
 static void
 output_group(group_t *g)
 {
-    if (g->base) output_customizations(g);
+    if (g->n_variants) output_variants(g);
+    else if (g->base) output_customizations(g);
     else output_configs(g);
 }
 
