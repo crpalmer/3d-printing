@@ -51,6 +51,8 @@ const char *config_get_by_key(config_t *config, const char *kv_pair);
 
 void config_delete_key(config_t *config, const char *kv_pair);
 
+void config_nozzle_restriction(config_t *config, double *low, double *high);
+
 void config_destroy(config_t *config);
 
 #endif

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <float.h>
 #include "config.h"
 #include "utils.h"
 
@@ -419,4 +420,36 @@ const void config_delete_key(config_t *c, const char *kv_pair)
     }
 
     c->n_s = j;
+}
+
+#define CC_EQ "nozzle_diameter[0] == "
+#define CC_LE "nozzle_diameter[0] <= "
+#define CC_GE "nozzle_diameter[0] >= "
+
+static int
+parse_cc(const char *cond, const char *prefix, double *v)
+{
+    cond += strlen(COMPATIBLE_COND);
+    while (*cond && isspace((int) *cond)) cond++;
+
+    if (strncmp(cond, prefix, strlen(prefix)) != 0) return 0;
+    cond += strlen(prefix);
+    *v = atof(cond);
+    while (*cond && (isspace((int) *cond) || isdigit((int) *cond) || *cond == '.')) cond++;
+    return *cond == 0;
+}
+
+void config_nozzle_restriction(config_t *c, double *low, double *high)
+{
+    double v;
+
+    *low = 0;
+    *high = DBL_MAX;
+
+    const char *cond = config_get_by_key(c, COMPATIBLE_COND);
+    if (! cond) return;
+
+    if (parse_cc(cond, CC_EQ, &v)) *low = *high = v;
+    else if (parse_cc(cond, CC_LE, &v)) *high = v;
+    else if (parse_cc(cond, CC_GE, &v)) *low = v;
 }

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <float.h>
 #include "group.h"
 #include "utils.h"
 
@@ -10,7 +11,7 @@ static void write_config(config_t *c)
     fflush(stdout);
 }
 
-static void output_one_variant(group_t *g, config_t *base, size_t level)
+static void output_one_variant(group_t *g, config_t *base, size_t level, double low, double high)
 {
     if (level >= g->n_variants) {
 	write_config(base);
@@ -19,9 +20,20 @@ static void output_one_variant(group_t *g, config_t *base, size_t level)
 
     group_t *v = g->variants[level].variants;
     for (size_t i = 0; i < v->n_c; i++) {
+	double this_low, this_high;
+
+	config_nozzle_restriction(v->c[i], &this_low, &this_high);
+	if (this_low > high || this_high < low) {
+	    /* inconsistent, abort! */
+	    continue;
+	}
+
+	this_low = low < this_low ? this_low : low;
+	this_high = high > this_high ? this_high : high;
+
 	config_t *c = config_new_variant(base, v->c[i]);
 	if (c != NULL) {
-	    output_one_variant(g, c, level+1);
+	    output_one_variant(g, c, level+1, this_low, this_high);
 	    config_destroy(c);
 	}
     }
@@ -30,7 +42,7 @@ static void output_one_variant(group_t *g, config_t *base, size_t level)
 static void output_variants(group_t *g)
 {
     for (size_t i = 0; i < g->n_c; i++) {
-	output_one_variant(g, g->c[i], 0);
+	output_one_variant(g, g->c[i], 0, 0, DBL_MAX);
     }
 }
     
