@@ -155,7 +155,7 @@ int main(int argc, char **argv)
 {
     config_t *c;
     size_t n_groups;
-    group_t **groups = group_load_dirs(".", &n_groups);
+    group_t **groups = group_load_dirs("slic3r", &n_groups);
 
     while ((c = config_new_f(stdin, NULL)) != NULL) {
 	if (ignore_config(c)) printf("Ignoring %s\n", config_get_name(c));

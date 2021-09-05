@@ -30,5 +30,5 @@ slic3r-bundle.ini: generate-slic3r-bundle
 
 slic3r/timestamp: PrusaSlicer_config_bundle.ini slic3r-to-files
 	mkdir -p slic3r
-	cd slic3r && ../slic3r-to-files < ../PrusaSlicer_config_bundle.ini
+	./slic3r-to-files < PrusaSlicer_config_bundle.ini
 	touch slic3r/timestamp
