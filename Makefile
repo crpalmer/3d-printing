@@ -1,4 +1,4 @@
-CFLAGS = -Wall -Werror
+CFLAGS = -Wall -Werror -g
 
 all:	grid-show hex2ascii generate-slic3r-bundle slic3r-to-files stl2ascii \
 	slic3r/timestamp slic3r-bundle.ini
