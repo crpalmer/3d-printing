@@ -86,7 +86,7 @@ char *Strdup(const char *s)
 int file_exists(const char *fname)
 {
     FILE * f = fopen(fname, "r");
-    fclose(f);
+    if (f) fclose(f);
     return f != NULL;
 }
 
