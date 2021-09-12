@@ -52,8 +52,9 @@ M574 U1 S1 P"^1.io2.in"                                ; configure active-high e
 ; Z-Probe
 M950 S0 C"io1.out"                                     ; servo pin definition
 M558 P9 C"^io1.in" H5 F100 T2000
-G31 X0 Y55 Z1.40 P25
-;M557 X5:200 Y5:200 P7                                  ; define mesh grid
+G31 X0 Y55 Z1.35 P25
+M557 X5:285 Y60:345 P7                                  ; define mesh grid
+M376 H3
 
 ; Fans (tool 0)
 M950 F0 C"out5" Q250                                   ; create fan and set its frequency
