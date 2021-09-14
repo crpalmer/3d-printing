@@ -94,9 +94,13 @@ handle_variants(group_t *g, const char *dir)
 	v->variants = group_new();
 	load_configs(v->variants, new_path);
 
-	free(new_path);
+	if (v->variants->n_c == 0) {
+	    fprintf(stderr, "warning: no variants found in [%s]n\n", new_path);
+	} else {
+	    g->n_variants++;
+	}
 
-	g->n_variants++;
+	free(new_path);
     }
 
 done:

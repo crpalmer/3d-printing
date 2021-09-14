@@ -3,7 +3,7 @@
 
 #include "config.h"
 
-#define MAX_VARIANTS 4
+#define MAX_VARIANTS 10
 
 typedef struct groupS group_t;
 

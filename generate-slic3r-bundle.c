@@ -4,6 +4,8 @@
 #include "group.h"
 #include "utils.h"
 
+#define DEBUG 0
+
 static void write_config(config_t *c)
 {
     config_write(c, stdout);
@@ -11,10 +13,13 @@ static void write_config(config_t *c)
     fflush(stdout);
 }
 
-static void output_one_variant(group_t *g, config_t *base, size_t level, double low, double high)
+static void output_one_variant(group_t *g, config_t *base, int level, double low, double high)
 {
+    if (DEBUG) fprintf(stderr, "%*c>> %s\n", level*3, ' ', config_get_name(base));
     if (level >= g->n_variants) {
 	write_config(base);
+	if (DEBUG) fprintf(stderr, "%*c   == %s\n", level*3, ' ', config_get_name(base));
+	if (DEBUG) fprintf(stderr, "%*c<< %s\n", level*3, ' ', config_get_name(base));
 	return;
     }
 
@@ -22,9 +27,11 @@ static void output_one_variant(group_t *g, config_t *base, size_t level, double 
     for (size_t i = 0; i < v->n_c; i++) {
 	double this_low, this_high;
 
+	if (DEBUG) fprintf(stderr, "%*c   ++ %s + %s\n", level*3, ' ', config_get_name(base), config_get_name(v->c[i]));
 	config_nozzle_restriction(v->c[i], &this_low, &this_high);
 	if (this_low > high || this_high < low) {
 	    /* inconsistent, abort! */
+	    if (DEBUG) fprintf(stderr, "config %s.%d is inconsistent [%.2f..%.2f] vs. [%.2f..%.2f]\n", config_get_name(base), (int) i, this_low, this_high, low, high);
 	    continue;
 	}
 
@@ -35,8 +42,11 @@ static void output_one_variant(group_t *g, config_t *base, size_t level, double 
 	if (c != NULL) {
 	    output_one_variant(g, c, level+1, this_low, this_high);
 	    config_destroy(c);
+	} else {
+	    fprintf(stderr, "config %s + %s could not be created\n", config_get_name(base), config_get_name(v->c[i]));
 	}
     }
+    if (DEBUG) fprintf(stderr, "<< %s\n", config_get_name(base));
 }
 
 static void output_variants(group_t *g)
