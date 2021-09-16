@@ -33,7 +33,7 @@ M350 X16 Y16 U16 Z16 E16 I1                            ; set microstepping to 25
 M566 X600.00 Y600.00 U600.00 Z18.00 E1000:40             ; set maximum instantaneous speed changes (mm/min) (nimble v3)
 M203 X24000.00 Y24000.00 U24000.00 Z360.00 E3600:3600  ; set maximum speeds (mm/min)
 M201 X1000.00 Y1000.00 U1000.00 Z100.00 E1000:120       ; set accelerations (mm/s^2) (nimble v3)
-M906 X1200 Y1200 U1200 Z1200 E500 I30                  ; set motor currents (mA) and motor idle factor in per cent (nimble v3	)
+M906 X1200 Y1000 U1200 Z1200 E500 I30                  ; set motor currents (mA) and motor idle factor in per cent (nimble v3	)
 M84 S30                                                ; Set idle timeout
 
 ; Z drive
