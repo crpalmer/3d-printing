@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <float.h>
+#include <string.h>
 #include "group.h"
 #include "utils.h"
 
@@ -11,6 +12,20 @@ static void write_config(config_t *c)
     config_write(c, stdout);
     printf("\n");
     fflush(stdout);
+}
+
+static int passes_requires(config_t *c)
+{
+    const char *rlh = config_get_by_key(c, REQUIRES_LAYER_HEIGHT);
+    const char *lh = config_get_by_key(c, LAYER_HEIGHT);
+
+    if (! rlh) return 1; /* no requires => yes */
+    if (! lh) return 0;	 /* requires layer height but none found => no */
+
+    rlh += strlen(REQUIRES_LAYER_HEIGHT);
+    lh += strlen(LAYER_HEIGHT);
+
+    return strcmp(lh, rlh) == 0;
 }
 
 static void output_one_variant(group_t *g, config_t *base, int level, double low, double high)
@@ -40,7 +55,7 @@ static void output_one_variant(group_t *g, config_t *base, int level, double low
 
 	config_t *c = config_new_variant(base, v->c[i]);
 	if (c != NULL) {
-	    output_one_variant(g, c, level+1, this_low, this_high);
+	    if (passes_requires(c)) output_one_variant(g, c, level+1, this_low, this_high);
 	    config_destroy(c);
 	} else {
 	    fprintf(stderr, "config %s + %s could not be created\n", config_get_name(base), config_get_name(v->c[i]));

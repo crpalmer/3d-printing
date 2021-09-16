@@ -218,6 +218,7 @@ static config_t *replace_matching_variant_instances(group_t *g, config_t *c, con
 	    const char *field;
 
 	    copy_config_item(c_new, gc, COMPATIBLE_COND);
+	    copy_config_item(c_new, gc, REQUIRES_LAYER_HEIGHT);
 	    for (size_t j = 0; (field = config_get_i(fields, j)) != NULL; j++) {
 		copy_config_item(c_new, c, field);
 	    }

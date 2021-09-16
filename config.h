@@ -2,6 +2,8 @@
 #define __CONFIG_H__
 
 #define COMPATIBLE_COND "compatible_printers_condition ="
+#define LAYER_HEIGHT "layer_height ="
+#define REQUIRES_LAYER_HEIGHT "__requires_layer_height ="
 
 typedef struct configS config_t;
 
