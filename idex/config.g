@@ -52,7 +52,7 @@ M574 U1 S1 P"^1.io2.in"                                ; configure active-high e
 ; Z-Probe
 M950 S0 C"io1.out"                                     ; servo pin definition
 M558 P9 C"^io1.in" H5 F100 T2000
-G31 X0 Y55 Z1.35 P25
+G31 X0 Y55 Z1.4 P25
 M557 X5:285 Y60:345 P7                                  ; define mesh grid
 M376 H3
 
@@ -92,7 +92,7 @@ if global.tool1 == global.e3dV6
   ; tool 1: e3dv6 40w
   M307 H2 B0 R2.508 C225.2 D5.67 S1.00 V24.1           ; tuned 255 10mm off of the bed with the part cooling fan
   M563 P1 S"E3Dv6" D1 H2 X3 F2                         ; define tool 1
-  G10 P1 X0 Y0.3 Z-0.05                                ; set tool 1 axis offsets
+  G10 P1 X0 Y0.3 Z-0.15                                ; set tool 1 axis offsets
 elif global.tool1 == global.e3dVolcano
   ; tool 1: e3dv6 volcano 30w
   M307 H2 B0 R1.666 C251.2 D4.48 S1.00 V24.3           ; tuned 255 no part cooling fan
