@@ -102,6 +102,10 @@ else
   abort "Invalid tool for tool1"
 endif
 
+; Set both tools to standby mode
+M568 A1 P0 R0 S0
+M568 A1 P1 R0 S0
+
 ; Tool 2: duplicating mode
 
 M563 P2 D0:1 H1:2 X0:3 F0:2                            ; tool 2 uses both extruders and hot end heaters, maps X to both X and U, and uses both print cooling fans
