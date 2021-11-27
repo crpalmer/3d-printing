@@ -19,9 +19,8 @@ M586 P0 S1                                 ; Enable HTTP
 M586 P1 S0                                 ; Disable FTP
 M586 P2 S0                                 ; Disable Telnet
 
-; Endstops
-M574 X1 S1 P"!xstop"                      ; configure active-low endstop for low end on X via pin xstop
-M574 Y1 S1 P"!ystop"                      ; configure active-low endstop for low end on Y via pin ystop
+; MOTOR Section
+M584 X0 Y1 E3 Z2:4:6                       ; 3 Z motors connected to driver outputs 2 (z), 4 (e1), 6 (breakout board), 5 (UNUSED: breakout board)
 
 ; Drive directions
 M569 P0 S1 D2                              ; Drive 0 direction (x)
@@ -31,10 +30,6 @@ M569 P3 S1 D2                              ; Drive 3 direction (e0)
 M569 P4 S1 D2                              ; Drive 4 direction (z back left) (e1)
 M569 P5 S0 D2                              ; Drive 5 direction (z UNUSED) (breakout 1)
 M569 P6 S1 D2                              ; Drive 6 direction (z back right) (breakout 2)
-
-; Z drive setup
-M584 X0 Y1 E3 Z2:4:6                       ; 3 Z motors connected to driver outputs 2 (z), 4 (e1), 6 (breakout board), 5 (UNUSED: breakout board)
-M671 X185:348:19 Y405:15:15 S10          ; motor order: front middle, back left, back right
 
 ; Drive steps per mm
 ; z = 360/0.067/40*16*2 = 4298.5
@@ -51,6 +46,13 @@ M203 X24000 Y24000 Z360 E6000              ; Set maximum speeds (mm/min)
 M201 X1000 Y1000 Z500 E120                 ; Set accelerations (mm/s^2)
 M906 X1200 Y1200 Z840 E500 I30             ; Set motor currents (mA) and motor idle factor in per cent
 M84 S30                                    ; Set idle timeout
+
+; Z "leadscrew" setup
+M671 X185:348:19 Y405:15:15 S10          ; motor order: front middle, back left, back right
+
+; Endstops
+M574 X1 S1 P"!xstop"                      ; configure active-low endstop for low end on X via pin xstop
+M574 Y1 S1 P"!ystop"                      ; configure active-low endstop for low end on Y via pin ystop
 
 ; Axis Limits
 M98 P"/sys/axis-limits.g"
