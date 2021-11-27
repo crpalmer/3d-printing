@@ -41,7 +41,7 @@ M671 X-10:390:-10:390 Y475:475:-45:-45 S2  ; motor order: back left, back right,
 ; 0.067 is step angle from spec sheet, 40 = belt mm for 1 full rotation, 16 micro stepping, 2 = "double belt resolution"
 ; z = 360/1.8*26.85/40*16*2 = 4296
 ; 1.8 is the normal step angle, 26.85 is the gear ratio, 2 = "double belt resolution"
-M92 X160 Y160 Z2148 E2645                  ; Set steps per mm at 1/16 micro stepping (E recommended is 2700)
+M92 X160 Y160 Z2148 E2700                  ; Set steps per mm at 1/16 micro stepping (E recommended is 2700)
 M350 X16 Y16 E16 I1                        ; Configure microstepping with interpolation for x/y
 M350 Z16 I0                                ; Configure microstepping without interpolation for e/z
 
