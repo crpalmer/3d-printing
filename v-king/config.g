@@ -26,15 +26,15 @@ M574 Y1 S1 P"!ystop"                      ; configure active-low endstop for low
 ; Drive directions
 M569 P0 S1 D2                              ; Drive 0 direction (x)
 M569 P1 S1 D2                              ; Drive 1 direction (y)
-M569 P2 S1 D2                              ; Drive 2 direction (z back left) (z)
+M569 P2 S1 D2                              ; Drive 2 direction (z front middle) (z)
 M569 P3 S1 D2                              ; Drive 3 direction (e0)
-M569 P4 S1 D2                              ; Drive 4 direction (z front right) (e1)
-M569 P5 S0 D2                              ; Drive 5 direction (z back right) (breakout 1)
-M569 P6 S0 D2                              ; Drive 6 direction (z front left) (breakout 2)
+M569 P4 S1 D2                              ; Drive 4 direction (z back left) (e1)
+M569 P5 S0 D2                              ; Drive 5 direction (z UNUSED) (breakout 1)
+M569 P6 S1 D2                              ; Drive 6 direction (z back right) (breakout 2)
 
 ; Z drive setup
-M584 X0 Y1 E3 Z2:5:6:4                     ; 4 Z motors connected to driver outputs 2 (z), 5 (breakout board), 4 (e1), 6 (breakout board)
-M671 X-10:390:-10:390 Y475:475:-45:-45 S2  ; motor order: back left, back right, front left, front right
+M584 X0 Y1 E3 Z2:4:6                       ; 3 Z motors connected to driver outputs 2 (z), 4 (e1), 6 (breakout board), 5 (UNUSED: breakout board)
+M671 X185:348:19 Y405:15:15 S10          ; motor order: front middle, back left, back right
 
 ; Drive steps per mm
 ; z = 360/0.067/40*16*2 = 4298.5
@@ -58,8 +58,8 @@ M98 P"/sys/axis-limits.g"
 ; Z-Probe
 M950 S0 C"zprobe.mod"                      ; servo pin definition
 M558 P9 C"^zprobe.in" H5 F100 T2000
-G31 X25 Y0 Z1.75 P25				     	   ; was z1.8
-M557 X35:300 Y50:350 P11                   ; Define mesh grid
+G31 X25 Y0 Z1.2 P25			     	   ; 
+M557 X35:300 Y25:350 P11                   ; Define mesh grid
 
 ; Bed Heater
 M308 S0 P"bedtemp" Y"thermistor" T100000 B4138 ; configure sensor 0 as thermistor on pin bedtemp
