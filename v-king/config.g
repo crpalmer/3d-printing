@@ -10,6 +10,7 @@ M83                                        ; ...but relative extruder moves
 ; Network
 M550 P"v-king"                             ; Set machine name
 M98 P"/sys/passwords.g"
+M551 P"reprap"
 M553 P255.255.255.0			   ; Set netmask
 M554 P192.168.1.1                          ; Set gateway
 M552 P192.168.1.8 S1                       ; Enable network
@@ -19,39 +20,40 @@ M586 P2 S0                                 ; Disable Telnet
 
 ; MOTOR Section
 
-M584 X0 Y1:6 E3 Z2:4:5                     ; set up the drive mapping
+M584 X0 Y1:6 E3 Z5:2:4                     ; set up the drive mapping
 
 ; Drive directions
-M569 P0 S1 D2                              ; Drive 0 direction (x)
-M569 P1 S0 D2                              ; Drive 1 direction (y back left)
-M569 P2 S1 D2                              ; Drive 2 direction (z front middle) (z)
-M569 P3 S1 D2                              ; Drive 3 direction (e0)
-M569 P4 S1 D2                              ; Drive 4 direction (z back left) (e1)
-M569 P5 S1 D2                              ; Drive 5 direction (z back right) (breakout 1)
-M569 P6 S0 D2                              ; Drive 6 direction (y back right) (breakout 2)
+M569 P0 S0 D3                              ; Drive 0 direction (x)
+M569 P1 S0 D3                              ; Drive 1 direction (y back left)
+M569 P2 S1 D3                              ; Drive 2 direction (z back left) (z)
+M569 P3 S0 D3                              ; Drive 3 direction (e0)
+M569 P4 S1 D3                              ; Drive 4 direction (z back right) (e1)
+M569 P5 S0 D3                              ; Drive 5 direction (z front middle) (breakout 1)
+M569 P6 S1 D3                              ; Drive 6 direction (y back right) (breakout 2)
 
 ; Drive steps per mm
 ; z = 360/0.067/40*16*2 = 4298.5
 ; 0.067 is step angle from spec sheet, 40 = belt mm for 1 full rotation, 16 micro stepping, 2 = "double belt resolution"
 ; z = 360/1.8*26.85/40*16*2 = 4296
 ; 1.8 is the normal step angle, 26.85 is the gear ratio, 2 = "double belt resolution"
-M92 X160 Y160 Z2148 E2700                  ; Set steps per mm at 1/16 micro stepping (E recommended is 2700)
-M350 X16 Y16 E16 I1                        ; Configure microstepping with interpolation for x/y
-M350 Z16 I0                                ; Configure microstepping without interpolation for e/z
+M92 X160 Y160 Z2148 E700                   ; Set steps per mm at 1/16 micro stepping (E recommended is 690)
+M350 X16 Y16 E16 I1                        ; Configure microstepping with interpolation for x/y/e
+M350 Z16 I0                                ; Configure microstepping without interpolation for z
 
 ; Drive speeds and currents
-M566 X600 Y600 Z18 E40                     ; Set maximum instantaneous speed changes (mm/min)
-M203 X24000 Y24000 Z360 E6000              ; Set maximum speeds (mm/min)
-M201 X1000 Y1000 Z500 E120                 ; Set accelerations (mm/s^2)
-M906 X800 Y800 Z840 E500 I30               ; Set motor currents (mA) and motor idle factor in per cent
+M566 X600 Y600 Z18 E300                    ; Set maximum instantaneous speed changes (mm/min)
+M203 X24000 Y24000 Z360 E7200              ; Set maximum speeds (mm/min)
+M201 X1000 Y1000 Z500 E800                 ; Set accelerations (mm/s^2)
+M906 X1200 Y1000 Z840 I30                   ; Set motor currents (mA) and motor idle factor in per cent
+M906 E1000 I10
 M84 S30                                    ; Set idle timeout
 
 ; Z "leadscrew" positions
-M671 X185:348:19 Y405:15:15 S10            ; motor order: front middle, back left, back right
+M671 X195:25:360 Y365:-20:-20 S10            ; motor order: front middle, back left, back right
 
 ; Endstops
 M574 X1 S1 P"!xstop"                       ; configure active-low endstop for low end on X via pin xstop
-M574 Y1 S1 P"!ystop+!e0stop"               ; configure active-low endstop for low end on Y via pin ystop
+M574 Y1 S1 P"!e0stop+!ystop"               ; configure active-low endstop for low end on Y via pin ystop
 
 ; Axis Limits
 M98 P"/sys/axis-limits.g"
@@ -59,8 +61,8 @@ M98 P"/sys/axis-limits.g"
 ; Z-Probe
 M950 S0 C"zprobe.mod"                      ; servo pin definition
 M558 P9 C"^zprobe.in" H5 F100 T2000
-G31 X25 Y0 Z1.2 P25			     	   ; 
-M557 X35:300 Y25:350 P11                   ; Define mesh grid
+G31 X0 Y-55 Z1.3 P25			     	   ; 
+M557 X35:300 Y75:325 P11                   ; Define mesh grid
 
 ; Bed Heater
 M308 S0 P"bedtemp" Y"thermistor" T100000 B4138 ; configure sensor 0 as thermistor on pin bedtemp
