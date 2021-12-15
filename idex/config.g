@@ -28,12 +28,12 @@ M569 P1.0 S1 D3                                        ; physical drive 1.0 goes
 M569 P1.1 S1 D3                                        ; physical drive 1.1 goes forwards
 M569 P1.2 S1 D3                                        ; physical drive 1.2 goes forwards
 M584 X0.2 Y0.1:1.2 u1.1 E0.0:1.0 Z0.3:0.4              ; set drive mapping
-M92 X160.00 Y160.00 U160.00 Z800.00 E690:2700          ; set steps per mm
+M92 X160.00 Y160.00 U160.00 Z800.00 E680:2645          ; set steps per mm (recommended; 690 orbiter, 2700 zesty)
 M350 X16 Y16 U16 Z16 E16 I1                            ; set microstepping to 256 interpolation
 M566 X600.00 Y600.00 U600.00 Z18.00 E300:40            ; set maximum instantaneous speed changes (mm/min)
-M203 X24000.00 Y24000.00 U24000.00 Z360.00 E7200:3600  ; set maximum speeds (mm/min)
+M203 X24000.00 Y24000.00 U24000.00 Z180.00 E7200:3600  ; set maximum speeds (mm/min)
 M201 X1000.00 Y1000.00 U1000.00 Z100.00 E800:120       ; set accelerations (mm/s^2) (nimble v3)
-M906 X1300 Y1000 U1300 Z1200 E800:500 I30              ; set motor currents (mA) and motor idle factor in per cent
+M906 X1200 Y1000 U1200 Z1200 E800:500 I30              ; set motor currents (mA) and motor idle factor in per cent
 M84 S30                                                ; Set idle timeout
 
 ; Z drive
@@ -52,7 +52,7 @@ M574 U1 S1 P"^1.io2.in"                                ; configure active-high e
 ; Z-Probe
 M950 S0 C"io1.out"                                     ; servo pin definition
 M558 P9 C"^io1.in" H5 F100 T2000
-G31 X0 Y55 Z1.4 P25
+G31 X0 Y55 Z1.35 P25
 M557 X5:285 Y60:345 P7                                  ; define mesh grid
 M376 H3
 
@@ -92,7 +92,7 @@ if global.tool1 == global.e3dV6
   ; tool 1: e3dv6 40w
   M307 H2 B0 R2.508 C225.2 D5.67 S1.00 V24.1           ; tuned 255 10mm off of the bed with the part cooling fan
   M563 P1 S"E3Dv6" D1 H2 X3 F2                         ; define tool 1
-  G10 P1 X0 Y0.3 Z-0.10                                ; set tool 1 axis offsets
+  G10 P1 X0 Y0.3 Z-0.025                               ; set tool 1 axis offsets
 elif global.tool1 == global.e3dVolcano
   ; tool 1: e3dv6 volcano 30w
   M307 H2 B0 R1.666 C251.2 D4.48 S1.00 V24.3           ; tuned 255 no part cooling fan
