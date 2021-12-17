@@ -7,17 +7,6 @@
 G90                                        ; Send absolute coordinates...
 M83                                        ; ...but relative extruder moves
 
-; Network
-M550 P"v-king"                             ; Set machine name
-M98 P"/sys/passwords.g"
-M551 P"reprap"
-M553 P255.255.255.0			   ; Set netmask
-M554 P192.168.1.1                          ; Set gateway
-M552 P192.168.1.8 S1                       ; Enable network
-M586 P0 S1                                 ; Enable HTTP
-M586 P1 S0                                 ; Disable FTP
-M586 P2 S0                                 ; Disable Telnet
-
 ; MOTOR Section
 
 M584 X0 Y1:6 E3 Z5:2:4                     ; set up the drive mapping
