@@ -41,36 +41,36 @@ M84 S30                                    ; Set idle timeout
 M671 X195:25:360 Y365:-20:-20 S10            ; motor order: front middle, back left, back right
 
 ; Endstops
-M574 X1 S1 P"!xstop"                       ; configure active-low endstop for low end on X via pin xstop
-M574 Y1 S1 P"!e0stop+!ystop"               ; configure active-low endstop for low end on Y via pin ystop
+M574 X1 S1 P"!io3.in"                       ; configure active-low endstop for low end on X via pin xstop
+M574 Y1 S1 P"!io5.in+!io6.in"               ; configure active-low endstop for low end on Y via pin ystop
 
 ; Axis Limits
 M98 P"/sys/axis-limits.g"
 
 ; Z-Probe
-M950 S0 C"zprobe.mod"                      ; servo pin definition
-M558 P9 C"^zprobe.in" H5 F100 T2000
-G31 X0 Y-55 Z1.3 P25			     	   ; 
+M950 S0 C"io1.out"                         ; servo pin definition
+M558 P9 C"^io1.in" H5 F100 T2000
+G31 X0 Y-55 Z1.3 P25
 M557 X35:300 Y75:325 P11                   ; Define mesh grid
 
 ; Bed Heater
-M308 S0 P"bedtemp" Y"thermistor" T100000 B4138 ; configure sensor 0 as thermistor on pin bedtemp
-M950 H0 C"bedheat" T0                      ; create bed heater output on bedheat and map it to sensor 0
+M308 S0 P"temp0" Y"thermistor" T100000 B4138 ; configure sensor 0 as thermistor on pin bedtemp
+M950 H0 C"out0" T0                         ; create bed heater output on bedheat and map it to sensor 0
 M140 H0
 M143 H0 S120                               ; Set temperature limit for heater 0 to 120C
 M307 H0 A159.7 C501.4 D3.1 V24.2 B0
 
 ; Hotend Heater
-M308 S1 P"e1temp" Y"thermistor" T100000 B4725 C7.06e-8 ; configure sensor 1 as thermistor on pin e0temp
-M950 H1 C"e1heat" T1                       ; create nozzle heater output on e0heat
+M308 S1 P"temp1" Y"thermistor" T100000 B4725 C7.06e-8 ; configure sensor 1 as thermistor on pin e0temp
+M950 H1 C"out1" T1                       ; create nozzle heater output on e0heat
 M143 H1 S280                               ; Set temperature limit for heater 1 to 280C
 M307 H1 B0 R2.652 C205.6 D5.61 S1.00 V24.0 ; 40w heater @ 255C
 
 ; Fans
 ; heatend fan is on always on fan due to fan0 being dead
-M950 F0 C"fan1" Q500
+M950 F0 C"out5" Q500
 M106 P0 S0                                 ; part cooling fan off by default on fan1
-M950 F1 C"fan2" Q500                       ; create fan 1 on pin fan2 and set its frequency
+M950 F1 C"out6" Q500                       ; create fan 1 on pin fan2 and set its frequency
 M106 P1 S1 T45 H1                          ; set fan 1 value. Thermostatic control is turned on
 
 ; Tools
