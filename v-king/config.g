@@ -9,16 +9,16 @@ M83                                        ; ...but relative extruder moves
 
 ; MOTOR Section
 
-M584 X0 Y1:6 E3 Z5:2:4                     ; set up the drive mapping
+M584 E0 X1 Y2:3 Z4:5:6                     ; set up the drive mapping
 
 ; Drive directions
-M569 P0 S0 D3                              ; Drive 0 direction (x)
-M569 P1 S0 D3                              ; Drive 1 direction (y back left)
-M569 P2 S1 D3                              ; Drive 2 direction (z back left) (z)
-M569 P3 S0 D3                              ; Drive 3 direction (e0)
-M569 P4 S1 D3                              ; Drive 4 direction (z back right) (e1)
-M569 P5 S0 D3                              ; Drive 5 direction (z front middle) (breakout 1)
-M569 P6 S1 D3                              ; Drive 6 direction (y back right) (breakout 2)
+M569 P0 S0 D3                              ; Drive 0 direction (e0)
+M569 P1 S1 D3                              ; Drive 1 direction (x)
+M569 P2 S1 D3                              ; Drive 2 direction (y back left)
+M569 P3 S0 D3                              ; Drive 3 direction (y back right)
+M569 P4 S0 D3                              ; Drive 4 direction (z front middle)
+M569 P5 S0 D3                              ; Drive 5 direction (z back left) (expansion 1)
+M569 P6 S0 D3                              ; Drive 6 direction (y back right) (expansion 2)
 
 ; Drive steps per mm
 ; z = 360/0.067/40*16*2 = 4298.5
@@ -41,8 +41,8 @@ M84 S30                                    ; Set idle timeout
 M671 X195:25:360 Y365:-20:-20 S10            ; motor order: front middle, back left, back right
 
 ; Endstops
-M574 X1 S1 P"!io3.in"                       ; configure active-low endstop for low end on X via pin xstop
-M574 Y1 S1 P"!io5.in+!io6.in"               ; configure active-low endstop for low end on Y via pin ystop
+M574 X1 S1 P"!io6.in"                       ; x endstop (low end)
+M574 Y2 S1 P"!io5.in+!io3.in"               ; 2 y endstops (high end)
 
 ; Axis Limits
 M98 P"/sys/axis-limits.g"
