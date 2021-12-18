@@ -12,7 +12,7 @@ M83                                        ; ...but relative extruder moves
 M584 E0 X1 Y2:3 Z4:5:6                     ; set up the drive mapping
 
 ; Drive directions
-M569 P0 S0 D3                              ; Drive 0 direction (e0)
+M569 P1 S0 D3                              ; Drive 0 direction (e0)
 M569 P1 S1 D3                              ; Drive 1 direction (x)
 M569 P2 S1 D3                              ; Drive 2 direction (y back left)
 M569 P3 S0 D3                              ; Drive 3 direction (y back right)
