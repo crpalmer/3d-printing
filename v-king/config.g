@@ -17,8 +17,8 @@ M569 P1 S1 D3                              ; Drive 1 direction (x)
 M569 P2 S1 D3                              ; Drive 2 direction (y back left)
 M569 P3 S0 D3                              ; Drive 3 direction (y back right)
 M569 P4 S0 D3                              ; Drive 4 direction (z front middle)
-M569 P5 S0 D3                              ; Drive 5 direction (z back left) (expansion 1)
-M569 P6 S0 D3                              ; Drive 6 direction (y back right) (expansion 2)
+M569 P5 S1 D3                              ; Drive 5 direction (z back left) (expansion 1)
+M569 P6 S1 D3                              ; Drive 6 direction (y back right) (expansion 2)
 
 ; Drive steps per mm
 ; z = 360/0.067/40*16*2 = 4298.5
@@ -31,7 +31,7 @@ M350 Z16 I0                                ; Configure microstepping without int
 
 ; Drive speeds and currents
 M566 X600 Y600 Z18 E300                    ; Set maximum instantaneous speed changes (mm/min)
-M203 X24000 Y24000 Z360 E7200              ; Set maximum speeds (mm/min)
+M203 X24000 Y24000 Z600 E7200              ; Set maximum speeds (mm/min)
 M201 X1000 Y1000 Z500 E800                 ; Set accelerations (mm/s^2)
 M906 X1200 Y1000 Z840 I30                   ; Set motor currents (mA) and motor idle factor in per cent
 M906 E1000 I10
