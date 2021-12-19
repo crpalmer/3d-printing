@@ -86,4 +86,5 @@ G10 P0 R0 S0                               ; Set initial tool 0 active and stand
 ; Custom settings are not configured
 
 ; Miscellaneous
+M912 P0 S1.2                               ; MCU temperature calibration
 T0                                         ; Select first tool
