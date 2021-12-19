@@ -12,7 +12,7 @@ M83                                        ; ...but relative extruder moves
 M584 E0 X1 Y2:3 Z4:5:6                     ; set up the drive mapping
 
 ; Drive directions
-M569 P1 S0 D3                              ; Drive 0 direction (e0)
+M569 P1 S1 D3                              ; Drive 0 direction (e0)
 M569 P1 S1 D3                              ; Drive 1 direction (x)
 M569 P2 S1 D3                              ; Drive 2 direction (y back left)
 M569 P3 S0 D3                              ; Drive 3 direction (y back right)
@@ -38,7 +38,7 @@ M906 E1000 I10
 M84 S30                                    ; Set idle timeout
 
 ; Z "leadscrew" positions
-M671 X195:25:360 Y365:-20:-20 S10            ; motor order: front middle, back left, back right
+M671 X195:25:357 Y8:395:395 S10            ; motor order: front middle, back left, back right
 
 ; Endstops
 M574 X1 S1 P"!io6.in"                       ; x endstop (low end)
@@ -50,7 +50,7 @@ M98 P"/sys/axis-limits.g"
 ; Z-Probe
 M950 S0 C"io1.out"                         ; servo pin definition
 M558 P9 C"^io1.in" H5 F100 T2000
-G31 X0 Y-55 Z1.3 P25
+G31 X0 Y55 Z1.2 P25
 M557 X35:300 Y75:325 P11                   ; Define mesh grid
 
 ; Bed Heater
