@@ -122,3 +122,4 @@ G10 P2 R0 S0                                           ; set initial tool 2 acti
 ; M912 P0 S-12.5                                       ; Calibrate MCU temperature
 
 ; Miscellaneous
+M912 P0 S-1
