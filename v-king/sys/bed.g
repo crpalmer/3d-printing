@@ -1,7 +1,7 @@
 ; bed.g
 ; called to perform automatic bed compensation via G32
 
-G1 Z5
+;G1 Z5
 G1 X195 Y20 F18000
 G30 P0 X195 Y75 Z-99999
 
