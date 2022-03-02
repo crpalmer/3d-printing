@@ -10,6 +10,7 @@ M550 P"taz6"                              ; set printer name
 
 ; Network
 M98 P"password.g"
+M551 P"reprap"
 M552 P0.0.0.0 S1                          ; enable network and acquire dynamic address via DHCP
 M586 P0 S1                                ; enable HTTP
 M586 P1 S0                                ; disable FTP
