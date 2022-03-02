@@ -17,11 +17,11 @@ M586 P1 S0                                ; disable FTP
 M586 P2 S0                                ; disable Telnet
 
 ; Drives
-M569 P0 S0                                ; physical drive 0 goes backward
-M569 P1 S1                                ; physical drive 1 goes forward
-M569 P2 S0                                ; physical drive 2 goes backward
-M569 P3 S1                                ; physical drive 3 goes forward
-M569 P4 S0                                ; physical drive 2 goes backward
+M569 P0 S0 D2                             ; physical drive 0 goes backward
+M569 P1 S1 D2                             ; physical drive 1 goes forward
+M569 P2 S0 D2                             ; physical drive 2 goes backward
+M569 P3 S1 D2                             ; physical drive 3 goes forward
+M569 P4 S0 D2                             ; physical drive 2 goes backward
 
 ; Axis mapping
 M584 X0 Y1 Z2:4 E3                        ; set drive mapping
