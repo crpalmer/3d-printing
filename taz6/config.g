@@ -48,7 +48,7 @@ M574 Z1 S1 P"!zstop"                      ; configure active-low endstop for low
 ; Z-Probe
 M950 S0 C"zprobe.mod"                     ; servo pin definition
 M558 P9 C"^zprobe.in" H5 F100 T2000
-G31 X0 Y-44 Z2.9 P25 ; was 3.0, 2.9 tested well maybe just a little too close
+G31 X0 Y-44 Z3.00 P25					  ; 
 M557 X5:245 Y5:245 P9                     ; define mesh grid
 
 ; Bed heater
