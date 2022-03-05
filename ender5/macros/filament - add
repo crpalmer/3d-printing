@@ -1,0 +1,4 @@
+M83            ; relative extrusion
+G1 E50 F180    ; go slow to make sure it gets loaded in there
+G1 E200 F300   ; push the filament into the extruder and purge the old filament
+
