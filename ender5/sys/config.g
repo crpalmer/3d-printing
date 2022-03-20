@@ -8,10 +8,12 @@ global xMin = -50
 global xMax = 225
 global uMin = 0
 global uMax = 275
+global yMin = -30
+global yMax = 220
 global xCenter = 112.5
 global yCenter = 110
 global blTouchX = -2
-global blTouchY = -47
+global blTouchY = 47
 
 ; General preferences
 G90                                                    ; send absolute coordinates...
@@ -23,9 +25,9 @@ M569 P0.1 S0                                           ; e0: goes backwards
 M569 P0.2 S0                                           ; e1: goes backwards
 M569 P0.3 S0                                           ; u: goes backwards
 M569 P0.4 S0                                           ; z front: backwards
-M569 P0.5 S1                                           ; x: goes forewards
-M569 P1.0 S1                                           ; y left: goes forwards
-M569 P1.2 S0                                           ; y right: goes backwards
+M569 P0.5 S1                                           ; x: goes forwards
+M569 P1.0 S0                                           ; y left: goes backwards
+M569 P1.2 S1                                           ; y right: goes forwards
 
 M584 X0.5 Y1.0:1.2 u0.3 E0.1:0.2 Z0.0:0.4              ; set drive mapping
 
@@ -42,12 +44,12 @@ M84 S30                                                ; Set idle timeout
 M671 X140:140 Y-35:385 S2  			                   ; motor order: front, back
 
 ; Axis Limits
-M208 X{global.xMin} Y0 Z0 U{global.uMin} S1                        ; set axis minima
-M208 X{global.xMax} Y250 Z305 U{global.uMax} S0        ; set axis maxima
+M208 X{global.xMin} Y{global.yMin} Z0 U{global.uMin} S1                        ; set axis minima
+M208 X{global.xMax} Y{global.yMax} Z305 U{global.uMax} S0        ; set axis maxima
 
 ; Endstops
 M574 X1 S1 P"^0.io5.in"                                ; configure active-high endstop for low end on X
-M574 Y1 S1 P"^1.io0.in+^1.io3.in"                      ; configure active-high endstop for low end on Y
+M574 Y2 S1 P"^1.io0.in+^1.io3.in"                      ; configure active-high endstop for high end on Y
 M574 U2 S1 P"^0.io6.in"                                ; configure active-high endstop for high end on U
 
 ; Z-Probe
