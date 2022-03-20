@@ -8,7 +8,7 @@ global xMin = -50
 global xMax = 225
 global uMin = 0
 global uMax = 275
-global yMin = -30
+global yMin = -50
 global yMax = 220
 global xCenter = 112.5
 global yCenter = 110
@@ -21,7 +21,7 @@ M83                                                    ; ...but relative extrude
 
 ; Drives
 M569 P0.0 S0                                           ; z back: goes backwards
-M569 P0.1 S0                                           ; e0: goes backwards
+M569 P0.1 S1                                           ; e0: goes forwards
 M569 P0.2 S0                                           ; e1: goes backwards
 M569 P0.3 S0                                           ; u: goes backwards
 M569 P0.4 S0                                           ; z front: backwards
@@ -31,12 +31,13 @@ M569 P1.2 S1                                           ; y right: goes forwards
 
 M584 X0.5 Y1.0:1.2 u0.3 E0.1:0.2 Z0.0:0.4              ; set drive mapping
 
-M92 X160.00 Y160.00 U160.00 Z800.00 E680:2645          ; set steps per mm (recommended; 690 orbiter, 2700 zesty)
+M92 X160.00 Y160.00 U160.00 Z1600.00 E690:2645          ; set steps per mm (recommended; 690 orbiter, 2700 zesty)
 M350 X16 Y16 U16 Z16 E16 I1                            ; set microstepping to 256 interpolation
 M566 X600.00 Y600.00 U600.00 Z18.00 E300:40            ; set maximum instantaneous speed changes (mm/min)
 M203 X24000.00 Y24000.00 U24000.00 Z180.00 E7200:3600  ; set maximum speeds (mm/min)
 M201 X1000.00 Y1000.00 U1000.00 Z100.00 E800:120       ; set accelerations (mm/s^2) (nimble v3)
-M906 X1350 Y1600 U1350 Z1200 E800:500 I30              ; set motor currents (mA) and motor idle factor in per cent
+M906 X1350 Y1600 U1350 Z1200 I30
+M906 E1200:500 I10                                     ; set motor currents (mA) and motor idle factor in per cent
 M84 S30                                                ; Set idle timeout
 
 ; Z drive
@@ -55,14 +56,14 @@ M574 U2 S1 P"^0.io6.in"                                ; configure active-high e
 ; Z-Probe
 M950 S0 C"io1.out"                                     ; servo pin definition
 M558 P9 C"^io1.in" H5 F100 T2000
-G31 X{-global.blTouchX} Y{-global.blTouchY} Z4.30 P25
+G31 X{-global.blTouchX} Y{-global.blTouchY} Z2.1 P25
 M557 X5:285 Y60:345 P7                                  ; define mesh grid
 M376 H3
 
 ; Fans (tool 0)
-M950 F0 C"out5" Q250                                   ; create fan and set its frequency
+M950 F0 C"out6" Q250                                   ; create fan and set its frequency
 M106 P0 S0 H-1                                         ; set fan value (off). Thermostatic control is turned off
-M950 F1 C"out6" Q500                                   ; create fan and set its frequency
+M950 F1 C"out5" Q500                                   ; create fan and set its frequency
 M106 P1 S1 T45 H1                                      ; set fan value (on). Thermostatic control is turned on
 
 ; Fans (tool 1)
@@ -114,3 +115,4 @@ G10 P2 R0 S0                                           ; set initial tool 2 acti
 
 ; Miscellaneous
 M912 P0 S-1
+T0
