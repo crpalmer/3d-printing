@@ -8,7 +8,7 @@ global xMin = -50
 global xMax = 225
 global uMin = 0
 global uMax = 275
-global yMin = -50
+global yMin = -30
 global yMax = 220
 global xCenter = 112.5
 global yCenter = 110
@@ -56,7 +56,7 @@ M574 U2 S1 P"^0.io6.in"                                ; configure active-high e
 ; Z-Probe
 M950 S0 C"io1.out"                                     ; servo pin definition
 M558 P9 C"^io1.in" H5 F100 T2000
-G31 X{-global.blTouchX} Y{-global.blTouchY} Z2.1 P25
+G31 X{-global.blTouchX} Y{-global.blTouchY} Z2.05 P25
 M557 X5:285 Y60:345 P7                                  ; define mesh grid
 M376 H3
 
@@ -114,5 +114,5 @@ G10 P1 R0 S0                                           ; set initial tool 1 acti
 G10 P2 R0 S0                                           ; set initial tool 2 active and standby temperatures to 0C
 
 ; Miscellaneous
-M912 P0 S-1
+M912 P0 S0
 T0
