@@ -1,1 +1,1 @@
-G1 X{global.xCenter - global.blTouchX} Y{25 - global.blTouchY} F24000
+G1 X{global.xCenter - global.blTouchX} Y{25 - global.blTouchY} z5 F24000
