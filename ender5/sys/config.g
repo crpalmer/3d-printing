@@ -4,6 +4,8 @@
 
 ; -------------------------
 
+global include_duplication_tool = 1
+
 global xMin = -49.2
 global xMax = 225
 global uMin = 0
@@ -108,11 +110,10 @@ M568 A1 P0 R0 S0
 M568 A1 P1 R0 S0
 
 ; Tool 2: duplicating mode
-
-M563 P2 D0:1 H1:2 X0:3 F0:2                            ; tool 2 uses both extruders and hot end heaters, maps X to both X and U, and uses both print cooling fans
-G10 P2 X-70 Y0 U110                                    ; set tool offsets and temperatures for tool 2
-M567 P2 E1:1                                           ; set mix ratio 100% on both extruders
-M568 P2 S1                                             ; turn on mixing for tool 2
+if include_duplication_tool > 0
+  M563 P2 D0:1 H1:2 X0:3 F0:2                            ; tool 2 uses both extruders and hot end heaters, maps X to both X and U, and uses both print cooling fans
+  G10 P2 X-70 Y0 U110                                    ; set tool offsets and temperatures for tool 2
+  M567 P2 E1:1                                           ; set mix ratio 100% on both extruders
 
 ; Miscellaneous
 M912 P0 S0
