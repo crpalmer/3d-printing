@@ -4,7 +4,7 @@
 
 ; -------------------------
 
-global include_duplication_tool = 1
+global includeDuplication = 0
 
 global xMin = -49.2
 global xMax = 225
@@ -12,43 +12,54 @@ global uMin = 0
 global uMax = 275
 global yMin = -30
 global yMax = 220
+global zMax = 325
 global xCenter = 112.5
 global yCenter = 110
 global blTouchX = -2
 global blTouchY = 47
+
+global frontX = 110
+global frontY = 30
+global blX = 30
+global brX = 195
+global blrY = 200
+
+global lastPurge0 = 0
+global lastPurge1 = 0
 
 ; General preferences
 G90                                                    ; send absolute coordinates...
 M83                                                    ; ...but relative extruder moves
 
 ; Drives
-M569 P0.0 S0                                           ; z back: goes backwards
-M569 P0.1 S1                                           ; e0: goes forwards
-M569 P0.3 S0                                           ; u: goes backwards
-M569 P0.4 S0                                           ; z front: backwards
-M569 P0.5 S1                                           ; x: goes forwards
-M569 P1.0 S0                                           ; y left: goes backwards
-M569 P1.1 S0                                           ; e1: goes backwards
-M569 P1.2 S1                                           ; y right: goes forwards
+M569 P0.0 S1 D3                                        ; z front: goes forward
+M569 P0.1 S1 D3                                        ; e0: goes forwards
+M569 P0.2 S0 D3                                        ; z back left: goes backward
+M569 P0.3 S0 D3                                        ; u: goes backwards
+M569 P0.4 S0 D3                                        ; z back right: goes backward
+M569 P0.5 S1 D3                                        ; x: goes forward
+M569 P1.0 S0 D3                                        ; y left: goes backward
+M569 P1.1 S0 D3                                        ; e1: goes backward
+M569 P1.2 S1 D3                                        ; y right: goes forward
 
-M584 X0.5 Y1.0:1.2 u0.3 E0.1:1.1 Z0.0:0.4              ; set drive mapping
+M584 X0.5 Y1.0:1.2 u0.3 E0.1:1.1 Z0.0:0.2:0.4          ; set drive mapping (front, bl, br)
 
-M92 X160.00 Y160.00 U160.00 Z1600.00 E680:680          ; set steps per mm (recommended; 690 orbiter)
+; Z "leadscrew" positions
+;M671 X{global.frontX}:{global.blX}:{global.brX} Y{global.frontY}:{global.blrY}:{global.blrY} S10
+M671 X110:30:195 Y30:195:195 S10
+
+M92 X160.00 Y160.00 U160.00 Z2148.00 E680:680          ; set steps per mm (recommended; 690 orbiter)
 M350 X16 Y16 U16 Z16 E16 I1                            ; set microstepping to 256 interpolation
 M566 X600.00 Y600.00 U600.00 Z18.00 E300:300           ; set maximum instantaneous speed changes (mm/min)
-M203 X24000.00 Y24000.00 U24000.00 Z180.00 E7200:7200  ; set maximum speeds (mm/min)
-M201 X1000.00 Y1000.00 U1000.00 Z100.00 E800:800       ; set accelerations (mm/s^2)
-M906 X1350 Y1600 U1350 Z1200 I30
+M203 X24000.00 Y24000.00 U24000.00 Z600.00 E7200:7200  ; set maximum speeds (mm/min)
+M201 X1000.00 Y1000.00 U1000.00 Z500.00 E800:800       ; set accelerations (mm/s^2)
+M906 X1350 Y1000 U1350 Z840 I30
 M906 E1200:1200 I10                                    ; set motor currents (mA) and motor idle factor in per cent
 M84 S30                                                ; Set idle timeout
 
-; Z drive
-;M671 X{global.xCenter, global.xCenter} Y-35:385 S2  			                   ; motor order: front, back
-M671 X140:140 Y-35:385 S2  			                   ; motor order: front, back
-
 ; Axis Limits
 M208 X{global.xMin} Y{global.yMin} Z0 U{global.uMin} S1                        ; set axis minima
-M208 X{global.xMax} Y{global.yMax} Z305 U{global.uMax} S0        ; set axis maxima
+M208 X{global.xMax} Y{global.yMax} Z{global.zMax} U{global.uMax} S0        ; set axis maxima
 
 ; Endstops
 M574 X1 S1 P"^0.io5.in"                                ; configure active-high endstop for low end on X
@@ -59,7 +70,7 @@ M574 U2 S1 P"^0.io6.in"                                ; configure active-high e
 M950 S0 C"io1.out"                                     ; servo pin definition
 M558 P9 C"^io1.in" H5 F100 T2000
 G31 X{-global.blTouchX} Y{-global.blTouchY} Z2.15 P25
-M557 X5:285 Y60:345 P7                                  ; define mesh grid
+M557 X10:215 Y10:150 P7                                  ; define mesh grid
 M376 H3
 
 ; Fans (tool 0)
@@ -110,10 +121,11 @@ M568 A1 P0 R0 S0
 M568 A1 P1 R0 S0
 
 ; Tool 2: duplicating mode
-if include_duplication_tool > 0
+if global.includeDuplication > 0
   M563 P2 D0:1 H1:2 X0:3 F0:2                            ; tool 2 uses both extruders and hot end heaters, maps X to both X and U, and uses both print cooling fans
   G10 P2 X-70 Y0 U110                                    ; set tool offsets and temperatures for tool 2
   M567 P2 E1:1                                           ; set mix ratio 100% on both extruders
+  M568 P2 R0 S0                                          ; temperatures set to 0
 
 ; Miscellaneous
 M912 P0 S0
