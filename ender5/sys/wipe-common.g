@@ -1,19 +1,38 @@
 T-1
 
+var base_mm = 3
+var extra_mm = 3
+var multiplier = 0
+var retract = 1
+
 G1 X{global.xMin+25} U{global.uMax-25} F24000 ; move beside the bucket
-G1 Y-30 F24000              ; past the wiping bucket
+G1 Y{global.yMin+10} F24000              ; past the wiping bucket
 G1 X{global.xMin+1} U{global.uMax-1} F24000  ; now over the bucket
 
 T{param.T}
 
 if exists(param.E) then
-  G1 E{param.E} F300          ; 5mm/sec prime
-else
-  G1 E10 F300
+  if param.E > 0 then
+     set var.base_mm = param.E
 
 if exists(param.R) then
-  G1 E{-param.R} F1800        ; 30mm/sec retract
-else
-  G1 E-1 F1800
-  
+  if param.R > 0 then
+     set var.retract = param.R
+
+if exists(param.X) then
+  if param.X > 0 then
+     set var.extra_mm = param.X
+	 
+if exists(param.S) then
+  if param.S > 480
+     set var.multiplier = 3
+  elif param.S > 120
+     set var.multiplier = 2
+  elif param.S > 10
+     set var.multiplier = 1
+
+echo var.base_mm + var.multiplier*var.extra_mm
+G1 E{var.base_mm + var.multiplier*var.extra_mm} F300
+G1 E{-var.retract} F1800
+
 G1 Y0 F12000
