@@ -23,9 +23,13 @@ global frontY = 30
 global blX = 30
 global brX = 195
 global blrY = 200
-
+ 
 global lastPurge0 = 0
 global lastPurge1 = 0
+
+; Variables to be used to work around PrusaSlicer "quirks"
+global T0firstUse = true
+global T1firstUse = true
 
 ; General preferences
 G90                                                    ; send absolute coordinates...
