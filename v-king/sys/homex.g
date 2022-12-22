@@ -7,7 +7,6 @@ G1 Z2 F6000 H2   ; lift Z relative to current position
 G1 H1 X-345 F1800; move quickly to X axis endstop and stop there (first pass)
 G1 H2 X5 F6000   ; go back a few mm
 G1 H1 X-345 F360 ; move slowly to X axis endstop once more (second pass)
-G92 X-10         ; set endstop offset
 G1 Z-2 F6000 H2  ; lower Z again
 G90              ; absolute positioning
 

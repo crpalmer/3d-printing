@@ -25,7 +25,7 @@ M569 P6 S1 D3                              ; Drive 6 direction (y back right) (e
 ; 0.067 is step angle from spec sheet, 40 = belt mm for 1 full rotation, 16 micro stepping, 2 = "double belt resolution"
 ; z = 360/1.8*26.85/40*16*2 = 4296
 ; 1.8 is the normal step angle, 26.85 is the gear ratio, 2 = "double belt resolution"
-M92 X160 Y160 Z2148 E700                   ; Set steps per mm at 1/16 micro stepping (E recommended is 690)
+M92 X160 Y160 Z2148 E680                   ; Set steps per mm at 1/16 micro stepping (E recommended is 690)
 M350 X16 Y16 E16 I1                        ; Configure microstepping with interpolation for x/y/e
 M350 Z16 I0                                ; Configure microstepping without interpolation for z
 
@@ -38,7 +38,7 @@ M906 E1000 I10
 M84 S30                                    ; Set idle timeout
 
 ; Z "leadscrew" positions
-M671 X195:25:357 Y8:395:395 S10            ; motor order: front middle, back left, back right
+M671 X180:10:342 Y8:395:395 S10            ; motor order: front middle, back left, back right
 
 ; Endstops
 M574 X1 S1 P"!io6.in"                       ; x endstop (low end)
@@ -50,7 +50,7 @@ M98 P"/sys/axis-limits.g"
 ; Z-Probe
 M950 S0 C"io1.out"                         ; servo pin definition
 M558 P9 C"^io1.in" H5 F100 T2000
-G31 X0 Y55 Z1.2 P25
+G31 X1.5 Y47 Z3.25 P25
 M557 X35:300 Y75:325 P11                   ; Define mesh grid
 
 ; Bed Heater
@@ -64,7 +64,8 @@ M307 H0 A159.7 C501.4 D3.1 V24.2 B0
 M308 S1 P"temp1" Y"thermistor" T100000 B4725 C7.06e-8 ; configure sensor 1 as thermistor on pin e0temp
 M950 H1 C"out1" T1                       ; create nozzle heater output on e0heat
 M143 H1 S280                               ; Set temperature limit for heater 1 to 280C
-M307 H1 B0 R2.652 C205.6 D5.61 S1.00 V24.0 ; 40w heater @ 255C
+; M307 H1 B0 R2.652 C205.6 D5.61 S1.00 V24.0 ; 40w heater @ 255C
+M307 H1 B0 R4.098 C171.4:104.9 D1.63 S1.00 V24.4 ; revo @ 255C
 
 ; Fans
 ; heatend fan is on always on fan due to fan0 being dead
