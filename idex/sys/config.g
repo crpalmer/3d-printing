@@ -14,6 +14,14 @@ global e3dVolcano = 2
 
 global tool1 = global.e3dV6
 
+; Seconds since the epoch of the last purge of each extruder
+global lastPurge0 = 0
+global lastPurge1 = 0
+
+; Variables to be used to work around PrusaSlicer "quirks"
+global T0firstUse = true
+global T1firstUse = true
+
 ; General preferences
 G90                                                    ; send absolute coordinates...
 M83                                                    ; ...but relative extruder moves
