@@ -53,12 +53,15 @@ M584 X0.5 Y1.0:1.2 u0.3 E0.1:1.1 Z0.0:0.2:0.4          ; set drive mapping (fron
 M671 X110:30:195 Y30:195:195 S10
 
 M92 X160.00 Y160.00 U160.00 Z2148.00 E680:680          ; set steps per mm (recommended; 690 orbiter)
-M350 X16 Y16 U16 Z16 E16 I1                            ; set microstepping to 256 interpolation
+M350 X16 Y16 U16 E16 I1                                ; Configure microstepping with interpolation for x/u/y/e
+M350 Z16 I0                                            ; Configure microstepping without interpolation for z
+
+; TO TRY: do Z without interpolation
 M566 X600.00 Y600.00 U600.00 Z18.00 E300:300           ; set maximum instantaneous speed changes (mm/min)
 M203 X24000.00 Y24000.00 U24000.00 Z600.00 E7200:7200  ; set maximum speeds (mm/min)
-M201 X1000.00 Y1000.00 U1000.00 Z500.00 E800:800       ; set accelerations (mm/s^2)
-M906 X1350 Y1000 U1350 Z840 I30
-M906 E1200:1200 I10                                    ; set motor currents (mA) and motor idle factor in per cent
+M201 X1000.00 Y1000.00 U1000.00 Z500.00 E10000:10000   ; set accelerations (mm/s^2)
+M906 X1350 Y1000 U1350 Z1300 I30
+M906 E900:900 I10                                      ; set motor currents (mA) and motor idle factor in per cent
 M84 S30                                                ; Set idle timeout
 
 ; Axis Limits
@@ -73,7 +76,7 @@ M574 U2 S1 P"^0.io6.in"                                ; configure active-high e
 ; Z-Probe
 M950 S0 C"io1.out"                                     ; servo pin definition
 M558 P9 C"^io1.in" H5 F100 T2000
-G31 X{-global.blTouchX} Y{-global.blTouchY} Z2.15 P25
+G31 X{-global.blTouchX} Y{-global.blTouchY} Z2.1 P25
 M557 X10:215 Y10:150 P7                                ; define mesh grid
 M376 H3
 
@@ -118,7 +121,7 @@ M950 H2 C"1.out2" T2                                   ; create nozzle heater ou
 ; tool 1: revo 40w
 M307 H2 B0 R2.593 C211.1:173.4 D5.20 S1.00 V24.1       ; tuned (new) at 255 10mm off the bed with the part cooling fan
 M563 P1 S"E3Dv6" D1 H2 X3 F2                           ; define tool 1
-G10 P1 U0.35 Y-0.45 Z0.05                                ; set tool 1 axis offsets
+G10 P1 U0.35 Y-0.45 Z-0.05                                ; set tool 1 axis offsets
 
 ; Set both tools to standby mode
 M568 A1 P0 R0 S0
