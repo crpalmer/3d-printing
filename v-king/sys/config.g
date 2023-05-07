@@ -61,6 +61,10 @@ M558 P9 C"^io1.in" H5 F100 T2000
 G31 X{-global.blTouchX} Y{-global.blTouchY} Z2.1 P25
 M557 X35:300 Y75:325 P11                   ; Define mesh grid
 
+; Accelerometer
+M955 P0 C"io4.out+io4.in"
+M593 P"ZVD" F83       ; does it do anything for me?
+
 ; Bed Heater
 M308 S0 P"temp0" Y"thermistor" T100000 B4138 ; configure sensor 0 as thermistor on pin bedtemp
 M950 H0 C"out0" T0                         ; create bed heater output on bedheat and map it to sensor 0
