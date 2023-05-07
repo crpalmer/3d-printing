@@ -52,6 +52,13 @@ M584 X0.5 Y1.0:1.2 u0.3 E0.1:1.1 Z0.0:0.2:0.4          ; set drive mapping (fron
 ;M671 X{global.frontX}:{global.blX}:{global.brX} Y{global.frontY}:{global.blrY}:{global.blrY} S10
 M671 X110:30:195 Y30:195:195 S10
 
+; Z Steps have 2 possible computations (gear reduction or angle per step) from the manufacturer...
+; Our pulley moves 40mm per full rotation
+; 0.067 degree/step: 360/0.067/40*16 = 2,149.25
+; 26.85 gear ration: 360/1.8*26.85/40*16 = 2,148
+; Note the different is .058% so a movement of 350mm equates to 0.2mm potential error, so not that critical
+; I'm going to believe the gear ratio because 1.8/26.85 = 0.067039 degrees easily called 0.067 on the specs...
+
 M92 X160.00 Y160.00 U160.00 Z2148.00 E680:680          ; set steps per mm (recommended; 690 orbiter)
 M350 X16 Y16 U16 E16 I1                                ; Configure microstepping with interpolation for x/u/y/e
 M350 Z16 I0                                            ; Configure microstepping without interpolation for z
