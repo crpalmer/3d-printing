@@ -36,15 +36,15 @@ G90                                                    ; send absolute coordinat
 M83                                                    ; ...but relative extruder moves
 
 ; Drives
-M569 P0.0 S1 D3                                        ; z front: goes forward
-M569 P0.1 S1 D3                                        ; e0: goes forwards
-M569 P0.2 S0 D3                                        ; z back left: goes backward
-M569 P0.3 S0 D3                                        ; u: goes backwards
-M569 P0.4 S0 D3                                        ; z back right: goes backward
-M569 P0.5 S1 D3                                        ; x: goes forward
-M569 P1.0 S0 D3                                        ; y left: goes backward
-M569 P1.1 S0 D3                                        ; e1: goes backward
-M569 P1.2 S1 D3                                        ; y right: goes forward
+M569 P0.0 S1 ; D3                                        ; z front: goes forward
+M569 P0.1 S1 ; D3                                        ; e0: goes forwards
+M569 P0.2 S0 ; D3                                        ; z back left: goes backward
+M569 P0.3 S0 ; D3                                        ; u: goes backwards
+M569 P0.4 S0 ; D3                                        ; z back right: goes backward
+M569 P0.5 S1 ; D3                                        ; x: goes forward
+M569 P1.0 S0 ; D3                                        ; y left: goes backward
+M569 P1.1 S0 ; D3                                        ; e1: goes backward
+M569 P1.2 S1 ; D3                                        ; y right: goes forward
 
 M584 X0.5 Y1.0:1.2 u0.3 E0.1:1.1 Z0.0:0.2:0.4          ; set drive mapping (front, bl, br)
 
