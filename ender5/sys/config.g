@@ -93,9 +93,9 @@ M950 F3 C"1.out7" Q500                                 ; create fan and set its 
 M106 P3 S1 T45 H2                                      ; set fan value (on). Thermostatic control is turned on
 
 ; Fans (board cooling)
-M950 F4 C"!1.out3" Q25000                              ; create fan and set its frequency
+M950 F4 C"!1.out3+out3.tach" Q25000                    ; create fan and set its frequency
 M106 P4 S1 H-1                                         ; set fan value (on).  Thermostatic control is turned off
-M950 F5 C"!1.out4" Q25000                              ; create fan and set its frequency
+M950 F5 C"!1.out4+out4.tach" Q25000                    ; create fan and set its frequency
 M106 P5 S1 H-1                                         ; set fan value (on).  Thermostatic control is turned off
 
 ; Bed Heater
