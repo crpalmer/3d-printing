@@ -128,7 +128,9 @@ M950 H2 C"1.out2" T2                                   ; create nozzle heater ou
 ; tool 1: revo 40w
 M307 H2 B0 R2.593 C211.1:173.4 D5.20 S1.00 V24.1       ; tuned (new) at 255 10mm off the bed with the part cooling fan
 M563 P1 S"E3Dv6" D1 H2 X3 F2                           ; define tool 1
-G10 P1 U0.35 Y-0.45 Z-0.05                                ; set tool 1 axis offsets
+#G10 P1 U0.35 Y-0.45 Z-0.05                            ; pre having ember to set it right
+#G10 P1 X0 Y0.2 Z0 U1                                  ; pre voron heatsink
+G10 P1 X-0 U0.75 Y-0.45 Z0.15
 
 ; Set both tools to standby mode
 M568 A1 P0 R0 S0
