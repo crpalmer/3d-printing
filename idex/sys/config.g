@@ -120,15 +120,15 @@ M568 A1 P1 R0 S0
 
 ; Tool 2: duplicating mode
 
-M563 P2 D0:1 H1:2 X0:3 F0:2                            ; tool 2 uses both extruders and hot end heaters, maps X to both X and U, and uses both print cooling fans
-G10 P2 X-70 Y0 U110                                    ; set tool offsets and temperatures for tool 2
-M567 P2 E1:1                                           ; set mix ratio 100% on both extruders
-M568 P2 S1                                             ; turn on mixing for tool 2
+;M563 P2 D0:1 H1:2 X0:3 F0:2                            ; tool 2 uses both extruders and hot end heaters, maps X to both X and U, and uses both print cooling fans
+;G10 P2 X-70 Y0 U110                                    ; set tool offsets and temperatures for tool 2
+;M567 P2 E1:1                                           ; set mix ratio 100% on both extruders
+;M568 P2 S1                                             ; turn on mixing for tool 2
 
 ; Tool (common)
 G10 P0 R0 S0                                           ; set initial tool 0 active and standby temperatures to 0C
 G10 P1 R0 S0                                           ; set initial tool 1 active and standby temperatures to 0C
-G10 P2 R0 S0                                           ; set initial tool 2 active and standby temperatures to 0C
+;G10 P2 R0 S0                                           ; set initial tool 2 active and standby temperatures to 0C
 
 ; MCU DOES NOT WORK ON THE DUET 3 MINI 5+, DON'T CONFIGURE:
 ; M912 P0 S-12.5                                       ; Calibrate MCU temperature
