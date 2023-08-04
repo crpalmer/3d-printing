@@ -1,4 +1,4 @@
-;
+ ;
 ;
 ; T O D O
 ;
@@ -60,9 +60,10 @@ M208 X345 Y372 Z390 S0                     ; Set axis maxima
 
 ; Z-Probe
 M950 S0 C"io1.out"                         ; servo pin definition
-M558 P9 C"^io1.in" H5 F100 T2000
-G31 X{-global.blTouchX} Y{-global.blTouchY} Z2.225 P25
-M557 X35:300 Y75:325 P11                   ; Define mesh grid
+M558 P9 C"^io1.in" H5 F100 T24000
+G31 X{global.blTouchX} Y{global.blTouchY} Z2.4 P25  ; z was 2.4, 2.225
+M557 X10:335 Y60:360 P10                   ; Define mesh grid
+M376 H12                                   ; Taper compensation over 12mm height, good for up to 0.6mm error @ < 5% extrusion error
 
 ; Accelerometer
 M955 P0 C"io4.out+io4.in"
