@@ -6,12 +6,12 @@
 ;
 
 global frontX = 180
-global blX = 10
-global brX = 342
+global blX = 6
+global brX = 337
 global frontY = 13
-global blrY = 400
+global blrY = 392
 global blTouchX = 0
-global blTouchY = -47
+global blTouchY = 47
 
 ; General preferences
 G90                                        ; Send absolute coordinates...
@@ -28,7 +28,7 @@ M569 P2 S1 D2                              ; Drive 2 direction (y back left)
 M569 P3 S0 D2                              ; Drive 3 direction (y back right)
 M569 P4 S0 D2                              ; Drive 4 direction (z front middle)
 M569 P5 S1 D2                              ; Drive 5 direction (z back left) (expansion 1)
-M569 P6 S1 D2                              ; Drive 6 direction (y back right) (expansion 2)
+M569 P6 S1 D2                              ; Drive 6 direction (z back right) (expansion 2)
 
 ; Drive steps per mm
 ; z = 360/0.067/40*16*2 = 4298.5
@@ -48,14 +48,15 @@ M906 E900 I10
 M84 S30                                    ; Set idle timeout
 
 ; Z "leadscrew" positions
-M671 X180:10:342 Y8:395:395 S10            ; motor order: front middle, back left, back right
+M671 X180:4:336 Y8:395:395 S10             ; motor order: front middle, back left, back right
 
 ; Endstops
-M574 X1 S1 P"!io6.in"                       ; x endstop (low end)
-M574 Y2 S1 P"!io5.in+!io3.in"               ; 2 y endstops (high end)
+M574 X1 S1 P"!io6.in"                      ; x endstop (low end)
+M574 Y2 S1 P"!io5.in+!io3.in"              ; 2 y endstops (high end)
 
 ; Axis Limits
-M98 P"/sys/axis-limits.g"
+M208 X-24 Y0 Z-5 S1                        ; Set axis minima
+M208 X345 Y372 Z390 S0                     ; Set axis maxima
 
 ; Z-Probe
 M950 S0 C"io1.out"                         ; servo pin definition
