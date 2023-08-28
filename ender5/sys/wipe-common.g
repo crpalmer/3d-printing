@@ -16,6 +16,11 @@ if exists(param.E) then
   if param.E > 0 then
      set var.base_mm = param.E
 
+; On first use, purge a little extra to make sure we have a decent first change
+if exists(param.F) then
+   if param.F == "true" then
+      set var.base_mm = var.base_mm + 5
+
 if exists(param.R) then
   if param.R > 0 then
      set var.retract = param.R
@@ -33,7 +38,7 @@ if exists(param.S) then
      set var.multiplier = 1
 
 ; echo var.base_mm + var.multiplier*var.extra_mm
-G1 E{var.base_mm + var.multiplier*var.extra_mm} F180 ; F300
+G1 E{var.base_mm + var.multiplier*var.extra_mm} F300 ; F180
 G1 E{-var.retract} F1800
 
 G1 Y0 F24000
