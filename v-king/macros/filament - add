@@ -1,3 +1,6 @@
+if state.currentTool < 0
+  abort "You need an active tool to add filament"
+
 M83            ; relative extrusion
 G1 E50 F180    ; go slow to make sure it gets loaded in there
 G1 E200 F180   ; push the filament into the extruder and purge the old filament
