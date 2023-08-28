@@ -1,0 +1,5 @@
+if state.currentTool < 0
+  abort "You need an active tool to add filament"
+
+M83            ; relative extrusion
+G1 E250 F90    ; go slow
