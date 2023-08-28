@@ -15,7 +15,7 @@ global yMax = 220
 global zMax = 325
 global xCenter = 112.5
 global yCenter = 110
-global blTouchX = -2
+global blTouchX = 0
 global blTouchY = 47
 
 global frontX = 110
@@ -83,8 +83,8 @@ M574 U2 S1 P"^0.io6.in"                                ; configure active-high e
 ; Z-Probe
 M950 S0 C"io1.out"                                     ; servo pin definition
 M558 P9 C"^io1.in" H5 F100 T2000
-G31 X{-global.blTouchX} Y{-global.blTouchY} Z2.35 P25
-M557 X10:215 Y10:150 P7                                ; define mesh grid
+G31 X{-global.blTouchX} Y{-global.blTouchY} Z2.40 P25
+M557 X10:215 Y-15:130 P10                                ; define mesh grid
 M376 H3
 
 ; Fans (tool 0)
@@ -128,9 +128,8 @@ M950 H2 C"1.out2" T2                                   ; create nozzle heater ou
 ; tool 1: revo 40w
 M307 H2 B0 R2.593 C211.1:173.4 D5.20 S1.00 V24.1       ; tuned (new) at 255 10mm off the bed with the part cooling fan
 M563 P1 S"E3Dv6" D1 H2 X3 F2                           ; define tool 1
-#G10 P1 U0.35 Y-0.45 Z-0.05                            ; pre having ember to set it right
-#G10 P1 X0 Y0.2 Z0 U1                                  ; pre voron heatsink
-G10 P1 X-0 U0.75 Y-0.45 Z0.15
+#G10 P1 X0 U0.2 Y-0.45 Z0.125
+G10 P1 X0 U0.65 Y-0.6 Z0
 
 ; Set both tools to standby mode
 M568 A1 P0 R0 S0
