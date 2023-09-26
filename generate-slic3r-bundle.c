@@ -7,6 +7,8 @@
 
 #define DEBUG 0
 
+int verbose = 0;
+
 static void write_config(config_t *c)
 {
     config_write(c, stdout);
@@ -73,8 +75,10 @@ static void output_variants(group_t *g)
     
 static void output_customizations(group_t *g)
 {
+    if (verbose > 1) fprintf(stderr, "customization group\n");
     for (size_t i = 0; i < g->n_c; i++) {
 	config_t *c = config_new_customization(g->base, g->c[i]);
+        if (verbose > 2) fprintf(stderr, "    customization: %s\n", config_get_name(c));
 	write_config(c);
 	config_destroy(c);
     }
@@ -83,6 +87,7 @@ static void output_customizations(group_t *g)
 static void output_configs(group_t *g)
 {
     for (size_t i = 0; i < g->n_c; i++) {
+        if (verbose > 2) fprintf(stderr, "config: %s\n", config_get_name(g->c[i]));
 	if (g->c[i]) write_config(g->c[i]);
     }
 }
@@ -98,7 +103,18 @@ output_group(group_t *g)
 int main(int argc, char **argv)
 {
     size_t n_groups;
+   
+    for (int i = 1; i < argc; i++) {
+	if (strcmp(argv[i], "-v") == 0) verbose++;
+	else {
+	    fprintf(stderr, "[-v]\n");
+	    exit(1);
+	}
+    }
+
+    if (verbose) fprintf(stderr, "Loading groups.\n");
     group_t **groups = group_load_dirs("slic3r", &n_groups);
+    if (verbose) fprintf(stderr, "Outputting groups.\n");
     for (size_t i = 0; i < n_groups; i++) {
 	output_group(groups[i]);
     }
