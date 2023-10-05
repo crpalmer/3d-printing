@@ -10,8 +10,19 @@ global blX = 6
 global brX = 337
 global frontY = 13
 global blrY = 392
-global blTouchX = 0
-global blTouchY = 47
+
+global zprobe_x = 0
+global zprobe_y = 43
+
+global klicky_pre_x = 226
+global klicky_pre_y = 335
+global klicky_dock_x = global.klicky_pre_x
+global klicky_dock_y = 366
+global klicky_release_x = global.klicky_pre_x - 50
+global klicky_release_y = global.klicky_dock_y
+global klicky_servo_up = 130
+global klicky_servo_down = 5
+global klicky_n_deploys = 0
 
 ; General preferences
 G90                                        ; Send absolute coordinates...
@@ -42,7 +53,7 @@ M350 Z16 I0                                ; Configure microstepping without int
 ; Drive speeds and currents
 M566 X600 Y600 Z18 E300                    ; Set maximum instantaneous speed changes (mm/min)
 M203 X24000 Y24000 Z600 E7200              ; Set maximum speeds (mm/min)
-M201 X1000 Y1000 Z500 E10000                ; Set accelerations (mm/s^2)
+M201 X1000 Y1000 Z500 E10000               ; Set accelerations (mm/s^2)
 M906 X1200 Y1000 Z840 I30                  ; Set motor currents (mA) and motor idle factor in per cent
 M906 E900 I10
 M84 S30                                    ; Set idle timeout
@@ -59,15 +70,14 @@ M208 X-24 Y0 Z-5 S1                        ; Set axis minima
 M208 X345 Y372 Z390 S0                     ; Set axis maxima
 
 ; Z-Probe
-M950 S0 C"io1.out"                         ; servo pin definition
-M558 P9 C"^io1.in" H5 F100 T24000
-G31 X{global.blTouchX} Y{global.blTouchY} Z2.4 P25  ; z was 2.4, 2.225
+M558 P5 C"io1.in" H5 F200 T24000 P5
+G31 X{global.zprobe_x} Y{global.zprobe_y} Z3.05 P25
 M557 X10:335 Y60:360 P10                   ; Define mesh grid
 M376 H12                                   ; Taper compensation over 12mm height, good for up to 0.6mm error @ < 5% extrusion error
 
 ; Accelerometer
-M955 P0 C"io4.out+io4.in"
-M593 P"ZVD" F83       ; does it do anything for me?
+;M955 P0 C"io4.out+io4.in"
+;M593 P"ZVD" F83       ; does it do anything for me?
 
 ; Bed Heater
 M308 S0 P"temp0" Y"thermistor" T100000 B4138 ; configure sensor 0 as thermistor on pin bedtemp
@@ -86,9 +96,9 @@ M307 H1 B0 R2.593 C211.1:173.4 D5.20 S1.00 V24.1       ; [from ender-5] tuned (n
 ; Fans
 ; heatend fan is on always on fan due to fan0 being dead
 M950 F0 C"out5" Q500
-M106 P0 S0                                 ; part cooling fan off by default on fan1
-M950 F1 C"out6" Q500                       ; create fan 1 on pin fan2 and set its frequency
-M106 P1 S1 T45 H1                          ; set fan 1 value. Thermostatic control is turned on
+M106 P0 S0                                 ; part cooling fan off by default
+M950 F1 C"out4" Q500
+M106 P1 S1 T45 H1                          ; hotend fan turned on/off based on extruder temp
 
 ; Tools
 M563 P0 D0 H1 F0                           ; Define tool 0
@@ -101,6 +111,10 @@ G10 P0 R0 S0                               ; Set initial tool 0 active and stand
 ; Automatic saving after power loss is not enabled
 
 ; Custom settings are not configured
+
+; Servo for klicky
+M950 S1 C"out6" ; assign GPIO port 1 to out9 (Servo header), servo mod
+M280 P1 S{global.klicky_servo_down}
 
 ; Miscellaneous
 M912 P0 S1.2                               ; MCU temperature calibration
