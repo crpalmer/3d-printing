@@ -82,9 +82,9 @@ M574 U2 S1 P"^0.io6.in"                                ; configure active-high e
 
 ; Z-Probe
 M950 S0 C"io1.out"                                     ; servo pin definition
-M558 P9 C"^io1.in" H5 F100 T2000
-G31 X{-global.blTouchX} Y{-global.blTouchY} Z2.40 P25
-M557 X10:215 Y-15:130 P10                                ; define mesh grid
+M558 P9 C"^io1.in" H5 F100 T24000
+G31 X{global.blTouchX} Y{global.blTouchY} Z2.75 P25
+M557 X5:225 Y30:225 P20                                ; define mesh grid
 M376 H3
 
 ; Fans (tool 0)
