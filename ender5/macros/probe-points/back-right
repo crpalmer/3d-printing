@@ -1,1 +1,0 @@
-G1 X{global.xMax - 25 - global.blTouchX} Y{global.yMax - 25 - global.blTouchY} z5 F24000
