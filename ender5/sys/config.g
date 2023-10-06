@@ -15,8 +15,8 @@ global yMax = 220
 global zMax = 325
 global xCenter = 112.5
 global yCenter = 110
-global blTouchX = 0
-global blTouchY = 47
+global zprobe_x = 0
+global zprobe_y = 22
 
 global frontX = 110
 global frontY = 30
@@ -26,6 +26,7 @@ global blrY = 200
  
 global lastPurge0 = 0
 global lastPurge1 = 0
+global klicky_n_deploys = 0
 
 ; Variables to be used to work around PrusaSlicer "quirks"
 global T0firstUse = true
@@ -82,9 +83,9 @@ M574 U2 S1 P"^0.io6.in"                                ; configure active-high e
 
 ; Z-Probe
 M950 S0 C"io1.out"                                     ; servo pin definition
-M558 P9 C"^io1.in" H5 F100 T24000
-G31 X{global.blTouchX} Y{global.blTouchY} Z2.75 P25
-M557 X5:225 Y30:225 P20                                ; define mesh grid
+M558 P5 C"^io1.in" H5 F200 T24000
+G31 X{global.zprobe_x} Y{global.zprobe_y} Z3.75 P25
+M557 X5:225 Y5:225 P9                                  ; define mesh grid
 M376 H3
 
 ; Fans (tool 0)
