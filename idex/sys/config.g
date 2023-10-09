@@ -116,8 +116,8 @@ G10 P0 R0 S0                                           ; set initial tool 0 acti
 G10 P1 R0 S0                                           ; set initial tool 1 active and standby temperatures to 0C
 ;G10 P2 R0 S0                                           ; set initial tool 2 active and standby temperatures to 0C
 
-; MCU DOES NOT WORK ON THE DUET 3 MINI 5+, DON'T CONFIGURE:
-; M912 P0 S-12.5                                       ; Calibrate MCU temperature
+; MCU DOES NOT WORK ON THE DUET 3 MINI 5+?
+M912 P0 S-12.5                                       ; Calibrate MCU temperature
 
 ; Miscellaneous
 M912 P0 S-1
