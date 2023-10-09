@@ -5,6 +5,8 @@
 
 if state.currentTool == 0
   M106 P0 S{fans[2].requestedValue}
+  M106 P2 S0
 elif state.currentTool == 1
   M106 P2 S{fans[0].requestedValue}
+  M106 P0 S0
 endif
