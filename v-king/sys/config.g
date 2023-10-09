@@ -37,7 +37,7 @@ M569 P1 S1 D2                              ; Drive 0 direction (e0) (Orbiter rec
 M569 P1 S1 D2                              ; Drive 1 direction (x)
 M569 P2 S1 D2                              ; Drive 2 direction (y back left)
 M569 P3 S0 D2                              ; Drive 3 direction (y back right)
-M569 P4 S0 D2                              ; Drive 4 direction (z front middle)
+M569 P4 S1 D2                              ; Drive 4 direction (z front middle)
 M569 P5 S1 D2                              ; Drive 5 direction (z back left) (expansion 1)
 M569 P6 S1 D2                              ; Drive 6 direction (z back right) (expansion 2)
 
@@ -66,14 +66,14 @@ M574 X1 S1 P"!io6.in"                      ; x endstop (low end)
 M574 Y2 S1 P"!io5.in+!io3.in"              ; 2 y endstops (high end)
 
 ; Axis Limits
-M208 X-24 Y0 Z-5 S1                        ; Set axis minima
+M208 X-24 Y-12 Z-5 S1                        ; Set axis minima
 M208 X345 Y372 Z390 S0                     ; Set axis maxima
 
 ; Z-Probe
 M558 P5 C"io1.in" H5 F200 T24000 P5
-G31 X{global.zprobe_x} Y{global.zprobe_y} Z3.05 P25
-M557 X10:335 Y60:360 P10                   ; Define mesh grid
-M376 H12                                   ; Taper compensation over 12mm height, good for up to 0.6mm error @ < 5% extrusion error
+G31 X{global.zprobe_x} Y{global.zprobe_y} Z2.35 P25
+M557 X5:345 Y31:365 P10                   ; Define mesh grid
+M376 H6                                   ; Taper compensation over 6mm height, good for up to 0.3mm error @ < 5% extrusion error
 
 ; Accelerometer
 ;M955 P0 C"io4.out+io4.in"
