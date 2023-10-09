@@ -9,11 +9,6 @@ global uMin = -58.45
 global uMax = 283
 global xCenter = 140
 
-global e3dV6 = 1
-global e3dVolcano = 2
-
-global tool1 = global.e3dV6
-
 ; Seconds since the epoch of the last purge of each extruder
 global lastPurge0 = 0
 global lastPurge1 = 0
@@ -100,19 +95,10 @@ G10 P0 X0 Y0 Z0                                        ; set tool 0 axis offsets
 M308 S2 P"1.temp2" Y"thermistor" T100000 B4725 C7.06e-8  ; configure sensor
 M950 H2 C"1.out2" T2                                   ; create nozzle heater output and map it to sensor 2
 
-if global.tool1 == global.e3dV6
-  ; tool 1: e3dv6 40w
-  M307 H2 B0 R2.508 C225.2 D5.67 S1.00 V24.1           ; tuned 255 10mm off of the bed with the part cooling fan
-  M563 P1 S"E3Dv6" D1 H2 X3 F2                         ; define tool 1
-  G10 P1 X0 Y0.3 Z-0.025                               ; set tool 1 axis offsets
-elif global.tool1 == global.e3dVolcano
-  ; tool 1: e3dv6 volcano 30w
-  M307 H2 B0 R1.666 C251.2 D4.48 S1.00 V24.3           ; tuned 255 no part cooling fan
-  M563 P1 S"volcano" D1 H2 X3 F2                       ; define tool 1
-  G10 P1 X0 Y0 Z-9.45                                  ; set tool 1 axis offsets
-else
-  abort "Invalid tool for tool1"
-endif
+; tool 1: e3dv6 40w
+M307 H2 B0 R2.508 C225.2 D5.67 S1.00 V24.1           ; tuned 255 10mm off of the bed with the part cooling fan
+M563 P1 S"E3Dv6" D1 H2 X3 F2                         ; define tool 1
+G10 P1 X0.5 Y0.225 Z-0.025                               ; set tool 1 axis offsets
 
 ; Set both tools to standby mode
 M568 A1 P0 R0 S0
