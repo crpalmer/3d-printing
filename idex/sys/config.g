@@ -45,7 +45,7 @@ M671 X140:140 Y-35:385 S2  			                   ; motor order: front, back
 
 ; Axis Limits
 M208 X0 Y0 Z0 U{global.uMin} S1                        ; set axis minima
-M208 X{global.xMax} Y350 Z420 U{global.uMax} S0        ; set axis maxima
+M208 X{global.xMax} Y350 Z430 U{global.uMax} S0        ; set axis maxima
 
 ; Endstops
 M574 X2 S1 P"^0.io5.in"                                ; configure active-high endstop for high end on X
