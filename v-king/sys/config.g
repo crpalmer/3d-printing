@@ -20,8 +20,8 @@ global klicky_dock_x = global.klicky_pre_x
 global klicky_dock_y = 366
 global klicky_release_x = global.klicky_pre_x - 50
 global klicky_release_y = global.klicky_dock_y
-global klicky_servo_up = 130
-global klicky_servo_down = 5
+global klicky_servo_up = 134
+global klicky_servo_down = 6
 global klicky_n_deploys = 0
 
 ; General preferences
