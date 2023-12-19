@@ -26,6 +26,15 @@ global blrY = 200
  
 global lastPurge0 = 0
 global lastPurge1 = 0
+
+global klicky_pre_x = 110
+global klicky_pre_y = 180
+global klicky_dock_x = global.klicky_pre_x
+global klicky_dock_y = 220
+global klicky_release_x = global.klicky_dock_x - 50
+global klicky_release_y = global.klicky_dock_y
+global klicky_servo_up = 2275
+global klicky_servo_down = 750
 global klicky_n_deploys = 0
 
 ; Variables to be used to work around PrusaSlicer "quirks"
@@ -84,12 +93,12 @@ M574 U2 S1 P"^0.io6.in"                                ; configure active-high e
 ; Z-Probe
 M950 S0 C"io1.out"                                     ; servo pin definition
 M558 P5 C"^io1.in" H5 F200 T24000
-G31 X{global.zprobe_x} Y{global.zprobe_y} Z3.75 P25
+G31 X{global.zprobe_x} Y{global.zprobe_y} Z3.7 P25
 M557 X5:225 Y5:225 P9                                  ; define mesh grid
 M376 H3
 
 ; Fans (tool 0)
-M950 F0 C"out6" Q250                                   ; create fan and set its frequency
+M950 F0 C"out4" Q250                                   ; create fan and set its frequency
 M106 P0 S0 H-1 C"part-0"                               ; set fan value (off). Thermostatic control is turned off
 M950 F1 C"out5" Q500                                   ; create fan and set its frequency
 M106 P1 S1 T45 H1                                      ; set fan value (on). Thermostatic control is turned on
@@ -142,6 +151,10 @@ if global.includeDuplication > 0
   G10 P2 X-70 Y0 U110                                    ; set tool offsets and temperatures for tool 2
   M567 P2 E1:1                                           ; set mix ratio 100% on both extruders
   M568 P2 R0 S0                                          ; temperatures set to 0
+
+; Servo for klicky
+M950 S1 C"out6" ; assign GPIO port 1 to out9 (Servo header), servo mod
+M280 P1 S{global.klicky_servo_down}
 
 ; Miscellaneous
 M912 P0 S0
