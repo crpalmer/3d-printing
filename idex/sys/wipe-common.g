@@ -24,5 +24,5 @@ if exists(param.S) then
      set var.multiplier = 1
 
 echo var.base_mm + var.multiplier*var.extra_mm
-G1 E{var.base_mm + var.multiplier*var.extra_mm} F300
+G1 E{var.base_mm + var.multiplier*var.extra_mm} F120
 G1 E{-var.retract} F1800
