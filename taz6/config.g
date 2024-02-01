@@ -80,9 +80,10 @@ M307 H1 A502.2 C320.7 D4 V24.1 B0
 
 ; Fans
 M950 F0 C"fan0" Q500
-M106 P0 S1 H1 T45                         ; set fan 0 to be on by default but therm controlled
+M106 P0 S1 H1 T45                         ; set fan 0 to be on by default but therm controlled, set to 5V
+; Fan 1 is set to 5V but unused
 M950 F2 C"fan2" Q500
-M106 P2 S0 H-1                            ; set fan 2 off by default, not controlled
+M106 P2 S0 H-1                            ; set fan 2 off by default, not controlled, set to 24V
 
 ; Tools
 M563 P0 D0 H1 F2                          ; define tool 0
@@ -93,4 +94,3 @@ G10 P0 R0 S0                              ; set initial tool 0 active and standb
 
 ; Miscellaneous
 T0                                        ; select first tool
-
