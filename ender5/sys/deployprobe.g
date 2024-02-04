@@ -1,29 +1,19 @@
-if move.axes[0].homed == false and move.axes[1].homed == false
-  M98 P"/sys/homexy.g"
-  
-if move.axes[0].homed == false
-  G28 X
-if move.axes[1].homed == false
-  G28 Y
+if global.klicky_n_deploys > 0
+  set global.klicky_n_deploys = global.klicky_n_deploys + 1
+  M99
 
-if global.klicky_n_deploys == 0
-  var tool = state.currentTool
+var tool = state.currentTool
+
+if global.klicky_is_manual == true
+  T-1
   T0
+  M291 S3 P"Please attach the klicky probe"
+else
+  M98 P"/sys/deployprobe-automatically.g"
 
-  G0 X{global.klicky_pre_x} Y{global.klicky_pre_y} F24000
-  G4 S0
-  M280 P1 S{global.klicky_servo_up}
-  G4 S0.5
-  G0 X{global.klicky_dock_x} Y{global.klicky_dock_y} F1200
-  G4 S0
-  G0 X{global.klicky_pre_x} Y{global.klicky_pre_y} F24000
-  G4 S0
-  M280 P1 S{global.klicky_servo_down}
-  G4 S0
+T{var.tool}
 
-  T{var.tool}
+if sensors.probes[0].value[0] = 1000
+  abort "Failed to pick up the probe"
 
-  if sensors.probes[0].value[0] = 1000
-    abort "Failed to pick up the probe"
-
-set global.klicky_n_deploys = global.klicky_n_deploys + 1
+set global.klicky_n_deploys = 1
