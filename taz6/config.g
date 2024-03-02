@@ -5,27 +5,63 @@
 
 ; Configuration
 
-global extruder_current = 750
-global extruder_direction = 1             ; forward
-global extruder_jerk = 600                ; 10 mm/sec
-global extruder_acceleration = 250
+; Network - START THE NETWORK BEFORE ANYTHING ELSE IN CASE OF ERRORS
+;
+; If you have an error before the network starts you'll need to remove the sdcard
+; to be able to fix the error because you won't be able to access the web console!
 
-global zprobe_offset_x = 0
-global zprobe_offset_y = -44
-global zprobe_offset_z = 2.8
-
-; General preferences
-G90                                       ; send absolute coordinates...
-M83                                       ; ...but relative extruder moves
 M550 P"taz6"                              ; set printer name
-
-; Network
 M98 P"password.g"
 M551 P"reprap"
 M552 P0.0.0.0 S1                          ; enable network and acquire dynamic address via DHCP
 M586 P0 S1                                ; enable HTTP
 M586 P1 S0                                ; disable FTP
 M586 P2 S0                                ; disable Telnet
+
+global klicky_is_manual = false
+global klicky_safe_x = 50
+global klicky_safe_y = -10
+global klicky_pre_x = -1
+global klicky_pre_y = -10
+global klicky_z = 12.5
+global klicky_dock_x = global.klicky_pre_x
+global klicky_dock_y = 14
+global klicky_release_x = global.klicky_dock_x + 50
+global klicky_release_y = global.klicky_dock_y
+global klicky_servo_up = 1350
+global klicky_servo_down = 690
+global klicky_n_deploys = 0
+
+global hotend_revo_roto = 1
+global hotend_itworks3d = 2
+
+global hotend = global.hotend_revo_roto
+;global hotend = global.hotend_itworks3d
+
+if global.hotend == global.hotend_revo_roto
+  global extruder_current = 450
+  global extruder_direction = 1             ; forward
+  global extruder_jerk = 150                ; 2.5 mm/sec
+  global extruder_acceleration = 3000
+  global extruder_steps_per_mm = 2682
+
+  global zprobe_offset_x = 0
+  global zprobe_offset_y = 20
+  global zprobe_offset_z = 3.2
+elif global.hotend == global.hotend_itworks3d
+  global extruder_current = 750
+  global extruder_direction = 1             ; forward
+  global extruder_jerk = 600                ; 10 mm/sec
+  global extruder_acceleration = 250
+  global extruder_steps_per_mm = 413
+
+  global zprobe_offset_x = 0
+  global zprobe_offset_y = -44
+  global zprobe_offset_z = 2.8
+  global zprobe_
+; General preferences
+G90                                       ; send absolute coordinates...
+M83                                       ; ...but relative extruder moves
 
 ; Drives
 M569 P0 S0 D2                             ; physical drive 0 goes backward
@@ -40,7 +76,7 @@ M671 X370:-110 Y140:140                   ; leadscrew positions
 
 ; Steps and speeds
 M350 X16 Y16 Z16 E16 I1                   ; configure microstepping with interpolation
-M92 X100.50 Y100.50 Z1600.00 E413.00      ; set steps per mm (830 for stock extruder)
+M92 X100.50 Y100.50 Z1600.00 E{global.extruder_steps_per_mm}      ; set steps per mm (830 for stock extruder)
 M566 X480.00 Y480.00 Z24.00 E{global.extruder_jerk}       ; set maximum instantaneous speed changes (mm/min)
 M203 X18000.00 Y18000.00 Z180.00 E1500.00 ; set maximum speeds (mm/min)
 M201 X500.00 Y500.00 Z20.00 E{global.extruder_acceleration}       ; set accelerations (mm/s^2)
@@ -49,6 +85,8 @@ M84 S30                                   ; Set idle timeout
 
 ; Axis Limits
 M208 X-20 Y-20 Z-1 S1                     ; set axis minima
+; Printable area is 280x280 (minus the very corners?)
+; Extra movement area is available intended for reaching the probe points
 M208 X300 Y303 Z270 S0                    ; set axis maxima
 
 ; Endstops
@@ -58,10 +96,16 @@ M574 Z1 S1 P"!zstop"                      ; configure active-low endstop for low
 
 ; Z-Probe
 M950 S0 C"zprobe.mod"                     ; servo pin definition
-M558 P9 C"^zprobe.in" H5 F100 T2000
+M558 P9 C"^zprobe.in" H5 F200 T6000
 G31 X{global.zprobe_offset_x} Y{global.zprobe_offset_y} Z{global.zprobe_offset_z} P25					  ; 
-M557 X5:245 Y5:245 P13                     ; define mesh grid
-M376 H4
+
+var min_x = max(5+global.zprobe_offset_x, 5)
+var max_x = min(280, 280+global.zprobe_offset_x)
+var min_y = max(5+global.zprobe_offset_y, 5)
+var max_y = min(280, 280+global.zprobe_offset_y)
+
+M557 X{var.min_x}:{var.max_x} Y{var.min_y}:{var.max_y} P13                     ; define mesh grid
+M376 H3
 
 ; Bed heater
 M308 S0 P"bedtemp" Y"thermistor" T100000 B3972 C7.060000e-8  ; configure sensor 0 as thermistor on pin bedtemp
@@ -78,17 +122,12 @@ M308 S1 P"e0temp" Y"thermistor" T100000 B4725 C7.06e-8 ; configure sensor 1 as t
 M950 H1 C"e0heat" T1                      ; create nozzle heater output on e0hea
 M143 H1 S280                              ; set temperature limit for heater 1 to 280C
 
-; Stock hotend
-; Heater 1 model: gain 187.6, time constant 126.7, dead time 0.9, max PWM 1.00, calibration voltage 24.2, mode PID, inverted no, frequency default
-; Computed PID parameters for setpoint change: P139.2, I13.300, D84.4
-; Computed PID parameters for load change: P1
-;M307 H1 A187.6 C126.7 D0.9 S1.00 V24.2 B0
-
-; ItWorks3d titan aero
-; Heater 1 model: gain 502.2, time constant 320.7, dead time 4.0, max PWM 1.00, calibration voltage 24.1, mode PID, inverted no, frequency default
-; Computed PID parameters for setpoint change: P28.2, I0.785, D79.8
-; Computed PID parameters for load change: P28.
-M307 H1 A502.2 C320.7 D4 V24.1 B0
+if global.hotend == global.hotend_revo_roto
+  M307 H1 B0 R3.833 C186.9:99.6 D2.12 S1.00 V24.1
+else
+  ; ItWorks3d titan aero -- use this as a fallback for all other
+  ; toolheads as it is tuned using old algorithms for the V6 (aka, pretty generic)
+  M307 H1 A502.2 C320.7 D4 V24.1 B0
 
 ; Fans
 M950 F0 C"fan0" Q500
@@ -105,4 +144,5 @@ G10 P0 R0 S0                              ; set initial tool 0 active and standb
 ; Custom settings are not defined
 
 ; Miscellaneous
+M280 P0 S{global.klicky_servo_down}
 T0                                        ; select first tool
