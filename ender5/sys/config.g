@@ -96,7 +96,7 @@ M574 U2 S1 P"^0.io6.in"                                ; configure active-high e
 ; Z-Probe
 M950 S0 C"io1.out"                                     ; servo pin definition
 M558 P5 C"^io1.in" H5 F200 T24000
-G31 X{global.zprobe_x} Y{global.zprobe_y} Z3.7 P25
+G31 X{global.zprobe_x} Y{global.zprobe_y} Z3.65 P25    ; was 3.7
 M557 X5:225 Y5:225 P9                                  ; define mesh grid
 M376 H3
 
@@ -142,7 +142,7 @@ M950 H2 C"1.out2" T2                                   ; create nozzle heater ou
 M307 H2 B0 R2.593 C211.1:173.4 D5.20 S1.00 V24.1       ; tuned (new) at 255 10mm off the bed with the part cooling fan
 M563 P1 S"E3Dv6" D1 H2 X3 F2                           ; define tool 1
 ;G10 P1 X0 U0.2 Y-0.45 Z0.125
-G10 P1 X0 U0.65 Y-0.6 Z0.125 ; Z0
+G10 P1 X0 U0.65 Y-0.6 Z0 ; Z0.125
 
 ; Set both tools to standby mode
 M568 A1 P0 R0 S0
