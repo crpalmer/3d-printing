@@ -14,10 +14,10 @@ global blrY = 392
 global zprobe_x = 0
 global zprobe_y = 43
 
-global klicky_pre_x = 226
+global klicky_pre_x = 225
 global klicky_pre_y = 335
 global klicky_dock_x = global.klicky_pre_x
-global klicky_dock_y = 366
+global klicky_dock_y = 370
 global klicky_release_x = global.klicky_pre_x - 50
 global klicky_release_y = global.klicky_dock_y
 global klicky_servo_up = 134
@@ -70,7 +70,7 @@ M208 X-24 Y-12 Z-5 S1                        ; Set axis minima
 M208 X345 Y372 Z390 S0                     ; Set axis maxima
 
 ; Z-Probe
-M558 P5 C"io1.in" H5 F200 T24000 P5
+M558 P5 C"io1.in" H3 F60 T24000 P5
 G31 X{global.zprobe_x} Y{global.zprobe_y} Z2.35 P25
 M557 X5:345 Y31:365 P10                   ; Define mesh grid
 M376 H6                                   ; Taper compensation over 6mm height, good for up to 0.3mm error @ < 5% extrusion error
