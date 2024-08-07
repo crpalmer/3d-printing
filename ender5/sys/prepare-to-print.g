@@ -5,16 +5,13 @@ if exists(param.H) == false or exists(param.I) == false or exists(param.B) == fa
 var bed_temp = max(param.B, param.C)
 var probing_temp = min(var.bed_temp, 60)
 
-if param.H == 0 and param.I == 0
-  echo "Not hotend temperatures specified but required."
-  M99
-
 ;echo "Hotend temperatures: ", param.H, param.I
 ;echo "Probing temperature: ", var.probing_temp
 ;echo "Bed temperature: ", var.bed_temp, param.B, param.C
 
-M220 S100    ; clear any speed changes
+M220 S100     ; clear any speed changes
 M290 R0 S0    ; clear any baby stepping
+M106 S0       ; disable fans
 
 set global.T0firstUse = true
 set global.T1firstUse = true
