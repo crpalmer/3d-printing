@@ -75,7 +75,10 @@ M208 X345 Y372 Z390 S0                     ; Set axis maxima
 
 ; Z-Probe
 M558 P5 C"io1.in" H3 F60 T24000 P5
-G31 X{global.zprobe_x} Y{global.zprobe_y} Z2.35 P25
+; With textured bed: 
+; G31 X{global.zprobe_x} Y{global.zprobe_y} Z2.35 P25
+; With smooth bed:
+G31 X{global.zprobe_x} Y{global.zprobe_y} Z2.25 P25
 M557 X5:345 Y31:365 P10                   ; Define mesh grid
 M376 H6                                   ; Taper compensation over 6mm height, good for up to 0.3mm error @ < 5% extrusion error
 
