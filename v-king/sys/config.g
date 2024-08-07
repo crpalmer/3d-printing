@@ -41,12 +41,16 @@ M569 P4 S1 D2                              ; Drive 4 direction (z front middle)
 M569 P5 S1 D2                              ; Drive 5 direction (z back left) (expansion 1)
 M569 P6 S1 D2                              ; Drive 6 direction (z back right) (expansion 2)
 
-; Drive steps per mm
-; z = 360/0.067/40*16*2 = 4298.5
-; 0.067 is step angle from spec sheet, 40 = belt mm for 1 full rotation, 16 micro stepping, 2 = "double belt resolution"
-; z = 360/1.8*26.85/40*16*2 = 4296
-; 1.8 is the normal step angle, 26.85 is the gear ratio, 2 = "double belt resolution"
-M92 X160 Y160 Z2148 E680                   ; Set steps per mm at 1/16 micro stepping (E recommended is 690)
+; The motor specifications say 0.067 degree / step.  Let's assume that is rounded and is really
+; 0.0666... Give a degree/step we can say it takes (360/dps) steps to make a rotation, each
+; rotation moves 40mm and we are doing x16 microstepping.  So, at 0.067 degree/step we get:
+; 0.067 degree/step: 360/0.067/40*16 = 2,149.25
+; But if we do: 360/.066666666666666666666666666666666666/40*16 = 2160
+;
+; Given that given enough repeating digits we get arbitrarily close to a round number,
+; it sounds to me like that is the more likely value.  Use it.
+
+M92 X160 Y160 Z2160 E680                   ; Set steps per mm at 1/16 micro stepping (E recommended is 690)
 M350 X16 Y16 E16 I1                        ; Configure microstepping with interpolation for x/y/e
 M350 Z16 I0                                ; Configure microstepping without interpolation for z
 
