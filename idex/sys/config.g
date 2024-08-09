@@ -39,7 +39,7 @@ M569 P1.0 S1 ; D3                                      ; physical drive 1.0 goes
 M569 P1.1 S1 ; D3                                      ; physical drive 1.1 goes forwards
 M569 P1.2 S1 ; D3                                      ; physical drive 1.2 goes forwards
 M584 X0.2 Y0.1:1.2 u1.1 E0.0:1.0 Z0.3:0.4              ; set drive mapping
-M92 X160.00 Y160.00 U160.00 Z800.00 E680:680          ; set steps per mm (recommended; 690 orbiter)
+M92 X160.00 Y160.00 U160.00 Z800.00 E680:680           ; set steps per mm (recommended; 690 orbiter)
 M350 X16 Y16 U16 Z16 E16 I1                            ; set microstepping to 256 interpolation
 M566 X600.00 Y600.00 U600.00 Z18.00 E300:40            ; set maximum instantaneous speed changes (mm/min)
 M203 X24000.00 Y24000.00 U24000.00 Z180.00 E7200:3600  ; set maximum speeds (mm/min)
@@ -49,11 +49,11 @@ M84 S30                                                ; Set idle timeout
 
 ; Z drive
 ;M671 X{global.xCenter, global.xCenter} Y-35:385 S2  			                   ; motor order: front, back
-M671 X140:140 Y-35:385 S2  			                   ; motor order: front, back
+M671 X150:150 Y-35:385 S2  			                   ; motor order: front, back
 
 ; Axis Limits
-M208 X0 Y0 Z0 U{global.uMin} S1                        ; set axis minima
-M208 X{global.xMax} Y350 Z430 U{global.uMax} S0        ; set axis maxima
+M208 X0 Y-5 Z0 U{global.uMin} S1                        ; set axis minima
+M208 X{global.xMax} Y356 Z430 U{global.uMax} S0        ; set axis maxima
 
 ; Endstops
 M574 X2 S1 P"^0.io5.in"                                ; configure active-high endstop for high end on X
@@ -63,7 +63,7 @@ M574 U1 S1 P"^1.io2.in"                                ; configure active-high e
 ; Z-Probe
 M950 S0 C"io1.out"                                     ; servo pin definition
 M558 P9 C"^io1.in" H5 F100 T2000
-G31 X0 Y55 Z1.4 P25
+G31 X-0.5 Y30 Z1.1 P25
 M557 X5:285 Y60:350 P9                                  ; define mesh grid
 M376 H2
 
@@ -90,39 +90,31 @@ M307 H0 R0.272 C349.6 D8.37 S1.00 V23.7
 M140 H0                                                ; map heated bed to heater 0
 M143 H0 S120                                           ; set temperature limit for heater 0 to 120C
 
-; tool 0: thermistor (e3d)
+; tool 0 thermistor
 M308 S1 P"temp1" Y"thermistor" T100000 B4725 C7.06e-8  ; configure sensor
 M950 H1 C"out1" T1                                     ; create nozzle heater output and map it to sensor 1
 
-; tool 0: e3dv6 40w
-M307 H1 B0 R2.593 C211.1:173.4 D5.20 S1.00 V24.1       ; tuned (new) at 255 10mm off the bed with the part cooling fan
+; tool 0
+M307 H1 R3.927 K0.564:0.293 D1.73 E1.35 S1.00 B0 V24.1
 M563 P0 S"E3Dv6" D0 H1 F0                              ; define tool 0
 G10 P0 X0 Y0 Z0                                        ; set tool 0 axis offsets
 
-; tool 1: thermistor (e3d)
+; tool 1 thermistor
 M308 S2 P"1.temp2" Y"thermistor" T100000 B4725 C7.06e-8  ; configure sensor
 M950 H2 C"1.out2" T2                                   ; create nozzle heater output and map it to sensor 2
 
-; tool 1: e3dv6 40w
-M307 H2 B0 R2.508 C225.2 D5.67 S1.00 V24.1           ; tuned 255 10mm off of the bed with the part cooling fan
-M563 P1 S"E3Dv6" D1 H2 X3 F2                         ; define tool 1
-G10 P1 X0.5 Y0.225 Z-0.025                               ; set tool 1 axis offsets
+; tool 1
+M307 H2 R3.401 K0.474:0.307 D1.67 E1.35 S1.00 B0 V24.2
+M563 P1 S"E3Dv6" D1 H2 X3 F2                             ; define tool 1
+G10 P1 U-1.61 Y-0.19 Z0                               ; set tool 1 axis offsets
 
 ; Set both tools to standby mode
 M568 A1 P0 R0 S0
 M568 A1 P1 R0 S0
 
-; Tool 2: duplicating mode
-
-;M563 P2 D0:1 H1:2 X0:3 F0:2                            ; tool 2 uses both extruders and hot end heaters, maps X to both X and U, and uses both print cooling fans
-;G10 P2 X-70 Y0 U110                                    ; set tool offsets and temperatures for tool 2
-;M567 P2 E1:1                                           ; set mix ratio 100% on both extruders
-;M568 P2 S1                                             ; turn on mixing for tool 2
-
 ; Tool (common)
 G10 P0 R0 S0                                           ; set initial tool 0 active and standby temperatures to 0C
 G10 P1 R0 S0                                           ; set initial tool 1 active and standby temperatures to 0C
-;G10 P2 R0 S0                                           ; set initial tool 2 active and standby temperatures to 0C
 
 ; MCU DOES NOT WORK ON THE DUET 3 MINI 5+?
 M912 P0 S-12.5                                       ; Calibrate MCU temperature
