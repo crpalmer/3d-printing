@@ -30,14 +30,14 @@ G90                                                    ; send absolute coordinat
 M83                                                    ; ...but relative extruder moves
 
 ; Drives
-M569 P0 S0 D3                                          ; physical drive 0 goes backwards, stealthchop
-M569 P1 S0 D3                                          ; physical drive 1 goes backwards
-M569 P2 S0 D3                                          ; physical drive 2 goes backwards
-M569 P3 S0 D3                                          ; physical drive 3 goes backwards
-M569 P4 S0 D3                                          ; physical drive 4 goes backwards
-M569 P1.0 S1 D3                                        ; physical drive 1.0 goes forwards
-M569 P1.1 S1 D3                                        ; physical drive 1.1 goes forwards
-M569 P1.2 S1 D3                                        ; physical drive 1.2 goes forwards
+M569 P0 S0 ; D3                                        ; physical drive 0 goes backwards, stealthchop
+M569 P1 S0 ; D3                                        ; physical drive 1 goes backwards
+M569 P2 S0 ; D3                                        ; physical drive 2 goes backwards
+M569 P3 S0 ; D3                                        ; physical drive 3 goes backwards
+M569 P4 S0 ; D3                                        ; physical drive 4 goes backwards
+M569 P1.0 S1 ; D3                                      ; physical drive 1.0 goes forwards
+M569 P1.1 S1 ; D3                                      ; physical drive 1.1 goes forwards
+M569 P1.2 S1 ; D3                                      ; physical drive 1.2 goes forwards
 M584 X0.2 Y0.1:1.2 u1.1 E0.0:1.0 Z0.3:0.4              ; set drive mapping
 M92 X160.00 Y160.00 U160.00 Z800.00 E680:680          ; set steps per mm (recommended; 690 orbiter)
 M350 X16 Y16 U16 Z16 E16 I1                            ; set microstepping to 256 interpolation
