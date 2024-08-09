@@ -4,18 +4,26 @@
 
 ; -------------------------
 
-global xMax = 340
-global uMin = -58.45
-global uMax = 283
-global xCenter = 140
+if !exists(global.xMax)
+  ; If the we are rerunning this setup to see errors, don't try to redefine them
+  global xMax = 350
+  global uMin = -50
+  global uMax = 305
+  global xCenter = 150
 
-; Seconds since the epoch of the last purge of each extruder
-global lastPurge0 = 0
-global lastPurge1 = 0
+  ; Seconds since the epoch of the last purge of each extruder
+  global lastPurge0 = 0
+  global lastPurge1 = 0
 
-; Variables to be used to work around PrusaSlicer "quirks"
-global T0firstUse = true
-global T1firstUse = true
+  ; Variables to be used to work around PrusaSlicer "quirks"
+  global T0firstUse = true
+  global T1firstUse = true
+
+; Set the values in case we are rerunning the config to initialize them
+set global.lastPurge0 = 0
+set global.lastPurge1 = 0
+set global.T0firstUse = true
+set global.T1firstUse = true
 
 ; General preferences
 G90                                                    ; send absolute coordinates...
