@@ -1,4 +1,6 @@
 GCODE = \
+	filament-load.gcode \
+	filament-unload.gcode \
 	probe-corners.gcode \
 	probe-screws.gcode
 
