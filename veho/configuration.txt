@@ -1,0 +1,65 @@
+Send: M503
+Recv: echo:; Linear Units:
+Recv: echo:  G21 ; (mm)
+Recv: echo:; Temperature Units:
+Recv: echo:  M149 C ; Units in Celsius
+Recv: echo:; Filament settings (Disabled):
+Recv: echo:  M200 S0 D1.75
+Recv: echo:; Steps per unit:
+Recv: echo:  M92 X53.33 Y53.33 Z600.00 E415.00
+Recv: echo:; Max feedrates (units/s):
+Recv: echo:  M203 X200.00 Y200.00 Z6.00 E30.00
+Recv: echo:; Max Acceleration (units/s2):
+Recv: echo:  M201 X1000.00 Y1000.00 Z500.00 E1000.00
+Recv: echo:; Acceleration (units/s2) (P<print-accel> R<retract-accel> T<travel-accel>):
+Recv: echo:  M204 P1000.00 R1000.00 T1000.00
+Recv: echo:; Advanced (B<min_segment_time_us> S<min_feedrate> T<min_travel_feedrate> X<max_jerk> Y<max_jerk> Z<max_jerk> E<max_jerk>):
+Recv: echo:  M205 B20000.00 S0.00 T0.00 X9.00 Y9.00 Z3.00 E2.50
+Recv: echo:; Home offset:
+Recv: echo:  M206 X0.00 Y0.00 Z0.00
+Recv: echo:; Auto Bed Leveling:
+Recv: echo:  M420 S1 Z10.00 ; Leveling ON
+Recv: echo:  G29 W I0 J0 Z-0.11833
+Recv: echo:  G29 W I1 J0 Z-0.00667
+Recv: echo:  G29 W I2 J0 Z-0.01833
+Recv: echo:  G29 W I3 J0 Z-0.06500
+Recv: echo:  G29 W I4 J0 Z-0.08667
+Recv: echo:  G29 W I0 J1 Z-0.14000
+Recv: echo:  G29 W I1 J1 Z-0.04333
+Recv: echo:  G29 W I2 J1 Z-0.04667
+Recv: echo:  G29 W I3 J1 Z-0.09667
+Recv: echo:  G29 W I4 J1 Z-0.16000
+Recv: echo:  G29 W I0 J2 Z-0.10500
+Recv: echo:  G29 W I1 J2 Z-0.03833
+Recv: echo:  G29 W I2 J2 Z-0.02667
+Recv: echo:  G29 W I3 J2 Z-0.03833
+Recv: echo:  G29 W I4 J2 Z-0.09500
+Recv: echo:  G29 W I0 J3 Z-0.08167
+Recv: echo:  G29 W I1 J3 Z-0.01500
+Recv: echo:  G29 W I2 J3 Z-0.00167
+Recv: echo:  G29 W I3 J3 Z-0.01667
+Recv: echo:  G29 W I4 J3 Z-0.07333
+Recv: echo:  G29 W I0 J4 Z-0.06333
+Recv: echo:  G29 W I1 J4 Z-0.05667
+Recv: echo:  G29 W I2 J4 Z-0.05167
+Recv: echo:  G29 W I3 J4 Z-0.05667
+Recv: echo:  G29 W I4 J4 Z-0.08167
+Recv: echo:; Endstop adjustment:
+Recv: echo:  M666 Z0.00
+Recv: echo:; Hotend PID:
+Recv: echo:  M301 P22.54 I1.65 D108.83
+Recv: echo:; Bed PID:
+Recv: echo:  M304 P70.00 I15.00 D485.00
+Recv: echo:; Controller Fan:
+Recv: echo:  M710 S255 I0 A1 D60 ; (100% 0%)
+Recv: echo:; Power-loss recovery:
+Recv: echo:  M413 S1 ; ON
+Recv: echo:; Z-Probe Offset:
+Recv: echo:  M851 X0.00 Y30.00 Z-4.95 ; (mm)
+Recv: echo:; Linear Advance:
+Recv: echo:  M900 K0.00
+Recv: echo:; Filament load/unload:
+Recv: echo:  M603 L0.00 U100.00 ; (mm)
+Recv: echo:; Filament runout sensor:
+Recv: echo:  M412 S1 ; Sensor ON
+Recv: ok
