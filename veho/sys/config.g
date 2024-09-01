@@ -6,28 +6,17 @@
 
 global includeDuplication = 0
 
-global xMin = -49.2
-global xMax = 225
-global uMin = 0
-global uMax = 275
-global yMin = -30
-global yMax = 220
-global zMax = 325
-global xCenter = 112.5
-global yCenter = 110
+global xMin = 0
+global xMax = 600
+global yMin = 0
+global yMax = 600
+global zMax = 600
+global xCenter = 300
+global yCenter = 300
 global zprobe_x = 0
-global zprobe_y = 22
+global zprobe_y = 75
 
-global frontX = 110
-global frontY = 30
-global blX = 30
-global brX = 195
-global blrY = 200
- 
-global lastPurge0 = 0
-global lastPurge1 = 0
-
-global klicky_is_manual = false
+global klicky_is_manual = true
 global klicky_pre_x = 113.8
 global klicky_pre_y = 180
 global klicky_dock_x = global.klicky_pre_x
@@ -37,10 +26,6 @@ global klicky_release_y = global.klicky_dock_y
 global klicky_servo_up = 1660
 global klicky_servo_down = 575
 global klicky_n_deploys = 0
-
-; Variables to be used to work around PrusaSlicer "quirks"
-global T0firstUse = true
-global T1firstUse = true
 
 ; General preferences
 G90                                                    ; send absolute coordinates...
