@@ -73,6 +73,9 @@ G31 X{global.zprobe_x} Y{global.zprobe_y} Z6.7 P25
 M557 X100:500 Y100:500 P9                               ; define mesh grid
 M376 H3
 
+; Filament sensor (BTT SFS 2.0)
+M591 D0 P7 C"121.io0.in" L2.88 R75:125 E9 S1
+
 ; Fans (tool 0)
 M950 F0 C"121.out1" Q250                               ; create fan and set its frequency
 M106 P0 S0 H-1 C"part"                                 ; set fan value (off). Thermostatic control is turned off
