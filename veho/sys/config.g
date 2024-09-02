@@ -27,6 +27,8 @@ global klicky_servo_up = 1660
 global klicky_servo_down = 575
 global klicky_n_deploys = 0
 
+global in_filament_error = false
+
 G4 S2 ; wait for expansion boards to start
 
 ; General preferences
