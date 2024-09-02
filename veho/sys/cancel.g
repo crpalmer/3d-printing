@@ -10,7 +10,7 @@ else
    G1 Z+10            ; Move the nozzle up
    G90
 
-M568 A1 P0 R0 S0      ; Turn off hotend
+M568 A2 P0 R0 S0      ; Turn off hotend
 M140 S0               ; Turn off bed
 M106 P0 S0            ; Turn off the fan
 
