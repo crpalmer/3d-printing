@@ -41,10 +41,10 @@ M569 P1.2 S1 ; D3                                      ; physical drive 1.2 goes
 M584 X0.2 Y0.1:1.2 u1.1 E0.0:1.0 Z0.3:0.4              ; set drive mapping
 M92 X160.00 Y160.00 U160.00 Z800.00 E680:680           ; set steps per mm (recommended; 690 orbiter)
 M350 X16 Y16 U16 Z16 E16 I1                            ; set microstepping to 256 interpolation
-M566 X600.00 Y600.00 U600.00 Z18.00 E300:40            ; set maximum instantaneous speed changes (mm/min)
-M203 X24000.00 Y24000.00 U24000.00 Z180.00 E7200:3600  ; set maximum speeds (mm/min)
-M201 X1000.00 Y1000.00 U1000.00 Z100.00 E800:120       ; set accelerations (mm/s^2) (nimble v3)
-M906 X1350 Y1600 U1350 Z1200 E800:800 I30              ; set motor currents (mA) and motor idle factor in per cent
+M566 X600.00 Y600.00 U600.00 Z240.00 E300:300 P1       ; set maximum instantaneous speed changes (mm/min)
+M203 X24000.00 Y24000.00 U24000.00 Z600.00 E7200:7200  ; set maximum speeds (mm/min)
+M201 X1000.00 Y1000.00 U1000.00 Z500.00 E5000:5000   ; set accelerations (mm/s^2)
+M906 X1350 Y1600 U1350 Z1200 E850:850 I30              ; set motor currents (mA) and motor idle factor in per cent (orbiter supposed to be 1200)
 M84 S30                                                ; Set idle timeout
 
 ; Z drive
@@ -52,7 +52,7 @@ M84 S30                                                ; Set idle timeout
 M671 X150:150 Y-35:385 S2  			                   ; motor order: front, back
 
 ; Axis Limits
-M208 X0 Y-5 Z0 U{global.uMin} S1                        ; set axis minima
+M208 X0 Y-5 Z0 U{global.uMin} S1                       ; set axis minima
 M208 X{global.xMax} Y356 Z430 U{global.uMax} S0        ; set axis maxima
 
 ; Endstops
@@ -63,8 +63,8 @@ M574 U1 S1 P"^1.io2.in"                                ; configure active-high e
 ; Z-Probe
 M950 S0 C"io1.out"                                     ; servo pin definition
 M558 P9 C"^io1.in" H5 F100 T2000
-G31 X-0.5 Y30 Z1.1 P25
-M557 X5:285 Y60:350 P9                                  ; define mesh grid
+G31 X-0.5 Y30 Z2.375 P25
+M557 X5:300 Y35:350 P9                                 ; define mesh grid
 M376 H2
 
 ; Fans (tool 0)
@@ -100,13 +100,13 @@ M563 P0 S"E3Dv6" D0 H1 F0                              ; define tool 0
 G10 P0 X0 Y0 Z0                                        ; set tool 0 axis offsets
 
 ; tool 1 thermistor
-M308 S2 P"1.temp2" Y"thermistor" T100000 B4725 C7.06e-8  ; configure sensor
+M308 S2 P"1.temp2" Y"thermistor" T100000 B4725 C7.06e-8; configure sensor
 M950 H2 C"1.out2" T2                                   ; create nozzle heater output and map it to sensor 2
 
 ; tool 1
 M307 H2 R3.401 K0.474:0.307 D1.67 E1.35 S1.00 B0 V24.2
-M563 P1 S"E3Dv6" D1 H2 X3 F2                             ; define tool 1
-G10 P1 U-1.61 Y-0.19 Z0                               ; set tool 1 axis offsets
+M563 P1 S"E3Dv6" D1 H2 X3 F2                           ; define tool 1
+G10 P1 U-1.61 Y-0.19 Z0.135                            ; set tool 1 axis offsets
 
 ; Set both tools to standby mode
 M568 A1 P0 R0 S0
@@ -117,7 +117,7 @@ G10 P0 R0 S0                                           ; set initial tool 0 acti
 G10 P1 R0 S0                                           ; set initial tool 1 active and standby temperatures to 0C
 
 ; MCU DOES NOT WORK ON THE DUET 3 MINI 5+?
-M912 P0 S-12.5                                       ; Calibrate MCU temperature
+M912 P0 S-12.5                                         ; Calibrate MCU temperature
 
 ; Miscellaneous
 M912 P0 S-1
