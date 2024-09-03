@@ -1,45 +1,67 @@
- ;
 ;
-; T O D O
-;
-;
+; TODO
 ;
 
-global frontX = 180
-global blX = 6
-global brX = 337
-global frontY = 13
-global blrY = 392
+; -------------------------
 
+global includeDuplication = 0
+
+global xMin = -49.2
+global xMax = 225
+global uMin = 0
+global uMax = 275
+global yMin = -30
+global yMax = 220
+global zMax = 325
+global xCenter = 112.5
+global yCenter = 110
 global zprobe_x = 0
-global zprobe_y = 43
+global zprobe_y = 22
 
-global klicky_pre_x = 225
-global klicky_pre_y = 335
+global frontX = 110
+global frontY = 30
+global blX = 30
+global brX = 195
+global blrY = 200
+ 
+global lastPurge0 = 0
+global lastPurge1 = 0
+
+global klicky_is_manual = false
+global klicky_pre_x = 113.8
+global klicky_pre_y = 180
 global klicky_dock_x = global.klicky_pre_x
-global klicky_dock_y = 370
-global klicky_release_x = global.klicky_pre_x - 50
+global klicky_dock_y = 220
+global klicky_release_x = global.klicky_dock_x - 50
 global klicky_release_y = global.klicky_dock_y
-global klicky_servo_up = 134
-global klicky_servo_down = 6
+global klicky_servo_up = 1660
+global klicky_servo_down = 575
 global klicky_n_deploys = 0
 
+; Variables to be used to work around PrusaSlicer "quirks"
+global T0firstUse = true
+global T1firstUse = true
+
 ; General preferences
-G90                                        ; Send absolute coordinates...
-M83                                        ; ...but relative extruder moves
+G90                                                    ; send absolute coordinates...
+M83                                                    ; ...but relative extruder moves
 
-; MOTOR Section
+; Drives
+M569 P0.0 S1 ; D3                                        ; z front: goes forward
+M569 P0.1 S1 ; D3                                        ; e0: goes forwards
+M569 P0.2 S0 ; D3                                        ; z back left: goes backward
+M569 P0.3 S0 ; D3                                        ; u: goes backwards
+M569 P0.4 S0 ; D3                                        ; z back right: goes backward
+M569 P0.5 S1 ; D3                                        ; x: goes forward
+M569 P1.0 S0 ; D3                                        ; y left: goes backward
+M569 P1.1 S0 ; D3                                        ; e1: goes backward
+M569 P1.2 S1 ; D3                                        ; y right: goes forward
 
-M584 E0 X1 Y2:3 Z4:5:6                     ; set up the drive mapping
+M584 X0.5 Y1.0:1.2 u0.3 E0.1:1.1 Z0.0:0.2:0.4          ; set drive mapping (front, bl, br)
 
-; Drive directions
-M569 P1 S1 D2                              ; Drive 0 direction (e0) (Orbiter recommends disabling stealthchop, try disabling for all drivers)
-M569 P1 S1 D2                              ; Drive 1 direction (x)
-M569 P2 S1 D2                              ; Drive 2 direction (y back left)
-M569 P3 S0 D2                              ; Drive 3 direction (y back right)
-M569 P4 S1 D2                              ; Drive 4 direction (z front middle)
-M569 P5 S1 D2                              ; Drive 5 direction (z back left) (expansion 1)
-M569 P6 S1 D2                              ; Drive 6 direction (z back right) (expansion 2)
+; Z "leadscrew" positions
+;M671 X{global.frontX}:{global.blX}:{global.brX} Y{global.frontY}:{global.blrY}:{global.blrY} S10
+M671 X110:30:195 Y30:195:195 S10
 
 ; The motor specifications say 0.067 degree / step.  Let's assume that is rounded and is really
 ; 0.0666... Give a degree/step we can say it takes (360/dps) steps to make a rotation, each
@@ -50,79 +72,92 @@ M569 P6 S1 D2                              ; Drive 6 direction (z back right) (e
 ; Given that given enough repeating digits we get arbitrarily close to a round number,
 ; it sounds to me like that is the more likely value.  Use it.
 
-M92 X160 Y160 Z2160 E680                   ; Set steps per mm at 1/16 micro stepping (E recommended is 690)
-M350 X16 Y16 E16 I1                        ; Configure microstepping with interpolation for x/y/e
-M350 Z16 I0                                ; Configure microstepping without interpolation for z
+M92 X160.00 Y160.00 U160.00 Z2160.00 E680:680          ; set steps per mm (recommended; 690 orbiter)
+M350 X16 Y16 U16 E16 I1                                ; Configure microstepping with interpolation for x/u/y/e
+M350 Z16 I0                                            ; Configure microstepping without interpolation for z
 
-; Drive speeds and currents
-M566 X600 Y600 Z18 E300                    ; Set maximum instantaneous speed changes (mm/min)
-M203 X24000 Y24000 Z600 E7200              ; Set maximum speeds (mm/min)
-M201 X1000 Y1000 Z500 E10000               ; Set accelerations (mm/s^2)
-M906 X1200 Y1000 Z840 I30                  ; Set motor currents (mA) and motor idle factor in per cent
-M906 E900 I10
-M84 S30                                    ; Set idle timeout
-
-; Z "leadscrew" positions
-M671 X180:4:336 Y8:395:395 S10             ; motor order: front middle, back left, back right
-
-; Endstops
-M574 X1 S1 P"!io6.in"                      ; x endstop (low end)
-M574 Y2 S1 P"!io5.in+!io3.in"              ; 2 y endstops (high end)
+M566 X600.00 Y600.00 U600.00 Z240.00 E300:300 P1       ; set maximum instantaneous speed changes (mm/min)
+M203 X24000.00 Y24000.00 U24000.00 Z600.00 E7200:7200  ; set maximum speeds (mm/min)
+M201 X1000.00 Y1000.00 U1000.00 Z500.00 E5000:5000     ; set accelerations (mm/s^2)
+M906 X1350 Y1000 U1350 Z840 I30                        ; (orbiter supposed to be 1200)
+M906 E850:850 I10                                      ; set motor currents (mA) and motor idle factor in per cent
+M84 S30                                                ; Set idle timeout
 
 ; Axis Limits
-M208 X-24 Y-12 Z-5 S1                        ; Set axis minima
-M208 X345 Y372 Z390 S0                     ; Set axis maxima
+M208 X{global.xMin} Y{global.yMin} Z0 U{global.uMin} S1                        ; set axis minima
+M208 X{global.xMax} Y{global.yMax} Z{global.zMax} U{global.uMax} S0        ; set axis maxima
+
+; Endstops
+M574 X1 S1 P"^0.io5.in"                                ; configure active-high endstop for low end on X
+M574 Y2 S1 P"^1.io0.in+^1.io3.in"                      ; configure active-high endstop for high end on Y
+M574 U2 S1 P"^0.io6.in"                                ; configure active-high endstop for high end on U
 
 ; Z-Probe
-M558 P5 C"io1.in" H3 F60 T24000 P5
-; With textured bed: 
-; G31 X{global.zprobe_x} Y{global.zprobe_y} Z2.35 P25
-; With smooth bed:
-G31 X{global.zprobe_x} Y{global.zprobe_y} Z2.25 P25
-M557 X5:345 Y31:365 P10                   ; Define mesh grid
-M376 H6                                   ; Taper compensation over 6mm height, good for up to 0.3mm error @ < 5% extrusion error
+M950 S0 C"io1.out"                                     ; servo pin definition
+M558 P5 C"^io1.in" H5 F200 T24000
+G31 X{global.zprobe_x} Y{global.zprobe_y} Z3.7 P25
+M557 X5:225 Y5:225 P9                                  ; define mesh grid
+M376 H3
 
-; Accelerometer
-;M955 P0 C"io4.out+io4.in"
-;M593 P"ZVD" F83       ; does it do anything for me?
+; Fans (tool 0)
+M950 F0 C"out4" Q250                                   ; create fan and set its frequency
+M106 P0 S0 H-1 C"part-0"                               ; set fan value (off). Thermostatic control is turned off
+M950 F1 C"out5" Q500                                   ; create fan and set its frequency
+M106 P1 S1 T45 H1                                      ; set fan value (on). Thermostatic control is turned on
+
+; Fans (tool 1)
+M950 F2 C"1.out6" Q250                                 ; create fan and set its frequency
+M106 P2 S0 H-1 C"part-1"                               ; set fan value (off). Thermostatic control is turned off
+M950 F3 C"1.out7" Q500                                 ; create fan and set its frequency
+M106 P3 S1 T45 H2                                      ; set fan value (on). Thermostatic control is turned on
+
+; Fans (board cooling)
+M950 F4 C"!1.out3+out3.tach" Q25000                    ; create fan and set its frequency
+M106 P4 S1 H-1                                         ; set fan value (on).  Thermostatic control is turned off
+M950 F5 C"!1.out4+out4.tach" Q25000                    ; create fan and set its frequency
+M106 P5 S1 H-1                                         ; set fan value (on).  Thermostatic control is turned off
 
 ; Bed Heater
-M308 S0 P"temp0" Y"thermistor" T100000 B4138 ; configure sensor 0 as thermistor on pin bedtemp
-M950 H0 C"out0" T0                         ; create bed heater output on bedheat and map it to sensor 0
-M140 H0
-M143 H0 S120                               ; Set temperature limit for heater 0 to 120C
-M307 H0 A159.7 C501.4 D3.1 V24.2 B0
+M308 S0 P"temp0" Y"thermistor" T100000 B4092           ; configure sensor
+M950 H0 C"out0" T0                                     ; create bed heater output and map it to sensor 0
+M307 H0 R0.272 C349.6 D8.37 S1.00 V23.7
+M140 H0                                                ; map heated bed to heater 0
+M143 H0 S120                                           ; set temperature limit for heater 0 to 120C
 
-; Hotend Heater
-M308 S1 P"temp2" Y"thermistor" T100000 B4725 C7.06e-8 ; configure sensor 1 as thermistor on pin e0temp
-M950 H1 C"out1" T1                       ; create nozzle heater output on e0heat
-M143 H1 S280                               ; Set temperature limit for heater 1 to 280C
-;M307 H1 R3.794 K0.628:0.300 D1.54 E1.35 S1.00 B0 V24.4 ; revo @ 255
-M307 H1 B0 R2.593 C211.1:173.4 D5.20 S1.00 V24.1       ; [from ender-5] tuned (new) at 255 10mm off the bed with the part cooling fan
+; tool 0: thermistor (e3d)
+M308 S1 P"temp1" Y"thermistor" T100000 B4725 C7.06e-8  ; configure sensor
+M950 H1 C"out1" T1                                     ; create nozzle heater output and map it to sensor 1
 
-; Fans
-; heatend fan is on always on fan due to fan0 being dead
-M950 F0 C"out5" Q500
-M106 P0 S0                                 ; part cooling fan off by default
-M950 F1 C"out4" Q500
-M106 P1 S1 T45 H1                          ; hotend fan turned on/off based on extruder temp
+; tool 0: revo 40w
+M307 H1 B0 R2.593 C211.1:173.4 D5.20 S1.00 V24.1       ; tuned (new) at 255 10mm off the bed with the part cooling fan
+M563 P0 S"E3Dv6" D0 H1 F0                              ; define tool 0
+G10 P0 X0 Y0 Z0                                        ; set tool 0 axis offsets
 
-; Tools
-M563 P0 D0 H1 F0                           ; Define tool 0
-G10 P0 X0 Y0 Z0                            ; Set tool 0 axis offsets
-G10 P0 R0 S0                               ; Set initial tool 0 active and standby temperatures to 0C
+; tool 1: thermistor (e3d)
+M308 S2 P"1.temp2" Y"thermistor" T100000 B4725 C7.06e-8  ; configure sensor
+M950 H2 C"1.out2" T2                                   ; create nozzle heater output and map it to sensor 2
 
-; Pressure advance
-; M572 D0 S0.2
+; tool 1: revo 40w
+M307 H2 B0 R2.593 C211.1:173.4 D5.20 S1.00 V24.1       ; tuned (new) at 255 10mm off the bed with the part cooling fan
+M563 P1 S"E3Dv6" D1 H2 X3 F2                           ; define tool 1
+;G10 P1 X0 U0.2 Y-0.45 Z0.125
+G10 P1 X0 U0.65 Y-0.6 Z0 ; Z0.125
 
-; Automatic saving after power loss is not enabled
+; Set both tools to standby mode
+M568 A1 P0 R0 S0
+M568 A1 P1 R0 S0
 
-; Custom settings are not configured
+; Tool 2: duplicating mode
+if global.includeDuplication > 0
+  M563 P2 D0:1 H1:2 X0:3 F0:2                            ; tool 2 uses both extruders and hot end heaters, maps X to both X and U, and uses both print cooling fans
+  G10 P2 X-70 Y0 U110                                    ; set tool offsets and temperatures for tool 2
+  M567 P2 E1:1                                           ; set mix ratio 100% on both extruders
+  M568 P2 R0 S0                                          ; temperatures set to 0
 
 ; Servo for klicky
 M950 S1 C"out6" ; assign GPIO port 1 to out9 (Servo header), servo mod
 M280 P1 S{global.klicky_servo_down}
 
 ; Miscellaneous
-M912 P0 S1.2                               ; MCU temperature calibration
-T0                                         ; Select first tool
+M912 P0 S0
+T0
