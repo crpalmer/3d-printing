@@ -1,8 +1,8 @@
 if global.klicky_n_deploys > 1
   set global.klicky_n_deploys = global.klicky_n_deploys - 1
 elif global.klicky_n_deploys == 1
-  M98 P"/sys/klicky_goto_z.g"
   if global.klicky_is_manual == true
+    G1 Z25
     M291 S3 P"Please remove the klicky probe"
   else
     M98 P"/sys/retractprobe-automatically.g"

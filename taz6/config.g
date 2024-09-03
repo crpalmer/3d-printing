@@ -23,7 +23,7 @@ global klicky_safe_x = 50
 global klicky_safe_y = -10
 global klicky_pre_x = -1
 global klicky_pre_y = -10
-global klicky_z = 12.5
+global klicky_z = 11
 global klicky_dock_x = global.klicky_pre_x
 global klicky_dock_y = 14
 global klicky_release_x = global.klicky_dock_x + 50
@@ -47,7 +47,7 @@ if global.hotend == global.hotend_revo_roto
 
   global zprobe_offset_x = 0
   global zprobe_offset_y = 20
-  global zprobe_offset_z = 3.2
+  global zprobe_offset_z = 2.95   ; was 3.05
 elif global.hotend == global.hotend_itworks3d
   global extruder_current = 750
   global extruder_direction = 1             ; forward
@@ -96,7 +96,7 @@ M574 Z1 S1 P"!zstop"                      ; configure active-low endstop for low
 
 ; Z-Probe
 M950 S0 C"zprobe.mod"                     ; servo pin definition
-M558 P9 C"^zprobe.in" H5 F200 T6000
+M558 P9 C"^zprobe.in" H3 F60 T6000
 G31 X{global.zprobe_offset_x} Y{global.zprobe_offset_y} Z{global.zprobe_offset_z} P25					  ; 
 
 var min_x = max(5+global.zprobe_offset_x, 5)
@@ -104,7 +104,7 @@ var max_x = min(280, 280+global.zprobe_offset_x)
 var min_y = max(5+global.zprobe_offset_y, 5)
 var max_y = min(280, 280+global.zprobe_offset_y)
 
-M557 X{var.min_x}:{var.max_x} Y{var.min_y}:{var.max_y} P13                     ; define mesh grid
+M557 X{var.min_x, var.max_x} Y{var.min_y, var.max_y} P13                     ; define mesh grid
 M376 H3
 
 ; Bed heater

@@ -1,3 +1,5 @@
+M98 P"/sys/homexy-if-needed.g"
+
 if ! move.axes[2].homed
   M98 P"/sys/homez-button.g"
 

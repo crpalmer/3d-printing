@@ -2,8 +2,8 @@ if global.klicky_n_deploys > 0
   set global.klicky_n_deploys = global.klicky_n_deploys + 1
   M99
 
-M98 P"/sys/klicky_goto_z.g"
 if global.klicky_is_manual == true
+  ;G1 Z25
   M291 S3 P"Please attach the klicky probe"
 else
   M98 P"/sys/deployprobe-automatically.g"
