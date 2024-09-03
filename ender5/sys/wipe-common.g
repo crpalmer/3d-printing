@@ -12,22 +12,18 @@ G1 X{global.xMin+1} U{global.uMax-1} F24000  ; now over the bucket
 
 T{param.T}
 
-if exists(param.E) then
-  if param.E > 0 then
-     set var.base_mm = param.E
+if exists(param.E) && param.E > 0 then
+   set var.base_mm = param.E
 
 ; On first use, purge a little extra to make sure we have a decent first change
-if exists(param.F) then
-   if param.F == "true" then
-      set var.base_mm = var.base_mm + 5
+if exists(param.F) && param.F
+   set var.base_mm = var.base_mm + 5
 
-if exists(param.R) then
-  if param.R > 0 then
-     set var.retract = param.R
+if exists(param.R) && param.R > 0 then
+   set var.retract = param.R
 
-if exists(param.X) then
-  if param.X > 0 then
-     set var.extra_mm = param.X
+if exists(param.X) && param.X > 0 then
+   set var.extra_mm = param.X
 	 
 if exists(param.S) then
   if param.S > 480

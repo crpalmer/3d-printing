@@ -29,6 +29,7 @@ G28 Z
 
 M98 P"/sys/retractprobe-forced.g"
 
+echo var.probing_temp, " ", var.bed_temp, " ", (var.probing_temp < var.bed_temp)
 if var.probing_temp < var.bed_temp
    M140 S{var.bed_temp}
 
