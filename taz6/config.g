@@ -77,7 +77,7 @@ M671 X370:-110 Y140:140                   ; leadscrew positions
 ; Steps and speeds
 M350 X16 Y16 Z16 E16 I1                   ; configure microstepping with interpolation
 M92 X100.50 Y100.50 Z1600.00 E{global.extruder_steps_per_mm}      ; set steps per mm (830 for stock extruder)
-M566 X480.00 Y480.00 Z24.00 E{global.extruder_jerk}       ; set maximum instantaneous speed changes (mm/min)
+M566 X480.00 Y480.00 Z24.00 E{global.extruder_jerk} P1      ; set maximum instantaneous speed changes (mm/min)
 M203 X18000.00 Y18000.00 Z180.00 E1500.00 ; set maximum speeds (mm/min)
 M201 X500.00 Y500.00 Z20.00 E{global.extruder_acceleration}       ; set accelerations (mm/s^2)
 M906 X950 Y950 Z1200 E{global.extruder_current} I30             ; set motor currents (mA) and motor idle factor in per cent
