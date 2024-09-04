@@ -18,6 +18,9 @@ if !exists(global.xMax)
   ; Variables to be used to work around PrusaSlicer "quirks"
   global T0firstUse = true
   global T1firstUse = true
+  
+  global in_filament_error = false
+  global filament_error_tool = -1
 
 ; Set the values in case we are rerunning the config to initialize them
 set global.lastPurge0 = 0
@@ -66,6 +69,14 @@ M558 P9 C"^io1.in" H5 F100 T2000
 G31 X-0.5 Y30 Z2.375 P25
 M557 X5:300 Y35:350 P9                                 ; define mesh grid
 M376 H2
+
+; Filament sensor (BTT SFS 2.0)
+M591 D0 P7 C"0.io3.in" L2.88 R75:125 E9 S1
+M591 D1 P7 C"1.io1.in" L2.88 R75:125 E9 S1
+
+; Pressure advance
+M572 D0 S0.05
+M572 D1 S0.05
 
 ; Fans (tool 0)
 M950 F0 C"out5" Q250                                   ; create fan and set its frequency

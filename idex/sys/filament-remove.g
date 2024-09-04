@@ -1,4 +1,3 @@
-M98 P"/sys/filament-remove.g"
 if state.currentTool < 0
   abort "You need an active tool to remove filament"
 

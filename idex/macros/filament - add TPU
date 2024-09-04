@@ -1,5 +1,1 @@
-if state.currentTool < 0
-  abort "You need an active tool to add filament"
-
-M83            ; relative extrusion
-G1 E200 F120   ; super slow
+M98 P"/sys/filament-add.g" A200 B0 S120
