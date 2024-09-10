@@ -71,12 +71,18 @@ M574 Y2 S1 P"!0.io5.in+!0.io6.in"                       ; configure active-high 
 ; Z-Probe
 ;M950 S0 C"io1.out"                                     ; servo pin definition
 M558 P8 C"^121.io1.in" H5 F200 T24000
-G31 X{global.zprobe_x} Y{global.zprobe_y} Z6.7 P25
+G31 X{global.zprobe_x} Y{global.zprobe_y} Z6.55 P25
 M557 X100:500 Y100:500 P9                               ; define mesh grid
 M376 H3
 
 ; Filament sensor (BTT SFS 2.0)
-M591 D0 P7 C"121.io0.in" L2.88 R75:125 E9 S1
+M591 D0 P7 C"121.io0.in" L3.024 R90:110 E9 S1
+;M591 D0 P7 C"io4.in" P1 S1
+
+; Accelerometer (toolboard), input shaping and pressure advance
+M955 P121.0 I10                                        ; Z+ -> Y+ and X+ -> X+
+m593 P"zvd" F38.5 S0.1
+M572 D0 S0.05
 
 ; Fans (tool 0)
 M950 F0 C"121.out1" Q250                               ; create fan and set its frequency
@@ -92,7 +98,8 @@ M106 P2 S1 H-1  C"board"                               ; set fan value (on).  Th
 M106 P2 H10:11 T32 C"board"; set fan 2 value
 
 ; Bed Heater
-M308 S0 P"temp0" Y"thermistor" T100000 B4092           ; configure sensor
+;M308 S0 P"temp0" Y"thermistor" T100000 B4734 C1.153746e-7 ; configure sensor
+M308 S0 P"temp0" Y"thermistor" T100000 B3950 ; configure sensor
 M950 H0 C"out0" T0                                     ; create bed heater output and map it to sensor 0
 M307 H0 R0.212 K0.115:0.000 D9.15 E1.35 S1.00 B0
 M140 H0                                                ; map heated bed to heater 0
