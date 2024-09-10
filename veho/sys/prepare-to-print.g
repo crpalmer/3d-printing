@@ -21,7 +21,6 @@ M98 P"/sys/homexy-if-needed.g"
 M401
 G28 Z
 G32
-G32
 G28 Z
 G29 S1
 
