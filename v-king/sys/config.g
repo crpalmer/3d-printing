@@ -76,12 +76,13 @@ M92 X160.00 Y160.00 U160.00 Z2160.00 E680:680          ; set steps per mm (recom
 M350 X16 Y16 U16 E16 I1                                ; Configure microstepping with interpolation for x/u/y/e
 M350 Z16 I0                                            ; Configure microstepping without interpolation for z
 
-M566 X600.00 Y600.00 U600.00 Z240.00 E300:300 P1       ; set maximum instantaneous speed changes (mm/min)
-M203 X24000.00 Y24000.00 U24000.00 Z600.00 E7200:7200  ; set maximum speeds (mm/min)
-M201 X1000.00 Y1000.00 U1000.00 Z500.00 E5000:5000     ; set accelerations (mm/s^2)
-M906 X1350 Y1000 U1350 Z840 I30                        ; (orbiter supposed to be 1200)
-M906 E850:850 I10                                      ; set motor currents (mA) and motor idle factor in per cent
-M84 S30                                                ; Set idle timeout
+; Drive speeds and currents
+M566 X600 Y600 Z240 E300 P1                ; Set maximum instantaneous speed changes (mm/min)
+M203 X24000 Y24000 Z600 E7200              ; Set maximum speeds (mm/min)
+M201 X1000 Y1000 Z500 E5000                ; Set accelerations (mm/s^2)
+M906 X1200 Y1000 Z840 I30                  ; Set motor currents (mA) and motor idle factor in per cent
+M906 E850 I10                              ; (orbiter supposed to be 1200)
+M84 S30                                    ; Set idle timeout
 
 ; Axis Limits
 M208 X{global.xMin} Y{global.yMin} Z0 U{global.uMin} S1                        ; set axis minima
