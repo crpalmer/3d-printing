@@ -118,6 +118,9 @@ M106 P4 S1 H-1                                         ; set fan value (on).  Th
 M950 F5 C"!1.out4+out4.tach" Q25000                    ; create fan and set its frequency
 M106 P5 S1 H-1                                         ; set fan value (on).  Thermostatic control is turned off
 
+; Pressure advance
+M572 D0 S0.05
+
 ; Bed Heater
 M308 S0 P"temp0" Y"thermistor" T100000 B4092           ; configure sensor
 M950 H0 C"out0" T0                                     ; create bed heater output and map it to sensor 0
