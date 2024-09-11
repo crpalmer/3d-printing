@@ -41,11 +41,11 @@ M569 P0.1 S0 ; D3                                        ; z1 (front left)
 M569 P0.2 S0 ; D3                                        ; z2 (back left)
 M569 P0.3 S0 ; D3                                        ; z4 (front right)
 M569 P0.4 S1 ; D3                                        ; z3 (back right)
-M569 P0.5 S0 ; D3                                        ; y2 (right)
-M569 P0.6 S0 ; D3                                        ; y1 (left)
+M569 P0.5 S0 ; D3                                        ; y1 (left)
+M569 P0.6 S0 ; D3                                        ; y2 (right)
 M569 P121.0 S1 ; D3                                      ; e
 
-M584 X0.0 Y0.6:0.5 Z0.1:0.2:0.4:0.3 E121.0               ; set drive mapping
+M584 X0.0 Y0.5:0.6 Z0.1:0.2:0.4:0.3 E121.0               ; set drive mapping
 
 ; Z leadscrew positions
 M671 X-100:-100:680:680 Y70:530:530:70 S5
@@ -66,7 +66,7 @@ M208 X{global.xMax} Y{global.yMax} Z{global.zMax} S0    ; set axis maxima
 
 ; Endstops
 M574 X2 S1 P"!121.io2.in"                               ; configure active-high endstop for low end on X
-M574 Y2 S1 P"!0.io5.in+!0.io6.in"                       ; configure active-high endstop for high end on Y
+M574 Y2 S1 P"^0.io5.in+^0.io6.in"                         ; configure active-low endstop for high end on Y
 
 ; Z-Probe
 ;M950 S0 C"io1.out"                                     ; servo pin definition
