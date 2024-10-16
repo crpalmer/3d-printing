@@ -8,6 +8,9 @@ elif global.klicky_n_deploys == 1
     M291 S3 P"Please remove the klicky probe"
   else
     M98 P"/sys/retractprobe-automatically.g"
+    echo "After retractprobe-automatically"
+    M122
+  
   T{var.tool}
 
   if sensors.probes[0].value[0] = 0
