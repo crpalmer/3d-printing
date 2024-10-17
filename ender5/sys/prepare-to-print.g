@@ -1,6 +1,3 @@
-echo "Start of prepare-to-print"
-M122
-
 if exists(param.H) == false or exists(param.I) == false or exists(param.B) == false or exists(param.C) == false
   echo "Missing required parameter (H/I and B/C)"
   M99
@@ -25,13 +22,7 @@ M190 R{var.probing_temp}    ; Wait to get up (or down!) to the right temperature
 
 M561
 M98 P"/sys/homexy.g"
-echo "After homexy.g"
-M122
-
 M401
-echo "After M401"
-M122
-
 G28 Z
 G32
 G28 Z
