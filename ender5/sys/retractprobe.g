@@ -1,6 +1,8 @@
 if global.klicky_n_deploys > 1
   set global.klicky_n_deploys = global.klicky_n_deploys - 1
-elif global.klicky_n_deploys == 1
+  M99
+
+if global.klicky_n_deploys == 1
   var tool = state.currentTool
   if global.klicky_is_manual == true
     T-1
