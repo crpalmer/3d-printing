@@ -9,6 +9,7 @@ COMMON_FILES = macros/filament\ -\ add \
 	       sys/pause.g \
 	       sys/park.g \
 	       sys/resume.g \
+	       sys/stop.g \
 	       sys/wipe.g
 
 all:
