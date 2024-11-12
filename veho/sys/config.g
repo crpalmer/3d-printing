@@ -10,7 +10,7 @@ global xMin = 0
 global xMax = 625
 global yMin = 0
 global yMax = 600
-global zMax = 600
+global zMax = 650
 global xCenter = 300
 global yCenter = 300
 global zprobe_x = 0
@@ -45,7 +45,7 @@ M569 P0.5 S0 ; D3                                        ; y1 (left)
 M569 P0.6 S0 ; D3                                        ; y2 (right)
 M569 P121.0 S1 ; D3                                      ; e
 
-M584 X0.0 Y0.5:0.6 Z0.1:0.2:0.4:0.3 E121.0               ; set drive mapping
+M584 X0.0 Y0.6:0.5 Z0.1:0.2:0.4:0.3 E121.0               ; set drive mapping
 
 ; Z leadscrew positions
 M671 X-100:-100:680:680 Y70:530:530:70 S5
@@ -71,7 +71,7 @@ M574 Y2 S1 P"^0.io5.in+^0.io6.in"                         ; configure active-low
 ; Z-Probe
 ;M950 S0 C"io1.out"                                     ; servo pin definition
 M558 P8 C"^121.io1.in" H5 F200 T24000
-G31 X{global.zprobe_x} Y{global.zprobe_y} Z6.55 P25
+G31 X{global.zprobe_x} Y{global.zprobe_y} Z6.15 P25
 M557 X100:500 Y100:500 P9                               ; define mesh grid
 M376 H3
 
@@ -95,7 +95,7 @@ M308 S10 Y"mcu-temp" A"MCU"                            ; defines sensor 10 as MC
 M308 S11 Y"drivers" A"Duet stepper drivers"            ; defines sensor 11 as stepper driver temperature sensor
 M950 F2 C"out5" Q500                                   ; create fan and set its frequency
 M106 P2 S1 H-1  C"board"                               ; set fan value (on).  Thermostatic control is turned off
-M106 P2 H10:11 T32 C"board"; set fan 2 value
+M106 P2 H10:11 T33 C"board"; set fan 2 value
 
 ; Bed Heater
 ;M308 S0 P"temp0" Y"thermistor" T100000 B4734 C1.153746e-7 ; configure sensor
