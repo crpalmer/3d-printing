@@ -7,4 +7,4 @@ if ! global.in_filament_error
    G91            ; relative positioning
    G1 Z5 F360     ; lift Z by 5mm
    G90            ; absolute positioning
-   G1 X620 F12000
+   M98 P"/sys/park.g"

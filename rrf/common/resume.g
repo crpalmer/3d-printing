@@ -2,13 +2,7 @@
 ; called before a print from SD card is resumed
 
 if global.in_filament_error
-   ; Prime and retract (TODO add a wipe here)
-   M106 S1
-   G4 S1
-   M83
-   G1 E5 F180
-   G1 E1 F60
-   G1 E-1 F1800
+   M98 P"/sys/wipe.g"
 
    ; Go back to where our safe pre-position and unretract
    G1 R2 X0 Y0 Z1 F24000

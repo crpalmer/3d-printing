@@ -2,7 +2,8 @@
 ; TODO
 ;
 
-; -------------------------
+M98 P"/sys/global-declarations.g"
+M98 P"/sys/global-defaults.g"
 
 global includeDuplication = 0
 

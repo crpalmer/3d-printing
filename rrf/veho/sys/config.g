@@ -4,6 +4,9 @@
 
 ; -------------------------
 
+M98 P"/sys/global-declarations.g"
+M98 P"/sys/global-defaults.g"
+
 global includeDuplication = 0
 
 global xMin = 0
@@ -26,8 +29,6 @@ global klicky_release_y = global.klicky_dock_y
 global klicky_servo_up = 1660
 global klicky_servo_down = 575
 global klicky_n_deploys = 0
-
-global in_filament_error = false
 
 G4 S2 ; wait for expansion boards to start
 
