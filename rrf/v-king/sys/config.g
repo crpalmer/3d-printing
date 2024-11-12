@@ -85,6 +85,9 @@ G31 X{global.zprobe_x} Y{global.zprobe_y} Z2.05 P25
 M557 X5:345 Y31:365 P11                   ; Define mesh grid
 M376 H6                                   ; Taper compensation over 6mm height, good for up to 0.3mm error @ < 5% extrusion error
 
+; Filament sensor (BTT SFS 2.0)
+M591 D0 P7 C"io0.in" L2.88 R75:125 E9 S1
+
 ; Accelerometer
 ;M955 P0 C"io4.out+io4.in"
 ;M593 P"ZVD" F83       ; does it do anything for me?
