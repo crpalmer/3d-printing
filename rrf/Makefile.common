@@ -26,6 +26,6 @@ install:
 	sudo cp -r macros/. /opt/dsf/sd/macros/
 	for i in $(COMMON_FILES); do \
 	    base=`basename "$$i"`; \
-	    cp ../common/"$$base" /opt/dsf/sd/"$$i"; \
+	    sudo cp ../common/"$$base" /opt/dsf/sd/"$$i"; \
 	done
 	sudo chmod -R a+rw /opt/dsf/sd/sys/ /opt/dsf/sd/macros/
