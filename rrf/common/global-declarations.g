@@ -1,7 +1,12 @@
 if !exists(global.in_filament_error)
   ; These variables are printer specific and must have their values defined in global-defaults.g
 
-  ; These variables are printer specific but optiona to define in global-defaults.g
+  ; These variables are printer specific but optional to define in global-defaults.g
+  global print_ended_X = -123456
+  global print_ended_Y = -123456
+  global print_ended_Z = -123456
+  global print_ended_U = -123456
+
   global park_X = -123456
   global park_Y = -123456
 

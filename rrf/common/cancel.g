@@ -1,33 +1,36 @@
 ; cancel.g
 ; called when a print is cancelled after a pause.
 
-if move.axes[2].homed
-   if move.axes[2].userPosition + 10 >= global.zMax
+if exists(global.zMax)
+   if move.axes[2].homed && move.axes[2].userPosition + 5 >= global.zMax
       G1 Z{global.zMax}
    else
       G91
-      G1 Z+10            ; Move the nozzle up
+      G1 Z+5            ; Move the nozzle up
       G90
-else
-   echo "Z not homed"
 
 ; Set all temperatures to 0
-M568 A1 P0 R0 S0
-M568 A1 P1 R0 S0
-if global.includeDuplication > 0
-   M568 A1 P2 R0 S0
-M140 S0            ; Turn off bed
-
+M140 S0               ; Turn off bed
 M106 P0 S0            ; Turn off the fan
-M106 P2 S0            ; and the other one
-
-; Move the tools out of the way
-T-1
-
-if move.axes[1].homed && move.axes[2].homed
-   G1 Y600 F24000
-   G1 Z5              ; bring the bed up for easy print removal and faster next print
+if exists(tools[1])
+   M106 P2 S0         ; and the other one
+   M568 A1 P0 R0 S0   ; multi-tools: set to standby
+   M568 A1 P1 R0 S0
+   T-1                ; and deselect the current tool
 else
-   echo "Y and/or Z not homed"
+   M568 A2 P0 R0 S0   ; single tool: set to active
+
+
+if global.print_ended_X != -123456 && move.axes[0].homed
+   G1 X{global.print_ended_X} F24000
+
+if global.print_ended_U != -123456 && move.axes[3].homed
+   G1 X{global.print_ended_U} F24000
+
+if global.print_ended_Y != -123456 && move.axes[1].homed
+   G1 Y{global.print_ended_Y} F24000
+
+if global.print_ended_Z != -123456 && move.axes[2].homed
+   G1 Z{global.print_ended_Z} F24000
 
 M18
