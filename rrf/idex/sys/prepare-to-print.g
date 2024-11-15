@@ -21,7 +21,13 @@ M568 A1 P1 R{param.I} S{param.I}
 M190 R{var.probing_temp}    ; Wait to get up (or down!) to the right temperature
 
 M561
+
+T0
 G28
+G32
+G28 Z
+T-1
+
 G29 S1
 
 echo var.probing_temp, " ", var.bed_temp, " ", (var.probing_temp < var.bed_temp)
