@@ -8,6 +8,7 @@ COMMON_FILES = macros/filament\ -\ add \
 	       sys/global-declarations.g \
 	       sys/pause.g \
 	       sys/park.g \
+	       sys/prusaslicer-fan-hack.g \
 	       sys/resume.g \
 	       sys/sleep.g \
 	       sys/stop.g \
