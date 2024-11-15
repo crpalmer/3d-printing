@@ -2,16 +2,21 @@
 ; TODO
 ;
 
-M98 P"/sys/global-declarations.g"
-M98 P"/sys/global-defaults.g"
+; -------------------------
+
+M586 P4 H165.22.182.89 S1
 
 if !exists(global.xMax)
   ; If the we are rerunning this setup to see errors, don't try to redefine them
   global xMax = 350
   global uMin = -50
   global uMax = 305
+  global yMin = -10
+  global yMax = 356
   global xCenter = 150
 
+  global probeOffsetY = 30
+  
   ; Seconds since the epoch of the last purge of each extruder
   global lastPurge0 = 0
   global lastPurge1 = 0
@@ -20,6 +25,9 @@ if !exists(global.xMax)
   global T0firstUse = true
   global T1firstUse = true
   
+  global in_filament_error = false
+  global filament_error_tool = -1
+
 ; Set the values in case we are rerunning the config to initialize them
 set global.lastPurge0 = 0
 set global.lastPurge1 = 0
@@ -43,9 +51,9 @@ M584 X0.2 Y0.1:1.2 u1.1 E0.0:1.0 Z0.3:0.4              ; set drive mapping
 M92 X160.00 Y160.00 U160.00 Z800.00 E680:680           ; set steps per mm (recommended; 690 orbiter)
 M350 X16 Y16 U16 Z16 E16 I1                            ; set microstepping to 256 interpolation
 M566 X600.00 Y600.00 U600.00 Z240.00 E300:300 P1       ; set maximum instantaneous speed changes (mm/min)
-M203 X24000.00 Y24000.00 U24000.00 Z600.00 E7200:7200  ; set maximum speeds (mm/min)
+M203 X12000.00 Y12000.00 U12000.00 Z600.00 E7200:7200  ; set maximum speeds (mm/min)
 M201 X1000.00 Y1000.00 U1000.00 Z500.00 E5000:5000   ; set accelerations (mm/s^2)
-M906 X1350 Y1600 U1350 Z1200 E850:850 I30              ; set motor currents (mA) and motor idle factor in per cent (orbiter supposed to be 1200)
+M906 X1350 Y1350 U1350 Z1200 E850:850 I30              ; set motor currents (mA) and motor idle factor in per cent (orbiter supposed to be 1200)
 M84 S30                                                ; Set idle timeout
 
 ; Z drive
@@ -53,8 +61,8 @@ M84 S30                                                ; Set idle timeout
 M671 X150:150 Y-35:385 S2  			                   ; motor order: front, back
 
 ; Axis Limits
-M208 X0 Y-5 Z0 U{global.uMin} S1                       ; set axis minima
-M208 X{global.xMax} Y356 Z430 U{global.uMax} S0        ; set axis maxima
+M208 X0 Y{global.yMin} Z0 U{global.uMin} S1                       ; set axis minima
+M208 X{global.xMax} Y{global.yMax} Z425 U{global.uMax} S0        ; set axis maxima
 
 ; Endstops
 M574 X2 S1 P"^0.io5.in"                                ; configure active-high endstop for high end on X
@@ -64,13 +72,13 @@ M574 U1 S1 P"^1.io2.in"                                ; configure active-high e
 ; Z-Probe
 M950 S0 C"io1.out"                                     ; servo pin definition
 M558 P9 C"^io1.in" H5 F100 T2000
-G31 X-0.5 Y30 Z2.375 P25
-M557 X5:300 Y35:350 P9                                 ; define mesh grid
+G31 X-0.5 Y{global.probeOffsetY} Z2.2 P25
+M557 X0:320 Y30:350 P11                                 ; define mesh grid
 M376 H2
 
 ; Filament sensor (BTT SFS 2.0)
-M591 D0 P7 C"0.io3.in" L2.88 R75:125 E9 S1
-M591 D1 P7 C"1.io1.in" L2.88 R75:125 E9 S1
+M591 D0 P7 C"0.io3.in" L3 R75:125 E9 S1
+M591 D1 P7 C"1.io1.in" L3 R75:125 E9 S1
 
 ; Pressure advance
 M572 D0 S0.05
