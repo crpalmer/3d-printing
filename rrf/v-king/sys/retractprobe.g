@@ -12,6 +12,7 @@ if global.klicky_n_deploys > 0
       G4 S0
   
       if sensors.probes[0].value[0] = 0
+        M1118.3
         abort "Failed to release the probe"
 		
   set global.klicky_n_deploys = global.klicky_n_deploys - 1

@@ -20,6 +20,7 @@ if global.klicky_n_deploys == 0
   G4 S0
   
   if sensors.probes[0].value[0] = 1000
+    M1118.2
     abort "Failed to pick up the probe"
 
 set global.klicky_n_deploys = global.klicky_n_deploys + 1

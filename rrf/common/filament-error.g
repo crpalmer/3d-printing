@@ -3,6 +3,9 @@ set global.in_filament_error = true
 ; Pause the print
 M25
 
+; Send a notification (mqtt)
+M1118.1
+
 ; Move out of the way and save our return position
 G60 S2
 G91

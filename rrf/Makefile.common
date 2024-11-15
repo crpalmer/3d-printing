@@ -10,7 +10,8 @@ COMMON_FILES = macros/filament\ -\ add \
 	       sys/park.g \
 	       sys/resume.g \
 	       sys/stop.g \
-	       sys/wipe.g
+	       sys/wipe.g \
+	       sys/ExecOnMcode/ExecOnMcode.json
 
 all:
 	cp -r /opt/dsf/sd/sys/. sys/
@@ -26,6 +27,8 @@ install:
 	sudo cp -r macros/. /opt/dsf/sd/macros/
 	for i in $(COMMON_FILES); do \
 	    base=`basename "$$i"`; \
+	    dir=`dirname "$$i"`; \
+	    if [ "$$dir" != '.' ]; then sudo mkdir -p /opt/dsf/sd/"$$dir"; fi; \
 	    sudo cp ../common/"$$base" /opt/dsf/sd/"$$i"; \
 	done
 	sudo chmod -R a+rw /opt/dsf/sd/sys/ /opt/dsf/sd/macros/
