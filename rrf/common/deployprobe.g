@@ -5,8 +5,8 @@ if global.probe_n_deploys > 0
 var tool = state.currentTool
 
 if global.probe_is_manual == true
-  T-1
   T0
+  M98 P"/sys/rapid-move.g" X{global.probe_pre_x} Y{global.probe_pre_y} Z{global.probe_pre_z}
   M291 S3 P"Please attach the probe"
 else
   M98 P"/sys/deployprobe-automatically.g"

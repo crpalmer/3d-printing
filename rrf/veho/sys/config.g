@@ -4,11 +4,6 @@
 
 ; -------------------------
 
-M98 P"/sys/global-declarations.g"
-M98 P"/sys/global-defaults.g"
-
-global includeDuplication = 0
-
 global xMin = 0
 global xMax = 625
 global yMin = 0
@@ -19,16 +14,8 @@ global yCenter = 300
 global zprobe_x = 0
 global zprobe_y = 75
 
-global klicky_is_manual = true
-global klicky_pre_x = 113.8
-global klicky_pre_y = 180
-global klicky_dock_x = global.klicky_pre_x
-global klicky_dock_y = 220
-global klicky_release_x = global.klicky_dock_x - 50
-global klicky_release_y = global.klicky_dock_y
-global klicky_servo_up = 1660
-global klicky_servo_down = 575
-global klicky_n_deploys = 0
+M98 P"/sys/global-declarations.g"
+M98 P"/sys/global-defaults.g"
 
 G4 S2 ; wait for expansion boards to start
 

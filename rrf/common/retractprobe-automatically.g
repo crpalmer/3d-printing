@@ -1,3 +1,4 @@
+var tool = state.currentTool
 T0
 
 M98 P"/sys/rapid-move.g" X{global.probe_pre_x} Y{global.probe_pre_y} Z{global.probe_pre_z}
@@ -11,3 +12,5 @@ M98 P"/sys/rapid-move.g" X{global.probe_release_x} Y{global.probe_release_y} Z{g
 
 if global.probe_servo != -123456 && global.probe_servo_retract_done != -123456
   M280 P{global.probe_servo} S{global.probe_servo_retract_done}
+
+T{var.tool}
