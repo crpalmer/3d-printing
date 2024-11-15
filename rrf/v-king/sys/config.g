@@ -86,7 +86,7 @@ M557 X5:345 Y31:365 P11                   ; Define mesh grid
 M376 H6                                   ; Taper compensation over 6mm height, good for up to 0.3mm error @ < 5% extrusion error
 
 ; Filament sensor (BTT SFS 2.0)
-M591 D0 P7 C"io0.in" L2.88 R75:125 E9 S1
+M591 D0 P7 C"io0.in" L2.975 R50:150 E22 S1
 
 ; Accelerometer
 ;M955 P0 C"io4.out+io4.in"
