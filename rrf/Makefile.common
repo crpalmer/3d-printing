@@ -25,7 +25,7 @@ all:
 	cp -r /opt/dsf/sd/sys/. sys/
 	mkdir -p macros/
 	cp -r /opt/dsf/sd/macros/. macros/
-	for i in $(COMMON_FILES); do mv "$$i" ../common/; done
+	for i in $(COMMON_FILES); do if [ -e "$$i" ]; then mv "$$i" ../common/; fi; done
 	find sys/ -name '*.g' -exec dos2unix '{}' \;
 	find macros/ -type f -exec dos2unix '{}' \;
 
