@@ -21,7 +21,7 @@ COMMON_FILES = macros/filament\ -\ add \
 	       sys/wipe.g \
 	       sys/ExecOnMcode/ExecOnMcode.json
 
-all:
+all: check-dir
 	cp -r /opt/dsf/sd/sys/. sys/
 	mkdir -p macros/
 	cp -r /opt/dsf/sd/macros/. macros/
@@ -29,7 +29,7 @@ all:
 	find sys/ -name '*.g' -exec dos2unix '{}' \;
 	find macros/ -type f -exec dos2unix '{}' \;
 
-install:
+install: check-dir
 	sudo cp sys/*.g /opt/dsf/sd/sys/
 	mkdir -p macros/
 	sudo cp -r macros/. /opt/dsf/sd/macros/
@@ -40,3 +40,11 @@ install:
 	    sudo cp ../common/"$$base" /opt/dsf/sd/"$$i"; \
 	done
 	sudo chmod -R a+rw /opt/dsf/sd/sys/ /opt/dsf/sd/macros/
+
+check-dir:
+	cwd=`pwd`; \
+	dir=`basename "$$cwd"`; \
+	if [ "$$dir" != `hostname` ]; then \
+	    echo "Invalid directory: in directory [$$dir] on machine [`hostname`]"; \
+	    exit 1; \
+	fi
