@@ -77,7 +77,7 @@ M557 X100:500 Y100:500 P9                               ; define mesh grid
 M376 H3
 
 ; Filament sensor (BTT SFS 2.0)
-M591 D0 P7 C"121.io0.in" L3.024 R90:110 E9 S1
+M591 D0 P7 C"121.io0.in" L3 R75:125 E9 S1
 ;M591 D0 P7 C"io4.in" P1 S1
 
 ; Accelerometer (toolboard), input shaping and pressure advance
