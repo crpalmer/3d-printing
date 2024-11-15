@@ -2,6 +2,8 @@ COMMON_FILES = macros/filament\ -\ add \
 	       macros/filament\ -\ add\ slowly \
 	       macros/filament\ -\ remove \
 	       sys/cancel.g \
+	       sys/deployprobe.g \
+	       sys/deployprobe-automatically.g \
 	       sys/filament-remove.g \
 	       sys/filament-add.g \
 	       sys/filament-error.g \
@@ -9,7 +11,11 @@ COMMON_FILES = macros/filament\ -\ add \
 	       sys/pause.g \
 	       sys/park.g \
 	       sys/prusaslicer-fan-hack.g \
+	       sys/rapid-move.g \
 	       sys/resume.g \
+	       sys/retractprobe.g \
+	       sys/retractprobe-forced.g \
+	       sys/retractprobe-automatically.g \
 	       sys/sleep.g \
 	       sys/stop.g \
 	       sys/wipe.g \

@@ -4,7 +4,8 @@
 
 ; -------------------------
 
-M586 P4 H165.22.182.89 S1
+M98 P"/sys/global-declarations.g"
+M98 P"/sys/global-defaults.g"
 
 if !exists(global.xMax)
   ; If the we are rerunning this setup to see errors, don't try to redefine them
@@ -25,9 +26,6 @@ if !exists(global.xMax)
   global T0firstUse = true
   global T1firstUse = true
   
-  global in_filament_error = false
-  global filament_error_tool = -1
-
 ; Set the values in case we are rerunning the config to initialize them
 set global.lastPurge0 = 0
 set global.lastPurge1 = 0

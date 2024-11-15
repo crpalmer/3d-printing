@@ -1,6 +1,3 @@
-; cancel.g
-; called when a print is cancelled after a pause.
-
 if exists(global.zMax)
    if move.axes[2].homed && move.axes[2].userPosition + 5 >= global.zMax
       G1 Z{global.zMax}
@@ -20,17 +17,5 @@ if exists(tools[1])
 else
    M568 A2 P0 R0 S0   ; single tool: set to active
 
-
-if global.print_ended_X != -123456 && move.axes[0].homed
-   G1 X{global.print_ended_X} F24000
-
-if global.print_ended_U != -123456 && move.axes[3].homed
-   G1 X{global.print_ended_U} F24000
-
-if global.print_ended_Y != -123456 && move.axes[1].homed
-   G1 Y{global.print_ended_Y} F24000
-
-if global.print_ended_Z != -123456 && move.axes[2].homed
-   G1 Z{global.print_ended_Z} F24000
-
+M98 P"/sys/rapid-move.g" X{global.print_ended_X} Y{global.print_ended_Y} U{global.print_ended_U} Z{global.print_ended_Z}
 M18
