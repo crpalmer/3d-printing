@@ -1,8 +1,8 @@
-if global.park_X != -123456 && global.park_Y != -123456
+if global.park_X != null && global.park_Y != null
   G1 X{global.park_X} Y{global.park_Y} F24000
-elif global.park_X != -123456
+elif global.park_X != null
   G1 X{global.park_X} F24000
-elif global.park_Y != -123456
+elif global.park_Y != null
   G1 Y{global.park_Y} F24000
 else
   var tool = state.currentTool
