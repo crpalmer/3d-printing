@@ -44,7 +44,8 @@ install: check-dir
 check-dir:
 	cwd=`pwd`; \
 	dir=`basename "$$cwd"`; \
-	if [ "$$dir" != `hostname` ]; then \
-	    echo "Invalid directory: in directory [$$dir] on machine [`hostname`]"; \
+	host=`hostname | sed 's/\\..*//'`; \
+	if [ "$$dir" != "$$host" ]; then \
+	    echo "Invalid directory: in directory [$$dir] on machine [$$host]"; \
 	    exit 1; \
 	fi
