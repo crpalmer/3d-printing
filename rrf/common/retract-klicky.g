@@ -1,4 +1,4 @@
-if global.probe_is_manual == true
+if global.klicky_is_manual == true
   M98 P"/sys/rapid-move.g" X{global.probe_pre_x} Y{global.probe_pre_y} Z{global.probe_pre_z}
   M291 S3 P"Please remove the probe"
 else

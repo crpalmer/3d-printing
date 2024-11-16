@@ -28,17 +28,6 @@ global blrY = 200
 global lastPurge0 = 0
 global lastPurge1 = 0
 
-global klicky_is_manual = false
-global klicky_pre_x = 113.8
-global klicky_pre_y = 180
-global klicky_dock_x = global.klicky_pre_x
-global klicky_dock_y = 220
-global klicky_release_x = global.klicky_dock_x - 50
-global klicky_release_y = global.klicky_dock_y
-global klicky_servo_up = 1660
-global klicky_servo_down = 575
-global klicky_n_deploys = 0
-
 ; Variables to be used to work around PrusaSlicer "quirks"
 global T0firstUse = true
 global T1firstUse = true

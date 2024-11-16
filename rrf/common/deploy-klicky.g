@@ -12,5 +12,3 @@ T{var.tool}
 if sensors.probes[0].value[0] != 0
   M1118.2
   abort "Failed to connect the probe"
-
-set global.probe_n_deploys = 1

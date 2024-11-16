@@ -19,18 +19,18 @@ if !exists(global.in_filament_error)
 
   global klicky_is_manual = false
 
-  global klick_pre_x = -123456             ; Location to move to before triggering servo
-  global klick_pre_y = -123456
-  global klick_pre_z = -123456
+  global klicky_pre_x = -123456            ; Location to move to before triggering servo
+  global klicky_pre_y = -123456
+  global klicky_pre_z = -123456
 
-  global klicky_servo_up = -123456       ; Angle to position to start deploy/retract
-  global klicky_servo_down = -123456     ; Angle to position to end deploy/retract
+  global klicky_servo_up = -123456         ; Angle to position to start deploy/retract
+  global klicky_servo_down = -123456       ; Angle to position to end deploy/retract
 
-  global klicky_deploy_x = -123456          ; Position to move to after deploying servo
-  global klicky_deploy_y = -123456
-  global klicky_deploy_z = -123456
+  global klicky_dock_x = -123456           ; Position to move to after deploying servo
+  global klicky_dock_y = -123456
+  global klicky_dock_z = -123456
 
-  global klicky_release_x = -123456         ; Final position before untriggering servo
+  global klicky_release_x = -123456        ; Final position before untriggering servo
   global klicky_release_y = -123456
   global klicky_release_z = -123456
 
