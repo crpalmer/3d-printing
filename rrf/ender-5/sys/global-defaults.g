@@ -1,5 +1,3 @@
-set global.park_Y = 345
-
 set global.probe_servo = 1
 set global.klicky_pre_x = 113.8
 set global.klicky_pre_y = 180

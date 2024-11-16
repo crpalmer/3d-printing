@@ -7,12 +7,12 @@ if !exists(global.in_filament_error)
   global print_ended_Z = null
   global print_ended_U = null
 
-  global park_X = null
-  global park_Y = null
+  global park_X = null                  ; Position for pause or filament-errors
+  global park_Y = null                  ; Note: not used for dual extruders
 
   ; Probing (klicky or bltouch)
 
-  global probe_servo = null		   ; M280 P{global.probe_servo}
+  global probe_servo = null             ; M280 P{global.probe_servo}
   global probe_is_klicky = true
 
   ; Klicky configuration
