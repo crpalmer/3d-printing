@@ -13,8 +13,7 @@ M220 S100     ; clear any speed changes
 M290 R0 S0    ; clear any baby stepping
 M106 S0       ; disable fans
 
-set global.T0firstUse = true
-set global.T1firstUse = true
+set global.last_wipe = { 0, 0 }
 
 M568 A1 P0 R{param.H} S{param.H}
 M568 A1 P1 R{param.I} S{param.I}
