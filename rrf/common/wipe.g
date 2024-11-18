@@ -3,7 +3,6 @@ var fan_speed = 1
 if exists(tools[state.currentTool].fans[0])
   set var.fan_speed = fans[tools[state.currentTool].fans[0]].requestedValue
 
-echo "Tool " ^ state.currentTool ^ " fan @ " ^ var.fan_speed
 if var.fan_speed < 1
    M106 S1
    G4 S0.5
