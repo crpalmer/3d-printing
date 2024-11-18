@@ -10,6 +10,8 @@ if !exists(global.in_filament_error)
   global bed_middle_x = null
   global bed_middle_y = null
 
+  global bed_probe_points = []
+
   global park_X = null                  ; Position for pause or filament-errors
   global park_Y = null                  ; Note: not used for dual extruders
 

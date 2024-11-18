@@ -1,6 +1,8 @@
 set global.bed_middle_x = 112.5
 set global.bed_middle_y = 112.5
 
+set global.bed_probe_points = [ [ 110, 30 ], [195, 200], [30, 200] ]
+
 set global.probe_servo = 1
 set global.klicky_pre_x = 113.8
 set global.klicky_pre_y = 180

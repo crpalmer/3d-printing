@@ -7,31 +7,6 @@ M98 P"/sys/global-defaults.g"
 
 global includeDuplication = 0
 
-global xMin = -49.2
-global xMax = 225
-global uMin = 0
-global uMax = 275
-global yMin = -30
-global yMax = 220
-global zMax = 325
-global xCenter = 112.5
-global yCenter = 110
-global zprobe_x = 0
-global zprobe_y = 22
-
-global frontX = 110
-global frontY = 30
-global blX = 30
-global brX = 195
-global blrY = 200
- 
-global lastPurge0 = 0
-global lastPurge1 = 0
-
-; Variables to be used to work around PrusaSlicer "quirks"
-global T0firstUse = true
-global T1firstUse = true
-
 ; General preferences
 G90                                                    ; send absolute coordinates...
 M83                                                    ; ...but relative extruder moves
@@ -50,7 +25,6 @@ M569 P1.2 S1 ; D3                                        ; y right: goes forward
 M584 X0.5 Y1.0:1.2 u0.3 E0.1:1.1 Z0.0:0.2:0.4          ; set drive mapping (front, bl, br)
 
 ; Z "leadscrew" positions
-;M671 X{global.frontX}:{global.blX}:{global.brX} Y{global.frontY}:{global.blrY}:{global.blrY} S10
 M671 X110:30:195 Y30:195:195 S10
 
 ; The motor specifications say 0.067 degree / step.  Let's assume that is rounded and is really
@@ -74,8 +48,8 @@ M906 E850:850 I10                                      ; set motor currents (mA)
 M84 S30                                                ; Set idle timeout
 
 ; Axis Limits
-M208 X{global.xMin} Y{global.yMin} Z0 U{global.uMin} S1                        ; set axis minima
-M208 X{global.xMax} Y{global.yMax} Z{global.zMax} U{global.uMax} S0        ; set axis maxima
+M208 X-49.2 Y-30 Z0 U0 S1                              ; set axis minima
+M208 X225 Y220 Z325 U275 S0                            ; set axis maxima
 
 ; Endstops
 M574 X1 S1 P"^0.io5.in"                                ; configure active-high endstop for low end on X
@@ -85,7 +59,7 @@ M574 U2 S1 P"^0.io6.in"                                ; configure active-high e
 ; Z-Probe
 M950 S0 C"io1.out"                                     ; servo pin definition
 M558 P5 C"^io1.in" H5 F200 T24000
-G31 X{global.zprobe_x} Y{global.zprobe_y} Z3.75 P25
+G31 X0 Y22 Z3.75 P25
 M557 X5:225 Y5:225 P9                                  ; define mesh grid
 M376 H3
 
