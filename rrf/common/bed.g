@@ -1,7 +1,8 @@
 T0
 G1 Z5
 
-M401
+if global.probe_is_klicky
+  M401
 
 if global.bed_probe_points == null || (# global.bed_probe_points) < 1
   abort "G32 requires at least 1 point to probe"
@@ -31,4 +32,5 @@ while true
       else
         echo "Repeating calibration because the mean error is too high (" ^ move.calibration.initial.mean ^ "mm)"
 
-M402
+if global.probe_is_klicky
+  M402
