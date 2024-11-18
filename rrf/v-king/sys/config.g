@@ -8,25 +8,6 @@
 M98 P"/sys/global-declarations.g"
 M98 P"/sys/global-defaults.g"
 
-global frontX = 180
-global blX = 6
-global brX = 337
-global frontY = 13
-global blrY = 392
-
-global zprobe_x = 0
-global zprobe_y = 43
-
-global klicky_pre_x = 225
-global klicky_pre_y = 335
-global klicky_dock_x = global.klicky_pre_x
-global klicky_dock_y = 372
-global klicky_release_x = global.klicky_pre_x - 50
-global klicky_release_y = global.klicky_dock_y
-global klicky_servo_up = 134
-global klicky_servo_down = 6
-global klicky_n_deploys = 0
-
 ; General preferences
 G90                                        ; Send absolute coordinates...
 M83                                        ; ...but relative extruder moves
@@ -78,10 +59,7 @@ M208 X345 Y372 Z390 S0                     ; Set axis maxima
 
 ; Z-Probe
 M558 P5 C"io1.in" H3 F60 T24000 P5
-; With textured bed: 
-; G31 X{global.zprobe_x} Y{global.zprobe_y} Z2.35 P25
-; With smooth bed:
-G31 X{global.zprobe_x} Y{global.zprobe_y} Z2.05 P25
+G31 X0 Y43 Z2.05 P25
 M557 X5:345 Y31:365 P11                   ; Define mesh grid
 M376 H6                                   ; Taper compensation over 6mm height, good for up to 0.3mm error @ < 5% extrusion error
 
