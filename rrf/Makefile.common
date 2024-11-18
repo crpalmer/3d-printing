@@ -29,6 +29,9 @@ COMMON_FILES = macros/filament\ -\ add \
 	       sys/retract-klicky.g \
 	       sys/retract-klicky-automatically.g \
 	       sys/sleep.g \
+	       sys/tfree-common.g \
+               sys/tfree0.g \
+               sys/tfree1.g \
 	       sys/stop.g \
 	       sys/wipe.g \
 	       sys/ExecOnMcode/ExecOnMcode.json
