@@ -5,8 +5,6 @@
 M98 P"/sys/global-declarations.g"
 M98 P"/sys/global-defaults.g"
 
-global includeDuplication = 0
-
 ; General preferences
 G90                                                    ; send absolute coordinates...
 M83                                                    ; ...but relative extruder moves
@@ -113,13 +111,6 @@ G10 P1 X0 U0.65 Y-0.6 Z0 ; Z0.125
 ; Set both tools to standby mode
 M568 A1 P0 R0 S0
 M568 A1 P1 R0 S0
-
-; Tool 2: duplicating mode
-if global.includeDuplication > 0
-  M563 P2 D0:1 H1:2 X0:3 F0:2                            ; tool 2 uses both extruders and hot end heaters, maps X to both X and U, and uses both print cooling fans
-  G10 P2 X-70 Y0 U110                                    ; set tool offsets and temperatures for tool 2
-  M567 P2 E1:1                                           ; set mix ratio 100% on both extruders
-  M568 P2 R0 S0                                          ; temperatures set to 0
 
 ; Servo for klicky
 M950 S1 C"out6" ; assign GPIO port 1 to out9 (Servo header), servo mod
