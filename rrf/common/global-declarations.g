@@ -7,6 +7,9 @@ if !exists(global.in_filament_error)
   global print_ended_Z = null
   global print_ended_U = null
 
+  global bed_middle_x = null
+  global bed_middle_y = null
+
   global park_X = null                  ; Position for pause or filament-errors
   global park_Y = null                  ; Note: not used for dual extruders
 
