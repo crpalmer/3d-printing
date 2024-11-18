@@ -1,6 +1,11 @@
-var fanSpeed = fans[state.currentTool].requestedValue
-if var.fanSpeed < 1
-   M106 P{state.currentTool} S1
+var fan_speed = 1
+
+if exists(tools[state.currentTool].fans[0])
+  set var.fan_speed = fans[tools[state.currentTool].fans[0]].requestedValue
+
+echo "Tool " ^ state.currentTool ^ " fan @ " ^ var.fan_speed
+if var.fan_speed < 1
+   M106 S1
    G4 S0.5
 
 var base_mm = exists(param.E) ? param.E : 3
@@ -28,4 +33,8 @@ if var.prime > 0
   G1 Y3 F12000
   M98 P"/sys/wipe-finish.g"
 
+G4 S0
 set global.last_wipe[state.currentTool] = state.upTime
+
+if var.fan_speed < 1
+  M106 S{var.fan_speed}
