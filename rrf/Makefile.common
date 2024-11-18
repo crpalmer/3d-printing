@@ -1,6 +1,7 @@
 COMMON_FILES = macros/filament\ -\ add \
 	       macros/filament\ -\ add\ slowly \
 	       macros/filament\ -\ remove \
+	       sys/bed.g \
 	       sys/cancel.g \
 	       sys/deployprobe.g \
 	       sys/deploy-bltouch.g \
