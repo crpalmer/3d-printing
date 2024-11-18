@@ -65,7 +65,8 @@ install: check-dir
 	@sudo chmod -R a+rw /opt/dsf/sd/sys/ /opt/dsf/sd/macros/
 
 check-dir:
-	cwd=`pwd`; \
+	@echo "Hostname verification..."
+	@cwd=`pwd`; \
 	dir=`basename "$$cwd"`; \
 	host=`hostname | sed 's/\\..*//'`; \
 	if [ "$$dir" != "$$host" ]; then \
