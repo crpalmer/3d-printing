@@ -20,6 +20,7 @@ COMMON_FILES = macros/filament\ -\ add \
 	       sys/global-declarations.g \
 	       sys/pause.g \
 	       sys/park.g \
+	       sys/prepare-to-print.g \
 	       sys/prusaslicer-fan-hack.g \
 	       sys/rapid-move.g \
 	       sys/resume.g \
