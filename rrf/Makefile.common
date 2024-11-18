@@ -9,6 +9,14 @@ COMMON_FILES = macros/filament\ -\ add \
 	       sys/filament-remove.g \
 	       sys/filament-add.g \
 	       sys/filament-error.g \
+               sys/homeall.g \
+               sys/homeu.g \
+               sys/homex.g \
+               sys/homexy-if-needed.g \
+               sys/homexy.g \
+               sys/homey.g \
+               sys/homez-common.g \
+               sys/homez.g \
 	       sys/global-declarations.g \
 	       sys/pause.g \
 	       sys/park.g \
