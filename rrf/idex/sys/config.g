@@ -44,7 +44,7 @@ M574 U1 S1 P"^1.io2.in"                                ; configure active-high e
 
 ; Z-Probe
 M950 S0 C"io1.out"                                     ; servo pin definition
-M558 P9 C"^io1.in" H5 F100 T2000
+M558 P9 C"^io1.in" H5 F100 T24000
 G31 X-0.5 Y30 Z2.2 P25
 M557 X0:320 Y30:350 P11                                 ; define mesh grid
 M376 H2
