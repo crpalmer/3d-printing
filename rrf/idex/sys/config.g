@@ -7,31 +7,6 @@
 M98 P"/sys/global-declarations.g"
 M98 P"/sys/global-defaults.g"
 
-if !exists(global.xMax)
-  ; If the we are rerunning this setup to see errors, don't try to redefine them
-  global xMax = 350
-  global uMin = -50
-  global uMax = 305
-  global yMin = -10
-  global yMax = 356
-  global xCenter = 150
-
-  global probeOffsetY = 30
-  
-  ; Seconds since the epoch of the last purge of each extruder
-  global lastPurge0 = 0
-  global lastPurge1 = 0
-
-  ; Variables to be used to work around PrusaSlicer "quirks"
-  global T0firstUse = true
-  global T1firstUse = true
-  
-; Set the values in case we are rerunning the config to initialize them
-set global.lastPurge0 = 0
-set global.lastPurge1 = 0
-set global.T0firstUse = true
-set global.T1firstUse = true
-
 ; General preferences
 G90                                                    ; send absolute coordinates...
 M83                                                    ; ...but relative extruder moves
@@ -59,8 +34,8 @@ M84 S30                                                ; Set idle timeout
 M671 X150:150 Y-35:385 S2  			                   ; motor order: front, back
 
 ; Axis Limits
-M208 X0 Y{global.yMin} Z0 U{global.uMin} S1                       ; set axis minima
-M208 X{global.xMax} Y{global.yMax} Z425 U{global.uMax} S0        ; set axis maxima
+M208 X0 Y-10 Z0 U-50 S1                       ; set axis minima
+M208 X350 Y356 Z425 U305 S0                            ; set axis maxima
 
 ; Endstops
 M574 X2 S1 P"^0.io5.in"                                ; configure active-high endstop for high end on X
@@ -70,7 +45,7 @@ M574 U1 S1 P"^1.io2.in"                                ; configure active-high e
 ; Z-Probe
 M950 S0 C"io1.out"                                     ; servo pin definition
 M558 P9 C"^io1.in" H5 F100 T2000
-G31 X-0.5 Y{global.probeOffsetY} Z2.2 P25
+G31 X-0.5 Y30 Z2.2 P25
 M557 X0:320 Y30:350 P11                                 ; define mesh grid
 M376 H2
 
