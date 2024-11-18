@@ -29,7 +29,6 @@ if var.prime > 0
   M98 P"/sys/wipe-move-to-bucket.g"
   G1 E{var.prime} F120
   G1 E{-var.retract} F1800
-  G1 Y3 F12000
   M98 P"/sys/wipe-finish.g"
 
 G4 S0
