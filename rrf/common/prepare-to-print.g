@@ -40,7 +40,7 @@ G28 Z
 if global.probe_is_klicky
   M98 P"/sys/retractprobe-forced.g"
 
-M98 P{"/sys/tfree " ^ state.currentTool ^ ".g"}
+M98 P{"/sys/tfree" ^ state.currentTool ^ ".g"}
 
 if var.probing_temp < var.bed_temp
    M140 S{var.bed_temp}
