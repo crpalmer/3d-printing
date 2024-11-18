@@ -7,4 +7,4 @@ if ! global.in_filament_error
    G91            ; relative positioning
    G1 Z5 F360     ; lift Z by 5mm
    G90            ; absolute positioning
-   M98 P"/sys/park.g"
+   M98 P"/sys/rapid-move.g" X{global.pause_x} Y{global.pause_y}

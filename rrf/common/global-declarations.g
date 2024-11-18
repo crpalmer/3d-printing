@@ -2,19 +2,19 @@ if !exists(global.in_filament_error)
   ; These variables are printer specific and must have their values defined in global-defaults.g
 
   ; These variables are printer specific but optional to define in global-defaults.g
-  global print_ended_X = null
-  global print_ended_Y = null
-  global print_ended_Z = null
-  global print_ended_U = null
+  global print_ended_x = null
+  global print_ended_y = null
+  global print_ended_z = null
+  global print_ended_u = null
+
+  global pause_x = null
+  global pause_y = null
 
   global bed_middle_x = null
   global bed_middle_y = null
 
   global bed_probe_points = null
   global bed_probe_acceptable_stddev = 0.01
-
-  global park_X = null                  ; Position for pause or filament-errors
-  global park_Y = null                  ; Note: not used for dual extruders
 
   ; Probing (klicky or bltouch)
 

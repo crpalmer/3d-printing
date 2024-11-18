@@ -17,5 +17,5 @@ if exists(tools[1])
 else
    M568 A2 P0 R0 S0   ; single tool: set to active
 
-M98 P"/sys/rapid-move.g" X{global.print_ended_X} Y{global.print_ended_Y} U{global.print_ended_U} Z{global.print_ended_Z}
+M98 P"/sys/rapid-move.g" X{global.print_ended_x} Y{global.print_ended_y} U{global.print_ended_u} Z{global.print_ended_z}
 M18
