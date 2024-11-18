@@ -1,4 +1,1 @@
-; called when tool 1 is freed
-
-if move.axes[3].homed
-  G1 U{global.uMax-1} F24000
+M98 P"/sys/tfree-common.g" A3
