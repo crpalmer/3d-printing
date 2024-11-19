@@ -15,7 +15,6 @@ global zprobe_x = 0
 global zprobe_y = 75
 
 M98 P"/sys/global-declarations.g"
-M98 P"/sys/global-defaults.g"
 
 G4 S2 ; wait for expansion boards to start
 
@@ -109,3 +108,5 @@ G10 P0 R0 S0                                           ; Set initial tool 0 acti
 ; Miscellaneous
 M912 P0 S0
 T0
+
+M98 P"/sys/global-defaults.g"

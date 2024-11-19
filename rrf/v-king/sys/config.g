@@ -6,7 +6,6 @@
 ;
 
 M98 P"/sys/global-declarations.g"
-M98 P"/sys/global-defaults.g"
 
 ; General preferences
 G90                                        ; Send absolute coordinates...
@@ -113,3 +112,5 @@ M280 P1 S{global.klicky_servo_down}
 ; Miscellaneous
 M912 P0 S1.2                               ; MCU temperature calibration
 T0                                         ; Select first tool
+
+M98 P"/sys/global-defaults.g"

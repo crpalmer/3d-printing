@@ -5,7 +5,6 @@
 ; -------------------------
 
 M98 P"/sys/global-declarations.g"
-M98 P"/sys/global-defaults.g"
 
 ; General preferences
 G90                                                    ; send absolute coordinates...
@@ -111,3 +110,5 @@ M912 P0 S-12.5                                         ; Calibrate MCU temperatu
 
 ; Miscellaneous
 M912 P0 S-1
+
+M98 P"/sys/global-defaults.g"

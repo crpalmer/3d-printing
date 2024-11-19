@@ -3,7 +3,6 @@
 ;
 
 M98 P"/sys/global-declarations.g"
-M98 P"/sys/global-defaults.g"
 
 ; General preferences
 G90                                                    ; send absolute coordinates...
@@ -119,3 +118,5 @@ M280 P1 S{global.klicky_servo_down}
 ; Miscellaneous
 M912 P0 S0
 T0
+
+M98 P"/sys/global-defaults.g"
