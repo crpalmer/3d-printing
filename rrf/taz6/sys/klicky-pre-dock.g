@@ -9,7 +9,7 @@ G90
 
 ; Move over the button
 
-G1 X-20 Y256 F12000
+M98 P"/sys/rapid-move.g" X-20 Y256
 
 ; Use the bottom to position z at the height of the dock.  This does
 ; not change (or even set if the axis is unhomed) the current z zero.
