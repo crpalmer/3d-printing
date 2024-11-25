@@ -22,6 +22,9 @@ if !exists(global.in_filament_error)
   global probe_is_klicky = true
   global probe_at_temperature_delta = null
 
+  global pre_wipe_script = null
+  global post_wipe_script = null
+
   ; Klicky configuration
 
   global klicky_is_manual = false
