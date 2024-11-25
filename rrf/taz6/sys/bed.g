@@ -1,8 +1,0 @@
-M561 ; clear any bed transform
-
-M401
-
-G30 P0 X5 Y140 Z-99999
-G30 P1 X275 Y140 Z-99999 S2
-
-M402
