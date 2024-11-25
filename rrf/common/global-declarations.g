@@ -29,8 +29,10 @@ if !exists(global.in_filament_error)
 
   global klicky_is_manual = false
 
+  global klicky_pre_dock_script = null  ; Executed before moving to the dock
+
   global klicky_pre_x = null            ; Location to move to before triggering servo
-  global klicky_pre_y = null
+  global klicky_pre_y = null            ; These are only used if no pre_dock_script specified
   global klicky_pre_z = null
 
   global klicky_servo_up = null         ; Angle to position to start deploy/retract

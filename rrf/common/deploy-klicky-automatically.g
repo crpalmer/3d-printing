@@ -2,7 +2,10 @@ M98 P"/sys/homexy-if-needed.g"
 
 T0
 
-M98 P"/sys/rapid-move.g" X{global.klicky_pre_x} Y{global.klicky_pre_y} Z{global.klicky_pre_z}
+if global.klicky_pre_dock_script != null
+  M98 P{global.klicky_pre_dock_script}
+else
+  M98 P"/sys/rapid-move.g" X{global.klicky_pre_x} Y{global.klicky_pre_y} Z{global.klicky_pre_z}
 
 if global.probe_servo != null && global.klicky_servo_up != null
   M280 P{global.probe_servo} S{global.klicky_servo_up}
