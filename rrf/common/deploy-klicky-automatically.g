@@ -15,4 +15,5 @@ M98 P"/sys/rapid-move.g" X{global.klicky_dock_x} Y{global.klicky_dock_y} Z{globa
 M98 P"/sys/rapid-move.g" X{global.klicky_pre_x} Y{global.klicky_pre_y} Z{global.klicky_pre_z}
 
 if global.probe_servo != null && global.klicky_servo_down != null
+  G4 S0
   M280 P{global.probe_servo} S{global.klicky_servo_down}
