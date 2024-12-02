@@ -1,0 +1,5 @@
+M291 S1 T55 P"Loading filament..."
+M83            ; relative extrusion
+G1 E100 F180   ; go slow to make sure it gets loaded in there
+G1 E700 F3000  ; load it most of the way
+G1 E200 F300   ; push the filament into the extruder and purge the old filament
