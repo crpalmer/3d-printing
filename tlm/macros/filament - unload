@@ -1,6 +1,0 @@
-M291 S1 T55 P"Unloading filament..."
-M83             ; relative extrusion
-G1 E5 F120      ; push out a little filament to get a nice tip
-G1 E-200 F3600  ; retract into the tube to try to stop it from sticking in the extruder
-G4 S30          ; wait for the filament to cool
-G1 E-800 F3600  ; remove it all the way
