@@ -60,6 +60,10 @@ G31 X0 Y22 Z3.75 P25
 M557 X5:225 Y5:225 P9                                  ; define mesh grid
 M376 H3
 
+; Filament sensor (BTT SFS 2.0)
+M591 D0 P7 C"0.io0.in" L3 R50:150 E22 S1
+M591 D1 P7 C"1.io5.in" L3 R50:150 E22 S1
+
 ; Pressure advance
 M572 D0 S0.05
 
