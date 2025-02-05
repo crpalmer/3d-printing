@@ -115,12 +115,12 @@ G10 P1 X0 U0.65 Y-0.6 Z0 ; Z0.125
 M568 A1 P0 R0 S0
 M568 A1 P1 R0 S0
 
-; Servo for klicky
-M950 S1 C"out6" ; assign GPIO port 1 to out9 (Servo header), servo mod
-M280 P1 S{global.klicky_servo_down}
-
 ; Miscellaneous
 M912 P0 S0
 T0
 
 M98 P"/sys/global-defaults.g"
+
+; Servo for klicky
+M950 S1 C"out6" ; assign GPIO port 1 to out9 (Servo header), servo mod
+M280 P1 S{global.klicky_servo_down}
