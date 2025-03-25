@@ -1,6 +1,8 @@
 set global.bed_middle_x = 112.5
 set global.bed_middle_y = 112.5
 
+set global.print_ended_y = move.axes[1].max - 1
+
 set global.bed_probe_points = { { 110, 30}, {195, 200}, {30, 200} }
 
 set global.probe_servo = 1
