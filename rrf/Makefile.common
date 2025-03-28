@@ -4,7 +4,6 @@ COMMON_FILES = macros/filament\ -\ add \
 	       sys/bed.g \
 	       sys/cancel.g \
 	       sys/deployprobe.g \
-	       sys/deploy-bltouch.g \
 	       sys/deploy-klicky.g \
 	       sys/deploy-klicky-automatically.g \
 	       sys/filament-remove.g \
@@ -26,7 +25,6 @@ COMMON_FILES = macros/filament\ -\ add \
 	       sys/resume.g \
 	       sys/retractprobe.g \
 	       sys/retractprobe-forced.g \
-	       sys/retract-bltouch.g \
 	       sys/retract-klicky.g \
 	       sys/retract-klicky-automatically.g \
 	       sys/sleep.g \
