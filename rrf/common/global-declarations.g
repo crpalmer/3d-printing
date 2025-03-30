@@ -16,7 +16,7 @@ if !exists(global.in_filament_error)
   global bed_probe_points = null
   global bed_probe_acceptable_stddev = 0.01
 
-  ; Probing (klicky or bltouch)
+  ; Probing (klicky or nozzle based probe)
 
   global probe_servo = null             ; M280 P{global.probe_servo}
   global probe_is_klicky = true
@@ -40,6 +40,10 @@ if !exists(global.in_filament_error)
   global klicky_release_y = null
   global klicky_release_z = null
 
+  ; Configuration of print startup
+  global use_mesh_compensation = false
+  global use_true_bed_leveling = true
+  
   ; These variables are for internal use and do notneed to be defined in the global-defaults.g
   ; Instead, you must provide defaults in the else clause (here)
 
