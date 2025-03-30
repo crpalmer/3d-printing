@@ -44,10 +44,9 @@ M574 Y2 S1 P"^0.io6.in+^1.io0.in"                      ; configure active-high e
 M574 U1 S1 P"^1.io2.in"                                ; configure active-high endstop for high end on U
 
 ; Z-Probe
-M950 S0 C"io1.out"                                     ; servo pin definition
-M558 P9 C"^io1.in" H5 F100 T24000
-G31 X-0.5 Y30 Z2.2 P25
-M557 X0:320 Y30:350 P11                                 ; define mesh grid
+M558 P8 C"^!io1.in" R1.0 H5 F400 A5 T24000
+G31 X0 Y0 Z0 P25
+M557 X0:325 Y5:355 P9                                  ; define mesh grid
 M376 H2
 
 ; Filament sensor (BTT SFS 2.0)
