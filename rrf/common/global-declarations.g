@@ -20,6 +20,7 @@ if !exists(global.in_filament_error)
 
   global probe_servo = null             ; M280 P{global.probe_servo}
   global probe_is_klicky = true
+  global probe_at_temperature_pct = 0
 
   ; Klicky configuration
 

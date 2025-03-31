@@ -21,14 +21,11 @@ else
   set var.t1_temp = param.H
   set var.bed_temp = param.B
 
-if exists(param.T)
-  if param.T == 1
-    if var.t1_temp > 0
-      set var.t1_probe_temp = var.t1_temp * 0.7
-    else
-      set var.t1_probe_temp = var.t2_temp * 0.7
+if global.probe_at_temperature_pct > 0
+  if var.t1_temp > 0
+    set var.t1_probe_temp = var.t1_temp * global.probe_at_temperature_pct
   else
-    set var.t1_probe_temp = param.T
+    set var.t1_probe_temp = var.t2_temp * global.probe_at_temperature_pct
 
 var bed_probe_temp = var.bed_temp
 if global.probe_is_klicky
