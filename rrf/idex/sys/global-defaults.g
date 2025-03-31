@@ -5,6 +5,9 @@ set global.bed_middle_y = 178
 
 set global.bed_probe_points = { {global.bed_middle_x, 50}, {global.bed_middle_x, 300} }
 
+set global.probe_pin_location = {259, -5.35, 0.8}
+set global.probe_pin_diameter = 4
+
 set global.probe_is_klicky = false
 set global.probe_at_temperature_pct = 0.7
 

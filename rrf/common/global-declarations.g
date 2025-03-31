@@ -22,6 +22,10 @@ if !exists(global.in_filament_error)
   global probe_is_klicky = true
   global probe_at_temperature_pct = 0
 
+  ; Probing a fixed pin for idex calibration
+  global probe_pin_location = null      ; An array {x, y, z} - x,y is the middle of the pin, z is the height to probe the pin at
+  global probe_pin_diameter = null      ; An approximate diameter of the pin, used to find a same distance to start probing from
+
   ; Klicky configuration
 
   global klicky_is_manual = false
@@ -51,6 +55,7 @@ if !exists(global.in_filament_error)
   global in_filament_error = false
   global probe_n_deploys = 0
   global last_wipe = { 0, 0 }
+  global last_probe_result = {0, 0}
 else
   set global.in_filament_error = false
   set global.probe_n_deploys = 0
