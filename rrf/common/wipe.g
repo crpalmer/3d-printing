@@ -1,11 +1,10 @@
+if state.currentTool < 0
+  abort "Wipe failed: no tool selected"
+
 var fan_speed = 1
 
 if exists(tools[state.currentTool].fans[0])
   set var.fan_speed = fans[tools[state.currentTool].fans[0]].requestedValue
-
-if var.fan_speed < 1
-   M106 S1
-   G4 S0.5
 
 var base_mm = exists(param.E) ? param.E : 3
 var extra_mm = exists(param.X) ? param.X : 3
