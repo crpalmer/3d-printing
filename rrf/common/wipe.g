@@ -25,13 +25,15 @@ if var.prime < var.min_mm
   set var.prime = var.min_mm
   
 if var.prime > 0
+  if var.fan_speed < 1
+    M106 S1
+
   M98 P"/sys/wipe-move-to-bucket.g"
   G1 E{var.prime} F120
   G1 E{-var.retract} F1800
   M98 P"/sys/wipe-finish.g"
+  if var.fan_speed < 1
+    M106 S{var.fan_speed}
+  G4 S0
 
-G4 S0
 set global.last_wipe[state.currentTool] = state.upTime
-
-if var.fan_speed < 1
-  M106 S{var.fan_speed}
