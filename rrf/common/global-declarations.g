@@ -20,7 +20,7 @@ if !exists(global.in_filament_error)
 
   global probe_servo = null             ; M280 P{global.probe_servo}
   global probe_is_klicky = true
-  global probe_at_temperature_pct = 0
+  global probe_at_temperature_delta = null
 
   ; Probing a fixed pin for idex calibration
   global probe_pin_location = null      ; An array {x, y, z} - x,y is the middle of the pin, z is the height to probe the pin at
@@ -49,6 +49,18 @@ if !exists(global.in_filament_error)
   global use_mesh_compensation = false
   global use_true_bed_leveling = true
   
+  ; Wiping configuration
+  global wipe_passes = 3
+  global wipe_for_probing_passes = 7
+  global wipe_y_range = null
+  global wipe_park_x = null
+  global wipe_park_u = null
+  global wipe_safe_x = null
+  global wipe_safe_u = null
+  global wipe_at_x = null
+  global wipe_at_u = null
+  global wipe_at_y = null
+
   ; These variables are for internal use and do notneed to be defined in the global-defaults.g
   ; Instead, you must provide defaults in the else clause (here)
 

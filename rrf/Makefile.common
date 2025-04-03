@@ -34,6 +34,9 @@ COMMON_FILES = macros/filament\ -\ add \
                sys/tfree0.g \
                sys/tfree1.g \
 	       sys/stop.g \
+	       sys/wipe-finish.g \
+	       sys/wipe-for-probing.g \
+	       sys/wipe-move-to-bucket.g \
 	       sys/wipe.g \
 	       sys/ExecOnMcode/ExecOnMcode.json
 

@@ -29,11 +29,10 @@ if var.prime > 0
     M106 S1
 
   M98 P"/sys/wipe-move-to-bucket.g"
-  G1 E{var.prime} F120
-  G1 E{-var.retract} F1800
+  G1 E{var.prime} F{3*60}
+  G1 E{-var.retract} F{30*60}
   M98 P"/sys/wipe-finish.g"
   if var.fan_speed < 1
     M106 S{var.fan_speed}
-  G4 S0
 
 set global.last_wipe[state.currentTool] = state.upTime
