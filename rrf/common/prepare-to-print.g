@@ -47,10 +47,12 @@ if var.t1_probe_temp > 0
   M568 A1 P0 R{var.t1_probe_temp} S{var.t1_probe_temp}
 else
   M568 A1 P0 R{var.t1_temp} S{var.t1_temp}
-if  var.t2_probe_temp > 0
-  M568 A1 P1 R{var.t2_probe_temp} S{var.t2_probe_temp}
-else
-  M568 A1 P1 R{var.t2_temp} S{var.t2_temp}
+
+if exists(tools[1])
+  if  var.t2_probe_temp > 0
+    M568 A1 P1 R{var.t2_probe_temp} S{var.t2_probe_temp}
+  else
+    M568 A1 P1 R{var.t2_temp} S{var.t2_temp}
 
 ;
 ; Reset the state / initialize things
@@ -140,4 +142,5 @@ T-1
 T0
 M116 H0
 M116 P0
-M116 P1
+if exists(tools[1])
+  M116 P1

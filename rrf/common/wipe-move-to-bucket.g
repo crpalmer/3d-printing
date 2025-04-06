@@ -1,5 +1,5 @@
 var x = move.axes[0].machinePosition
-var u = move.axes[3].machinePosition
+var u = null
 
 if global.wipe_safe_x != null
   set var.x = global.wipe_safe_x
@@ -11,7 +11,11 @@ if global.wipe_safe_u != null
 elif global.wipe_park_u != null
   set var.u = global.wipe_park_u
 
-G1 X{var.x} U{var.u} F24000 H2 ; move beside the bucket
+if var.u != null
+  G1 X{var.x} U{var.u} F24000 H2 ; move beside the bucket
+else
+  G1 X{var.x} F24000 H2 ; move beside the bucket
+
 if global.wipe_at_y != null
   G1 Y{global.wipe_at_y} F24000              ; past the wiping bucket
 elif global.wipe_y_range != null

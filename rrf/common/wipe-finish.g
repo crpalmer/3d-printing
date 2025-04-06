@@ -16,8 +16,7 @@ var x = move.axes[0].machinePosition
 if global.wipe_park_x != null
   set var.x = global.wipe_park_x
 
-var u = move.axes[3].machinePosition
-if global.wipe_park_u != null
-  set var.u = global.wipe_park_u
-
-G1 X{var.x} U{var.u} F24000 H2
+if global.wipe_park_u != null && exists(move.axes[3])
+  G1 X{var.x} U{global.wipe_park_u} F24000 H2
+else
+  G1 X{var.x} F24000 H2
