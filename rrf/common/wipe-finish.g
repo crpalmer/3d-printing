@@ -7,10 +7,8 @@ var at_high = (move.axes[1].machinePosition > (global.wipe_y_range[1] - global.w
 
 while iterations < var.n
   if var.at_high
-    echo move.axes[1].machinePosition, global.wipe_y_range[0]
     G1 Y{global.wipe_y_range[0]} F24000
   else
-    echo move.axes[1].machinePosition, global.wipe_y_range[1]
     G1 Y{global.wipe_y_range[1]} F24000
   set var.at_high = !var.at_high
 
