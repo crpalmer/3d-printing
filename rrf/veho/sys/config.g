@@ -4,16 +4,6 @@
 
 ; -------------------------
 
-global xMin = 0
-global xMax = 625
-global yMin = 0
-global yMax = 600
-global zMax = 650
-global xCenter = 300
-global yCenter = 300
-global zprobe_x = 0
-global zprobe_y = 75
-
 M98 P"/sys/global-declarations.g"
 
 G4 S2 ; wait for expansion boards to start
@@ -48,8 +38,8 @@ M906 E900 I10                                          ; set motor currents (mA)
 M84 S30                                                ; Set idle timeout
 
 ; Axis Limits
-M208 X{global.xMin} Y{global.yMin} Z0 S1                ; set axis minima
-M208 X{global.xMax} Y{global.yMax} Z{global.zMax} S0    ; set axis maxima
+M208 X0 Y0 Z0 S1                                       ; set axis minima
+M208 X625 Y600 Z650 S0                                 ; set axis maxima
 
 ; Endstops
 M574 X2 S1 P"!121.io2.in"                               ; configure active-high endstop for low end on X
@@ -58,7 +48,7 @@ M574 Y2 S1 P"^0.io5.in+^0.io6.in"                         ; configure active-low
 ; Z-Probe
 ;M950 S0 C"io1.out"                                     ; servo pin definition
 M558 P8 C"^121.io1.in" H5 F200 T24000
-G31 X{global.zprobe_x} Y{global.zprobe_y} Z6.15 P25
+G31 X0 Y75 Z6.15 P25
 M557 X100:500 Y100:500 P9                               ; define mesh grid
 M376 H3
 
