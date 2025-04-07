@@ -1,11 +1,3 @@
-if exists(global.zMax)
-   if move.axes[2].homed && move.axes[2].userPosition + 5 >= global.zMax
-      G1 Z{global.zMax}
-   else
-      G91
-      G1 Z+5            ; Move the nozzle up
-      G90
-
 ; Set all temperatures to 0
 M140 S0               ; Turn off bed
 M106 P0 S0            ; Turn off the fan
