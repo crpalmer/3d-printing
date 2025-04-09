@@ -22,9 +22,10 @@ if !exists(global.in_filament_error)
   global probe_is_klicky = true
   global probe_at_temperature_delta = null
 
-  ; Probing a fixed pin for idex calibration
-  global probe_pin_location = null      ; An array {x, y, z} - x,y is the middle of the pin, z is the height to probe the pin at
-  global probe_pin_diameter = null      ; An approximate diameter of the pin, used to find a same distance to start probing from
+  ; Probing to find a corner of a fixed block (IDEX calibration)
+  global probe_block_middle = null
+  global probe_block_diameter = null
+  global probe_block_directions = { -1, +1 }
 
   ; Klicky configuration
 

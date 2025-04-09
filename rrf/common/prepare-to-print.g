@@ -95,18 +95,7 @@ else
   G28 Z
   G1 Z5
   if var.t1_probe_temp > 0 && var.t2_probe_temp > 0
-    T1
-    M98 P"/sys/wipe-for-probing.g"
-
-    var mid_x = global.bed_middle_x != null ? global.bed_middle_x : (move.axes[0].max - move.axes[0].min + 1) / 2
-    var mid_y = global.bed_middle_y != null ? global.bed_middle_x : (move.axes[1].max - move.axes[1].min + 1) / 2
-    G1 X{var.mid_x - sensors.probes[0].offsets[0]} Y{var.mid_y - sensors.probes[0].offsets[1]} F24000
-    G30 P1 S-1
-
-    var z_offset = move.axes[2].machinePosition
-    G1 Z5
-    echo "T1 zeroed at", var.z_offset
-    G10 P1 Z{-var.z_offset}
+    M98 P"/sys/idex-calibration.g"
 
 ;
 ; Handle any bed compensation/leveling
