@@ -4,22 +4,22 @@ T0
 G28 Z
 G1 Z5 f12000
 
-G1 X10 Y20
+G1 X50 Y50
 G30 S-1
 var fl = sensors.probes[0].lastStopHeight
 G1 Z5
 
-G1 X10 Y340
+G1 X50 Y325
 G30 S-1
 var bl = sensors.probes[0].lastStopHeight
 G1 Z5
 
-G1 X315 Y340
+G1 X315 Y325
 G30 S-1
 var br = sensors.probes[0].lastStopHeight
 G1 Z5
 
-G1 X315 Y20
+G1 X315 Y50
 G30 S-1
 var fr = sensors.probes[0].lastStopHeight
 G1 Z5
