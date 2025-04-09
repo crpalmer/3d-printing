@@ -16,7 +16,6 @@ COMMON_FILES = macros/filament\ -\ add \
                sys/homexy-if-needed.g \
                sys/homexy.g \
                sys/homey.g \
-               sys/homez-common.g \
                sys/homez.g \
 	       sys/global-declarations.g \
 	       sys/pause.g \

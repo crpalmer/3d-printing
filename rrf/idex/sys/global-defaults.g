@@ -5,7 +5,7 @@ set global.bed_middle_y = 178
 
 set global.bed_probe_points = { {global.bed_middle_x, 50}, {global.bed_middle_x, 300} }
 
-set global.probe_pin_location = {262, -6, 0}
+set global.probe_pin_location = {261, -6, 2}  ; TODO: this is probably too high
 set global.probe_pin_diameter = 4
 
 ; PZ Probe on setting #2
