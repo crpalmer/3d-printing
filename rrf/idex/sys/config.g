@@ -45,9 +45,9 @@ M574 U1 S1 P"^1.io2.in"                                ; configure active-high e
 
 ; Z-Probe
 M558 K0 P8 C"^!io1.in" R1.0 H5 F400 A5 T24000
-G31  K0 X0 Y0 Z0 P25
+G31  K0 X0 Y0 Z0 P100
 M558 K1 P8 C"^!1.io5.in" R1.0 H5 F400 A5 T24000
-G31  K1 X0 Y0 Z0 P25
+G31  K1 X0 Y0 Z0 P100
 
 M557 X0:325 Y5:355 P9                                  ; define mesh grid
 M376 H2
