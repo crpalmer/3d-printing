@@ -25,7 +25,7 @@ M569 P121.0 S1 ; D3                                      ; e
 M584 X0.0 Y0.6:0.5 Z0.1:0.2:0.4:0.3 E121.0               ; set drive mapping
 
 ; Z leadscrew positions
-M671 X-100:-100:680:680 Y70:530:530:70 S5
+M671 X50:50:550:550 Y50:550:550:50 S5
 
 M92 X53.33 Y53.33 Z600 E680                            ; set steps per mm (recommended; 690 orbiter)
 M350 X16 Y16 Z16 E16 I1                                ; Configure microstepping with interpolation
@@ -47,9 +47,9 @@ M574 Y2 S1 P"^0.io5.in+^0.io6.in"                         ; configure active-low
 
 ; Z-Probe
 ;M950 S0 C"io1.out"                                     ; servo pin definition
-M558 P8 C"^121.io1.in" H5 F200 T24000
-G31 X0 Y75 Z6.15 P25
-M557 X100:500 Y100:500 P9                               ; define mesh grid
+M558 P8 C"^!121.io1.in" A5 R1 H5 F400 T24000
+G31 X0 Y0 Z0 P100
+M557 X50:550 Y50:550 P13                               ; define mesh grid
 M376 H3
 
 ; Filament sensor (BTT SFS 2.0)
