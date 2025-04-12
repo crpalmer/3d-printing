@@ -14,7 +14,7 @@ if !exists(global.in_filament_error)
   global bed_middle_y = null
 
   global bed_probe_points = null
-  global bed_probe_acceptable_stddev = 0.01
+  global bed_meshing_max_stddev = 0.02
 
   ; Probing (klicky or nozzle based probe)
 
