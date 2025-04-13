@@ -4,42 +4,42 @@ COMMON_FILES = macros/filament\ -\ add \
 	       macros/stop \
 	       sys/bed.g \
 	       sys/cancel.g \
-	       sys/deployprobe.g \
-	       sys/deploy-klicky.g \
 	       sys/deploy-klicky-automatically.g \
-	       sys/filament-remove.g \
+	       sys/deploy-klicky.g \
+	       sys/deployprobe.g \
+	       sys/ExecOnMcode/ExecOnMcode.json \
 	       sys/filament-add.g \
 	       sys/filament-error.g \
+	       sys/filament-remove.g \
+	       sys/global-declarations.g \
                sys/homeall.g \
                sys/homeu.g \
                sys/homex.g \
-               sys/homexy-if-needed.g \
                sys/homexy.g \
+               sys/homexy-if-needed.g \
                sys/homey.g \
                sys/homez-common.g \
                sys/homez.g \
-	       sys/global-declarations.g \
 	       sys/pause.g \
 	       sys/prepare-to-print.g \
-	       sys/probe-pin-once.g \
 	       sys/probe-pin.g \
+	       sys/probe-pin-once.g \
 	       sys/prusaslicer-fan-hack.g \
 	       sys/rapid-move.g \
 	       sys/resume.g \
-	       sys/retractprobe.g \
-	       sys/retractprobe-forced.g \
-	       sys/retract-klicky.g \
 	       sys/retract-klicky-automatically.g \
+	       sys/retract-klicky.g \
+	       sys/retractprobe-forced.g \
+	       sys/retractprobe.g \
 	       sys/sleep.g \
-	       sys/tfree-common.g \
+	       sys/stop.g \
                sys/tfree0.g \
                sys/tfree1.g \
-	       sys/stop.g \
+	       sys/tfree-common.g \
 	       sys/wipe-finish.g \
 	       sys/wipe-for-probing.g \
-	       sys/wipe-move-to-bucket.g \
 	       sys/wipe.g \
-	       sys/ExecOnMcode/ExecOnMcode.json
+	       sys/wipe-move-to-bucket.g \
 
 all: check-dir
 	@echo "Copy sys/"
