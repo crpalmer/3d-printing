@@ -27,7 +27,7 @@ elif global.wipe_y_range != null
     G1 Y{global.wipe_y_range[0]} F24000
 
 ; Move just the wiping tool in line with the bucket
-if state.currentTool == 0 and global.wipe_at_x != null
+if state.currentTool == 0 && global.wipe_at_x != null
   G1 X{global.wipe_at_x} H2
-elif state.currentTool == 1 and global.wipe_at_u != null
+elif state.currentTool == 1 && global.wipe_at_u != null
   G1 U{global.wipe_at_u} H2
