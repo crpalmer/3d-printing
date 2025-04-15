@@ -30,9 +30,9 @@ if var.t1_temp <= 0 && var.t2_temp <= 0
 var t1_probe_temp = var.t1_temp - 50
 var t2_probe_temp = 0
 
-if exists(sensors.probes[1]) and global.probe_at_temperature_delta != null
+if exists(sensors.probes[1]) && global.probe_at_temperature_delta != null
   set var.t2_probe_temp = var.t2_temp - global.probe_at_temperature_delta
-elif var.t1_temp <= 0 and global.probe_at_temperature_delta != null
+elif var.t1_temp <= 0 && global.probe_at_temperature_delta != null
   set var.t1_probe_temp = var.t2_temp - global.probe_at_temperature_delta
 
 var bed_probe_temp = var.bed_temp
