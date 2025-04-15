@@ -107,10 +107,11 @@ G10 P0 R0 S0                               ; Set initial tool 0 active and stand
 
 ; Servo for klicky
 M950 S1 C"out6" ; assign GPIO port 1 to out9 (Servo header), servo mod
-M280 P1 S{global.klicky_servo_down}
 
 ; Miscellaneous
 M912 P0 S1.2                               ; MCU temperature calibration
 T0                                         ; Select first tool
 
 M98 P"/sys/global-defaults.g"
+
+M280 P1 S{global.klicky_servo_down}
