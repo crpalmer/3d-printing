@@ -22,9 +22,9 @@ M569 P1.2 S1 ; D3                                      ; physical drive 1.2 goes
 M584 X0.2 Y0.1:1.2 u1.1 E0.0:1.0 Z0.3:0.4              ; set drive mapping
 M92 X160.00 Y160.00 U160.00 Z800.00 E680:680           ; set steps per mm (recommended; 690 orbiter)
 M350 X16 Y16 U16 Z16 E16 I1                            ; set microstepping to 256 interpolation
-M566 X600.00 Y600.00 U600.00 Z240.00 E300:300 P1       ; set maximum instantaneous speed changes (mm/min)
+M566 X300.00 Y300.00 U300.00 Z240.00 E300:300 P1       ; set maximum instantaneous speed changes (mm/min)
 M203 X12000.00 Y12000.00 U12000.00 Z600.00 E7200:7200  ; set maximum speeds (mm/min)
-M201 X1000.00 Y1000.00 U1000.00 Z500.00 E5000:5000     ; set accelerations (mm/s^2)
+M201 X1500.00 Y1500.00 U1500.00 Z500.00 E5000:5000     ; set accelerations (mm/s^2)
 ;M906 X1350 Y1350 U1350 Z1200 E850:850 I30              ; set motor currents (mA) and motor idle factor in per cent (orbiter supposed to be 1200)
 M906 X1200 Y1000 U1200 Z840 I30                        ; Set motor currents (mA) and motor idle factor in per cent
 M906 E850:850 I10                                      ; (orbiter supposed to be 1200)
