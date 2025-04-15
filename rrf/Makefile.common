@@ -23,7 +23,6 @@ COMMON_FILES = macros/filament\ -\ add \
 	       sys/pause.g \
 	       sys/prepare-to-print.g \
 	       sys/probe-block.g \
-	       sys/probe-find-corner.g \
 	       sys/probe-laterally.g \
 	       sys/probe-side.g \
 	       sys/prusaslicer-fan-hack.g \
