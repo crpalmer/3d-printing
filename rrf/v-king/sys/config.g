@@ -57,9 +57,9 @@ M208 X-24 Y-12 Z-5 S1                        ; Set axis minima
 M208 X345 Y372 Z390 S0                     ; Set axis maxima
 
 ; Z-Probe
-M558 P5 C"io1.in" H3 F60 T24000 P5
-G31 X0 Y43 Z2.20 P25
-M557 X5:345 Y31:365 P11                   ; Define mesh grid
+M558 K0 P8 C"^!io1.in" R1.0 H5 F400 A5 T24000
+G31 X0 Y0 Z0 P100
+M557 X10:335 Y10:362 P11                   ; Define mesh grid
 M376 H6                                   ; Taper compensation over 6mm height, good for up to 0.3mm error @ < 5% extrusion error
 
 ; Filament sensor (BTT SFS 2.0)
@@ -105,13 +105,8 @@ G10 P0 R0 S0                               ; Set initial tool 0 active and stand
 
 ; Custom settings are not configured
 
-; Servo for klicky
-M950 S1 C"out6" ; assign GPIO port 1 to out9 (Servo header), servo mod
-
 ; Miscellaneous
 M912 P0 S1.2                               ; MCU temperature calibration
 T0                                         ; Select first tool
 
 M98 P"/sys/global-defaults.g"
-
-M280 P1 S{global.klicky_servo_down}
