@@ -30,9 +30,9 @@ M671 X50:50:550:550 Y50:550:550:50 S5
 M92 X53.33 Y53.33 Z600 E680                            ; set steps per mm (recommended; 690 orbiter)
 M350 X16 Y16 Z16 E16 I1                                ; Configure microstepping with interpolation
 
-M566 X600.00 Y600.00 Z240.00 E300 P1                   ; set maximum instantaneous speed changes (mm/min)
+M566 X300.00 Y300.00 Z240.00 E300 P1                   ; set maximum instantaneous speed changes (mm/min)
 M203 X24000.00 Y24000.00 Z600.00 E7200                 ; set maximum speeds (mm/min)
-M201 X1000.00 Y1000.00 Z500.00 E5000                   ; set accelerations (mm/s^2)
+M201 X5000.00 Y5000.00 Z500.00 E5000                   ; set accelerations (mm/s^2)
 M906 X1200 Y1200 Z1200 I30
 M906 E900 I10                                          ; set motor currents (mA) and motor idle factor in per cent
 M84 S30                                                ; Set idle timeout
