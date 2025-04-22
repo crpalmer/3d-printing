@@ -53,6 +53,7 @@ if !exists(global.in_filament_error)
   ; Wiping configuration
   global wipe_passes = 3
   global wipe_for_probing_passes = 7
+  global wipe_x_range = null
   global wipe_y_range = null
   global wipe_park_x = null
   global wipe_park_u = null
