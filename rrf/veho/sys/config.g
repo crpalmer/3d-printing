@@ -58,7 +58,7 @@ M591 D0 P7 C"121.io0.in" L3 R75:125 E9 S1
 
 ; Accelerometer (toolboard), input shaping and pressure advance
 M955 P121.0 I10                                        ; Z+ -> Y+ and X+ -> X+
-m593 P"zvd" F38.5 S0.1
+M593 P"zvd" F45 S0.1
 M572 D0 S0.05
 
 ; Fans (tool 0)
