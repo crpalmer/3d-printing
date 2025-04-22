@@ -3,6 +3,7 @@ set global.print_ended_y = move.axes[1].max - 1
 
 set global.bed_middle_x = 300
 set global.bed_probe_points = { {150, 150}, {150, 450}, {450, 450}, {450, 150} }
+set global.bed_meshing_max_stddev = 0.05
 
 ; PZ Probe on setting #2
 set global.probe_is_klicky = false
