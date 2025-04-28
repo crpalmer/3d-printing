@@ -54,10 +54,9 @@ M574 Y2 S1 P"^1.io0.in+^1.io3.in"                      ; configure active-high e
 M574 U2 S1 P"^0.io6.in"                                ; configure active-high endstop for high end on U
 
 ; Z-Probe
-M950 S0 C"io1.out"                                     ; servo pin definition
-M558 P5 C"^io1.in" H5 F200 T24000
-G31 X0 Y22 Z3.625 P25
-M557 X5:225 Y5:225 P9                                  ; define mesh grid
+M558 P8 C"!^io1.in" A5 R1 H5 F400 T24000
+G31 X0 Y0 Z0 P100
+M557 X5:220 Y5:215 P9                                  ; define mesh grid
 M376 H3
 
 ; Filament sensor (BTT SFS 2.0)
@@ -120,7 +119,3 @@ M912 P0 S0
 T0
 
 M98 P"/sys/global-defaults.g"
-
-; Servo for klicky
-M950 S1 C"out6" ; assign GPIO port 1 to out9 (Servo header), servo mod
-M280 P1 S{global.klicky_servo_down}
