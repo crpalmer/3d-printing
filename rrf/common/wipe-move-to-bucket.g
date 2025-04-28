@@ -11,6 +11,9 @@ if global.wipe_safe_u != null
 elif global.wipe_park_u != null
   set var.u = global.wipe_park_u
 
+;TODO: Check that the axes we are going to move are homed
+; If not, they will still be moved but not safely!!
+
 if var.u != null
   G1 X{var.x} U{var.u} F24000 H2 ; move beside the bucket
 else
