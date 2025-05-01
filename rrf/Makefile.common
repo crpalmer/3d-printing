@@ -1,6 +1,7 @@
 COMMON_FILES = macros/filament\ -\ add \
 	       macros/filament\ -\ add\ slowly \
 	       macros/filament\ -\ remove \
+	       macros/home\ with\ wipe \
 	       macros/stop \
 	       sys/bed.g \
 	       sys/bed-probe-point.g \

@@ -1,0 +1,3 @@
+M98 P"/sys/homexy.g"
+M98 P"/sys/wipe-for-probing.g"
+G28 Z
