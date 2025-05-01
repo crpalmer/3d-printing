@@ -6,9 +6,12 @@ G4 P0
 var y_mid = (global.wipe_y_range[1] - global.wipe_y_range[0])/2 + global.wipe_y_range[0]
 var at_high = (move.axes[1].userPosition > var.y_mid)
 
+var at = state.currentTool == 0 ? global.wipe_at_x : global.wipe_at_u
+var range = state.currentTool == 0 ? global.wipe_x_range : global.wipe_u_range
+
 while iterations < var.n
-  var x1 = global.wipe_x_range != null ? global.wipe_x_range[0] : global.wipe_at_x
-  var x2 = global.wipe_x_range != null ? global.wipe_x_range[1] : global.wipe_at_x
+  var x1 = var.range != null ? var.range[0] : var.at
+  var x2 = var.range != null ? var.range[1] : var.at
   var y = var.at_high ? global.wipe_y_range[0] : global.wipe_y_range[1]
   var dir = move.axes[1].userPosition > var.y ? -1 : +1
 
