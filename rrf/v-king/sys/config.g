@@ -40,7 +40,7 @@ M350 Z16 I0                                ; Configure microstepping without int
 ; Drive speeds and currents
 M566 X300 Y300 Z240 E300 P1                ; Set maximum instantaneous speed changes (mm/min)
 M203 X24000 Y24000 Z600 E7200              ; Set maximum speeds (mm/min)
-M201 X1500 Y1500 Z500 E5000                ; Set accelerations (mm/s^2)
+M201 X3500 Y3500 Z500 E5000                ; Set accelerations (mm/s^2)
 M906 X1200 Y1000 Z840 I30                  ; Set motor currents (mA) and motor idle factor in per cent
 M906 E850 I10                              ; (orbiter supposed to be 1200)
 M84 S30                                    ; Set idle timeout
@@ -53,13 +53,13 @@ M574 X1 S1 P"!io6.in"                      ; x endstop (low end)
 M574 Y2 S1 P"!io5.in+!io3.in"              ; 2 y endstops (high end)
 
 ; Axis Limits
-M208 X-24 Y-12 Z-5 S1                        ; Set axis minima
-M208 X345 Y372 Z390 S0                     ; Set axis maxima
+M208 X-16 Y-12 Z-5 S1                      ; Set axis minima
+M208 X353 Y372 Z390 S0                     ; Set axis maxima
 
 ; Z-Probe
 M558 K0 P8 C"^!io1.in" R1.0 H5 F400 A5 T24000
 G31 X0 Y0 Z0 P100
-M557 X10:335 Y10:362 P11                   ; Define mesh grid
+M557 X50:300 Y50:350 P11                   ; Define mesh grid
 M376 H6                                   ; Taper compensation over 6mm height, good for up to 0.3mm error @ < 5% extrusion error
 
 ; Filament sensor (BTT SFS 2.0)
