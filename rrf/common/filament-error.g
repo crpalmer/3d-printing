@@ -4,7 +4,7 @@ set global.in_filament_error = true
 M25
 
 ; Send a notification (mqtt)
-M1118.1
+M98 P"/sys/mqtt-message.g" S"Filament runout sensor triggered"
 
 ; Move out of the way and save our return position
 G60 S2
