@@ -5,7 +5,7 @@ set global.bed_middle_y = 178
 
 set global.bed_probe_points = { {global.bed_middle_x, 50}, {global.bed_middle_x, 300} }
 
-set global.probe_block_middle = {261, -7, 5}
+set global.probe_block_middle = {261, -9, 5}
 set global.probe_block_diameter = 10
 
 ; PZ Probe on setting #2
