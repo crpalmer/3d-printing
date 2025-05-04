@@ -13,21 +13,12 @@ if global.probe_is_klicky
 
 var mid_x = global.bed_middle_x != null ? global.bed_middle_x : (move.axes[0].max - move.axes[0].min + 1) / 2
 var mid_y = global.bed_middle_y != null ? global.bed_middle_y : (move.axes[1].max - move.axes[1].min + 1) / 2
-var success = false
-while iterations < 5 && ! var.success
-  if move.axes[2].homed
-    G1 Z{sensors.probes[state.currentTool].diveHeights[0]} F24000
-  G1 X{var.mid_x - sensors.probes[state.currentTool].offsets[0]} Y{var.mid_y - sensors.probes[state.currentTool].offsets[1]} F24000
-  G30 K{state.currentTool}
-  set var.success = (result == 0)
-  if ! var.success
-    echo "Probing failed, trying up to 5 times."
+G1 X{var.mid_x - sensors.probes[state.currentTool].offsets[0]} Y{var.mid_y - sensors.probes[state.currentTool].offsets[1]} F24000
+G30 K{state.currentTool}
+set global.last_homez_failed = (result != 0)
 
 if global.probe_is_klicky
   M402
 
 ;if state.currentTool != var.tool
 T{var.tool}
-
-if ! var.success
-  abort "Failed to probe Z"

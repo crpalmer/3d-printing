@@ -84,7 +84,7 @@ if global.probe_is_klicky
   M98 P"/sys/homexy.g"
   T0
   M401
-  G28 Z
+  M98 P"/sys/homez-with-retry.g"
 else
   if var.t1_probe_temp <= 0
     G10 P1 Z0        ; We are probing Z with our own probe, it doesn't need to be offset
@@ -92,7 +92,7 @@ else
   G28 Y
   T{var.t1_probe_temp > 0 ? 0 : 1}
   M98 P"/sys/wipe-for-probing.g"
-  G28 Z
+  M98 P"/sys/homez-with-retry.g"
   G1 Z5
   if var.t1_probe_temp > 0 && var.t2_probe_temp > 0
     M98 P"/sys/idex-calibration.g"
@@ -104,7 +104,7 @@ else
 
 if global.use_true_bed_leveling
   G32
-  G28 Z
+  M98 P"/sys/homez-with-retry.g"
 
 if global.use_mesh_compensation
   G29 S1

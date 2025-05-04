@@ -21,6 +21,7 @@ COMMON_FILES = macros/filament\ -\ add \
                sys/homexy-if-needed.g \
                sys/homey.g \
                sys/homez.g \
+               sys/homez-with-retry.g \
 	       sys/idex-calibration.g \
 	       sys/pause.g \
 	       sys/prepare-to-print.g \
