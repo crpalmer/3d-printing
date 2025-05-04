@@ -96,6 +96,7 @@ else
   G1 Z5
   if var.t1_probe_temp > 0 && var.t2_probe_temp > 0
     M98 P"/sys/idex-calibration.g"
+    T0
 
 ;
 ; Handle any bed compensation/leveling
