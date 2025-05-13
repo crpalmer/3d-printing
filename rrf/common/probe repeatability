@@ -1,0 +1,18 @@
+if ! move.axes[2].homed
+  abort "probe repeatability: Z must be homed to test probe repeatability"
+
+var sum = 0.0
+var min = 999999.0
+var max = -999999.0
+
+while iterations < 10
+   G1 Z5
+   G30 S-1
+   var z = move.axes[2].userPosition
+   G1 Z5
+
+   set var.min = var.z < var.min ? var.z : var.min
+   set var.max = var.z > var.max ? var.z : var.max
+   set var.sum = var.sum + var.z
+
+echo "probe repetability: Range", var.min, "..", var.max, "average", (var.sum / 10.0)
