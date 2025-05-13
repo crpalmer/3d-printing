@@ -46,7 +46,6 @@ M574 X2 S1 P"!121.io2.in"                              ; configure active-high e
 M574 Y2 S1 P"^0.io5.in+^0.io6.in"                      ; configure active-low endstop for high end on Y
 
 ; Z-Probe
-;M950 S0 C"io1.out"                                     ; servo pin definition
 M558 P8 C"^!121.io1.in" A5 R1 H5 F400 T24000
 G31 X0 Y0 Z0 P100
 M557 X50:550 Y50:550 P13                               ; define mesh grid
