@@ -15,20 +15,21 @@ while true
     abort "G32 probing failed to converge"
 
   var is_valid_probing = true
+  set global.last_probe_failed = false
 
   while iterations < (# global.bed_probe_points)-1
-    if var.is_valid_probing
+    if ! global.last_probe_failed
       M98 P"/sys/bed-probe-point.g" K{var.probe} I{iterations} X{global.bed_probe_points[iterations][0]} Y{global.bed_probe_points[iterations][1]} Z-99999
-      if result != 0
+      if global.last_probe_failed
         echo "Failed to probe [" ^ global.bed_probe_points[iterations][0] ^ ", " ^ global.bed_probe_points[iterations][1] ^ "]"
         set var.is_valid_probing = false
       else
         echo "Probe", global.bed_probe_points[iterations][0], ",", global.bed_probe_points[iterations][1], "@", sensors.probes[state.currentTool].lastStopHeight
 
-  if var.is_valid_probing
+  if ! global.last_probe_failed
     var i = #global.bed_probe_points - 1
     M98 P"/sys/bed-probe-point.g" K{var.probe} I{var.i} X{global.bed_probe_points[var.i][0]} Y{global.bed_probe_points[var.i][1]} Z-99999 S{var.i+1}
-    if result == 0
+    if ! global.last_probe_failed
       echo "Probe", global.bed_probe_points[var.i][0], ",", global.bed_probe_points[var.i][1], "@", sensors.probes[state.currentTool].lastStopHeight
       echo "Mean error:", move.calibration.initial.mean, "stddev:", move.calibration.initial.deviation
       if abs(move.calibration.initial.deviation) <= global.bed_meshing_max_stddev

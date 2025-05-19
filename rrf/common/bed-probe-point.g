@@ -15,3 +15,5 @@ else
     G30 K{param.K} P{param.I} X{move.axes[0].machinePosition} Y{move.axes[1].machinePosition} U{move.axes[3].machinePosition} Z-99999
   else
     G30 K{param.K} P{param.I} X{move.axes[0].machinePosition} Y{move.axes[1].machinePosition} Z-99999
+
+set global.last_probe_failed = (result != 0)
