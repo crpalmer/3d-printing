@@ -41,8 +41,7 @@ M350 Z16 I0                                ; Configure microstepping without int
 M566 X300 Y300 Z240 E300 P1                ; Set maximum instantaneous speed changes (mm/min)
 M203 X24000 Y24000 Z600 E7200              ; Set maximum speeds (mm/min)
 M201 X3500 Y3500 Z500 E5000                ; Set accelerations (mm/s^2)
-M906 X1200 Y1000 Z840 I30                  ; Set motor currents (mA) and motor idle factor in per cent
-M906 E850 I10                              ; (orbiter supposed to be 1200)
+M906 X1200 Y1000 Z840 E850 I30             ; Set motor currents (mA) and motor idle factor in per cent
 M84 S30                                    ; Set idle timeout
 
 ; Z "leadscrew" positions
