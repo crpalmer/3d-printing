@@ -3,7 +3,8 @@ set global.bed_middle_y = 112.5
 
 set global.print_ended_y = move.axes[1].max - 1
 
-set global.bed_probe_points = { { 110, 30}, {195, 200}, {30, 200} }
+set global.bed_probe_points = { { 110, 30}, {195, 195}, {30, 195} }
+set global.bed_meshing_max_stddev = 0.04
 
 set global.probe_is_klicky = false
 set global.probe_at_temperature_delta = 50
