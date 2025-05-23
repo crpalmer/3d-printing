@@ -61,6 +61,7 @@ if exists(tools[1])
 M220 S100     ; clear any speed changes
 M290 R0 S0    ; clear any baby stepping
 M106 S0       ; disable fans
+G29 S2        ; disable mesh compensation
 
 set global.last_wipe = { 0, 0 }
 
