@@ -27,7 +27,7 @@ if var.t1_temp <= 0 && var.t2_temp <= 0
 ; Determine any required temperatures for probing
 ;
 
-var t1_probe_temp = var.t1_temp - 50
+var t1_probe_temp = var.t1_temp - global.probe_at_temperature_delta
 var t2_probe_temp = 0
 
 if exists(sensors.probes[1]) && global.probe_at_temperature_delta != null
