@@ -18,8 +18,8 @@ M569 P0.1 S0 ; D3                                        ; z1 (front left)
 M569 P0.2 S0 ; D3                                        ; z2 (back left)
 M569 P0.3 S0 ; D3                                        ; z4 (front right)
 M569 P0.4 S1 ; D3                                        ; z3 (back right)
-M569 P0.5 S0 ; D3                                        ; y1 (left)
-M569 P0.6 S0 ; D3                                        ; y2 (right)
+M569 P0.5 S1 ; D3                                        ; y1 (left)
+M569 P0.6 S1 ; D3                                        ; y2 (right)
 M569 P121.0 S1 ; D3                                      ; e
 
 M584 X0.0 Y0.6:0.5 Z0.1:0.2:0.4:0.3 E121.0               ; set drive mapping
@@ -32,7 +32,7 @@ M350 X16 Y16 Z16 E16 I1                                ; Configure microstepping
 
 M566 X300.00 Y300.00 Z240.00 E300 P1                   ; set maximum instantaneous speed changes (mm/min)
 M203 X24000.00 Y24000.00 Z600.00 E7200                 ; set maximum speeds (mm/min)
-M201 X5000.00 Y5000.00 Z500.00 E5000                   ; set accelerations (mm/s^2)
+M201 X2500.00 Y2500.00 Z500.00 E5000                   ; set accelerations (mm/s^2)
 M906 X1200 Y1200 Z1200 E900 I30                        ; set motor currents (mA) and motor idle factor in per cent
 M84 S30                                                ; Set idle timeout
 
