@@ -33,7 +33,7 @@ M84 S30                                                ; Set idle timeout
 M671 X150:150 Y-35:385 S2  			                   ; motor order: front, back
 
 ; Axis Limits
-M208 X0 Y-10 Z0 U-50 S1                       ; set axis minima
+M208 X0 Y-10 Z-5 U-50 S1                       ; set axis minima
 M208 X350 Y356 Z425 U305 S0                            ; set axis maxima
 
 ; Endstops
