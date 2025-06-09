@@ -10,4 +10,4 @@ if ! global.in_filament_error
    if global.pause_x != null || global.pause_y != null
      M98 P"/sys/rapid-move.g" X{global.pause_x} Y{global.pause_y}
    else
-     M98 P{"/sys/tfree" ^ state.currentTool ^ ".g"}
+     M98 P{"/sys/park-hotends.g"}

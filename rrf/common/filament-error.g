@@ -11,7 +11,7 @@ G60 S2
 G91
 G1 Z+1 F6000
 G90
-M98 P{"/sys/tfree" ^ state.currentTool ^ ".g"}
+M98 P"/sys/park-hotends.g"
 
 G4 S0
 M291 S3 R"Unload Filament" P{"Filament sensor for tool " ^ state.currentTool ^ " reports: " ^ sensors.filamentMonitors[state.currentTool].status ^ "  --  Click OKAY to unload the filament."}

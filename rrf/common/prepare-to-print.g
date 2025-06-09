@@ -129,8 +129,7 @@ if var.bed_probe_temp < var.bed_temp
 ; Park the toolhead and then wait for all temperatures to be reached.
 ;
 
-T-1
-T0
+M98 P"/sys/park-hotends.g"
 M116 H0
 M116 P0
 if exists(tools[1])
