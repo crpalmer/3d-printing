@@ -26,3 +26,6 @@ while var.needs_calibration && iterations < 5
   echo "Correction:", var.d_u, ",", var.d_y, ",", var.d_z
   G10 P1 U{tools[1].offsets[3] + var.d_u} Y{tools[1].offsets[1] + var.d_y} Z{tools[1].offsets[2] + var.d_z}
   echo "New offets:", tools[1].offsets[3], ",", tools[1].offsets[1], ",", tools[1].offsets[2]
+
+if var.needs_calibration
+  abort "idex-calibration failed to converge"
