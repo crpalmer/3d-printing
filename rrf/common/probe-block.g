@@ -3,7 +3,7 @@ G1 X{global.probe_block_middle[0]} Y{global.probe_block_middle[1]} Z{global.prob
 G4 S1
 G30 S-1 K{state.currentTool}
 var z0 = move.axes[2].userPosition
-var z = var.z0 - 0.25
+var z = var.z0 - 0.15
 
 echo "probe-find-corner: using Z =", var.z
 
