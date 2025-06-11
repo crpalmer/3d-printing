@@ -31,7 +31,7 @@ COMMON_FILES = macros/filament\ -\ add \
 	       sys/probe-block.g \
 	       sys/probe-laterally.g \
 	       sys/probe-side.g \
-	       sys/prusaslicer-fan-hack.g \
+	       sys/prusaslicer-toolchange.g \
 	       sys/rapid-move.g \
 	       sys/resume.g \
 	       sys/retract-klicky-automatically.g \
