@@ -34,5 +34,7 @@ if var.prime > 0
   M98 P"/sys/wipe-finish.g"
   if var.fan_speed < 1
     M106 S{var.fan_speed}
+  if global.last_wipe[state.currentTool] == 0
+    G1 E{var.retract} F{30*60}
 
 set global.last_wipe[state.currentTool] = state.upTime
