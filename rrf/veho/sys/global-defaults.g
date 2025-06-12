@@ -7,7 +7,7 @@ set global.bed_meshing_max_stddev = 0.075
 
 ; PZ Probe on setting #2
 set global.probe_is_klicky = false
-set global.probe_at_temperature_delta = 70
+set global.probe_at_temperature_delta = 50
 
 set global.use_mesh_compensation = true
 set global.use_true_bed_leveling = true
