@@ -6,6 +6,9 @@ M25
 ; Send a notification (mqtt)
 M98 P"/sys/mqtt-message.g" S"Filament runout sensor triggered"
 
+; Temporarily disabe the runout sensor
+M591 D{state.currentTool} S0
+
 ; Move out of the way and save our return position
 G60 S2
 G91
