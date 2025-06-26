@@ -14,10 +14,11 @@ set global.use_true_bed_leveling = true
 
 set global.wipe_x_range = { -36, -32 }
 set global.wipe_y_range = {-15, 15}
+set global.wipe_u_range = {259, 265}
 set global.wipe_safe_x = -28
 set global.wipe_safe_u = 255
 set global.wipe_at_x = global.wipe_x_range[0]
-set global.wipe_at_u = 260
+set global.wipe_at_u = global.wipe_u_range[0]
 set global.wipe_at_y = global.wipe_y_range[0]
 set global.wipe_park_x = move.axes[0].min + 1
 set global.wipe_park_u = move.axes[3].max - 1
