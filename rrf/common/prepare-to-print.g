@@ -118,9 +118,9 @@ if global.probe_is_klicky
   M98 P"/sys/retractprobe-forced.g"
 
 if var.t1_probe_temp != var.t1_temp
-  M568 A1 P0 R{var.t1_temp} S{var.t1_temp}
+  M568 A{state.currentTool == 0 ? 2 : 1} P0 R{var.t1_temp} S{var.t1_temp}
 if var.t2_probe_temp != var.t2_temp
-  M568 A1 P1 R{var.t2_temp} S{var.t2_temp}
+  M568 A{state.currentTool == 1 ? 2 : 1} P1 R{var.t2_temp} S{var.t2_temp}
 
 if var.bed_probe_temp < var.bed_temp
    M140 S{var.bed_temp}
