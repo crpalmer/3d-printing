@@ -43,6 +43,7 @@ COMMON_FILES = macros/filament\ -\ add \
                sys/tfree0.g \
                sys/tfree1.g \
 	       sys/tfree-common.g \
+	       sys/trigger-filament-error.g \
 	       sys/wipe-finish.g \
 	       sys/wipe-for-probing.g \
 	       sys/wipe.g \
