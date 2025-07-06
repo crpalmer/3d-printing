@@ -52,7 +52,7 @@ COMMON_FILES = macros/filament\ -\ add \
 
 HOSTNAME := ${shell pwd | sed 's/.*\///'}
 
-all:
+all: connect
 	@mkdir -p sys macros
 	../download.py ${HOSTNAME}
 	@echo "Dos2Unix"
@@ -61,7 +61,7 @@ all:
 	@echo "Place files in the correct directory"
 	@for i in $(COMMON_FILES); do if [ -e "$$i" ]; then mv "$$i" ../common/; fi; done
 
-install:
+install: connect
 	@echo "Copy sys/"
 	../upload-directory.py ${HOSTNAME} sys
 	@echo "Copy macros/"
@@ -73,3 +73,6 @@ install:
 	    dir=`dirname "$$i"`; \
 	    ../upload-file.py ${HOSTNAME} "../common/$$base" "$$i"; \
 	done
+
+connect:
+	curl "http://${HOSTNAME}/rr_connect?password=reprap"
