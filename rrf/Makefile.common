@@ -24,6 +24,7 @@ COMMON_FILES = macros/filament\ -\ add \
                sys/homez.g \
                sys/homez-with-retry.g \
 	       sys/idex-calibration.g \
+	       sys/mqtt-enable.g \
 	       sys/mqtt-message.g \
 	       sys/park-hotends.g \
 	       sys/pause.g \

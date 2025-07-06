@@ -1,4 +1,5 @@
 M98 P"/sys/global-declarations.g"
+M98 P"/sys/mqtt-enable.g"
 
 ; General preferences
 G90                                                    ; send absolute coordinates...

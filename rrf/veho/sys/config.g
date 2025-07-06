@@ -3,6 +3,7 @@ M552 S1 P0.0.0.0                                          ; Enable the ethernet 
 M554 P192.168.1.1
 
 M98 P"/sys/global-declarations.g"
+M98 P"/sys/mqtt-enable.g"
 
 G4 S2 ; wait for expansion boards to start
 
