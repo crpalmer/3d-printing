@@ -1,10 +1,3 @@
- ;
-;
-; T O D O
-;
-;
-;
-
 M98 P"/sys/global-declarations.g"
 
 ; General preferences
