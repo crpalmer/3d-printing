@@ -7,14 +7,14 @@ var t2_temp = 0
 var bed_temp = 0
 
 if exists(tools[1])
-  if exists(param.H) == false or exists(param.I) == false or exists(param.B) == false or exists(param.C) == false
+  if ! exists(param.H) || ! exists(param.I) || ! exists(param.B) || ! exists(param.C)
     echo "Missing required parameter (H/I and B/C)"
     M99
   set var.t1_temp = param.H
   set var.t2_temp = param.I
   set var.bed_temp = max(param.B, param.C)
 else
-  if exists(param.H) == false or exists(param.B) == false
+  if ! exists(param.H) || ! exists(param.B)
     echo "Missing required parameter (H and B)"
     M99
   set var.t1_temp = param.H

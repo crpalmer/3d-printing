@@ -1,6 +1,6 @@
 var x = exists(param.X) && move.axes[0].homed ? param.X : null
 var y = exists(param.Y) && move.axes[1].homed ? param.Y : null
-var u = exists(param.U) && move.axes[3].homed ? param.U : null
+var u = exists(param.U) && exists(move.axes[3]) && move.axes[3].homed ? param.U : null
 var z = exists(param.Z) && move.axes[2].homed ? param.Z : null
 
 var rate = 24000
