@@ -49,41 +49,26 @@ COMMON_FILES = macros/filament\ -\ add \
 	       sys/wipe.g \
 	       sys/wipe-move-to-bucket.g \
 
-all: check-dir
-	@echo "Copy sys/"
-	@cp -r /opt/dsf/sd/sys/. sys/
-	@echo "Copy macros/"
-	@mkdir -p macros/
-	@cp -r /opt/dsf/sd/macros/. macros/
-	@echo "Copy common/"
+HOSTNAME := ${shell pwd | sed 's/.*\///'}
+
+all:
+	@mkdir -p sys macros
+	../download.py ${HOSTNAME}
 	@echo "Dos2Unix"
 	@find sys/ -name '*.g' -exec dos2unix '{}' \;
 	@find macros/ -type f -exec dos2unix '{}' \;
 	@echo "Place files in the correct directory"
 	@for i in $(COMMON_FILES); do if [ -e "$$i" ]; then mv "$$i" ../common/; fi; done
 
-install: check-dir
+install:
 	@echo "Copy sys/"
-	@sudo cp sys/*.g /opt/dsf/sd/sys/
+	../upload-directory.py ${HOSTNAME} sys
 	@echo "Copy macros/"
 	@mkdir -p macros/
-	@sudo cp -r macros/. /opt/dsf/sd/macros/
+	../upload-directory.py ${HOSTNAME} macros
 	@echo "Copy common/"
 	@for i in $(COMMON_FILES); do \
 	    base=`basename "$$i"`; \
 	    dir=`dirname "$$i"`; \
-	    if [ "$$dir" != '.' ]; then sudo mkdir -p /opt/dsf/sd/"$$dir"; fi; \
-	    sudo cp ../common/"$$base" /opt/dsf/sd/"$$i"; \
+	    ../upload-file.py ${HOSTNAME} "../common/$$base" "$$i"; \
 	done
-	@echo "Set permissions"
-	@sudo chmod -R a+rw /opt/dsf/sd/sys/ /opt/dsf/sd/macros/
-
-check-dir:
-	@echo "Hostname verification..."
-	@cwd=`pwd`; \
-	dir=`basename "$$cwd"`; \
-	host=`hostname | sed 's/\\..*//'`; \
-	if [ "$$dir" != "$$host" ]; then \
-	    echo "Invalid directory: in directory [$$dir] on machine [$$host]"; \
-	    exit 1; \
-	fi
