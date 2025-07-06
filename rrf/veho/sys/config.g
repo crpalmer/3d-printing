@@ -1,8 +1,6 @@
-;
-; TODO
-;
-
-; -------------------------
+M550 P"veho"                                              ; Set our hostname
+M552 S1 P0.0.0.0                                          ; Enable the ethernet connection with DHCP IP address assignment
+M554 P192.168.1.1
 
 M98 P"/sys/global-declarations.g"
 
