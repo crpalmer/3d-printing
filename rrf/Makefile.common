@@ -56,9 +56,6 @@ all: connect
 	@mkdir -p sys macros
 	../download.py ${HOSTNAME} sys
 	../download.py ${HOSTNAME} macros
-	@echo "Dos2Unix"
-	@find sys/ -name '*.g' -exec dos2unix '{}' \;
-	@find macros/ -type f -exec dos2unix '{}' \;
 	@echo "Place files in the correct directory"
 	@for i in $(COMMON_FILES); do if [ -e "$$i" ]; then mv "$$i" ../common/; fi; done
 
