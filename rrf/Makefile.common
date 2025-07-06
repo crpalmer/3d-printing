@@ -54,7 +54,8 @@ HOSTNAME := ${shell pwd | sed 's/.*\///'}
 
 all: connect
 	@mkdir -p sys macros
-	../download.py ${HOSTNAME}
+	../download.py ${HOSTNAME} sys
+	../download.py ${HOSTNAME} macros
 	@echo "Dos2Unix"
 	@find sys/ -name '*.g' -exec dos2unix '{}' \;
 	@find macros/ -type f -exec dos2unix '{}' \;
