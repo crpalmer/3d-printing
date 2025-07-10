@@ -21,7 +21,7 @@ else
   set var.bed_temp = param.B
 
 if var.t1_temp <= 0 && var.t2_temp <= 0
-   abort "No hotend has a temperature to print at"
+   M98 P"/sys/mqtt-message.g" S"No hotend has a temperature to print at" F
 
 ;
 ; Determine any required temperatures for probing

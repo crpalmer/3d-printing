@@ -28,4 +28,4 @@ while var.needs_calibration && iterations < 5
   echo "New offets:", tools[1].offsets[3], ",", tools[1].offsets[1], ",", tools[1].offsets[2]
 
 if var.needs_calibration
-  abort "idex-calibration failed to converge"
+  M98 P"/sys/mqtt-message.g" S"idex-calibration failed to converge" F
