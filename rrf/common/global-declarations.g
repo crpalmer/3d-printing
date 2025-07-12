@@ -22,11 +22,6 @@ if !exists(global.in_filament_error)
   global probe_is_klicky = true
   global probe_at_temperature_delta = null
 
-  ; Probing to find a corner of a fixed block (IDEX calibration)
-  global probe_block_middle = null
-  global probe_block_diameter = null
-  global probe_block_directions = { -1, +1 }
-
   ; Klicky configuration
 
   global klicky_is_manual = false
