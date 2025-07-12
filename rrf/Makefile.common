@@ -1,6 +1,7 @@
 COMMON_FILES = macros/filament\ -\ add \
 	       macros/filament\ -\ add\ slowly \
 	       macros/filament\ -\ remove \
+	       macros/endstop\ repeatability \
 	       macros/home\ with\ wipe \
 	       macros/probe\ repeatability \
 	       macros/stop \
