@@ -1,0 +1,64 @@
+var axis = 0
+var feed = 360
+var n = 10
+
+T-1
+
+if exists(param.X)
+  G28 X
+elif exists(param.Y)
+  set var.axis = 1
+  G28 Y
+elif exists(param.U)
+  set var.axis = 3
+  G28 U
+else
+  abort "You must specify X, Y or U"
+
+if exists(param.N)
+  set var.n = param.N
+
+if exists(param.F)
+  set var.feed = param.F
+  
+var backoff = 0
+var target = 0
+if move.axes[var.axis].userPosition > 50
+   set var.backoff = -2
+   set var.target  = +4
+else
+   set var.backoff = 2
+   set var.target  = -4
+
+var mx = -10000
+var mn = 10000
+var sum = 0
+
+G91
+
+while iterations < var.n
+  if var.axis == 0
+    G1 X{var.backoff} F360
+    G1 X{var.target} F{var.feed} H4
+  elif var.axis == 1
+    G1 Y{var.backoff} F360
+    G1 Y{var.target} F{var.feed} H4
+  else
+    G1 U{var.backoff} F360
+    G1 U{var.target} F{var.feed} H4
+  
+  G4 P0
+  var p = move.axes[var.axis].userPosition
+  if exists(param.V)
+    echo var.p
+
+  if var.p < var.mn
+    set var.mn = var.p
+  if var.p > var.mx
+    set var.mx = var.p
+  set var.sum = var.sum + var.p
+
+G90
+
+echo "min:", var.mn, "max:", var.mx, "avg:", (var.sum / var.n)
+

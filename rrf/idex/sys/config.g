@@ -96,7 +96,7 @@ M950 H2 C"1.out2" T2                                   ; create nozzle heater ou
 ; tool 1
 M307 H2 R3.401 K0.474:0.307 D1.67 E1.35 S1.00 B0 V24.2
 M563 P1 S"E3Dv6" D1 H2 X3 F2                           ; define tool 1
-G10 P1 X0.000 Y0.03 Z0.35 U-1.47                       ; set tool 1 axis offsets
+G10 P1 X0.000 Y0.02 Z0.35 U-1.35                       ; set tool 1 axis offsets
 
 ; Set both tools to standby mode
 M568 A1 P0 R0 S0
