@@ -21,7 +21,7 @@ else
   set var.bed_temp = param.B
 
 if var.t1_temp <= 0 && var.t2_temp <= 0
-   M98 P"/sys/mqtt-message.g" S"No hotend has a temperature to print at" F
+   M98 P"/sys/mqtt-message.g" S"No hotend has a temperature to print at" F1
 
 ;
 ; Determine any required temperatures for probing

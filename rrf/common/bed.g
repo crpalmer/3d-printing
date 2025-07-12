@@ -12,7 +12,7 @@ if global.bed_probe_points == null || (# global.bed_probe_points) < 1
 
 while true
   if iterations >= 5
-    M98 P"/sys/mqtt-message" S"G32 probing failed to converge" F
+    M98 P"/sys/mqtt-message.g" S"G32 probing failed to converge" F1
 
   var is_valid_probing = true
   set global.last_probe_failed = false

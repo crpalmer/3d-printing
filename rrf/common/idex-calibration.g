@@ -49,4 +49,4 @@ else
     echo "New offets:", tools[1].offsets[3], ",", tools[1].offsets[1], ",", tools[1].offsets[2]
 
   if var.needs_calibration
-    M98 P"/sys/mqtt-message.g" S"idex-calibration failed to converge" F
+    M98 P"/sys/mqtt-message.g" S"idex-calibration failed to converge" F1
