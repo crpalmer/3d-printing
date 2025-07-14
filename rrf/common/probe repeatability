@@ -1,18 +1,30 @@
 if ! move.axes[2].homed
   abort "probe repeatability: Z must be homed to test probe repeatability"
 
-var sum = 0.0
+var avg = 0.0
 var min = 999999.0
 var max = -999999.0
+var n = exists(param.N) ? param.N : 10
+var p = vector(var.n, 0)
 
-while iterations < 10
+while iterations < var.n
    G1 Z5
    G30 S-1
-   var z = move.axes[2].userPosition
+   var z = sensors.probes[0].lastStopHeight
    G1 Z5
 
+   set var.p[iterations] = var.z
    set var.min = var.z < var.min ? var.z : var.min
    set var.max = var.z > var.max ? var.z : var.max
-   set var.sum = var.sum + var.z
+   set var.avg = var.avg + var.z
 
-echo "probe repetability: Range", var.min, "..", var.max, "average", (var.sum / 10.0)
+set var.avg = var.avg / var.n
+var sse = 0
+
+while iterations < var.n
+  set var.sse = pow(var.p[iterations] - var.avg, 2)
+
+var stddev = pow(var.sse / var.n, 0.5)
+
+echo "Values:", var.p
+echo "probe repetability: Range", var.min, "..", var.max, "average", var.avg, "stddev", var.stddev
