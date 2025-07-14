@@ -54,9 +54,9 @@ M574 Y2 S1 P"^1.io0.in+^1.io3.in"                      ; configure active-high e
 M574 U2 S1 P"^0.io6.in"                                ; configure active-high endstop for high end on U
 
 ; Z-Probe
-M558 K0 P8 C"!^0.io1.in" A5 R1 H5 F400 T24000
+M558 K0 P8 C"!^0.io1.in" A7 S0.001 R1 H5 F400 T24000
 G31  K0 X0 Y0 Z0 P100
-M558 K1 P8 C"!^1.io2.in" A5 R1 H5 F400 T24000
+M558 K1 P8 C"!^1.io2.in" A7 S0.001 R1 H5 F400 T24000
 G31  K1 X0 Y0 Z0 P100
 
 M557 X5:220 Y5:215 P5                                  ; define mesh grid
