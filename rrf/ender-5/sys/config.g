@@ -59,7 +59,7 @@ G31  K0 X0 Y0 Z0 P100
 M558 K1 P8 C"!^1.io2.in" A5 R1 H5 F400 T24000
 G31  K1 X0 Y0 Z0 P100
 
-M557 X5:220 Y5:215 P9                                  ; define mesh grid
+M557 X5:220 Y5:215 P5                                  ; define mesh grid
 M376 H3
 
 ; Filament sensor (BTT SFS 2.0)

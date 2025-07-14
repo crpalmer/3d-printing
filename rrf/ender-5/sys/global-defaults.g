@@ -8,7 +8,7 @@ set global.bed_meshing_max_stddev = 0.04
 
 set global.probe_at_temperature_delta = 50
 
-set global.use_mesh_compensation = false
+set global.use_mesh_compensation = true
 set global.use_true_bed_leveling = true
 
 set global.wipe_x_range = { -36, -32 }
