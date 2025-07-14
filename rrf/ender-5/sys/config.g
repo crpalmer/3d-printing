@@ -35,8 +35,8 @@ M671 X110:30:195 Y30:195:195 S10
 ; it sounds to me like that is the more likely value.  Use it.
 
 M92 X160.00 Y160.00 U160.00 Z2160.00 E680:680          ; set steps per mm (recommended; 690 orbiter)
-M350 X64 Y64 U64 Z32                                   ; Configure microstepping without interpotation
-M350 E16 I1                                            ; Configure microstepping with interpolation
+M350 Z16 I0                                            ; Configure microstepping without interpotation
+M350 X16 Y16 U16 E16 I1                                ; Configure microstepping with interpolation
 
 M566 X300.00 Y300.00 U300.00 Z240.00 E300:300 P1       ; set maximum instantaneous speed changes (mm/min)
 M203 X24000.00 Y24000.00 U24000.00 Z600.00 E7200:7200  ; set maximum speeds (mm/min)
