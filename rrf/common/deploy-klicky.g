@@ -3,6 +3,7 @@ var tool = state.currentTool
 if global.klicky_is_manual == true
   T0
   M98 P"/sys/rapid-move.g" X{global.klicky_pre_x} Y{global.klicky_pre_y} Z{global.klicky_pre_z}
+  G4 S0
   M291 S3 P"Please attach the probe"
 elif sensors.probes[0].value[0] != 1000
   M1118.2

@@ -123,5 +123,4 @@ G10 P0 R0 S0                              ; set initial tool 0 active and standb
 M98 P"/sys/global-defaults.g"
 
 ; Miscellaneous
-M280 P{global.probe_servo} S{global.klicky_servo_down}
 T0                                        ; select first tool
