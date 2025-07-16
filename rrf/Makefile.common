@@ -68,3 +68,6 @@ install: connect
 
 connect:
 	curl "http://${HOSTNAME}/rr_connect?password=reprap"
+
+restart: connect
+	curl "http://${HOSTNAME}/rr_gcode?gcode=M999"
