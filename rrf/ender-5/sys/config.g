@@ -98,7 +98,7 @@ M308 S1 P"temp1" Y"thermistor" T100000 B4725 C7.06e-8  ; configure sensor
 M950 H1 C"out1" T1                                     ; create nozzle heater output and map it to sensor 1
 
 ; tool 0: revo 40w
-M307 H1 B0 R2.593 C211.1:173.4 D5.20 S1.00 V24.1       ; tuned (new) at 255 10mm off the bed with the part cooling fan
+M307 H1 R4.042 K0.586:0.400 D2.02 E1.35 S1.00 B0 V23.8 ; tuned (3.6.0) at 220, 5mm off the bed with part cooling fan
 M563 P0 S"E3Dv6" D0 H1 F0                              ; define tool 0
 G10 P0 X0 Y0 Z0                                        ; set tool 0 axis offsets
 
@@ -107,7 +107,7 @@ M308 S2 P"1.temp2" Y"thermistor" T100000 B4725 C7.06e-8  ; configure sensor
 M950 H2 C"1.out2" T2                                   ; create nozzle heater output and map it to sensor 2
 
 ; tool 1: revo 40w
-M307 H2 B0 R2.593 C211.1:173.4 D5.20 S1.00 V24.1       ; tuned (new) at 255 10mm off the bed with the part cooling fan
+M307 H2 R4.042 K0.586:0.400 D2.02 E1.35 S1.00 B0 V23.8 ; tuned (3.6.0) at 220, 5mm off the bed with part cooling fan
 M563 P1 S"E3Dv6" D1 H2 X3 F2                           ; define tool 1
 ;G10 P1 X0 U0.2 Y-0.45 Z0.125
 G10 P1 X0 U1.35 Y-0.3 Z-0.05 ; Z0.125
