@@ -85,7 +85,7 @@ M308 S1 P"121.temp0" Y"thermistor" T100000 B4725 C7.06e-8  ; configure sensor
 M950 H1 C"121.out0" T1                                     ; create nozzle heater output and map it to sensor 1
 
 ; revo 40w
-M307 H1 R3.488 K0.464:0.226 D1.62 E1.35 S1.00 B0 V24.1
+M307 H1 R4.042 K0.586:0.400 D2.02 E1.35 S1.00 B0 V23.8 ; ender-5 tuned (3.6.0) at 220, 5mm off the bed with part cooling fan
 M563 P0 S"E3Dv6" D0 H1 F0                              ; define tool 0
 G10 P0 R0 S0                                           ; Set initial tool 0 active and standby temperatures to 0C
 

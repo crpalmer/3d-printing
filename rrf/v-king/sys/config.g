@@ -80,8 +80,7 @@ M307 H0 A159.7 C501.4 D3.1 V24.2 B0
 M308 S1 P"temp2" Y"thermistor" T100000 B4725 C7.06e-8 ; configure sensor 1 as thermistor on pin e0temp
 M950 H1 C"out1" T1                       ; create nozzle heater output on e0heat
 M143 H1 S280                               ; Set temperature limit for heater 1 to 280C
-;M307 H1 R3.794 K0.628:0.300 D1.54 E1.35 S1.00 B0 V24.4 ; revo @ 255
-M307 H1 B0 R2.593 C211.1:173.4 D5.20 S1.00 V24.1       ; [from ender-5] tuned (new) at 255 10mm off the bed with the part cooling fan
+M307 H1 R4.042 K0.586:0.400 D2.02 E1.35 S1.00 B0 V23.8 ; ender-5 tuned (3.6.0) at 220, 5mm off the bed with part cooling fan
 
 ; Fans
 ; heatend fan is on always on fan due to fan0 being dead

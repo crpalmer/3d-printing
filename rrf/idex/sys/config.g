@@ -85,7 +85,7 @@ M308 S1 P"temp1" Y"thermistor" T100000 B4725 C7.06e-8  ; configure sensor
 M950 H1 C"out1" T1                                     ; create nozzle heater output and map it to sensor 1
 
 ; tool 0
-M307 H1 R3.927 K0.564:0.293 D1.73 E1.35 S1.00 B0 V24.1
+M307 H1 R4.042 K0.586:0.400 D2.02 E1.35 S1.00 B0 V23.8 ; ender-5 tuned (3.6.0) at 220, 5mm off the bed with part cooling fan
 M563 P0 S"E3Dv6" D0 H1 F0                              ; define tool 0
 G10 P0 X0 Y0 Z0                                        ; set tool 0 axis offsets
 
@@ -94,7 +94,7 @@ M308 S2 P"1.temp2" Y"thermistor" T100000 B4725 C7.06e-8; configure sensor
 M950 H2 C"1.out2" T2                                   ; create nozzle heater output and map it to sensor 2
 
 ; tool 1
-M307 H2 R3.401 K0.474:0.307 D1.67 E1.35 S1.00 B0 V24.2
+M307 H2 R4.042 K0.586:0.400 D2.02 E1.35 S1.00 B0 V23.8 ; ender-5 tuned (3.6.0) at 220, 5mm off the bed with part cooling fan
 M563 P1 S"E3Dv6" D1 H2 X3 F2                           ; define tool 1
 G10 P1 X0.000 Y0.02 Z0.35 U-1.35                       ; set tool 1 axis offsets
 
