@@ -7,8 +7,8 @@ G1 Z5
 if global.probe_is_klicky
   M401
 
-if global.bed_probe_points == null || (# global.bed_probe_points) < 1
-  abort "G32 requires at least 1 point to probe"
+if global.bed_probe_points == null || (# global.bed_probe_points) < #move.axes[2].drivers
+  abort "G32 requires at least " ^ #move.axes[2].drivers ^ " point(s) to probe (# of Z drivers)"
 
 while true
   if iterations >= 5
@@ -28,7 +28,7 @@ while true
 
   if ! global.last_probe_failed
     var i = #global.bed_probe_points - 1
-    M98 P"/sys/bed-probe-point.g" K{var.probe} I{var.i} X{global.bed_probe_points[var.i][0]} Y{global.bed_probe_points[var.i][1]} Z-99999 S{var.i+1}
+    M98 P"/sys/bed-probe-point.g" K{var.probe} I{var.i} X{global.bed_probe_points[var.i][0]} Y{global.bed_probe_points[var.i][1]} Z-99999 S{#move.axes[2].drivers}
     if ! global.last_probe_failed
       echo "Probe", global.bed_probe_points[var.i][0], ",", global.bed_probe_points[var.i][1], "@", sensors.probes[state.currentTool].lastStopHeight
       echo "Mean error:", move.calibration.initial.mean, "stddev:", move.calibration.initial.deviation
