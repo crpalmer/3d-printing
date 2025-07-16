@@ -26,7 +26,7 @@ M584 X0.0 Y0.6:0.5 Z0.1:0.2:0.4:0.3 E121.0               ; set drive mapping
 ; Z leadscrew positions
 M671 X50:50:550:550 Y50:550:550:50 S5
 
-M92 X53.33 Y53.33 Z600 E680                            ; set steps per mm (recommended; 690 orbiter)
+M92 X53.33333333333 Y53.3333333333 Z600 E680           ; set steps per mm (recommended; 690 orbiter)
 M350 X16 Y16 Z16 E16 I1                                ; Configure microstepping with interpolation
 
 M566 X300.00 Y300.00 Z240.00 E300 P1                   ; set maximum instantaneous speed changes (mm/min)
