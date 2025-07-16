@@ -67,16 +67,10 @@ M574 Y2 S1 P"^io5.in"                       ; configure active-high endstop for 
 M574 Z1 S1 P"!^io4.in"                      ; configure active-low endstop for low end on Z via pin zstop
 
 ; Z-Probe
-M950 S0 C"out6"                            ; servo pin definition
-M558 P9 C"^io3.in" H3 F60 T6000
-G31 X{global.zprobe_offset_x} Y{global.zprobe_offset_y} Z{global.zprobe_offset_z} P25					  ; 
+M558 K0 P8 C"^!io3.in" R1.0 H5 F400 A7 S0.005 T24000
+G31 X0 Y0 Z0 P25					  ; 
 
-var min_x = max(5+global.zprobe_offset_x, 5)
-var max_x = min(280, 280+global.zprobe_offset_x)
-var min_y = max(5+global.zprobe_offset_y, 5)
-var max_y = min(280, 280+global.zprobe_offset_y)
-
-M557 X{var.min_x, var.max_x} Y{var.min_y, var.max_y} P13                     ; define mesh grid
+M557 X5:280 Y5:280 P13                     ; define mesh grid
 M376 H3
 
 ; Filament sensor (BTT SFS 2.0)
