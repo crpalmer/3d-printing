@@ -12,6 +12,7 @@ COMMON_FILES = macros/filament\ -\ add \
 	       sys/filament-error.g \
 	       sys/filament-remove.g \
 	       sys/global-declarations.g \
+	       sys/heater-fault.g \
                sys/homeall.g \
                sys/homeu.g \
                sys/homex.g \
