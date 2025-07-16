@@ -24,4 +24,4 @@ G30 S-1
 var fr = sensors.probes[0].lastStopHeight
 G1 Z5
 
-echo "Stopped at: " ^ var.fl ^ ", " ^ var.bl ^ ", " ^ var.br ^ ", " ^ var.fr 
+echo "Stopped at: ", var.fl, var.bl, var.br, var.fr 
