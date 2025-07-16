@@ -8,9 +8,6 @@ COMMON_FILES = macros/filament\ -\ add \
 	       sys/bed.g \
 	       sys/bed-probe-point.g \
 	       sys/cancel.g \
-	       sys/deploy-klicky-automatically.g \
-	       sys/deploy-klicky.g \
-	       sys/deployprobe.g \
 	       sys/filament-add.g \
 	       sys/filament-error.g \
 	       sys/filament-remove.g \
@@ -35,10 +32,6 @@ COMMON_FILES = macros/filament\ -\ add \
 	       sys/prusaslicer-toolchange.g \
 	       sys/rapid-move.g \
 	       sys/resume.g \
-	       sys/retract-klicky-automatically.g \
-	       sys/retract-klicky.g \
-	       sys/retractprobe-forced.g \
-	       sys/retractprobe.g \
 	       sys/sleep.g \
 	       sys/stop.g \
                sys/tfree0.g \

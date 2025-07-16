@@ -6,7 +6,6 @@ set global.bed_middle_y = 178
 set global.bed_probe_points = { {global.bed_middle_x, 50}, {global.bed_middle_x, 300} }
 
 ; PZ Probe on setting #2
-set global.probe_is_klicky = false
 set global.probe_at_temperature_delta = 50
 
 set global.use_mesh_compensation = true

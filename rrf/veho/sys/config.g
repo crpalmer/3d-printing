@@ -89,10 +89,6 @@ M307 H1 R3.488 K0.464:0.226 D1.62 E1.35 S1.00 B0 V24.1
 M563 P0 S"E3Dv6" D0 H1 F0                              ; define tool 0
 G10 P0 R0 S0                                           ; Set initial tool 0 active and standby temperatures to 0C
 
-; Servo for klicky
-;M950 S1 C"out6" ; assign GPIO port 1 to out9 (Servo header), servo mod
-;M280 P1 S{global.klicky_servo_down}
-
 ; Miscellaneous
 M912 P0 S0
 T0

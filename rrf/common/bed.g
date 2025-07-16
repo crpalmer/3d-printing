@@ -4,9 +4,6 @@ var probe = state.currentTool
 
 G1 Z5
 
-if global.probe_is_klicky
-  M401
-
 if global.bed_probe_points == null || (# global.bed_probe_points) < #move.axes[2].drivers
   abort "G32 requires at least " ^ #move.axes[2].drivers ^ " point(s) to probe (# of Z drivers)"
 
@@ -36,6 +33,3 @@ while true
         break
       else
         echo "Repeating calibration because the stddev is too high (" ^ move.calibration.initial.deviation ^ "mm)"
-
-if global.probe_is_klicky
-  M402

@@ -16,35 +16,9 @@ if !exists(global.in_filament_error)
   global bed_probe_points = null
   global bed_meshing_max_stddev = 0.02
 
-  ; Probing (klicky or nozzle based probe)
+  ; Probing
 
-  global probe_servo = null             ; M280 P{global.probe_servo}
-  global probe_is_klicky = true
   global probe_at_temperature_delta = null
-
-  global pre_wipe_script = null
-  global post_wipe_script = null
-
-  ; Klicky configuration
-
-  global klicky_is_manual = false
-
-  global klicky_pre_dock_script = null  ; Executed before moving to the dock
-
-  global klicky_pre_x = null            ; Location to move to before triggering servo
-  global klicky_pre_y = null            ; These are only used if no pre_dock_script specified
-  global klicky_pre_z = null
-
-  global klicky_servo_up = null         ; Angle to position to start deploy/retract
-  global klicky_servo_down = null       ; Angle to position to end deploy/retract
-
-  global klicky_dock_x = null           ; Position to move to after deploying servo
-  global klicky_dock_y = null
-  global klicky_dock_z = null
-
-  global klicky_release_x = null        ; Final position before untriggering servo
-  global klicky_release_y = null
-  global klicky_release_z = null
 
   ; Configuration of print startup
   global use_mesh_compensation = false

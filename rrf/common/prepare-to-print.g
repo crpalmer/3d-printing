@@ -36,8 +36,6 @@ elif var.t1_temp <= 0 && global.probe_at_temperature_delta != null
   set var.t1_probe_temp = var.t2_temp - global.probe_at_temperature_delta
 
 var bed_probe_temp = var.bed_temp
-if global.probe_is_klicky
-  set var.bed_probe_temp = min(var.bed_probe_temp, 60)
 
 ;
 ; Start the hotend(s) heating
@@ -81,23 +79,17 @@ M561
 ;
 
 T0
-if global.probe_is_klicky
-  M98 P"/sys/homexy.g"
+if var.t1_probe_temp <= 0
+  G10 P1 Z0        ; We are probing Z with our own probe, it doesn't need to be offset
+G28 X U
+G28 Y
+T{var.t1_probe_temp > 0 ? 0 : 1}
+M98 P"/sys/wipe-for-probing.g"
+M98 P"/sys/homez-with-retry.g"
+G1 Z5
+if var.t1_probe_temp > 0 && var.t2_probe_temp > 0
+  M98 P"/sys/idex-calibration.g"
   T0
-  M401
-  M98 P"/sys/homez-with-retry.g"
-else
-  if var.t1_probe_temp <= 0
-    G10 P1 Z0        ; We are probing Z with our own probe, it doesn't need to be offset
-  G28 X U
-  G28 Y
-  T{var.t1_probe_temp > 0 ? 0 : 1}
-  M98 P"/sys/wipe-for-probing.g"
-  M98 P"/sys/homez-with-retry.g"
-  G1 Z5
-  if var.t1_probe_temp > 0 && var.t2_probe_temp > 0
-    M98 P"/sys/idex-calibration.g"
-    T0
 
 ;
 ; Handle any bed compensation/leveling
@@ -113,9 +105,6 @@ if global.use_mesh_compensation
 ;
 ; Finish up
 ;
-
-if global.probe_is_klicky
-  M98 P"/sys/retractprobe-forced.g"
 
 if var.t1_probe_temp != var.t1_temp
   M568 A{state.currentTool == 0 ? 2 : 1} P0 R{var.t1_temp} S{var.t1_temp}
