@@ -3,6 +3,9 @@ CFLAGS = -Wall -Werror -g
 all:	grid-show hex2ascii generate-slic3r-bundle slic3r-to-files stl2ascii \
 	slic3r/timestamp slic3r-bundle.ini
 
+install:
+	./install-orca.py
+
 grid-show: grid-show.c
 	$(CC) $(CFLAGS) grid-show.c -o grid-show -lm
 
