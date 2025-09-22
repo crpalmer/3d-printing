@@ -4,25 +4,28 @@ import sys
 import json
 import numpy
 
-def load_orca(orca, filename, type):
+def load_orca(filename, type):
     if not filename.startswith("/"):
         filename = "/home/crpalmer/.config/OrcaSlicer/system/Custom/" + type + "/" + filename;
     if not filename.endswith(".json"):
         filename = filename + ".json"
 
     with open(filename, "r") as file:
-        print("Loading: " + filename)
-        new_orca = json.load(file)
-        orca.update(new_orca)
-        if "inherits" in new_orca:
-            load_orca(orca, new_orca["inherits"], new_orca["type"])
+        sys.stderr.write("Loading: " + filename + "\n")
+        orca = json.load(file)
+        if "inherits" in orca:
+            additional = load_orca(orca["inherits"], type)
+            orca.update(additional)
+        return orca
 
-def load_prusa(prusa, filename):
+def load_prusa(filename):
+    prusa = {}
     with open(filename, "r") as file:
         for line in file:
             kv = line.split("=")
             if len(kv) == 2:
                 prusa[kv[0].strip()] = kv[1].strip()
+    return prusa
 
 def edit_distance(s1, s2):
     m, n = len(s1), len(s2)
@@ -42,18 +45,21 @@ def edit_distance(s1, s2):
                 dp[i - 1][j - 1] + cost,  # Substitution or Match
             )
     return dp[m][n]
+
 # -------------------------
 
 if len(sys.argv) < 3:
     print("usage: orca-config config-type prusa-config...")
     exit(1)
 
-orca = {}
-load_orca(orca, sys.argv[1], sys.argv[2])
+orca = load_orca(sys.argv[1], sys.argv[2])
+
+with open("/tmp/orca", "w") as f:
+    json.dump(orca, f, indent=4)
 
 prusa = {}
 for filename in sys.argv[3:]:
-    load_prusa(prusa, filename)
+    prusa.update(load_prusa(filename))
 
 mapping = {}
 for key in orca:
@@ -69,7 +75,7 @@ for key in orca:
 print("mapping = {", end="")
 comma = "\n\t"
 for kv in sorted(mapping.items()):
-    print(comma + '"' + kv[0] + '", ', end="")
+    print(comma + '"' + kv[0] + '": ', end="")
     print(kv[1], end="")
     comma = ",\n\t"
 print()
