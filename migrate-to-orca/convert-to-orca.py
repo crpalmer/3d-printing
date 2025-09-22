@@ -32,21 +32,20 @@ def load_prusa(path, mapping):
             orca["name"] = name
         return orca
 
-def process(path, dest_path, mapping, fixed, name_keys):
+def process(path, dest_path, mapping, fixed, name_key):
     has_base_ini = os.path.exists(path + "/base.ini")
     mkdir_recursive(dest_path)
     for file in os.listdir(path):
         full = path + "/" + file
         if os.path.isdir(full):
-            process(full, dest_path + "/" + file, mapping, fixed, name_keys)
+            process(full, dest_path + "/" + file, mapping, fixed, name_key)
         elif file.endswith(".ini"):
             config = {}
             if not has_base_ini or file == "base.ini":
                 config.update(fixed)
             config.update(load_prusa(full, mapping))
             if "name" in config:
-                for name_key in name_keys:
-                    config[name_key] = config["name"]
+                config[name_key] = config["name"]
             with open(dest_path + "/" + file[:len(file)-4] + ".json", "w") as output:
                 json.dump(config, output, indent=4)
 
@@ -56,4 +55,4 @@ mkdir_recursive("orca/filament")
 mkdir_recursive("orca/machine")
 mkdir_recursive("orca/process")
 
-process("slic3r/printer", "orca/machine", machine.mapping, machine.fixed, [ machine.name, "print_host" ])
+process("slic3r/printer", "orca/machine", machine.mapping, machine.fixed, machine.name)
