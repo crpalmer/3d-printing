@@ -6,6 +6,7 @@
     "gcode_flavor": "reprapfirmware",
     "thumbnails": "",
     "host_type": "duet",
+    "print_host": "v-king",
     "printable_area": "0x0,345x0,345x370,0x370",
     "before_layer_change_gcode": "",
     "machine_pause_gcode": "M600",
