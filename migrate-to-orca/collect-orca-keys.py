@@ -3,17 +3,21 @@
 import sys
 import json
 import numpy
+import os
 
 def load_orca(filename, type):
-    if not filename.startswith("/"):
-        filename = "/home/crpalmer/.config/OrcaSlicer/system/Custom/" + type + "/" + filename;
     if not filename.endswith(".json"):
         filename = filename + ".json"
+
+    for path in [ "system/Custom/", "system/OrcaFilamentLibrary/", "system/Prusa", "user/default/" ]:
+        full_path = "/home/crpalmer/.config/OrcaSlicer/" + path + "/" + type + "/" + filename
+        if os.path.exists(full_path):
+            filename = full_path
 
     with open(filename, "r") as file:
         sys.stderr.write("Loading: " + filename + "\n")
         orca = json.load(file)
-        if "inherits" in orca:
+        if "inherits" in orca and orca["inherits"] != "":
             additional = load_orca(orca["inherits"], type)
             orca.update(additional)
         return orca
