@@ -26,6 +26,7 @@ mapping = {
 	"min_layer_height": {'key': 'min_layer_height', 'scalar': False, 'ed': 0},
 	"nozzle_diameter": {'key': 'nozzle_diameter', 'scalar': False, 'ed': 0},
 	"bed_shape": {'key': 'printable_area', 'scalar': False, 'ed': 8},
+    "max_print_height": {'key': 'printable_height', 'scalar': True},
 	"printer_model": {'key': 'printer_model', 'scalar': True, 'ed': 0},
 	"printer_settings_id": {'key': 'printer_settings_id', 'scalar': True, 'ed': 0},
 	"printer_technology": {'key': 'printer_technology', 'scalar': True, 'ed': 0},
@@ -48,7 +49,10 @@ fixed = {
     "from": "User",
     "is_custom_defined": "0",
     "scan_first_layer": "0",
-    "nozzle_type": "hardened_steel"
+    "nozzle_type": "hardened_steel",
+    "gcode_flavor": "reprapfirmware",
+    "thumbnails" : "",
+    "host_type": "duet"
 }
 
 name = "printer_settings_id"
