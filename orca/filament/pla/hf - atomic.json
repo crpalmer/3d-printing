@@ -1,0 +1,11 @@
+{
+    "name": "pla - hf - atomic",
+    "filament_cost": [ "30" ],
+    "filament_max_volumetric_speed": [ "25" ],
+    "filament_settings_id": [ "pla - hf - atomic" ],
+    "filament_vendor": [ "Atomic" ],
+    "from": "User",
+    "inherits": "pla",
+    "is_custom_defined": "0",
+    "version": "2.3.1.0"
+}

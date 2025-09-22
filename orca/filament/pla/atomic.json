@@ -1,0 +1,9 @@
+{
+    "name": "pla - atomic",
+    "filament_cost": [ "30" ],
+    "filament_vendor": [ "Atomic" ],
+    "from": "User",
+    "inherits": "pla",
+    "is_custom_defined": "0",
+    "version": "2.3.1.0"
+}
