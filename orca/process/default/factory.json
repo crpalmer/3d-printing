@@ -1,0 +1,9 @@
+{
+    "from": "User",
+    "inherits": "default",
+    "name": "default - factory",
+    "print_settings_id": "default - factory",
+    "sparse_infill_density": "33%",
+    "version": "2.3.1.0",
+    "wall_loops": "3"
+}
