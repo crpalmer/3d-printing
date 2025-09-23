@@ -17,7 +17,7 @@
     "brim_ears_detection_length": "1",
     "brim_ears_max_angle": "125",
     "brim_object_gap": "0",
-    "brim_type": "auto_brim",
+    "brim_type": "no_brim",
     "brim_width": "0",
     "calib_flowrate_topinfill_special_order": "0",
     "compatible_printers": [],
