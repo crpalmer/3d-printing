@@ -40,7 +40,7 @@ def set_name(config, name, subsystem):
     return config
 
 def write_json(dest, config):
-    if "post_process" in config:
+    if not orca_dir.startswith("/home/crpalmer") and "post_process" in config:
         cmds = []
         for cmd in config["post_process"]:
             cmds.append(post_process_prefix + cmd)
