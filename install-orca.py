@@ -4,7 +4,14 @@ import json
 import os
 
 version = "2.3.1.0"
-orca_dir = "/home/crpalmer/.config/OrcaSlicer/user/default"
+
+post_process_prefix = ""
+for dir in [ "/home/crpalmer/.config/OrcaSlicer/user/default", "/cygdrive/c/Users/crpalmer/AppData/Local/OrcaSlicer/user/default", "/cygdrive/c/Users/crpalmer/AppData/Roaming/OrcaSlicer/user/default" ]:
+    if os.path.exists(dir):
+        orca_dir = dir
+        if dir.startswith("/cygdrive"):
+            post_process_prefix = "c:/cygwin64/bin/bash"
+        break
 
 def mkdir_recursive(path):
     if path[0] == '/':
@@ -28,6 +35,11 @@ def set_name(config, name):
     return config
 
 def write_json(dest, config):
+    if "post_process" in config:
+        cmds = []
+        for cmd in config["post_process"]:
+            cmds.append("c:/cygwin64/bin/bash.exe --login " + cmd)
+        config["post_process"] = cmds
     with open(dest, "w") as f:
         config["version"] = version
         json.dump(config, f, indent=4)
