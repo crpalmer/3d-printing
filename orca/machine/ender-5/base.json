@@ -48,5 +48,7 @@
     "silent_mode": "0",
     "single_extruder_multi_material": "0",
     "machine_start_gcode": "M83          ; Relative Extruder mode\\n\\nM98 P\"/sys/prepare-to-print.g\" H{is_extruder_used[0] ? first_layer_temperature[0] : 0} I{is_extruder_used[1] ? first_layer_temperature[1] : 0} B{is_extruder_used[0] ? first_layer_bed_temperature[0] : 0} C{is_extruder_used[1] ? first_layer_bed_temperature[1] : 0}\\n\\nT{initial_tool}\\n",
-    "wipe": "1,1"
+    "wipe": "1,1",
+    "z_hop": "0.5",
+    "travel_slope": "90"
 }

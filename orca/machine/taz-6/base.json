@@ -49,5 +49,7 @@
     "silent_mode": "0",
     "single_extruder_multi_material": "0",
     "machine_start_gcode": "G21 ; set unites to Millimetres\\nM98 P\"/sys/prepare-to-print.g\" H{first_layer_temperature[0]} B{first_layer_bed_temperature[0]}\\n",
-    "wipe": "0"
+    "wipe": "0",
+    "z_hop": "0.5",
+    "travel_slope": "90"
 }
