@@ -6,7 +6,7 @@ import os
 version = "2.3.1.0"
 
 post_process_prefix = ""
-dirs = [ "/home/crpalmer/.config/OrcaSlicer/user/default", "/cygdrive/c/Users/crpalmer/AppData/Local/OrcaSlicer/user/default", "/cygdrive/c/Users/crpalmer/AppData/Roaming/OrcaSlicer/user/default" ]
+dirs = [ "/home/crpalmer/.config/OrcaSlicer/user/default", "/home/crpalmer/.var/app/io.github.softfever.OrcaSlicer/config/OrcaSlicer/user/default", "/cygdrive/c/Users/crpalmer/AppData/Local/OrcaSlicer/user/default", "/cygdrive/c/Users/crpalmer/AppData/Roaming/OrcaSlicer/user/default" ]
 orca_dir = dirs[0]
 for dir in dirs:
     if os.path.exists(dir):
