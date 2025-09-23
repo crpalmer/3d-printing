@@ -29,7 +29,6 @@ def set_name(config, name):
 
 def write_json(dest, config):
     with open(dest, "w") as f:
-        print("Creating: " + dest)
         config["version"] = version
         json.dump(config, f, indent=4)
 
@@ -54,6 +53,7 @@ def process(path, subsystem, name):
         if os.path.isdir(full_file):
             process(full_file, subsystem, file)
         elif file.endswith(".json"):
+            print("Processing: " + full_file)
             config = read_json(full_file)
             if file == "base.json":
                 write_base(config, subsystem, name)
