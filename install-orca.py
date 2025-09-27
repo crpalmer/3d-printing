@@ -10,7 +10,7 @@ for dir in [ "/home/crpalmer/.config/OrcaSlicer/user/default", "/cygdrive/c/User
     if os.path.exists(dir):
         orca_dir = dir
         if dir.startswith("/cygdrive"):
-            post_process_prefix = "c:/cygwin64/bin/bash"
+            post_process_prefix = "c:/cygwin64/bin/bash.exe --login"
         break
 
 def mkdir_recursive(path):
@@ -38,7 +38,7 @@ def write_json(dest, config):
     if "post_process" in config:
         cmds = []
         for cmd in config["post_process"]:
-            cmds.append("c:/cygwin64/bin/bash.exe --login " + cmd)
+            cmds.append(post_process_prefix + cmd)
         config["post_process"] = cmds
     with open(dest, "w") as f:
         config["version"] = version
