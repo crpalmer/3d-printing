@@ -42,14 +42,12 @@ if !exists(global.in_filament_error)
   ; Instead, you must provide defaults in the else clause (here)
 
   global in_filament_error = false
-  global probe_n_deploys = 0
   global last_wipe = { 0, 0 }
   global last_probe_failed = false
   global last_probe_result = {0, 0}
   global last_homez_failed = false
 else
   set global.in_filament_error = false
-  set global.probe_n_deploys = 0
   set global.last_wipe = { 0, 0 }
   set global.last_probe_failed = false
   set global.last_homez_failed = false
