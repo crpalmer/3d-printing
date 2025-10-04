@@ -19,6 +19,7 @@ if !exists(global.in_filament_error)
   ; Probing
 
   global probe_at_temperature_delta = null
+  global probe_extra_squish = 0
 
   ; Configuration of print startup
   global use_mesh_compensation = false

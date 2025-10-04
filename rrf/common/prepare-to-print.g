@@ -102,6 +102,7 @@ if global.use_true_bed_leveling
 if global.use_mesh_compensation
   G29 S1
 
+M290 R0 S{-global.probe_extra_squish}
 ;
 ; Finish up
 ;
