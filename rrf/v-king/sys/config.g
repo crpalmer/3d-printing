@@ -55,9 +55,9 @@ M208 X353 Y372 Z390 S0                     ; Set axis maxima
 
 ; Z-Probe
 M558 K0 P8 C"^!io1.in" R1.0 H5 F400 A5 T24000
-G31 X0 Y0 Z0 P100
+G31 X0 Y0 Z0.00 P100
 M557 X50:300 Y50:350 P11                   ; Define mesh grid
-M376 H6                                   ; Taper compensation over 6mm height, good for up to 0.3mm error @ < 5% extrusion error
+M376 H6                                    ; Taper compensation over 6mm height, good for up to 0.3mm error @ < 5% extrusion error
 
 ; Filament sensor (BTT SFS 2.0)
 M591 D0 P7 C"io0.in" L2.975 R50:150 E22 S1
