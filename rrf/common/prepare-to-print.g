@@ -115,6 +115,12 @@ if var.t2_probe_temp != var.t2_temp
 if var.bed_probe_temp < var.bed_temp
    M140 S{var.bed_temp}
 
+; Make sure filament monitors are enabled!
+
+if exists(sensors.filamentMonitors[0])
+  M591 D0 S1
+if exists(sensors.filamentMonitors[1])
+  M591 D1 S1
 ;
 ; Park the toolhead and then wait for all temperatures to be reached.
 ;
