@@ -1,0 +1,15 @@
+{
+    "filament_cost": "55",
+    "filament_density": "1.19",
+    "filament_flow_ratio": "0.83",
+    "filament_max_volumetric_speed": "5.5",
+    "filament_settings_id": "PC Max",
+    "filament_vendor": "Polymaker",
+    "from": "User",
+    "inherits": "Generic PC @System",
+    "name": "pc max",
+    "nozzle_temperature": "255",
+    "nozzle_temperature_initial_layer": "255",
+    "nozzle_temperature_range_high": "270",
+    "nozzle_temperature_range_low": "250"
+}
