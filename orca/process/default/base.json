@@ -268,7 +268,7 @@
     "support_type": "tree(auto)",
     "symmetric_infill_y_axis": "0",
     "thick_bridges": "0",
-    "thick_internal_bridges": "1",
+    "thick_internal_bridges": "0",
     "timelapse_type": "0",
     "top_bottom_infill_wall_overlap": "25%",
     "top_shell_layers": "1",
