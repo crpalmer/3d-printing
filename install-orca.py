@@ -75,15 +75,20 @@ def combine_json(config1, config2):
     return config
 
 def apply_chain(base, path, subsystem, chain):
-    chain_path = path + "/" + chain[0]
-    for file in os.listdir(chain_path):
-        if file != "base.json" and file != "modifiers.json" and file.endswith(".json"):
-            full = chain_path + "/" + file
-            config = combine_json(base, read_json(full))
-            if len(chain) > 1:
+    if len(chain) == 0:
+        write_config(base, subsystem)
+    elif chain[0].endswith(".json"):
+        config = combine_json(base, read_json(path + "/" + chain[0]))
+        if "name" in config:
+            write_config(config, subsystem)
+        apply_chain(config, path, subsystem, chain[1:])
+    else:
+        chain_path = path + "/" + chain[0]
+        for file in os.listdir(chain_path):
+            if file != "base.json" and file != "modifiers.json" and file.endswith(".json"):
+                full = chain_path + "/" + file
+                config = combine_json(base, read_json(full))
                 apply_chain(config, path, subsystem, chain[1:])
-            else:
-                write_config(config, subsystem)
 
 def apply_modifiers_to_dir(path, subsystem):
     modifiers = read_json(path + "/modifiers.json")

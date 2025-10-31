@@ -26,10 +26,6 @@
     "close_fan_the_first_x_layers": [
         "1"
     ],
-    "compatible_printers": [],
-    "compatible_printers_condition": "",
-    "compatible_prints": [],
-    "compatible_prints_condition": "",
     "complete_print_exhaust_fan_speed": [
         "80"
     ],
@@ -60,6 +56,7 @@
     "eng_plate_temp_initial_layer": [
         "45"
     ],
+    "extrusion_multiplier": "0.87",
     "fan_cooling_layer_time": [
         "60"
     ],
@@ -79,7 +76,7 @@
         "4"
     ],
     "filament_cost": [
-        "0"
+        "20"
     ],
     "filament_density": [
         "1.24"
@@ -193,7 +190,7 @@
         "100"
     ],
     "filament_vendor": [
-        "(Undefined)"
+        "generic"
     ],
     "filament_wipe": [
         "nil"
@@ -228,7 +225,6 @@
         "-1"
     ],
     "is_custom_defined": "0",
-    "name": "pla",
     "nozzle_temperature": [
         "205"
     ],
@@ -278,7 +274,7 @@
         "-1"
     ],
     "temperature_vitrification": [
-        "100"
+        "50"
     ],
     "textured_cool_plate_temp": [
         "40"

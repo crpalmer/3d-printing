@@ -1,0 +1,10 @@
+{
+    "name": "popper",
+    "bottom_shell_thickness": "2",
+    "enable_support": "1",
+    "support_interface_top_layers": "0",
+    "fill_multiline": "2",
+    "raft_first_layer_density": "100%",
+    "sparse_infill_pattern": "lightning",
+    "wall_loops": "3"
+}

@@ -1,0 +1,3 @@
+{
+    "compatible_printer_conditions": "nozzle_diameter[0] > 0.25"
+}

@@ -1,0 +1,10 @@
+{
+    "inner_wall_speed": "120",
+    "internal_solid_infill_speed": "120",
+    "name": " - fast",
+    "outer_wall_speed": "100",
+    "print_settings_id": "default - fast",
+    "sparse_infill_speed": "120",
+    "top_surface_speed": "100",
+    "travel_speed": "400"
+}

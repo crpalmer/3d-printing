@@ -1,0 +1,9 @@
+{
+    "name": " - polymaker matte",
+    "extrusion_multiplier": "0.97",
+    "filament_cost": "21.4",
+    "filament_density": "1.3",
+    "filament_vendor": "Polymaker",
+    "first_layer_temperature": "220",
+    "temperature": "220"
+}

@@ -1,5 +1,6 @@
 {
     "from": "User",
+    "instantiation": "false",
     "is_custom_defined": "0",
     "scan_first_layer": "0",
     "nozzle_type": "hardened_steel",

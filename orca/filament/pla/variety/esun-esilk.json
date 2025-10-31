@@ -1,0 +1,9 @@
+{
+    "name": " - eSilk",
+    "extrusion_multiplier": "0.87",
+    "filament_cost": "24.68",
+    "filament_density": "1.21",
+    "filament_vendor": "eSun",
+    "first_layer_temperature": "210",
+    "temperature": "210"
+}

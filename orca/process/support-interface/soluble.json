@@ -1,0 +1,12 @@
+{
+    "name": " (soluble)",
+    "compatible_printers_condition": "extruders_count > 1 and filament_is_support[1]",
+    "support_bottom_z_distance": "0",
+    "support_filament": "1",
+    "support_interface_bottom_layers": "1",
+    "support_interface_filament": "2",
+    "support_interface_top_layers": "4",
+    "support_interface_spacing": "0",
+    "support_material_extruder": "1",
+    "support_top_z_distance": "0"
+}
