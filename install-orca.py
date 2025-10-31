@@ -44,9 +44,10 @@ def write_json(dest, config):
         config["version"] = version
         json.dump(config, f, indent=4)
 
-def write_config(config, subsystem, inherits):
+def write_config(config, subsystem, inherits = None):
     name = get_name(config)
-    config["inherits"] = inherits
+    if inherits != None:
+        config["inherits"] = inherits
     config = set_name(config, name)
     write_json(orca_dir + "/" + subsystem + "/" + name + ".json", config)
 
@@ -56,10 +57,45 @@ def write_base(config, subsystem, name):
     write_json(orca_dir + "/" + subsystem + "/base/" + name + ".json", config)
 
 def read_json(path):
+    print("   Loading: " + path)
     with open(path, "r") as f:
         return json.load(f)
 
+def combine_json(config1, config2):
+    config = { }
+    for key in config1.keys():
+        config[key] = config1[key]
+    for key in config2.keys():
+        if key == "compatible_printers_condition" and key in config and key in config2:
+            config[key] = "(" + config[key] + ") and (" + config2[key] + ")"
+        elif key == "name" and key in config and key in config2:
+            config["name"] += config2["name"]
+        else:
+            config[key] = config2[key]
+    return config
+
+def apply_chain(base, path, subsystem, chain):
+    chain_path = path + "/" + chain[0]
+    for file in os.listdir(chain_path):
+        if file != "base.json" and file != "modifiers.json" and file.endswith(".json"):
+            full = chain_path + "/" + file
+            config = combine_json(base, read_json(full))
+            if len(chain) > 1:
+                apply_chain(config, path, subsystem, chain[1:])
+            else:
+                write_config(config, subsystem)
+
+def apply_modifiers_to_dir(path, subsystem):
+    modifiers = read_json(path + "/modifiers.json")
+    base = read_json(path + "/base.json")
+    for chain in modifiers["chains"]:
+        apply_chain(base, path, subsystem, chain)
+        
 def process(path, subsystem, name):
+    if os.path.exists(path + "/modifiers.json"):
+        apply_modifiers_to_dir(path, subsystem)
+        return
+
     for file in os.listdir(path):
         full_file = path + "/" + file
         if os.path.isdir(full_file):
@@ -70,7 +106,7 @@ def process(path, subsystem, name):
             if file == "base.json":
                 write_base(config, subsystem, name)
             else:
-                write_config(config, subsystem, name)
+                write_config(config, subsystem)
 
 for subsystem in [ "filament", "machine", "process" ]:
     mkdir_recursive(orca_dir + "/" + subsystem + "/base")
