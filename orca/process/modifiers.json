@@ -1,5 +1,5 @@
 {
     "chains": [ 
-	[ "style", "speed", "support-interface" ]
+	[ "style", "speed", "support" ]
     ]
 }
