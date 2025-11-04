@@ -30,10 +30,13 @@ def get_name(config):
         if key in config and config[key] != "":
             return config[key]
 
-def set_name(config, name):
+def set_name(config, name, subsystem):
     config["name"] = name
-    if "printer_settings_id" in config:
-        config["printer_settings_id"] = name
+    if subsystem == "process":
+        type = "print"
+    else:
+        type = subsystem
+    config[type + "_settings_id"] = name
     return config
 
 def write_json(dest, config):
@@ -50,11 +53,11 @@ def write_config(config, subsystem, inherits = None):
     name = get_name(config)
     if inherits != None:
         config["inherits"] = inherits
-    config = set_name(config, name)
+    config = set_name(config, name, subsystem)
     write_json(orca_dir + "/" + subsystem + "/" + name + ".json", config)
 
 def write_base(config, subsystem, name):
-    config = set_name(config, name)
+    config = set_name(config, name, subsystem)
     config["inherits"] = ""
     write_json(orca_dir + "/" + subsystem + "/base/" + name + ".json", config)
 
