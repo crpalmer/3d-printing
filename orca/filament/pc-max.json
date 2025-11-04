@@ -1,5 +1,7 @@
 {
     "name": "pc max",
+    "inherits": "Generic PC @System.json",
+    "filament_vendor": "Polymaker",
     "fan_cooling_layer_time": "10",
     "fan_min_speed": "0",
     "fan_max_speed": "25",
@@ -7,9 +9,6 @@
     "filament_density": "1.19",
     "filament_flow_ratio": "0.83",
     "filament_max_volumetric_speed": "5.5",
-    "filament_settings_id": "PC Max",
-    "filament_type": "PC",
-    "filament_vendor": "Polymaker",
     "hot_plate_temp": "100",
     "hot_plate_temp_initial_layer": "100",
     "nozzle_temperature": "255",
@@ -17,6 +16,5 @@
     "nozzle_temperature_range_high": "270",
     "nozzle_temperature_range_low": "250",
     "overhang_fan_speed": "0",
-    "reduce_fan_stop_start_freq": "0",
-    "temperature_vitrification": "50"
+    "reduce_fan_stop_start_freq": "0"
 }

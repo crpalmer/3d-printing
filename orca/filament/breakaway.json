@@ -1,12 +1,16 @@
 {
     "name": "polysupport (breakaway)",
+    "inherits": "Generic PLA @System",
     "compatible_printers_condition": "extruders_count > 1",
-    "fan_cooling_layer_time": "5",
     "filament_density": "1.25",
     "filament_flow_ratio": "0.8",
     "filament_is_support": "1",
     "filament_max_volumetric_speed": "7",
     "filament_vendor": "Polymaker",
+    "hot_plate_temp": "60",
+    "hot_plate_temp_initial_layer": "60",
     "nozzle_temperature": "220",
-    "nozzle_temperature_initial_layer": "220"
+    "nozzle_temperature_initial_layer": "220",
+    "textured_plate_temp": "60",
+    "textured_plate_temp_initial_layer": "60"
 }
