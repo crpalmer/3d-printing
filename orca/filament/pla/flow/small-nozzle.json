@@ -1,4 +1,5 @@
 {
+    "name": " (0.25mm)",
     "compatible_printers_condition": "nozzle_diameter[0] == 0.25",
     "filament_max_volumetric_speed": "1.5"
 }
