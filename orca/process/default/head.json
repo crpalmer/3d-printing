@@ -1,9 +1,0 @@
-{
-    "enable_support": "1",
-    "support_interface_top_layers": "0",
-    "fill_multiline": "2",
-    "inherits": "default",
-    "name": "default - head",
-    "raft_first_layer_density": "100%",
-    "sparse_infill_pattern": "lightning"
-}
