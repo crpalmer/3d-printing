@@ -1,5 +1,6 @@
 {
     "chains": [ 
-	[ "layer-height", "../rrf/style", "../rrf/support" ]
+	[ "layer-height/0.4mm-nozzle", "../rrf/style", "../rrf/support" ],
+	[ "layer-height/0.6mm-nozzle", "../rrf/style", "../rrf/support" ]
     ]
 }
