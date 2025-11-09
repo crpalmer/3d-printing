@@ -1,6 +1,6 @@
 {
     "name": "pc max",
-    "inherits": "Generic PC @System.json",
+    "inherits": "Generic PC @System",
     "filament_vendor": "Polymaker",
     "fan_cooling_layer_time": "10",
     "fan_min_speed": "0",
