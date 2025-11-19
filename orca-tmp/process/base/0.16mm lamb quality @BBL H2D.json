@@ -1,0 +1,25 @@
+{
+    "brim_type": "no_brim",
+    "from": "User",
+    "inherits": "0.16mm Balanced Quality @BBL H2D",
+    "name": "0.16mm lamb quality @BBL H2D",
+    "prime_tower_width": "15",
+    "prime_volume": "6",
+    "print_extruder_id": [
+        "1",
+        "1",
+        "2",
+        "2"
+    ],
+    "print_extruder_variant": [
+        "Direct Drive Standard",
+        "Direct Drive High Flow",
+        "Direct Drive Standard",
+        "Direct Drive High Flow"
+    ],
+    "print_settings_id": "0.16mm lamb quality @BBL H2D",
+    "support_critical_regions_only": "1",
+    "support_interface_not_for_body": "0",
+    "version": "2.0.0.55",
+    "wipe_tower_wall_type": "rib"
+}
