@@ -1,0 +1,22 @@
+{
+    "bottom_shell_thickness": "1",
+    "from": "User",
+    "inherits": "0.20mm lamb @BBL H2D",
+    "name": "0.20mm lamb head @BBL H2D",
+    "print_extruder_id": [
+        "1",
+        "1",
+        "2",
+        "2"
+    ],
+    "print_extruder_variant": [
+        "Direct Drive Standard",
+        "Direct Drive High Flow",
+        "Direct Drive Standard",
+        "Direct Drive High Flow"
+    ],
+    "print_settings_id": "0.20mm lamb head @BBL H2D",
+    "sparse_infill_pattern": "lightning",
+    "version": "2.0.0.55",
+    "wall_loops": "3"
+}
