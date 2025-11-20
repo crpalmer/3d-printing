@@ -24,6 +24,7 @@
     "support_interface_spacing": "0",
     "support_interface_top_layers": "4",
     "support_object_xy_distance": "0.1",
+    "support_object_xy_overhang_distance": "0.05",
     "support_style": "tree_slim",
     "support_top_z_distance": "0",
     "version": "2.0.0.55"
