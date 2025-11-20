@@ -1,2 +1,5 @@
+D=~/.config/OrcaSlicer/user/default/
+
 install:
-	cp -r . ~/.config/OrcaSlicer/user/default
+	mkdir -p $D
+	cp -r . $D
