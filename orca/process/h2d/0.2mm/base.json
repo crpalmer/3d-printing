@@ -1,0 +1,6 @@
+{
+    "from": "User",
+    "inherits": "0.20mm Standard @BBL H2D",
+    "name": "0.20mm lamb base",
+    "version": "2.0.0.55"
+}

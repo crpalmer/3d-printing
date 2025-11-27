@@ -1,0 +1,5 @@
+{
+    "chains": [ 
+	[ "name.json", "lamb.json", "../../rrf/style", "../../rrf/support" ]
+    ]
+}

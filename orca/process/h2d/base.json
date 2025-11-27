@@ -1,9 +1,0 @@
-{
-    "name": "H2D",
-    "bottom_shell_thickness": "1",
-    "brim_type": "no_brim",
-    "only_one_wall_top": "0",
-    "prime_tower_width": "12",
-    "prime_volume": "5",
-    "wipe_tower_wall_type": "rib"
-}

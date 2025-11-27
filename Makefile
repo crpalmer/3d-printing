@@ -8,6 +8,7 @@ clean-orca-config:
 
 install:
 	./install-orca.py
+	cp -r orca/h2d-filament/* ~/.config/OrcaSlicer/user/default/filament/
 
 grid-show: grid-show.c
 	$(CC) $(CFLAGS) grid-show.c -o grid-show -lm

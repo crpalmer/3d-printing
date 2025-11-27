@@ -56,8 +56,7 @@ def write_config(config, subsystem):
     config = set_name(config, name, subsystem)
     if "printer_notes" in config:
         printer_notes[name] = config["printer_notes"]
-    if "compatible_printers_condition" in config:
-        config["compatible_printers"] = ""
+    if "compatible_printers" not in config and "compatible_printers_condition" in config:
         config["compatible_printers"] = []
         for printer in printer_notes.keys():
             satisfied = True
@@ -68,6 +67,7 @@ def write_config(config, subsystem):
                     break
             if satisfied:
                 config["compatible_printers"].append(printer)
+        config["compatible_printers"].sort()
         config["compatible_printers_condition"] = ""
     write_json(orca_dir + "/" + subsystem + "/" + name + ".json", config)
 
@@ -100,8 +100,6 @@ def apply_chain(base, path, subsystem, chain):
         write_config(base, subsystem)
     elif chain[0].endswith(".json"):
         config = combine_json(base, read_json(path + "/" + chain[0]))
-        if "name" in config:
-            write_config(config, subsystem)
         apply_chain(config, path, subsystem, chain[1:])
     else:
         chain_path = path + "/" + chain[0]
