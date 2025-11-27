@@ -49,10 +49,8 @@ def write_json(dest, config):
         config["version"] = version
         json.dump(config, f, indent=4)
 
-def write_config(config, subsystem, inherits = None):
+def write_config(config, subsystem):
     name = get_name(config)
-    if inherits != None:
-        config["inherits"] = inherits
     config = set_name(config, name, subsystem)
     write_json(orca_dir + "/" + subsystem + "/" + name + ".json", config)
 
@@ -98,8 +96,10 @@ def apply_chain(base, path, subsystem, chain):
 def apply_modifiers_to_dir(path, subsystem):
     modifiers = read_json(path + "/modifiers.json")
     base = read_json(path + "/base.json")
+    write_base(base, subsystem, base["name"])
+    base_config = { "inherits": base["name"] }
     for chain in modifiers["chains"]:
-        apply_chain(base, path, subsystem, chain)
+        apply_chain(base_config, path, subsystem, chain)
         
 def process(path, subsystem, name):
     if os.path.exists(path + "/modifiers.json"):

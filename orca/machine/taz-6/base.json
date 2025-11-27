@@ -1,4 +1,5 @@
 {
+    "name": "taz-6-base",
     "from": "User",
     "instantiation": "false",
     "is_custom_defined": "0",

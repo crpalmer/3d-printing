@@ -1,4 +1,5 @@
 {
+    "name": "lamb-duet",
     "scan_first_layer": "0",
     "nozzle_type": "hardened_steel",
     "gcode_flavor": "reprapfirmware",

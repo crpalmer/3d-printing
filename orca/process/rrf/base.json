@@ -1,4 +1,5 @@
 {
+    "name": "rrf-base",
     "accel_to_decel_enable": "1",
     "accel_to_decel_factor": "50%",
     "align_infill_direction_to_model": "0",
