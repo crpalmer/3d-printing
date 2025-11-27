@@ -2,5 +2,6 @@
     "name": " - 0.6mm",
     "max_layer_height": "0.4,0.4",
     "min_layer_height": "0.05,0.05",
-    "nozzle_diameter": "0.6,0.6"
+    "nozzle_diameter": "0.6,0.6",
+    "printer_notes": "@!0.25mm@"
 }

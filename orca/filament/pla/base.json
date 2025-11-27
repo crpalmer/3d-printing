@@ -1,5 +1,5 @@
 {
-    "name": "pla",
+    "name": "pla-base",
     "inherits": "Generic PLA @System",
     "filament_flow_ratio": "0.87",
     "hot_plate_temp": [

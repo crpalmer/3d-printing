@@ -31,6 +31,7 @@
     "machine_min_extruding_rate": "0,0",
     "machine_min_travel_rate": "0,0",
     "printer_model": "",
+    "printer_notes": "@RRF@\n",
     "printer_technology": "FFF",
     "printer_variant": "",
     "retraction_minimum_travel": "1.5,1.5",

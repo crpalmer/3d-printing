@@ -1,6 +1,7 @@
 {
     "name": "pc max",
     "inherits": "Generic PC @System",
+    "compatible_printers_condition": "@!0.25mm@",
     "filament_vendor": "Polymaker",
     "fan_cooling_layer_time": "10",
     "fan_min_speed": "0",

@@ -8,5 +8,6 @@
     "machine_max_acceleration_x": "2500,2500",
     "machine_max_acceleration_y": "2500,2500",
     "machine_max_acceleration_z": "500,200",
-    "printable_height": "410"
+    "printable_height": "410",
+    "printer_notes": "@DUAL@\n"
 }
