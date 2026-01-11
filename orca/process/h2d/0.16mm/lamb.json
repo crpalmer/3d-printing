@@ -3,6 +3,7 @@
     "compatible_printers": [ "Bambu Lab H2D 0.4 nozzle" ],
     "prime_tower_width": "15",
     "prime_volume": "6",
+    "sparse_infill_pattern": "crosshatch",
     "support_critical_regions_only": "1",
     "support_interface_not_for_body": "0",
     "version": "2.0.0.55",
