@@ -30,7 +30,7 @@
         "30"
     ],
     "filament_settings_id": [
-        "TPU"
+        "tpu"
     ],
     "filament_start_gcode": [
         "; Filament gcode\nM591 D0 S0"
@@ -46,7 +46,7 @@
         "60"
     ],
     "inherits": "Generic TPU @System",
-    "name": "TPU",
+    "name": "tpu",
     "nozzle_temperature": [
         "220"
     ],
