@@ -33,3 +33,4 @@ while true
         break
       else
         echo "Repeating calibration because the stddev is too high (" ^ move.calibration.initial.deviation ^ "mm)"
+        G28 Z
