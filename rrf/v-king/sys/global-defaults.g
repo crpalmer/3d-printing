@@ -4,7 +4,7 @@ set global.print_ended_z = 5
 
 set global.bed_probe_points = { {175, 75}, {275, 300}, {75, 300} }
 
-set global.probe_at_temperature_delta = 50
+set global.probe_at_temperature_delta = 70
 
 set global.use_mesh_compensation = true
 set global.use_true_bed_leveling = true
