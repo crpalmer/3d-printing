@@ -28,29 +28,25 @@ if var.t1_temp <= 0 && var.t2_temp <= 0
 ;
 
 var t1_probe_temp = var.t1_temp - global.probe_at_temperature_delta
-var t2_probe_temp = 0
-
-if exists(sensors.probes[1]) && global.probe_at_temperature_delta != null
-  set var.t2_probe_temp = var.t2_temp - global.probe_at_temperature_delta
-elif var.t1_temp <= 0 && global.probe_at_temperature_delta != null
-  set var.t1_probe_temp = var.t2_temp - global.probe_at_temperature_delta
-
+var t2_probe_temp = var.t2_temp - global.probe_at_temperature_delta
 var bed_probe_temp = var.bed_temp
+
+; We are always going to use t0 for the bed probing and consequently need
+; to heat it up, even if we aren't going to be using it for printing.  Since
+; we don't know anything about T0's filament, just go for a safe heating
+; temperature.
+
+if var.t1_probe_temp <= 0
+   set var.t1_probe_temp = 150
 
 ;
 ; Start the hotend(s) heating
 ;
 
-if var.t1_probe_temp > 0
-  M568 A1 P0 R{var.t1_probe_temp} S{var.t1_probe_temp}
-else
-  M568 A1 P0 R{var.t1_temp} S{var.t1_temp}
+M568 A1 P0 R{var.t1_probe_temp} S{var.t1_probe_temp}
 
-if exists(tools[1])
-  if  var.t2_probe_temp > 0
+if exists(tools[1]) && var.t2_probe_temp > 0
     M568 A1 P1 R{var.t2_probe_temp} S{var.t2_probe_temp}
-  else
-    M568 A1 P1 R{var.t2_temp} S{var.t2_temp}
 
 ;
 ; Reset the state / initialize things
@@ -68,10 +64,7 @@ set global.last_wipe = { 0, 0 }
 ;
 
 M190 R{var.bed_probe_temp}    ; Wait to get up (or down!) to the right temperature
-if var.t1_probe_temp > 0
-   M116 P0                    ; Wait for the hotend to reach its temp
-if var.t2_probe_temp > 0
-   M116 P1
+M116 P0                    ; Wait for the hotend to reach its temp
 M561
 
 ;
@@ -79,15 +72,13 @@ M561
 ;
 
 T0
-if var.t1_probe_temp <= 0
-  G10 P1 Z0        ; We are probing Z with our own probe, it doesn't need to be offset
 G28 X U
 G28 Y
-T{var.t1_probe_temp > 0 ? 0 : 1}
 M98 P"/sys/wipe-for-probing.g"
 M98 P"/sys/homez-with-retry.g"
 G1 Z5
 if var.t1_probe_temp > 0 && var.t2_probe_temp > 0
+  M116 P1               ; Make sure T1 is also at the right temperature
   M98 P"/sys/idex-calibration.g"
   T0
 
@@ -109,7 +100,7 @@ M290 R0 S{-global.probe_extra_squish}
 
 if var.t1_probe_temp != var.t1_temp
   M568 A{state.currentTool == 0 ? 2 : 1} P0 R{var.t1_temp} S{var.t1_temp}
-if var.t2_probe_temp != var.t2_temp
+if exists(tools[1]) && var.t2_probe_temp != var.t2_temp
   M568 A{state.currentTool == 1 ? 2 : 1} P1 R{var.t2_temp} S{var.t2_temp}
 
 if var.bed_probe_temp < var.bed_temp
@@ -123,10 +114,13 @@ if exists(sensors.filamentMonitors[1])
   M591 D1 S1
 ;
 ; Park the toolhead and then wait for all temperatures to be reached.
+; Note: we don't wait for unused hotends to cool down, we only wait for
+; temperatures on hotends that are being used.
 ;
 
 M98 P"/sys/park-hotends.g"
 M116 H0
-M116 P0
-if exists(tools[1])
+if var.t1_temp > 0
+  M116 P0
+if exists(tools[1]) && var.t2_temp > 0
   M116 P1
