@@ -25,6 +25,11 @@ if !exists(global.in_filament_error)
   global use_mesh_compensation = false
   global use_true_bed_leveling = true
   
+  ; Skew Compensation (no skew by default)
+  global skew_AC = 141.42
+  global skew_BD = 141.42
+  global skew_AD = 100
+
   ; Wiping configuration
   global wipe_passes = 3
   global wipe_for_probing_passes = 7

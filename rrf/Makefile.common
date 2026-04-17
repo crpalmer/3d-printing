@@ -33,6 +33,7 @@ COMMON_FILES = macros/filament\ -\ add \
 	       sys/prusaslicer-toolchange.g \
 	       sys/rapid-move.g \
 	       sys/resume.g \
+	       sys/skew-compensation.g \
 	       sys/sleep.g \
 	       sys/stop.g \
                sys/tfree0.g \

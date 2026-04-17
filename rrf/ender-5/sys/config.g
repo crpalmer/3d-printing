@@ -121,3 +121,4 @@ M912 P0 S0
 T0
 
 M98 P"/sys/global-defaults.g"
+M98 P"/sys/skew-compensation.g"

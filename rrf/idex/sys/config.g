@@ -113,3 +113,4 @@ M912 P0 S-12.5                                         ; Calibrate MCU temperatu
 M912 P0 S-1
 
 M98 P"/sys/global-defaults.g"
+M98 P"/sys/skew-compensation.g"

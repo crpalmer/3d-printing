@@ -106,3 +106,4 @@ M912 P0 S1.2                               ; MCU temperature calibration
 T0                                         ; Select first tool
 
 M98 P"/sys/global-defaults.g"
+M98 P"/sys/skew-compensation.g"
