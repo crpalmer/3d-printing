@@ -6,7 +6,7 @@ set global.print_ended_y = move.axes[1].max - 1
 set global.bed_probe_points = { { 110, 30}, {195, 195}, {30, 195} }
 set global.bed_meshing_max_stddev = 0.04
 
-set global.probe_at_temperature_delta = 50
+set global.probe_at_temperature_delta = 70
 
 set global.use_mesh_compensation = true
 set global.use_true_bed_leveling = true
