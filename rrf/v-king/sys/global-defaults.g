@@ -10,4 +10,4 @@ set global.use_mesh_compensation = true
 set global.use_true_bed_leveling = true
 
 set global.wipe_y_range = {200, 250}
-set global.wipe_at_x = -6
+set global.wipe_x_range = { -7, -1 }
