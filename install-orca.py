@@ -6,14 +6,12 @@ import os
 version = "2.3.1.0"
 
 post_process_prefix = ""
-dirs = [ "/home/crpalmer/.config/OrcaSlicer/user/default", "/home/crpalmer/.var/app/io.github.softfever.OrcaSlicer/config/OrcaSlicer/user/default", "/cygdrive/c/Users/crpalmer/AppData/Local/OrcaSlicer/user/default", "/cygdrive/c/Users/crpalmer/AppData/Roaming/OrcaSlicer/user/default" ]
-orca_dir = dirs[0]
-for dir in dirs:
-    if os.path.exists(dir):
-        orca_dir = dir
-        if dir.startswith("/cygdrive"):
-            post_process_prefix = "c:/cygwin64/bin/bash.exe --login"
-        break
+dirs = [ "/home/crpalmer/.config/OrcaSlicer/user/default",
+         "/home/crpalmer/.var/app/com.orcaslicer.OrcaSlicer/config/OrcaSlicer/user/default",
+         "/cygdrive/c/Users/crpalmer/AppData/Local/OrcaSlicer/user/default",
+         "/cygdrive/c/Users/crpalmer/AppData/Roaming/OrcaSlicer/user/default"
+        ]
+orca_dir = ""
 
 def mkdir_recursive(path):
     if path[0] == '/':
@@ -140,6 +138,22 @@ def process(path, subsystem, name):
             else:
                 write_config(config, subsystem)
 
-for subsystem in [ "machine", "filament", "process" ]:
-    mkdir_recursive(orca_dir + "/" + subsystem + "/base")
-    process("orca/" + subsystem, subsystem, None)
+def install_all():
+    print()
+    print("**** Installing to: ", orca_dir)
+    print()
+    for subsystem in [ "machine", "filament", "process" ]:
+        mkdir_recursive(orca_dir + "/" + subsystem + "/base")
+        process("orca/" + subsystem, subsystem, None)
+
+# --------------------------------------------------------------------------
+
+for dir in dirs:
+    if os.path.exists(dir):
+        orca_dir = dir
+        if dir.startswith("/cygdrive"):
+            post_process_prefix = "c:/cygwin64/bin/bash.exe --login"
+        else:
+            post_process_prefix = ""
+        install_all()
+
