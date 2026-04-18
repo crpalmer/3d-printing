@@ -11,6 +11,10 @@ set global.probe_at_temperature_delta = 70
 set global.use_mesh_compensation = true
 set global.use_true_bed_leveling = true
 
+set global.skew_AC = 141.45
+set global.skew_BD = 140.75
+set global.skew_AD = 99.5
+
 set global.wipe_x_range = { -36, -32 }
 set global.wipe_y_range = {-15, 15}
 set global.wipe_u_range = {259, 265}
