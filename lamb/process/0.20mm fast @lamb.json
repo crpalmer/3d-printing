@@ -1,0 +1,11 @@
+{
+    "inherits": "0.20mm normal @lamb",
+    "name": "0.20mm fast @lamb",
+    "instantiation": "true",
+    "inner_wall_speed": "120",
+    "internal_solid_infill_speed": "120",
+    "outer_wall_speed": "100",
+    "sparse_infill_speed": "120",
+    "top_surface_speed": "100",
+    "travel_speed": "400"
+}

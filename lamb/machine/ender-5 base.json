@@ -1,0 +1,10 @@
+{
+    "type": "machine",
+    "name": "ender-5 base",
+    "instantiation": "false",
+    "printer_model": "ender-5",
+    "inherits": "base @lamb",
+    "print_host": "ender-5",
+    "printable_area": "0x0,220x0,220x220,0x220",
+    "printable_height": "325"
+}

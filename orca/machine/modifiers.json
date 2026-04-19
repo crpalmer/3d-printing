@@ -1,6 +1,0 @@
-{
-    "chains": [
-	[ "single-extruder", "nozzle-size1" ],
-	[ "dual-extruder", "nozzle-size2" ]
-    ]
-}

@@ -1,0 +1,21 @@
+{
+    "enable_extra_bridge_layer": "apply_to_all",
+    "from": "User",
+    "inherits": "0.24mm Balanced Strength @BBL H2D 0.6 nozzle",
+    "name": "0.24mm normal @H2D 0.6 nozzle",
+    "print_extruder_id": [
+        "1",
+        "1",
+        "2",
+        "2"
+    ],
+    "print_extruder_variant": [
+        "Direct Drive Standard",
+        "Direct Drive High Flow",
+        "Direct Drive Standard",
+        "Direct Drive High Flow"
+    ],
+    "print_settings_id": "0.24mm normal @H2D 0.6 nozzle",
+    "thick_internal_bridges": "0",
+    "version": "2.1.0.10"
+}

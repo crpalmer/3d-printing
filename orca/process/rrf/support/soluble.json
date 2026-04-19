@@ -1,9 +1,0 @@
-{
-    "name": " (soluble)",
-    "compatible_printers_condition": "@DUAL@\n",
-    "support_bottom_interface_spacing": "0",
-    "support_bottom_z_distance": "0",
-    "support_interface_filament": "4",
-    "support_interface_spacing": "0",
-    "support_top_z_distance": "0"
-}

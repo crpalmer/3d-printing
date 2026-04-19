@@ -1,0 +1,6 @@
+{
+    "inherits": "0.20mm normal @lamb",
+    "name": "0.20mm normal @lamb 0.25 nozzle",
+    "instantiation": "true",
+    "compatible_printers_condition": "nozzle_diameter[0] == 0.25 and gcode_flavor == \"reprapfirmware\""
+}

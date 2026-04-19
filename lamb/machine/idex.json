@@ -1,0 +1,5 @@
+{
+    "type": "machine_model",
+    "name": "idex",
+    "nozzle_diameter": "0.6;0.25;0.4"
+}

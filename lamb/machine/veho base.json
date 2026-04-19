@@ -1,0 +1,10 @@
+{
+    "type": "machine",
+    "name": "veho base",
+    "instantiation": "false",
+    "printer_model": "veho",
+    "inherits": "base @lamb",
+    "print_host": "veho",
+    "printable_area": "0x0,600x0,600x600,0x600",
+    "printable_height": "650"
+}

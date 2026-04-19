@@ -1,0 +1,124 @@
+{
+    "name": "lamb",
+    "version": "01.00.00.00",
+    "force_update": "0",
+    "description": "Lam-B's printers",
+    "machine_model_list": [
+        {
+            "name": "ender-5",
+            "sub_path": "machine/ender-5.json"
+        },
+        {
+            "name": "idex",
+            "sub_path": "machine/idex.json"
+        },
+        {
+            "name": "v-king",
+            "sub_path": "machine/v-king.json"
+        },
+        {
+            "name": "veho",
+            "sub_path": "machine/veho.json"
+        }
+    ],
+    "process_list": [
+        {
+            "name": "base @lamb",
+            "sub_path": "process/base @lamb.json"
+        },
+        {
+            "name": "0.20mm normal @lamb",
+            "sub_path": "process/0.20mm normal @lamb.json"
+        },
+	{
+            "name": "0.20mm factory @lamb",
+            "sub_path": "process/0.20mm factory @lamb.json"
+        },
+	{
+            "name": "0.20mm fast @lamb",
+            "sub_path": "process/0.20mm fast @lamb.json"
+        },
+	{
+            "name": "0.20mm head @lamb",
+            "sub_path": "process/0.20mm head @lamb.json"
+        },
+        {
+            "name": "0.20mm normal @lamb 0.25 nozzle",
+            "sub_path": "process/0.20mm normal @lamb 0.25 nozzle.json"
+        },
+	{
+            "name": "0.20mm popper @lamb",
+            "sub_path": "process/0.20mm popper @lamb.json"
+        }
+    ],
+    "machine_list": [
+        {
+            "name": "base @lamb",
+            "sub_path": "machine/base @lamb.json"
+        },
+        {
+            "name": "ender-5 base",
+            "sub_path": "machine/ender-5 base.json"
+        },
+        {
+            "name": "ender-5 0.25 nozzle",
+            "sub_path": "machine/ender-5 0.25 nozzle.json"
+        },
+        {
+            "name": "ender-5 0.4 nozzle",
+            "sub_path": "machine/ender-5 0.4 nozzle.json"
+        },
+        {
+            "name": "ender-5 0.6 nozzle",
+            "sub_path": "machine/ender-5 0.6 nozzle.json"
+        },
+        {
+            "name": "idex base",
+            "sub_path": "machine/idex base.json"
+        },
+        {
+            "name": "idex 0.25 nozzle",
+            "sub_path": "machine/idex 0.25 nozzle.json"
+        },
+        {
+            "name": "idex 0.4 nozzle",
+            "sub_path": "machine/idex 0.4 nozzle.json"
+        },
+        {
+            "name": "idex 0.6 nozzle",
+            "sub_path": "machine/idex 0.6 nozzle.json"
+        },
+        {
+            "name": "v-king base",
+            "sub_path": "machine/v-king base.json"
+        },
+        {
+            "name": "v-king 0.25 nozzle",
+            "sub_path": "machine/v-king 0.25 nozzle.json"
+        },
+        {
+            "name": "v-king 0.4 nozzle",
+            "sub_path": "machine/v-king 0.4 nozzle.json"
+        },
+        {
+            "name": "v-king 0.6 nozzle",
+            "sub_path": "machine/v-king 0.6 nozzle.json"
+        },
+        {
+            "name": "veho base",
+            "sub_path": "machine/veho base.json"
+        },
+        {
+            "name": "veho 0.6 nozzle",
+            "sub_path": "machine/veho 0.6 nozzle.json"
+        },
+        {
+            "name": "veho 0.8 nozzle",
+            "sub_path": "machine/veho 0.8 nozzle.json"
+        },
+        {
+            "name": "veho 1.4 nozzle",
+            "sub_path": "machine/veho 1.4 nozzle.json"
+        }
+    ]
+}

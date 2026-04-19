@@ -1,0 +1,6 @@
+{
+    "name": "0.20mm normal @H2D",
+    "inherits": "base @H2D",
+    "instantiation": "true",
+    "compatible_printers_condition": "nozzle_diameter[0] >= 0.4"
+}

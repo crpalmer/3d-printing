@@ -1,0 +1,8 @@
+{
+    "name": "0.20mm head @lamb",
+    "inherits": "0.20mm normal @lamb",
+    "instantiation": "true",
+    "fill_multiline": "2",
+    "raft_first_layer_density": "100%",
+    "sparse_infill_pattern": "lightning"
+}

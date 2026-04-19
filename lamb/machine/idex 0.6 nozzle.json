@@ -1,0 +1,10 @@
+{
+    "name": "idex 0.6 nozzle",
+    "type": "machine",
+    "inherits": "idex base",
+    "instantiation": "true",
+    "printer_variant": "0.6",
+    "nozzle_diameter": [ "0.6", "0.6" ],
+    "max_layer_height": [ "0.4", "0.4" ],
+    "min_layer_height": [ "0.05", "0.05" ]
+}

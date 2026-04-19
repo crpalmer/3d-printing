@@ -1,0 +1,5 @@
+{
+    "type": "machine_model",
+    "name": "veho",
+    "nozzle_diameter": "0.6;0.8;1.4"
+}

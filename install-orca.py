@@ -2,6 +2,7 @@
 
 import json
 import os
+import shutil
 
 version = "2.3.1.0"
 
@@ -142,9 +143,12 @@ def install_all():
     print()
     print("**** Installing to: ", orca_dir)
     print()
-    for subsystem in [ "machine", "filament", "process" ]:
+    for subsystem in [ "filament" ]:
         mkdir_recursive(orca_dir + "/" + subsystem + "/base")
         process("orca/" + subsystem, subsystem, None)
+        print("copy lamb / lamb.json to " + orca_dir + "/../../system/")
+        shutil.copytree('lamb', orca_dir + '/../../system/lamb', dirs_exist_ok=True)
+        shutil.copy('lamb.json', orca_dir + '/../../system/lamb.json')
 
 # --------------------------------------------------------------------------
 
