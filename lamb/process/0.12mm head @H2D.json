@@ -1,0 +1,17 @@
+
+{
+    "name": "0.12mm head @H2D",
+    "inherits": "0.12mm normal @H2D",
+    "instantiation": "true",
+    "enable_support": "1",
+    "fill_multiline": "2",
+    "raft_first_layer_expansion": "20",
+    "sparse_infill_density": "20%",
+    "sparse_infill_pattern": "lightning",
+    "support_interface_filament": "4",
+    "support_interface_pattern": "rectilinear_interlaced",
+    "support_interface_spacing": "0",
+    "support_ironing": "1",
+    "support_top_z_distance": "0",
+    "wall_loops": "3"
+}

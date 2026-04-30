@@ -1,9 +1,9 @@
 {
-    "name": "0.20mm normal @H2D",
-    "inherits": "0.20mm Standard @BBL H2D @lamb",
+    "name": "0.12mm normal @H2D",
+    "inherits": "0.12mm Fine @BBL H2D @lamb",
     "instantiation": "true",
-    "brim_type": "no_brim",
     "bottom_shell_thickness": "1",
+    "brim_type": "no_brim",
     "compatible_printers": [
         "Bambu Lab H2D 0.2 nozzle",
         "Bambu Lab H2D 0.4 nozzle",

@@ -49,6 +49,51 @@
 	{
             "name": "0.20mm popper @lamb",
             "sub_path": "process/0.20mm popper @lamb.json"
+        },
+
+
+	{
+	    "name": "fdm_process_common @lamb",
+	    "sub_path": "BBL-process/fdm_process_common.json"
+	},
+	{
+	    "name": "fdm_process_dual_common @lamb",
+	    "sub_path": "BBL-process/fdm_process_dual_common.json"
+	},
+	{
+	    "name": "fdm_process_dual_0.12_nozzle_0.4 @lamb",
+	    "sub_path": "BBL-process/fdm_process_dual_0.12_nozzle_0.4.json"
+	},
+	{
+	    "name": "0.12mm Fine @BBL H2D @lamb",
+	    "sub_path": "BBL-process/0.12mm Fine @BBL H2D.json"
+	},
+	{
+	    "name": "fdm_process_dual_0.20_nozzle_0.4 @lamb",
+	    "sub_path": "BBL-process/fdm_process_dual_0.20_nozzle_0.4.json"
+	},
+	{
+            "name": "0.20mm Standard @BBL H2D @lamb",
+            "sub_path": "BBL-process/0.20mm Standard @BBL H2D.json"
+        },
+
+
+
+	{
+            "name": "0.12mm normal @H2D",
+            "sub_path": "process/0.12mm normal @H2D.json"
+        },
+	{
+            "name": "0.12mm head @H2D",
+            "sub_path": "process/0.12mm head @H2D.json"
+        },
+	{
+	    "name": "0.20mm normal @H2D",
+	    "sub_path": "process/0.20mm normal @H2D.json"
+	},
+	{
+            "name": "0.20mm head @H2D",
+            "sub_path": "process/0.20mm head @H2D.json"
         }
     ],
     "machine_list": [

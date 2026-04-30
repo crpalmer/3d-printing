@@ -3,6 +3,7 @@
 import json
 import os
 import shutil
+import subprocess
 
 version = "2.3.1.0"
 
@@ -143,12 +144,31 @@ def install_all():
     print()
     print("**** Installing to: ", orca_dir)
     print()
+    system_dir = orca_dir + "/../../system"
     for subsystem in [ "filament" ]:
         mkdir_recursive(orca_dir + "/" + subsystem + "/base")
         process("orca/" + subsystem, subsystem, None)
-        print("copy lamb / lamb.json to " + orca_dir + "/../../system/")
-        shutil.copytree('lamb', orca_dir + '/../../system/lamb', dirs_exist_ok=True)
-        shutil.copy('lamb.json', orca_dir + '/../../system/lamb.json')
+        print("   copy lamb / lamb.json to " + orca_dir + "/../../system/")
+        shutil.copytree('lamb', system_dir + '/lamb', dirs_exist_ok=True)
+        shutil.copy('lamb.json', system_dir + '/lamb.json')
+
+        mkdir_recursive(system_dir + "/" + "/lamb/BBL-process")
+
+        lamb = read_json('lamb.json')
+        for p in lamb["process_list"]:
+            name = p["name"]
+            sub_path = p["sub_path"]
+            if "BBL-process" in sub_path:
+                bbl_sub_path = sub_path[4:]
+                print("   copy BBL " + bbl_sub_path + " to " + sub_path)
+
+                bbl = read_json(system_dir + "/BBL/" + bbl_sub_path)
+                bbl["name"] = name
+                bbl["instantiation"] = "false"
+                if "inherits" in bbl:
+                    bbl["inherits"] += " @lamb"
+
+                write_json(system_dir + "/lamb/" + sub_path, bbl)
 
 # --------------------------------------------------------------------------
 
