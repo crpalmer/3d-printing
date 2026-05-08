@@ -17,9 +17,6 @@
 	"filament_settings_id": [
 		"pet-g"
 	],
-	"filament_start_gcode": [
-		"; Filament gcode\nM290 R0 S0.1   ; A little less squish for PETG"
-	],
 	"filament_vendor": [
 		"E-Sun"
 	],
