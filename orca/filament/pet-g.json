@@ -1,0 +1,30 @@
+{
+	"compatible_printers": [
+		"veho 0.6 nozzle"
+	],
+	"filament_cost": [
+		"20"
+	],
+	"filament_extruder_variant": [
+		"Direct Drive Standard"
+	],
+	"filament_flow_ratio": [
+		"0.9"
+	],
+	"filament_minimal_purge_on_wipe_tower": [
+		"3"
+	],
+	"filament_settings_id": [
+		"pet-g"
+	],
+	"filament_start_gcode": [
+		"; Filament gcode\nM290 R0 S0.1   ; A little less squish for PETG"
+	],
+	"filament_vendor": [
+		"E-Sun"
+	],
+	"from": "User",
+	"inherits": "Generic PETG @System",
+	"name": "pet-g",
+	"version": "2.3.2.60"
+}
