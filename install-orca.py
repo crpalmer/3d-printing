@@ -76,7 +76,6 @@ def write_base(config, subsystem, name):
     write_json(orca_dir + "/" + subsystem + "/base/" + name + ".json", config)
 
 def read_json(path):
-    print("   Loading: " + path)
     with open(path, "r") as f:
         return json.load(f)
 
@@ -99,6 +98,7 @@ def apply_chain(base, path, subsystem, chain):
     if len(chain) == 0:
         write_config(base, subsystem)
     elif chain[0].endswith(".json"):
+        print("        Combining: " + chain[0])
         config = combine_json(base, read_json(path + "/" + chain[0]))
         apply_chain(config, path, subsystem, chain[1:])
     else:
@@ -106,10 +106,12 @@ def apply_chain(base, path, subsystem, chain):
         for file in os.listdir(chain_path):
             if file != "base.json" and file != "modifiers.json" and file.endswith(".json"):
                 full = chain_path + "/" + file
+                print("        Combining: " + full)
                 config = combine_json(base, read_json(full))
                 apply_chain(config, path, subsystem, chain[1:])
 
 def apply_modifiers_to_dir(path, subsystem):
+    print("     Processing " + path)
     modifiers = read_json(path + "/modifiers.json")
     base = read_json(path + "/base.json")
     write_base(base, subsystem, base["name"])
@@ -140,35 +142,52 @@ def process(path, subsystem, name):
             else:
                 write_config(config, subsystem)
 
+def read_json_and_handle_lamb_includes(path):
+    json = read_json(path)
+    if "lamb-includes" in json:
+        for i in json["lamb-includes"]:
+            print("    Including " + i)
+            include_json = read_json_and_handle_lamb_includes("lamb/include/" + i)
+            json.update(include_json)
+        json.pop("lamb-includes", None)
+    return json
+
+def install_lamb():
+    system_dir = orca_dir + "/../../system"
+    mkdir_recursive(system_dir + "/lamb/BBL-process")
+    mkdir_recursive(system_dir + "/lamb/process")
+    mkdir_recursive(system_dir + "/lamb/machine")
+    mkdir_recursive(system_dir + "/lamb/machine_model_list")
+    shutil.copy('lamb.json', system_dir + '/lamb.json')
+    lamb = read_json('lamb.json')
+    for p in lamb["machine_model_list"] + lamb["process_list"] + lamb["machine_list"]:
+        name = p["name"]
+        sub_path = p["sub_path"]
+        if "BBL-process" in sub_path:
+            bbl_sub_path = sub_path[4:]
+            print("   BBL " + bbl_sub_path + " to " + sub_path)
+
+            bbl = read_json(system_dir + "/BBL/" + bbl_sub_path)
+            bbl["name"] = name
+            bbl["instantiation"] = "false"
+            if "inherits" in bbl:
+                bbl["inherits"] += " @lamb"
+
+            write_json(system_dir + "/lamb/" + sub_path, bbl)
+        else:
+            print("Lamb " + sub_path)
+            json = read_json_and_handle_lamb_includes("lamb/" + sub_path)
+            write_json(system_dir + "/lamb/" + sub_path, json)
+
 def install_all():
     print()
     print("**** Installing to: ", orca_dir)
     print()
-    system_dir = orca_dir + "/../../system"
     for subsystem in [ "filament" ]:
         mkdir_recursive(orca_dir + "/" + subsystem + "/base")
         process("orca/" + subsystem, subsystem, None)
-        print("   copy lamb / lamb.json to " + orca_dir + "/../../system/")
-        shutil.copytree('lamb', system_dir + '/lamb', dirs_exist_ok=True)
-        shutil.copy('lamb.json', system_dir + '/lamb.json')
-
-        mkdir_recursive(system_dir + "/" + "/lamb/BBL-process")
-
-        lamb = read_json('lamb.json')
-        for p in lamb["process_list"]:
-            name = p["name"]
-            sub_path = p["sub_path"]
-            if "BBL-process" in sub_path:
-                bbl_sub_path = sub_path[4:]
-                print("   copy BBL " + bbl_sub_path + " to " + sub_path)
-
-                bbl = read_json(system_dir + "/BBL/" + bbl_sub_path)
-                bbl["name"] = name
-                bbl["instantiation"] = "false"
-                if "inherits" in bbl:
-                    bbl["inherits"] += " @lamb"
-
-                write_json(system_dir + "/lamb/" + sub_path, bbl)
+    print("")
+    install_lamb()
 
 # --------------------------------------------------------------------------
 

@@ -1,0 +1,6 @@
+{
+    "sparse_infill_density": "33%",
+    "sparse_infill_pattern": "gyroid",
+    "alternate_extra_wall": "1",
+    "ensure_vertical_shell_thickness": "ensure_moderate"
+}
