@@ -1,5 +1,5 @@
 {
-    "name": "0.12mm normal @H2D",
+    "name": " 0.12mm normal @H2D",
     "inherits": "0.12mm Fine @BBL H2D @lamb",
     "instantiation": "true",
     "bottom_shell_thickness": "1",

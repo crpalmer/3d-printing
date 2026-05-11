@@ -80,19 +80,19 @@
 
 
 	{
-            "name": "0.12mm normal @H2D",
+            "name": "_0.12mm normal @H2D",
             "sub_path": "process/0.12mm normal @H2D.json"
         },
 	{
-            "name": "0.12mm head @H2D",
+            "name": "_0.12mm head @H2D",
             "sub_path": "process/0.12mm head @H2D.json"
         },
 	{
-	    "name": "0.20mm normal @H2D",
+	    "name": "_0.20mm normal @H2D",
 	    "sub_path": "process/0.20mm normal @H2D.json"
 	},
 	{
-            "name": "0.20mm head @H2D",
+            "name": "_0.20mm head @H2D",
             "sub_path": "process/0.20mm head @H2D.json"
         }
     ],
