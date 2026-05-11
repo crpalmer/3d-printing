@@ -1,0 +1,6 @@
+{
+    "name": "0.20mm factory @lamb 0.4 nozzle",
+    "inherits": "0.20mm normal @lamb",
+    "instantiation": "true",
+    "lamb-includes": [ "0.4mm/common.json", "0.4mm/factory.json" ]
+}

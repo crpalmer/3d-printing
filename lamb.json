@@ -91,12 +91,17 @@
             "sub_path": "process/0.12mm normal @H2D.json"
         },
 	{
+	    "name": " 0.20mm normal @H2D",
+	    "sub_path": "process/0.20mm normal @H2D.json"
+	},
+
+	{
             "name": " 0.12mm head @H2D",
             "sub_path": "process/0.12mm head @H2D.json"
         },
 	{
-	    "name": " 0.20mm normal @H2D",
-	    "sub_path": "process/0.20mm normal @H2D.json"
+	    "name": " 0.20mm factory @H2D",
+	    "sub_path": "process/0.20mm factory @H2D.json"
 	},
 	{
             "name": " 0.20mm head @H2D",
@@ -108,12 +113,16 @@
             "sub_path": "process/0.12mm normal @X2D.json"
         },
 	{
+	    "name": " 0.20mm normal @X2D",
+	    "sub_path": "process/0.20mm normal @X2D.json"
+	},
+	{
             "name": " 0.12mm head @X2D",
             "sub_path": "process/0.12mm head @X2D.json"
         },
 	{
-	    "name": " 0.20mm normal @X2D",
-	    "sub_path": "process/0.20mm normal @X2D.json"
+	    "name": " 0.20mm factory @X2D",
+	    "sub_path": "process/0.20mm factory @X2D.json"
 	},
 	{
             "name": " 0.20mm head @X2D",

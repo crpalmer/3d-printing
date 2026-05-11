@@ -2,5 +2,5 @@
     "name": "0.20mm factory @lamb",
     "inherits": "0.20mm normal @lamb",
     "instantiation": "true",
-    "lamb-includes": [ "0.4mm/factory.json" ]
+    "lamb-includes": [ "0.6mm/factory.json" ]
 }

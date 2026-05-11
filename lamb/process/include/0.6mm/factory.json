@@ -1,4 +1,4 @@
 {
     "lamb-includes": [ "common/factory.json" ],
-    "wall_loops": "4"
+    "wall_loops": "3"
 }

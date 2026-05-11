@@ -23,7 +23,6 @@
     "brim_width": "0",
     "calib_flowrate_topinfill_special_order": "0",
     "counterbore_hole_bridging": "none",
-    "compatible_printers_condition": "gcode_flavor == \"reprapfirmware\"",
     "default_acceleration": "0",
     "default_jerk": "0",
     "default_junction_deviation": "0",
