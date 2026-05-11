@@ -1,0 +1,4 @@
+{
+    "lamb-includes": [ "common/head.json" ],
+    "wall_loops": "3"
+}

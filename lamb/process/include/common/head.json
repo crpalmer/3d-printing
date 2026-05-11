@@ -1,0 +1,8 @@
+
+{
+    "enable_support": "1",
+    "fill_multiline": "2",
+    "raft_first_layer_expansion": "20",
+    "sparse_infill_density": "20%",
+    "sparse_infill_pattern": "lightning"
+}
