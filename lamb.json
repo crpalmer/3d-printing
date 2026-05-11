@@ -76,7 +76,14 @@
             "name": "0.20mm Standard @BBL H2D @lamb",
             "sub_path": "BBL-process/0.20mm Standard @BBL H2D.json"
         },
-
+	{
+	    "name": "0.12mm High Quality @BBL X2D @lamb",
+	    "sub_path": "BBL-process/0.12mm High Quality @BBL X2D.json"
+	},
+	{
+            "name": "0.20mm Standard @BBL X2D @lamb",
+            "sub_path": "BBL-process/0.20mm Standard @BBL X2D.json"
+        },
 
 
 	{
@@ -94,6 +101,23 @@
 	{
             "name": "_0.20mm head @H2D",
             "sub_path": "process/0.20mm head @H2D.json"
+        },
+
+	{
+            "name": "_0.12mm normal @X2D",
+            "sub_path": "process/0.12mm normal @X2D.json"
+        },
+	{
+            "name": "_0.12mm head @X2D",
+            "sub_path": "process/0.12mm head @X2D.json"
+        },
+	{
+	    "name": "_0.20mm normal @X2D",
+	    "sub_path": "process/0.20mm normal @X2D.json"
+	},
+	{
+            "name": "_0.20mm head @X2D",
+            "sub_path": "process/0.20mm head @X2D.json"
         }
     ],
     "machine_list": [
