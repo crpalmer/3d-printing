@@ -80,7 +80,7 @@ def read_json(path):
     with open(path, "r") as f:
         return json.load(f)
 
-def combine_json(config1, config2):
+def combine_json(config1, config2, overwrite_name=False):
     config = { }
     for key in config1.keys():
         config[key] = config1[key]
@@ -149,7 +149,7 @@ def read_json_and_handle_lamb_includes(path, filename):
         for i in json["lamb-includes"]:
             print("    Including " + i)
             include_json = read_json_and_handle_lamb_includes(path, "include/" + i)
-            json.update(include_json)
+            json = combine_json(json, include_json, True)
         json.pop("lamb-includes", None)
     return json
 
