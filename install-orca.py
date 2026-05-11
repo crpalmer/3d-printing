@@ -2,6 +2,7 @@
 
 import json
 import os
+from pathlib import Path
 import shutil
 import subprocess
 
@@ -142,12 +143,12 @@ def process(path, subsystem, name):
             else:
                 write_config(config, subsystem)
 
-def read_json_and_handle_lamb_includes(path):
-    json = read_json(path)
+def read_json_and_handle_lamb_includes(path, filename):
+    json = read_json(path + "/" + filename)
     if "lamb-includes" in json:
         for i in json["lamb-includes"]:
             print("    Including " + i)
-            include_json = read_json_and_handle_lamb_includes("lamb/include/" + i)
+            include_json = read_json_and_handle_lamb_includes(path, "include/" + i)
             json.update(include_json)
         json.pop("lamb-includes", None)
     return json
@@ -176,7 +177,8 @@ def install_lamb():
             write_json(system_dir + "/lamb/" + sub_path, bbl)
         else:
             print("Lamb " + sub_path)
-            json = read_json_and_handle_lamb_includes("lamb/" + sub_path)
+            path = Path(sub_path)
+            json = read_json_and_handle_lamb_includes("lamb/" + str(path.parent), path.name)
             write_json(system_dir + "/lamb/" + sub_path, json)
 
 def install_all():
