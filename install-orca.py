@@ -86,7 +86,7 @@ def combine_json(config1, config2):
         config[key] = config1[key]
     for key in config2.keys():
         if key == "compatible_printers_condition" and key in config:
-            config[key] += config2[key]
+            config[key] = "(" + config[key] + ") and (" + config2[key] + ")"
         elif key == "name" and key in config:
             config["name"] += config2["name"]
         elif key == "printer_notes" and key in config:
