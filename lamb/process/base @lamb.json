@@ -121,7 +121,6 @@
     "make_overhang_printable": "0",
     "make_overhang_printable_angle": "55",
     "make_overhang_printable_hole_size": "0",
-    "max_bridge_length": "10",
     "max_travel_detour_distance": "0",
     "max_volumetric_extrusion_rate_slope": "0",
     "max_volumetric_extrusion_rate_slope_segment_length": "3",
