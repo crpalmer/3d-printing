@@ -2,7 +2,6 @@
 
 import json
 from pathlib import Path
-import shutil
 import subprocess
 
 version = "2.3.1.0"
@@ -138,7 +137,7 @@ def read_json_and_handle_lamb_includes(includes_path, filename):
 
 def install_lamb():
     system_dir = orca_path.parent.parent / "system"
-    shutil.copy('lamb.json', system_dir / 'lamb.json')
+    Path('lamb.json').copy(system_dir / 'lamb.json')
     lamb = read_json('lamb.json')
     for p in lamb["machine_model_list"] + lamb["process_list"] + lamb["machine_list"]:
         name = p["name"]
