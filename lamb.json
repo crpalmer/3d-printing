@@ -24,40 +24,40 @@
     "process_list": [
         {
             "name": "base @lamb",
-            "sub_path": "process/base @lamb.json"
+            "sub_path": "process/rrf/base @lamb.json"
         },
         {
             "name": "0.10mm normal @lamb",
-            "sub_path": "process/0.10mm normal @lamb.json"
+            "sub_path": "process/rrf/0.10mm normal @lamb.json"
         },
         {
             "name": "0.20mm normal @lamb",
-            "sub_path": "process/0.20mm normal @lamb.json"
+            "sub_path": "process/rrf/0.20mm normal @lamb.json"
         },
         {
             "name": "0.20mm normal @lamb 0.25 nozzle",
-            "sub_path": "process/0.20mm normal @lamb 0.25 nozzle.json"
+            "sub_path": "process/rrf/0.20mm normal @lamb 0.25 nozzle.json"
         },
 
         {
             "name": "0.10mm head @lamb",
-            "sub_path": "process/0.10mm head @lamb.json"
+            "sub_path": "process/rrf/0.10mm head @lamb.json"
         },
 	{
             "name": "0.20mm factory @lamb",
-            "sub_path": "process/0.20mm factory @lamb.json"
+            "sub_path": "process/rrf/0.20mm factory @lamb.json"
         },
 	{
             "name": "0.20mm fast @lamb",
-            "sub_path": "process/0.20mm fast @lamb.json"
+            "sub_path": "process/rrf/0.20mm fast @lamb.json"
         },
 	{
             "name": "0.20mm head @lamb",
-            "sub_path": "process/0.20mm head @lamb.json"
+            "sub_path": "process/rrf/0.20mm head @lamb.json"
         },
 	{
             "name": "0.20mm popper @lamb",
-            "sub_path": "process/0.20mm popper @lamb.json"
+            "sub_path": "process/rrf/0.20mm popper @lamb.json"
         },
 
 
@@ -97,53 +97,53 @@
 
 	{
             "name": " 0.12mm normal @H2D",
-            "sub_path": "process/0.12mm normal @H2D.json"
+            "sub_path": "process/H2D/0.12mm normal @H2D.json"
         },
 	{
 	    "name": " 0.20mm normal @H2D",
-	    "sub_path": "process/0.20mm normal @H2D.json"
+	    "sub_path": "process/H2D/0.20mm normal @H2D.json"
 	},
 
 	{
             "name": " 0.12mm head @H2D",
-            "sub_path": "process/0.12mm head @H2D.json"
+            "sub_path": "process/H2D/0.12mm head @H2D.json"
         },
 	{
 	    "name": " 0.20mm factory @H2D",
-	    "sub_path": "process/0.20mm factory @H2D.json"
+	    "sub_path": "process/H2D/0.20mm factory @H2D.json"
 	},
 	{
             "name": " 0.20mm head @H2D",
-            "sub_path": "process/0.20mm head @H2D.json"
+            "sub_path": "process/H2D/0.20mm head @H2D.json"
         },
 	{
             "name": " 0.20mm popper @H2D",
-            "sub_path": "process/0.20mm popper @H2D.json"
+            "sub_path": "process/H2D/0.20mm popper @H2D.json"
         },
 
 	{
             "name": " 0.12mm normal @X2D",
-            "sub_path": "process/0.12mm normal @X2D.json"
+            "sub_path": "process/X2D/0.12mm normal @X2D.json"
         },
 	{
 	    "name": " 0.20mm normal @X2D",
-	    "sub_path": "process/0.20mm normal @X2D.json"
+	    "sub_path": "process/X2D/0.20mm normal @X2D.json"
 	},
 	{
             "name": " 0.12mm head @X2D",
-            "sub_path": "process/0.12mm head @X2D.json"
+            "sub_path": "process/X2D/0.12mm head @X2D.json"
         },
 	{
 	    "name": " 0.20mm factory @X2D",
-	    "sub_path": "process/0.20mm factory @X2D.json"
+	    "sub_path": "process/X2D/0.20mm factory @X2D.json"
 	},
 	{
             "name": " 0.20mm head @X2D",
-            "sub_path": "process/0.20mm head @X2D.json"
+            "sub_path": "process/X2D/0.20mm head @X2D.json"
         },
 	{
             "name": " 0.20mm popper @X2D",
-            "sub_path": "process/0.20mm popper @X2D.json"
+            "sub_path": "process/X2D/0.20mm popper @X2D.json"
         }
     ],
     "machine_list": [

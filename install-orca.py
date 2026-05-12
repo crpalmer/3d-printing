@@ -77,7 +77,7 @@ def write_base(config, subsystem, name):
     write_json(orca_dir + "/" + subsystem + "/base/" + name + ".json", config)
 
 def read_json(path):
-    with open(path, "r") as f:
+    with open(str(path), "r") as f:
         return json.load(f)
 
 def combine_json(config1, config2, overwrite_name=False):
@@ -143,12 +143,12 @@ def process(path, subsystem, name):
             else:
                 write_config(config, subsystem)
 
-def read_json_and_handle_lamb_includes(path, filename):
-    json = read_json(path + "/" + filename)
+def read_json_and_handle_lamb_includes(includes_path, filename):
+    json = read_json(filename)
     if "lamb-includes" in json:
         for i in json["lamb-includes"]:
             print("    Including " + i)
-            include_json = read_json_and_handle_lamb_includes(path, "include/" + i)
+            include_json = read_json_and_handle_lamb_includes(includes_path, includes_path / i)
             json = combine_json(json, include_json, True)
         json.pop("lamb-includes", None)
     return json
@@ -156,7 +156,9 @@ def read_json_and_handle_lamb_includes(path, filename):
 def install_lamb():
     system_dir = orca_dir + "/../../system"
     mkdir_recursive(system_dir + "/lamb/BBL-process")
-    mkdir_recursive(system_dir + "/lamb/process")
+    mkdir_recursive(system_dir + "/lamb/process/rrf")
+    mkdir_recursive(system_dir + "/lamb/process/H2D")
+    mkdir_recursive(system_dir + "/lamb/process/X2D")
     mkdir_recursive(system_dir + "/lamb/machine")
     mkdir_recursive(system_dir + "/lamb/machine_model_list")
     shutil.copy('lamb.json', system_dir + '/lamb.json')
@@ -177,8 +179,13 @@ def install_lamb():
             write_json(system_dir + "/lamb/" + sub_path, bbl)
         else:
             print("Lamb " + sub_path)
-            path = Path(sub_path)
-            json = read_json_and_handle_lamb_includes("lamb/" + str(path.parent), path.name)
+            path = Path("lamb") / Path(sub_path)
+            while not (path / "include").exists():
+                if path == path.parent:
+                    raise Exception("Could not find includes directory for " + sub_path)
+                path = path.parent
+                print("next: " + str(path))
+            json = read_json_and_handle_lamb_includes(path / "include", Path("lamb") / sub_path)
             write_json(system_dir + "/lamb/" + sub_path, json)
 
 def install_all():
