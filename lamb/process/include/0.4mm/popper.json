@@ -1,0 +1,4 @@
+{
+    "lamb-includes": [ "common/popper.json" ],
+    "wall_loops": "4"
+}

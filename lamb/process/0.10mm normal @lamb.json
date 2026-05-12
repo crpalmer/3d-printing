@@ -1,0 +1,7 @@
+{
+    "name": "0.10mm normal @lamb",
+    "inherits": "base @lamb",
+    "instantiation": "true",
+    "lamb-includes": [ "rrf.json" ],
+    "layer_height": "0.1"
+}
