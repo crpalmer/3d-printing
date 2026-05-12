@@ -247,7 +247,7 @@
     "support_interface_pattern": "auto",
     "support_interface_spacing": "0.5",
     "support_interface_speed": "80",
-    "support_interface_top_layers": "3",
+    "support_interface_top_layers": "4",
     "support_ironing": "0",
     "support_ironing_flow": "10%",
     "support_ironing_pattern": "rectilinear",
