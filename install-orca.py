@@ -1,30 +1,18 @@
 #!/usr/bin/python3
 
 import json
-import os
 from pathlib import Path
 import shutil
 import subprocess
 
 version = "2.3.1.0"
-
-post_process_prefix = ""
-dirs = [ "/home/crpalmer/.config/OrcaSlicer/user/default",
-         "/home/crpalmer/.var/app/com.orcaslicer.OrcaSlicer/config/OrcaSlicer/user/default",
-         "/cygdrive/c/Users/crpalmer/AppData/Local/OrcaSlicer/user/default",
-         "/cygdrive/c/Users/crpalmer/AppData/Roaming/OrcaSlicer/user/default"
-        ]
-orca_dir = ""
+orca_path = Path("/home/crpalmer/.config/OrcaSlicer/user/default")
 
 def mkdir_recursive(path):
-    if path[0] == '/':
-        base = '/'
-    else:
-        base = "."
-    for path in path.split('/'):
-        base = base + "/" + path
-        if not os.path.exists(base):
-            os.mkdir(base)
+    if path != path.parent:
+        mkdir_recursive(path.parent)
+    if not path.exists():
+        path.mkdir()
 
 def get_name(config):
     for key in [ "name", "printer_settings_id" ]:
@@ -41,11 +29,7 @@ def set_name(config, name, subsystem):
     return config
 
 def write_json(dest, config):
-    if not orca_dir.startswith("/home/crpalmer") and "post_process" in config:
-        cmds = []
-        for cmd in config["post_process"]:
-            cmds.append(post_process_prefix + cmd)
-        config["post_process"] = cmds
+    mkdir_recursive(dest.parent)
     with open(dest, "w") as f:
         config["version"] = version
         json.dump(config, f, indent=4)
@@ -70,11 +54,11 @@ def write_config(config, subsystem):
                 config["compatible_printers"].append(printer)
         config["compatible_printers"].sort()
         config["compatible_printers_condition"] = ""
-    write_json(orca_dir + "/" + subsystem + "/" + name + ".json", config)
+    write_json(orca_path / subsystem / (name + ".json"), config)
 
 def write_base(config, subsystem, name):
     config = set_name(config, name, subsystem)
-    write_json(orca_dir + "/" + subsystem + "/base/" + name + ".json", config)
+    write_json(orca_path / subsystem / 'base' / (name + ".json"), config)
 
 def read_json(path):
     with open(str(path), "r") as f:
@@ -98,23 +82,22 @@ def combine_json(config1, config2, overwrite_name=False):
 def apply_chain(base, path, subsystem, chain):
     if len(chain) == 0:
         write_config(base, subsystem)
-    elif chain[0].endswith(".json"):
+    elif chain[0].endswith('.json'):
         print("        Combining: " + chain[0])
-        config = combine_json(base, read_json(path + "/" + chain[0]))
+        config = combine_json(base, read_json(path / chain[0]))
         apply_chain(config, path, subsystem, chain[1:])
     else:
-        chain_path = path + "/" + chain[0]
-        for file in os.listdir(chain_path):
-            if file != "base.json" and file != "modifiers.json" and file.endswith(".json"):
-                full = chain_path + "/" + file
-                print("        Combining: " + full)
-                config = combine_json(base, read_json(full))
+        chain_path = path / chain[0]
+        for file in chain_path.iterdir():
+            if file.name != "base.json" and file.name != "modifiers.json" and file.suffix == '.json':
+                print("        Combining: " + str(file))
+                config = combine_json(base, read_json(file))
                 apply_chain(config, path, subsystem, chain[1:])
 
 def apply_modifiers_to_dir(path, subsystem):
-    print("     Processing " + path)
-    modifiers = read_json(path + "/modifiers.json")
-    base = read_json(path + "/base.json")
+    print("     Processing " + str(path))
+    modifiers = read_json(path / "modifiers.json")
+    base = read_json(path / "base.json")
     write_base(base, subsystem, base["name"])
 
     base_config = { "inherits": base["name"] }
@@ -126,18 +109,18 @@ def apply_modifiers_to_dir(path, subsystem):
     for chain in modifiers["chains"]:
         apply_chain(base_config, path, subsystem, chain)
         
-def process(path, subsystem, name):
-    if os.path.exists(path + "/modifiers.json"):
+def process(path, subsystem):
+    m = path / 'modifiers.json'
+    if m.exists():
         apply_modifiers_to_dir(path, subsystem)
         return
 
-    for file in os.listdir(path):
-        full_file = path + "/" + file
-        if os.path.isdir(full_file):
-            process(full_file, subsystem, file)
-        elif file.endswith(".json"):
-            print("Processing: " + full_file)
-            config = read_json(full_file)
+    for file in path.iterdir():
+        if file.is_dir():
+            process(file, subsystem)
+        elif file.suffix == '.json':
+            print("Processing: " + str(file))
+            config = read_json(file)
             if file == "base.json":
                 write_base(config, subsystem, name)
             else:
@@ -154,31 +137,31 @@ def read_json_and_handle_lamb_includes(includes_path, filename):
     return json
 
 def install_lamb():
-    system_dir = orca_dir + "/../../system"
-    mkdir_recursive(system_dir + "/lamb/BBL-process")
-    mkdir_recursive(system_dir + "/lamb/process/rrf")
-    mkdir_recursive(system_dir + "/lamb/process/H2D")
-    mkdir_recursive(system_dir + "/lamb/process/X2D")
-    mkdir_recursive(system_dir + "/lamb/machine")
-    mkdir_recursive(system_dir + "/lamb/machine_model_list")
-    shutil.copy('lamb.json', system_dir + '/lamb.json')
+    system_dir = orca_path.parent.parent / "system"
+    shutil.copy('lamb.json', system_dir / 'lamb.json')
     lamb = read_json('lamb.json')
     for p in lamb["machine_model_list"] + lamb["process_list"] + lamb["machine_list"]:
         name = p["name"]
-        sub_path = p["sub_path"]
-        if "BBL-process" in sub_path:
-            bbl_sub_path = sub_path[4:]
-            print("   BBL " + bbl_sub_path + " to " + sub_path)
+        sub_path = Path(p["sub_path"])
+        mkdir_recursive(system_dir / sub_path)
+        if "BBL-process" in sub_path.parts:
+            bbl_path = system_dir / 'BBL'
+            for p in sub_path.parts:
+                if p.startswith("BBL-"):
+                    bbl_path /= p[4:]
+                else:
+                    bbl_path /= p
+            print("   BBL " + str(bbl_path) + " to " + str(sub_path))
 
-            bbl = read_json(system_dir + "/BBL/" + bbl_sub_path)
+            bbl = read_json(system_dir / bbl_path)
             bbl["name"] = name
             bbl["instantiation"] = "false"
             if "inherits" in bbl:
                 bbl["inherits"] += " @lamb"
 
-            write_json(system_dir + "/lamb/" + sub_path, bbl)
+            write_json(system_dir / 'lamb' / sub_path, bbl)
         else:
-            print("Lamb " + sub_path)
+            print("Lamb " + str(sub_path))
             path = Path("lamb") / Path(sub_path)
             while not (path / "include").exists():
                 if path == path.parent:
@@ -186,26 +169,15 @@ def install_lamb():
                 path = path.parent
                 print("next: " + str(path))
             json = read_json_and_handle_lamb_includes(path / "include", Path("lamb") / sub_path)
-            write_json(system_dir + "/lamb/" + sub_path, json)
-
-def install_all():
-    print()
-    print("**** Installing to: ", orca_dir)
-    print()
-    for subsystem in [ "filament" ]:
-        mkdir_recursive(orca_dir + "/" + subsystem + "/base")
-        process("orca/" + subsystem, subsystem, None)
-    print("")
-    install_lamb()
+            write_json(system_dir / "lamb" / sub_path, json)
 
 # --------------------------------------------------------------------------
 
-for dir in dirs:
-    if os.path.exists(dir):
-        orca_dir = dir
-        if dir.startswith("/cygdrive"):
-            post_process_prefix = "c:/cygwin64/bin/bash.exe --login"
-        else:
-            post_process_prefix = ""
-        install_all()
-
+print()
+print("**** Installing to: ", orca_path)
+print()
+for subsystem in [ "filament" ]:
+    mkdir_recursive(orca_path / subsystem / "base")
+    process(Path("orca") / subsystem, subsystem)
+print("")
+install_lamb()
