@@ -3,5 +3,5 @@
     "type": "machine",
     "instantiation": "true",
     "inherits": "idex base",
-    "lamb-includes": [ "0.25mm.json" ]
+    "lamb-includes": [ "dual-0.25mm.json" ]
 }

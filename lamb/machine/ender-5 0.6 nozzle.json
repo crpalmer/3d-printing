@@ -3,5 +3,5 @@
     "type": "machine",
     "inherits": "ender-5 base",
     "instantiation": "true",
-    "lamb-includes": [ "0.6mm.json" ]
+    "lamb-includes": [ "dual-0.6mm.json" ]
 }

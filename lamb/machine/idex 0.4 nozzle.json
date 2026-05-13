@@ -2,5 +2,5 @@
     "name": "idex 0.4 nozzle",
     "inherits": "idex base",
     "instantiation": "true",
-    "lamb-includes": [ "0.4mm.json" ]
+    "lamb-includes": [ "dual-0.4mm.json" ]
 }

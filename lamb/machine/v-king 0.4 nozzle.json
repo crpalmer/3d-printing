@@ -3,5 +3,5 @@
     "type": "machine",
     "inherits": "v-king base",
     "instantiation": "true",
-    "lamb-includes": [ "0.4mm.json" ]
+    "lamb-includes": [ "single-0.4mm.json" ]
 }

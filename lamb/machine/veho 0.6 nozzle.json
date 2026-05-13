@@ -3,5 +3,5 @@
     "type": "machine",
     "inherits": "veho base",
     "instantiation": "true",
-    "lamb-includes": [ "0.6mm.json" ]
+    "lamb-includes": [ "single-0.6mm.json" ]
 }
