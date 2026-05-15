@@ -1,0 +1,6 @@
+{
+    "name": "0.20mm fast popper @lamb",
+    "inherits": "0.20mm normal @lamb",
+    "instantiation": "true",
+    "lamb-includes": [ "0.6mm/popper.json", "rrf-fast.json" ]
+}

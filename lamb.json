@@ -48,16 +48,25 @@
             "sub_path": "process/rrf/0.20mm factory @lamb.json"
         },
 	{
-            "name": "0.20mm fast @lamb",
-            "sub_path": "process/rrf/0.20mm fast @lamb.json"
-        },
-	{
             "name": "0.20mm head @lamb",
             "sub_path": "process/rrf/0.20mm head @lamb.json"
         },
 	{
             "name": "0.20mm popper @lamb",
             "sub_path": "process/rrf/0.20mm popper @lamb.json"
+        },
+
+	{
+            "name": "0.20mm fast @lamb",
+            "sub_path": "process/rrf/0.20mm fast @lamb.json"
+        },
+	{
+            "name": "0.20mm fast head @lamb",
+            "sub_path": "process/rrf/0.20mm fast head @lamb.json"
+        },
+	{
+            "name": "0.20mm fast popper @lamb",
+            "sub_path": "process/rrf/0.20mm fast popper @lamb.json"
         },
 
 

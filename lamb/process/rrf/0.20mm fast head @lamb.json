@@ -1,0 +1,6 @@
+{
+    "name": "0.20mm fast head @lamb",
+    "inherits": "0.20mm normal @lamb",
+    "instantiation": "true",
+    "lamb-includes": [ "0.6mm/head.json", "rrf-fast.json" ]
+}
