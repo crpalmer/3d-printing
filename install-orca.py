@@ -166,7 +166,6 @@ def install_lamb():
                 if path == path.parent:
                     raise Exception("Could not find includes directory for " + sub_path)
                 path = path.parent
-                print("next: " + str(path))
             json = read_json_and_handle_lamb_includes(path / "include", Path("lamb") / sub_path)
             write_json(system_dir / "lamb" / sub_path, json)
 
