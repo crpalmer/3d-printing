@@ -1,4 +1,4 @@
 {
-    "lamb-includes": [ "common/popper.json" ],
+    "lamb-includes": [ "0.6mm/head.json", "common/popper.json" ],
     "wall_loops": "3"
 }
