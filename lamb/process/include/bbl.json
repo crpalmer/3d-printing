@@ -8,7 +8,7 @@
     "flush_into_support": "0",
     "internal_bridge_flow": "1",
     "prime_tower_width": "5",
-    "prime_volume": "3",
+    "prime_volume": "8",
     "reduce_infill_retraction": "0",
     "seam_position": "aligned_back",
     "sparse_infill_pattern": "crosshatch",

@@ -3,7 +3,6 @@
 		"1"
 	],
 	"compatible_printers": [
-		"veho 0.6 nozzle"
 	],
 	"fan_max_speed": [
 		"50"
