@@ -3,9 +3,12 @@
 import json
 from pathlib import Path
 import subprocess
+import shutil
 
 version = "2.3.1.0"
-orca_path = Path("/home/crpalmer/.config/OrcaSlicer/user/default")
+orca_path = Path("/cygdrive/c//users/crpalmer/AppData/Roaming/OrcaSlicer/user/default")
+if not orca_path.exists():
+    orca_path = Path("/home/crpalmer/.config/OrcaSlicer/user/default")
 
 def mkdir_recursive(path):
     if path != path.parent:
@@ -137,7 +140,7 @@ def read_json_and_handle_lamb_includes(includes_path, filename):
 
 def install_lamb():
     system_dir = orca_path.parent.parent / "system"
-    Path('lamb.json').copy(system_dir / 'lamb.json')
+    shutil.copy('lamb.json', system_dir / 'lamb.json')
     lamb = read_json('lamb.json')
     for p in lamb["machine_model_list"] + lamb["process_list"] + lamb["machine_list"]:
         name = p["name"]
@@ -152,7 +155,7 @@ def install_lamb():
                     bbl_path /= p
             print("   BBL " + str(bbl_path) + " to " + str(sub_path))
 
-            bbl = read_json(system_dir / bbl_path)
+            bbl = read_json(bbl_path)
             bbl["name"] = name
             bbl["instantiation"] = "false"
             if "inherits" in bbl:
