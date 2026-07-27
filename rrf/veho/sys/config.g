@@ -19,9 +19,9 @@ M569 P0.3 S0                                              ; D3                  
 M569 P0.4 S1                                              ; D3                                        ; z4 (back right)
 M569 P0.5 S1                                              ; D3                                        ; y1 (left)
 M569 P0.6 S1                                              ; D3                                        ; y2 (right)
-M569 P121.0 S1                                            ; D3                                      ; e
+M569 P60.0 S0                                             ; D3                                        ; e
 
-M584 X0.0 Y0.6:0.5 Z0.1:0.2:0.4:0.3 E121.0                ; set drive mapping
+M584 X0.0 Y0.6:0.5 Z0.1:0.2:0.4:0.3 E60.0                ; set drive mapping
 
 ; Z leadscrew positions
 M671 X50:50:550:550 Y0:600:600:0 S5
@@ -40,29 +40,24 @@ M208 X0 Y0 Z0 S1                                          ; set axis minima
 M208 X625 Y600 Z650 S0                                    ; set axis maxima
 
 ; Endstops
-M574 X2 S1 P"!121.io2.in"                                 ; configure active-high endstop for low end on X
+M574 X2 S1 P"!60.io0.in"                                  ; configure active-high endstop for low end on X
 M574 Y2 S1 P"^0.io5.in+^0.io6.in"                         ; configure active-low endstop for high end on Y
 
 ; Z-Probe
-M558 P8 C"^!121.io1.in" A7 S0.01 R1 H5 F400 T24000 B1
+M558 P8 C"^!60.io1.in" A7 S0.01 R1.5 H5 F400 T24000 B0
 G31 X0 Y0 Z0 P100
 ;M557 X100:500 Y100:500 P9                              ; define mesh grid for 500x500 bed
 M557 X25:575 Y25:575 P19                                  ; define mesh grid for 600x600 bed
 M376 H3
 
 ; Filament sensor (BTT SFS 2.0)
-M591 D0 P7 C"121.io0.in" L3 R75:125 E9 S1
+;M591 D0 P7 C"121.io0.in" L3 R50:150 E22 S1
 ;M591 D0 P7 C"io4.in" P1 S1
 
-; Accelerometer (toolboard), input shaping and pressure advance
-M955 P121.0 I10                                           ; Z+ -> Y+ and X+ -> X+
-M593 P"zvd" F45 S0.1
-M572 D0 S0.05
-
 ; Fans (tool 0)
-M950 F0 C"121.out1" Q250                                  ; create fan and set its frequency
+M950 F0 C"60.out3" Q250                                   ; create fan and set its frequency
 M106 P0 S0 H-1 C"part"                                    ; set fan value (off). Thermostatic control is turned off
-M950 F1 C"121.out2" Q500                                  ; create fan and set its frequency
+M950 F1 C"60.out4" Q500                                   ; create fan and set its frequency
 M106 P1 S1 T45 H1 C"hotend"                               ; set fan value (on). Thermostatic control is turned on
 
 ; Fans (board cooling)
@@ -81,8 +76,8 @@ M140 H0                                                   ; map heated bed to he
 M143 H0 S120                                              ; set temperature limit for heater 0 to 120C
 
 ; thermistor (e3d)
-M308 S1 P"121.temp0" Y"thermistor" T100000 B4725 C7.06e-8 ; configure sensor
-M950 H1 C"121.out0" T1                                    ; create nozzle heater output and map it to sensor 1
+M308 S1 P"60.temp0" Y"thermistor" T100000 B4725 C7.06e-8 ; configure sensor
+M950 H1 C"60.out1" T1                                    ; create nozzle heater output and map it to sensor 1
 
 ; revo 40w
 M307 H1 R4.042 K0.586:0.400 D2.02 E1.35 S1.00 B0 V23.8    ; ender-5 tuned (3.6.0) at 220, 5mm off the bed with part cooling fan
