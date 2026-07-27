@@ -24,6 +24,8 @@ if !exists(global.in_filament_error)
   ; Configuration of print startup
   global use_mesh_compensation = false
   global use_true_bed_leveling = true
+  global pressure_advance_default = 0.00
+  global pressure_advance_petg = global.pressure_advance_default
   
   ; Skew Compensation (no skew by default)
   global skew_AC = 141.42

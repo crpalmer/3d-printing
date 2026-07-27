@@ -11,6 +11,8 @@ set global.probe_at_temperature_delta = 70
 
 set global.use_mesh_compensation = true
 set global.use_true_bed_leveling = true
+set global.pressure_advance_default = 0.025
+set global.pressure_advance_petg = 0.045
 
 set global.skew_AC = 141.65
 set global.skew_BD = 141.4

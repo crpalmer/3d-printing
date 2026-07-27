@@ -5,6 +5,8 @@
 var t1_temp = 0
 var t2_temp = 0
 var bed_temp = 0
+var t1_pa = global.pressure_advance_default
+var t2_pa = global.pressure_advance_default
 
 if exists(tools[1])
   if ! exists(param.H) || ! exists(param.I) || ! exists(param.B) || ! exists(param.C)
@@ -22,6 +24,15 @@ else
 
 if var.t1_temp <= 0 && var.t2_temp <= 0
    M98 P"/sys/mqtt-message.g" S"No hotend has a temperature to print at" F1
+
+if exists(param.T)
+  if param.T == "PETG"
+    set var.t1_pa = global.pressure_advance_petg
+
+if exists(param.U)
+  if param.U == "PETG"
+    set var.t2_pa = global.pressure_advance_petg
+
 
 ;
 ; Determine any required temperatures for probing
@@ -112,15 +123,20 @@ if exists(sensors.filamentMonitors[0])
   M591 D0 S1
 if exists(sensors.filamentMonitors[1])
   M591 D1 S1
+
 ;
 ; Park the toolhead and then wait for all temperatures to be reached.
 ; Note: we don't wait for unused hotends to cool down, we only wait for
 ; temperatures on hotends that are being used.
 ;
+; Also set the pressure advance here instead of duplicating the checks
+; for which hotends are available and being used
 
 M98 P"/sys/park-hotends.g"
 M116 H0
 if var.t1_temp > 0
+  M572 D0 S{var.t1_pa}
   M116 P0
 if exists(tools[1]) && var.t2_temp > 0
+  M572 D1 S{var.t2_pa}
   M116 P1
