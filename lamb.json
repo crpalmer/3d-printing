@@ -292,6 +292,10 @@
 	    "sub_path": "filament/rrf/pc-max.json"
 	},
 	{
+	    "name": "PETG @lamb",
+	    "sub_path": "filament/rrf/petg.json"
+	},
+	{
 	    "name": "PLA @lamb",
 	    "sub_path": "filament/pla.json"
 	},
