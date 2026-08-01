@@ -1,8 +1,8 @@
 {
-    "name": "pc max",
+    "name": "pc-max @lamb",
+    "lamb-includes": [ "rrf.json" ],
     "inherits": "Generic PC @System",
-    "compatible_printers_condition": "@!0.25mm@",
-    "filament_vendor": "Polymaker",
+    "filament_id": "LMB999",
     "fan_cooling_layer_time": "10",
     "fan_min_speed": "0",
     "fan_max_speed": "25",

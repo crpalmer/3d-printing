@@ -1,6 +1,6 @@
 {
     "name": "lamb",
-    "version": "01.00.00.00",
+    "version": "01.00.00.01",
     "force_update": "0",
     "description": "Lam-B's printers",
     "machine_model_list": [
@@ -288,8 +288,12 @@
     ],
     "filament_list": [
 	{
-	    "name": "test @lamb",
-	    "sub_path": "filament/test.json"
+	    "name": "pc-max @lamb",
+	    "sub_path": "filament/rrf/pc-max.json"
+	},
+	{
+	    "name": "pla @lamb",
+	    "sub_path": "filament/rrf/pla.json"
 	}
     ]
 }

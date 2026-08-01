@@ -1,5 +1,0 @@
-{
-    "name": " (hf)",
-    "compatible_printers_condition": "@HF@\n",
-    "filament_max_volumetric_speed": "25"
-}

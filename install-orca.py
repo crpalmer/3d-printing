@@ -39,30 +39,6 @@ def write_json(dest, config):
 
 printer_notes = {}
 
-def write_config(config, subsystem):
-    name = get_name(config)
-    config = set_name(config, name, subsystem)
-    if "printer_notes" in config:
-        printer_notes[name] = config["printer_notes"]
-    if "compatible_printers" not in config and "compatible_printers_condition" in config:
-        config["compatible_printers"] = []
-        for printer in printer_notes.keys():
-            satisfied = True
-            notes = printer_notes[printer]
-            for condition in config["compatible_printers_condition"].split("\n"):
-                if condition not in notes:
-                    satisfied = False
-                    break
-            if satisfied:
-                config["compatible_printers"].append(printer)
-        config["compatible_printers"].sort()
-        config["compatible_printers_condition"] = ""
-    write_json(orca_path / subsystem / (name + ".json"), config)
-
-def write_base(config, subsystem, name):
-    config = set_name(config, name, subsystem)
-    write_json(orca_path / subsystem / 'base' / (name + ".json"), config)
-
 def read_json(path):
     with open(str(path), "r") as f:
         return json.load(f)
@@ -81,53 +57,6 @@ def combine_json(config1, config2, overwrite_name=False):
         else:
             config[key] = config2[key]
     return config
-
-def apply_chain(base, path, subsystem, chain):
-    if len(chain) == 0:
-        write_config(base, subsystem)
-    elif chain[0].endswith('.json'):
-        print("        Combining: " + chain[0])
-        config = combine_json(base, read_json(path / chain[0]))
-        apply_chain(config, path, subsystem, chain[1:])
-    else:
-        chain_path = path / chain[0]
-        for file in chain_path.iterdir():
-            if file.name != "base.json" and file.name != "modifiers.json" and file.suffix == '.json':
-                print("        Combining: " + str(file))
-                config = combine_json(base, read_json(file))
-                apply_chain(config, path, subsystem, chain[1:])
-
-def apply_modifiers_to_dir(path, subsystem):
-    print("     Processing " + str(path))
-    modifiers = read_json(path / "modifiers.json")
-    base = read_json(path / "base.json")
-    write_base(base, subsystem, base["name"])
-
-    base_config = { "inherits": base["name"] }
-    if "printer_notes" in base:
-        base_config["printer_notes"] = base["printer_notes"]
-    if "compatible_printers_condition" in base:
-        base_config["compatible_printers_condition"] = base["compatible_printers_condition"]
-
-    for chain in modifiers["chains"]:
-        apply_chain(base_config, path, subsystem, chain)
-        
-def process(path, subsystem):
-    m = path / 'modifiers.json'
-    if m.exists():
-        apply_modifiers_to_dir(path, subsystem)
-        return
-
-    for file in path.iterdir():
-        if file.is_dir():
-            process(file, subsystem)
-        elif file.suffix == '.json':
-            print("Processing: " + str(file))
-            config = read_json(file)
-            if file == "base.json":
-                write_base(config, subsystem, name)
-            else:
-                write_config(config, subsystem)
 
 def read_json_and_handle_lamb_includes(includes_path, filename):
     json = read_json(filename)
@@ -177,14 +106,28 @@ def install_lamb():
                     path = path.parent
                 json = read_json_and_handle_lamb_includes(path / "include", Path("lamb") / sub_path)
                 write_json(system_dir / "lamb" / sub_path, json)
+                if "type" in json and json["type"] == "filament":
+                    print("    Adding custom filament " + json["name"])
+                    new_filaments.append(json["name"])
 
 # --------------------------------------------------------------------------
 
 print()
 print("**** Installing to: ", orca_path)
 print()
-for subsystem in [ "filament" ]:
-    mkdir_recursive(orca_path / subsystem / "base")
-    process(Path("orca") / subsystem, subsystem)
-print("")
+
+orcaslicer_conf = orca_root / "OrcaSlicer.conf"
+print("Removing our filaments from " + str(orcaslicer_conf))
+config = read_json(orcaslicer_conf)
+filaments = config["filaments"]
+new_filaments = []
+for filament in filaments:
+    if "@lamb" not in filament:
+        new_filaments.append(filament)
+    else:
+        print("    Removing " + filament)
+
 install_lamb()
+
+config["filaments"] = new_filaments
+write_json(orcaslicer_conf, config)
