@@ -1,0 +1,8 @@
+{
+    "name": " 0.08mm miniature @X2D",
+    "inherits": "0.08mm High Quality @BBL X2D 0.2 nozzle @lamb",
+    "lamb-includes": [ "bbl.json", "0.2mm/miniature.json" ],
+    "compatible_printers": [
+        "Bambu Lab X2D 0.2 nozzle"
+    ]
+}

@@ -79,6 +79,10 @@
 	    "sub_path": "BBL-process/fdm_process_dual_common.json"
 	},
 	{
+	    "name": "fdm_process_dual_0.08_nozzle_0.2 @lamb",
+	    "sub_path": "BBL-process/fdm_process_dual_0.08_nozzle_0.2.json"
+	},
+	{
 	    "name": "fdm_process_dual_0.12_nozzle_0.4 @lamb",
 	    "sub_path": "BBL-process/fdm_process_dual_0.12_nozzle_0.4.json"
 	},
@@ -95,8 +99,12 @@
             "sub_path": "BBL-process/0.20mm Standard @BBL H2D.json"
         },
 	{
-	    "name": "0.12mm High Quality @BBL X2D @lamb",
-	    "sub_path": "BBL-process/0.12mm High Quality @BBL X2D.json"
+	    "name": "0.08mm High Quality @BBL X2D 0.2 nozzle @lamb",
+	    "sub_path": "BBL-process/0.08mm High Quality @BBL X2D 0.2 nozzle.json"
+	},
+	{
+            "name": "0.12mm High Quality @BBL X2D @lamb",
+            "sub_path": "BBL-process/0.12mm High Quality @BBL X2D.json"
 	},
 	{
             "name": "0.20mm Standard @BBL X2D @lamb",
@@ -130,6 +138,10 @@
             "sub_path": "process/H2D/0.20mm popper @H2D.json"
         },
 
+	{
+            "name": " 0.08mm miniature @X2D",
+            "sub_path": "process/X2D/0.08mm miniature @X2D.json"
+        },
 	{
             "name": " 0.12mm normal @X2D",
             "sub_path": "process/X2D/0.12mm normal @X2D.json"
