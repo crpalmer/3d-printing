@@ -1,0 +1,7 @@
+{
+    "name": "CMYK Pearl White (Snapspeed) @lamb",
+    "lamb-includes": [ "not-rrf.json", "pla.json" ],
+    "filament_vendor": "Snapmaker",
+    "filament_id": "LMB_103",
+    "default_filament_colour": "#E2DEDB"
+}

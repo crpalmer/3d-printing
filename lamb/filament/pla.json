@@ -1,0 +1,6 @@
+{
+    "name": "PLA @lamb",
+    "lamb-includes": [ "not-rrf.json", "pla.json" ],
+    "filament_id": "LMB_001",
+    "filament_vendor": "Lamb"
+}

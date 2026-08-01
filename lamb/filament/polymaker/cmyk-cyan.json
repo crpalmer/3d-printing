@@ -1,0 +1,7 @@
+{
+    "name": "CMYK Cyan (Panchroma) @lamb",
+    "lamb-includes": [ "not-rrf.json" ],
+    "inherits": "Panchroma PLA Translucent @System",
+    "filament_id": "LMB_100",
+    "default_filament_colour": "#08ABFB"
+}

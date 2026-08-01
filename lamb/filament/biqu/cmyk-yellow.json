@@ -1,0 +1,7 @@
+{
+    "name": "CMYK Yellow (Biqu) @lamb",
+    "lamb-includes": [ "not-rrf.json", "pla.json" ],
+    "filament_vendor": "Biqu",
+    "filament_id": "LMB_106",
+    "default_filament_colour": "#FFF200"
+}

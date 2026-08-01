@@ -293,6 +293,38 @@
 	},
 	{
 	    "name": "PLA @lamb",
+	    "sub_path": "filament/pla.json"
+	},
+	{
+	    "name": "CMYK Cyan (Panchroma) @lamb",
+	    "sub_path": "filament/polymaker/cmyk-cyan.json"
+	},
+	{
+	    "name": "CMYK Magenta (Panchroma) @lamb",
+	    "sub_path": "filament/polymaker/cmyk-magenta.json"
+	},
+	{
+	    "name": "CMYK Yellow (Panchroma) @lamb",
+	    "sub_path": "filament/polymaker/cmyk-yellow.json"
+	},
+	{
+	    "name": "CMYK Pearl White (Snapspeed) @lamb",
+	    "sub_path": "filament/snapspeed-pearl-white.json"
+	},
+	{
+	    "name": "CMYK Cyan (Biqu) @lamb",
+	    "sub_path": "filament/biqu/cmyk-cyan.json"
+	},
+	{
+	    "name": "CMYK Magenta (Biqu) @lamb",
+	    "sub_path": "filament/biqu/cmyk-magenta.json"
+	},
+	{
+	    "name": "CMYK Yellow (Biqu) @lamb",
+	    "sub_path": "filament/biqu/cmyk-yellow.json"
+	},
+	{
+	    "name": "PLA (RRF) @lamb",
 	    "sub_path": "filament/rrf/pla.json"
 	}
     ]
