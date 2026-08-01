@@ -4,6 +4,7 @@
     "inherits": "0.08 High Quality @Snapmaker U1 (0.4 nozzle) @lamb",
     "instantiation": "true",
     "lamb-includes": [ "u1.json", "0.4mm/miniature.json" ],
+    "prime_tower_width": "20",
     "compatible-printers": [
 	"Snapmaker U1 (0.4 nozzle)"
     ]

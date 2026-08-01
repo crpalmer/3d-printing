@@ -6,7 +6,7 @@ import subprocess
 import shutil
 
 version = "2.3.1.0"
-orca_root = Path("/cygdrive/c/users/crpalmer/AppDataRoaming/OrcaSlicer")
+orca_root = Path("/cygdrive/c/Users/crpalmer/AppData/Roaming/OrcaSlicer")
 if not orca_root.exists():
     orca_root = Path("/home/crpalmer/.config/OrcaSlicer/")
 system_dir = orca_root / "system"
