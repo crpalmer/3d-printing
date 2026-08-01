@@ -10,6 +10,7 @@
     "seam_position": "aligned_back",
     "sparse_infill_pattern": "crosshatch",
     "support_interface_top_layers": "4",
+    "support_type": "tree(auto)",
     "thick_internal_bridges": "0",
     "top_shell_thickness": "1",
     "wipe_tower_rib_width": "2",

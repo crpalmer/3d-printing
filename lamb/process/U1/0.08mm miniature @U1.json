@@ -1,0 +1,10 @@
+
+{
+    "name": " 0.08mm miniature @U1",
+    "inherits": "0.08 High Quality @Snapmaker U1 (0.4 nozzle) @lamb",
+    "instantiation": "true",
+    "lamb-includes": [ "u1.json", "0.4mm/miniature.json" ],
+    "compatible-printers": [
+	"Snapmaker U1 (0.4 nozzle)"
+    ]
+}
