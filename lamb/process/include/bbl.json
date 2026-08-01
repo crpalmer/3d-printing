@@ -1,5 +1,6 @@
 {
     "instantiation": "true",
+    "vendor": "lamb",
     "bridge_flow": "1",
     "brim_type": "no_brim",
     "bottom_shell_thickness": "1",

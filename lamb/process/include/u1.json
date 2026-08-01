@@ -1,5 +1,6 @@
 {
     "instantiation": "true",
+    "vendor": "lamb",
     "brim_type": "no_brim",
     "bottom_shell_thickness": "1",
     "ensure_vertical_shell_thickness": "ensure_moderate",

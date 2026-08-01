@@ -1,3 +1,4 @@
 {
-    "compatible_printers_condition": "gcode_flavor == \"reprapfirmware\""
+    "compatible_printers_condition": "gcode_flavor == \"reprapfirmware\"",
+    "vendor": "lamb"
 }

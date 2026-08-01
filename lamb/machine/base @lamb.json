@@ -2,6 +2,7 @@
     "type": "machine",
     "name": "base @lamb",
     "instantiation": "false",
+    "vendor": "lamb",
     "scan_first_layer": "0",
     "nozzle_type": "hardened_steel",
     "gcode_flavor": "reprapfirmware",
