@@ -6,10 +6,10 @@ import subprocess
 import shutil
 
 version = "2.3.1.0"
-orca_path = Path("/cygdrive/c//users/crpalmer/AppData/Roaming/OrcaSlicer/user/default")
-if not orca_path.exists():
-    orca_path = Path("/home/crpalmer/.config/OrcaSlicer/user/default")
-system_dir = orca_path.parent.parent / "system"
+orca_root = Path("/cygdrive/c/users/crpalmer/AppDataRoaming/OrcaSlicer")
+if not orca_root.exists():
+    orca_root = Path("/home/crpalmer/.config/OrcaSlicer/")
+system_dir = orca_root / "system"
 
 def mkdir_recursive(path):
     if path != path.parent:
@@ -113,7 +113,7 @@ def install_lamb():
 # --------------------------------------------------------------------------
 
 print()
-print("**** Installing to: ", orca_path)
+print("**** Installing to: ", orca_root)
 print()
 
 orcaslicer_conf = orca_root / "OrcaSlicer.conf"
