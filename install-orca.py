@@ -159,7 +159,7 @@ def handle_system_preset(name, sub_path, prefix, vendor_dir):
 def install_lamb():
     shutil.copy('lamb.json', system_dir / 'lamb.json')
     lamb = read_json('lamb.json')
-    for p in lamb["machine_model_list"] + lamb["process_list"] + lamb["machine_list"]:
+    for p in lamb["machine_model_list"] + lamb["process_list"] + lamb["machine_list"] + lamb["filament_list"]:
         if "name" in p:
             name = p["name"]
             sub_path = Path(p["sub_path"])
@@ -173,7 +173,7 @@ def install_lamb():
                 path = Path("lamb") / Path(sub_path)
                 while not (path / "include").exists():
                     if path == path.parent:
-                        raise Exception("Could not find includes directory for " + sub_path)
+                        raise Exception("Could not find includes directory for " + str(sub_path))
                     path = path.parent
                 json = read_json_and_handle_lamb_includes(path / "include", Path("lamb") / sub_path)
                 write_json(system_dir / "lamb" / sub_path, json)

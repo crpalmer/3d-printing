@@ -285,5 +285,11 @@
             "name": "veho 1.4 nozzle",
             "sub_path": "machine/veho 1.4 nozzle.json"
         }
+    ],
+    "filament_list": [
+	{
+	    "name": "test @lamb",
+	    "sub_path": "filament/test.json"
+	}
     ]
 }

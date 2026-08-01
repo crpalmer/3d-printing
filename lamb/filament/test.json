@@ -1,0 +1,6 @@
+{
+	"name": "test @lamb",
+	"inherits": "fdm_filament_pla",
+	"lamb-includes": [ "base.json" ],
+	"filament_id": "LMB001"
+}
