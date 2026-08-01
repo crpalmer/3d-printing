@@ -9,6 +9,7 @@ version = "2.3.1.0"
 orca_path = Path("/cygdrive/c//users/crpalmer/AppData/Roaming/OrcaSlicer/user/default")
 if not orca_path.exists():
     orca_path = Path("/home/crpalmer/.config/OrcaSlicer/user/default")
+system_dir = orca_path.parent.parent / "system"
 
 def mkdir_recursive(path):
     if path != path.parent:
@@ -138,39 +139,44 @@ def read_json_and_handle_lamb_includes(includes_path, filename):
         json.pop("lamb-includes", None)
     return json
 
+def handle_system_preset(name, sub_path, prefix, vendor_dir):
+    src_path = system_dir /vendor_dir 
+    for p in sub_path.parts:
+        if p.startswith(prefix):
+            src_path /= p[len(prefix):]
+        else:
+            src_path /= p
+    print("   " + vendor_dir + " " + str(src_path) + " to " + str(sub_path))
+
+    json = read_json(src_path)
+    json["name"] = name
+    json["instantiation"] = "false"
+    if "inherits" in json:
+        json["inherits"] += " @lamb"
+
+    write_json(system_dir / 'lamb' / sub_path, json)
+
 def install_lamb():
-    system_dir = orca_path.parent.parent / "system"
     shutil.copy('lamb.json', system_dir / 'lamb.json')
     lamb = read_json('lamb.json')
     for p in lamb["machine_model_list"] + lamb["process_list"] + lamb["machine_list"]:
-        name = p["name"]
-        sub_path = Path(p["sub_path"])
-        mkdir_recursive(system_dir / sub_path)
-        if "BBL-process" in sub_path.parts:
-            bbl_path = system_dir / 'BBL'
-            for p in sub_path.parts:
-                if p.startswith("BBL-"):
-                    bbl_path /= p[4:]
-                else:
-                    bbl_path /= p
-            print("   BBL " + str(bbl_path) + " to " + str(sub_path))
-
-            bbl = read_json(bbl_path)
-            bbl["name"] = name
-            bbl["instantiation"] = "false"
-            if "inherits" in bbl:
-                bbl["inherits"] += " @lamb"
-
-            write_json(system_dir / 'lamb' / sub_path, bbl)
-        else:
-            print("Lamb " + str(sub_path))
-            path = Path("lamb") / Path(sub_path)
-            while not (path / "include").exists():
-                if path == path.parent:
-                    raise Exception("Could not find includes directory for " + sub_path)
-                path = path.parent
-            json = read_json_and_handle_lamb_includes(path / "include", Path("lamb") / sub_path)
-            write_json(system_dir / "lamb" / sub_path, json)
+        if "name" in p:
+            name = p["name"]
+            sub_path = Path(p["sub_path"])
+            mkdir_recursive(system_dir / sub_path)
+            if "BBL-process" in sub_path.parts:
+                handle_system_preset(name, sub_path, 'BBL-', 'BBL')
+            elif 'U1-process' in sub_path.parts:
+                handle_system_preset(name, sub_path, 'U1-', 'Snapmaker')
+            else:
+                print("Lamb " + str(sub_path))
+                path = Path("lamb") / Path(sub_path)
+                while not (path / "include").exists():
+                    if path == path.parent:
+                        raise Exception("Could not find includes directory for " + sub_path)
+                    path = path.parent
+                json = read_json_and_handle_lamb_includes(path / "include", Path("lamb") / sub_path)
+                write_json(system_dir / "lamb" / sub_path, json)
 
 # --------------------------------------------------------------------------
 

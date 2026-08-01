@@ -1,0 +1,8 @@
+{
+    "name": " 0.20mm normal @U1",
+    "inherits": "0.20 Standard @Snapmaker U1 (0.4 nozzle) @lamb",
+    "lamb-includes": [ "u1.json" ],
+    "compatible-printers": [
+	"Snapmaker U1 (0.4 nozzle)"
+    ]
+}

@@ -22,6 +22,7 @@
         }
     ],
     "process_list": [
+	{ "comment": "-------------------------------- rrf profiles -----------------------" },
         {
             "name": "base @lamb",
             "sub_path": "process/rrf/base @lamb.json"
@@ -38,18 +39,17 @@
             "name": "0.20mm normal @lamb 0.25 nozzle",
             "sub_path": "process/rrf/0.20mm normal @lamb 0.25 nozzle.json"
         },
-
         {
             "name": "0.10mm head @lamb",
             "sub_path": "process/rrf/0.10mm head @lamb.json"
         },
 	{
-            "name": "0.20mm factory @lamb",
-            "sub_path": "process/rrf/0.20mm factory @lamb.json"
-        },
-	{
             "name": "0.20mm head @lamb",
             "sub_path": "process/rrf/0.20mm head @lamb.json"
+        },
+	{
+            "name": "0.20mm factory @lamb",
+            "sub_path": "process/rrf/0.20mm factory @lamb.json"
         },
 	{
             "name": "0.20mm popper @lamb",
@@ -69,6 +69,7 @@
             "sub_path": "process/rrf/0.20mm fast popper @lamb.json"
         },
 
+	{ "comment": "----------------------------- BBL dependencies -------------------------------" },
 
 	{
 	    "name": "fdm_process_common @lamb",
@@ -87,12 +88,15 @@
 	    "sub_path": "BBL-process/fdm_process_dual_0.12_nozzle_0.4.json"
 	},
 	{
-	    "name": "0.12mm Fine @BBL H2D @lamb",
-	    "sub_path": "BBL-process/0.12mm Fine @BBL H2D.json"
-	},
-	{
 	    "name": "fdm_process_dual_0.20_nozzle_0.4 @lamb",
 	    "sub_path": "BBL-process/fdm_process_dual_0.20_nozzle_0.4.json"
+	},
+
+	{ "comment": "----------------------------- H2D dependencies -------------------------------" },
+
+	{
+	    "name": "0.12mm Fine @BBL H2D @lamb",
+	    "sub_path": "BBL-process/0.12mm Fine @BBL H2D.json"
 	},
 	{
             "name": "0.20mm Standard @BBL H2D @lamb",
@@ -102,6 +106,9 @@
 	    "name": "0.08mm High Quality @BBL X2D 0.2 nozzle @lamb",
 	    "sub_path": "BBL-process/0.08mm High Quality @BBL X2D 0.2 nozzle.json"
 	},
+
+	{ "comment": "----------------------------- X2D dependencies -------------------------------" },
+
 	{
             "name": "0.12mm High Quality @BBL X2D @lamb",
             "sub_path": "BBL-process/0.12mm High Quality @BBL X2D.json"
@@ -121,6 +128,8 @@
 	    "sub_path": "process/H2D/0.20mm normal @H2D.json"
 	},
 
+	{ "comment": "----------------------------- H2D profiles  -------------------------------" },
+
 	{
             "name": " 0.12mm head @H2D",
             "sub_path": "process/H2D/0.12mm head @H2D.json"
@@ -137,6 +146,8 @@
             "name": " 0.20mm popper @H2D",
             "sub_path": "process/H2D/0.20mm popper @H2D.json"
         },
+
+	{ "comment": "----------------------------- X2D profiles  -------------------------------" },
 
 	{
             "name": " 0.08mm miniature @X2D",
@@ -165,6 +176,32 @@
 	{
             "name": " 0.20mm popper @X2D",
             "sub_path": "process/X2D/0.20mm popper @X2D.json"
+        },
+
+	{ "comment": "----------------------------- U1 dependencies -------------------------------" },
+
+	{
+	    "name": "fdm_process_U1 @lamb",
+	    "sub_path": "U1-process/fdm_process_U1.json"
+	},
+	{
+	    "name": "fdm_process_U1_common @lamb",
+	    "sub_path": "U1-process/fdm_process_U1_common.json"
+	},
+	{
+	    "name": "fdm_process_U1_0.20 @lamb",
+	    "sub_path": "U1-process/fdm_process_U1_0.20.json"
+	},
+	{
+	    "name": "0.20 Standard @Snapmaker U1 (0.4 nozzle) @lamb",
+	    "sub_path": "U1-process/0.20 Standard @Snapmaker U1 (0.4 nozzle).json"
+	},
+
+	{ "comment": "----------------------------- U1 profiles  -------------------------------" },
+
+	{
+            "name": " 0.20mm normal @U1",
+            "sub_path": "process/U1/0.20mm normal @U1.json"
         }
     ],
     "machine_list": [
