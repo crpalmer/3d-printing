@@ -1,8 +1,9 @@
 {
-    "name": "pc-max @lamb",
+    "name": "PC Max @lamb",
+    "filament_vendor": "Polymaker",
     "lamb-includes": [ "rrf.json" ],
     "inherits": "Generic PC @System",
-    "filament_id": "LMB999",
+    "filament_id": "LMB_RRF_002",
     "fan_cooling_layer_time": "10",
     "fan_min_speed": "0",
     "fan_max_speed": "25",

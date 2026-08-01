@@ -1,5 +1,4 @@
 {
     "type": "filament",
-    "instantiation": "true",
-    "filament_vendor": "lamb"
+    "instantiation": "true"
 }
