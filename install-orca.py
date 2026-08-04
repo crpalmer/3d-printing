@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 import subprocess
 import shutil
+import sys
 
 version = "2.3.1.0"
 
@@ -97,6 +98,7 @@ def should_filter(json, filtered):
 
 def install_lamb():
     global new_filaments
+
     lamb = read_json('lamb.json')
     filtered = []
     new_lamb = {}
@@ -114,9 +116,9 @@ def install_lamb():
                     mkdir_recursive(system_dir / sub_path)
                     if "BBL-process" in sub_path.parts:
                         if has_BBL:
-                            filter = True
-                        else:
                             handle_system_preset(name, sub_path, 'BBL-', 'BBL')
+                        else:
+                            filter = True
                     elif 'U1-process' in sub_path.parts:
                         handle_system_preset(name, sub_path, 'U1-', 'Snapmaker')
                     else:
@@ -147,20 +149,29 @@ def install_lamb():
                         new_section.append(new_entry)
             new_lamb[section] = new_section
     write_json(system_dir / "lamb.json", new_lamb)
-    print(filtered)
 
-def do_it_all(config_fname):
+def do_it_all(root):
     global new_filaments
+    global orca_root
+    global system_dir
+    global has_BBL
+
+    orca_root = root
+    system_dir = root / "system"
+    has_BBL = (system_dir / "BBL").exists()
+
+    if not system_dir.exists():
+        print("==== NOT installing to: ", orca_root)
+        return
 
     print()
     print("**** Installing to: ", orca_root)
     print()
 
-    if not system_dir.exists():
-        print("--- no installation found ---")
-        return
+    orcaslicer_conf = orca_root / "OrcaSlicer.conf"
+    if not orcaslicer_conf.exists():
+        orcaslicer_conf = orca_root / "Snapmaker_Orca.conf"
 
-    orcaslicer_conf = orca_root / config_fname
     print("Removing our filaments from " + str(orcaslicer_conf))
     config = read_json(orcaslicer_conf)
     filaments = config["filaments"]
@@ -178,21 +189,11 @@ def do_it_all(config_fname):
 
 # --------------------------------------------------------------------------
 
-orca_root = Path("/cygdrive/c/Users/crpalmer/AppData/Roaming/OrcaSlicer")
-if not orca_root.exists():
-    orca_root = Path("/home/crpalmer/.config/OrcaSlicer/")
-system_dir = orca_root / "system"
-
-has_BBL = (system_dir / "BBL").exists()
-if has_BBL:
-    do_it_all("OrcaSlicer.conf")
+if len(sys.argv) == 1:
+    do_it_all(Path("/cygdrive/c/Users/crpalmer/AppData/Roaming/OrcaSlicer"))
+    do_it_all(Path("/cygdrive/c/Users/crpalmer/AppData/Roaming/Snapmaker_Orca"))
+    do_it_all(Path("/home/crpalmer/.config/OrcaSlicer"))
+    do_it_all(Path("/home/crpalmer/.config/Snapmaker_Orca"))
 else:
-    print("Bambu Lab printer is not installed, skipping this installation")
-
-orca_root = Path("/cygdrive/c/Users/crpalmer/AppData/Roaming/Snapmaker_Orca")
-if not orca_root.exists():
-    orca_root = Path("/home/crpalmer/.config/Snapmaker_Orca/")
-system_dir = orca_root / "system"
-
-do_it_all("Snapmaker_Orca.conf")
-
+    for i in range(1, len(sys.argv)):
+        do_it_all(Path(sys.argv[i]))
