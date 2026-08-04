@@ -6,10 +6,6 @@ import subprocess
 import shutil
 
 version = "2.3.1.0"
-orca_root = Path("/cygdrive/c/Users/crpalmer/AppData/Roaming/OrcaSlicer")
-if not orca_root.exists():
-    orca_root = Path("/home/crpalmer/.config/OrcaSlicer/")
-system_dir = orca_root / "system"
 
 def mkdir_recursive(path):
     if path != path.parent:
@@ -34,7 +30,7 @@ def set_name(config, name, subsystem):
 def write_json(dest, config):
     mkdir_recursive(dest.parent)
     with open(dest, "w") as f:
-        config["version"] = version
+        # config["version"] = version
         json.dump(config, f, indent=4)
 
 printer_notes = {}
@@ -85,49 +81,118 @@ def handle_system_preset(name, sub_path, prefix, vendor_dir):
 
     write_json(system_dir / 'lamb' / sub_path, json)
 
+def clean_name_for_filtering(name):
+    while "/" in name:
+        name = name.partition("/")[2]
+    name = name.replace(".json", "").replace(" @lamb", "")
+    return name.strip()
+
+def should_filter(json, filtered):
+    if not "inherits" in json:
+        return False
+    inherits = clean_name_for_filtering(json["inherits"])
+    if "H2D" in inherits:
+        print("consider '" + str(inherits) + "' in " + str(filtered))
+    return inherits in filtered
+
 def install_lamb():
-    shutil.copy('lamb.json', system_dir / 'lamb.json')
+    global new_filaments
     lamb = read_json('lamb.json')
-    for p in lamb["machine_model_list"] + lamb["process_list"] + lamb["machine_list"] + lamb["filament_list"]:
-        if "name" in p:
-            name = p["name"]
-            sub_path = Path(p["sub_path"])
-            mkdir_recursive(system_dir / sub_path)
-            if "BBL-process" in sub_path.parts:
-                handle_system_preset(name, sub_path, 'BBL-', 'BBL')
-            elif 'U1-process' in sub_path.parts:
-                handle_system_preset(name, sub_path, 'U1-', 'Snapmaker')
-            else:
-                print("Lamb " + str(sub_path))
-                path = Path("lamb") / Path(sub_path)
-                while not (path / "include").exists():
-                    if path == path.parent:
-                        raise Exception("Could not find includes directory for " + str(sub_path))
-                    path = path.parent
-                json = read_json_and_handle_lamb_includes(path / "include", Path("lamb") / sub_path)
-                write_json(system_dir / "lamb" / sub_path, json)
-                if "type" in json and json["type"] == "filament":
-                    print("    Adding custom filament " + json["name"])
-                    new_filaments.append(json["name"])
+    filtered = []
+    new_lamb = {}
+    processed_sections = [ "machine_model_list", "process_list", "machine_list", "filament_list"]
+    for section in lamb:
+        if section not in processed_sections:
+            new_lamb[section] = lamb[section]
+        else:
+            new_section = []
+            for p in lamb[section]:
+                if "name" in p:
+                    filter = False
+                    name = p["name"]
+                    sub_path = Path(p["sub_path"])
+                    mkdir_recursive(system_dir / sub_path)
+                    if "BBL-process" in sub_path.parts:
+                        if has_BBL:
+                            filter = True
+                        else:
+                            handle_system_preset(name, sub_path, 'BBL-', 'BBL')
+                    elif 'U1-process' in sub_path.parts:
+                        handle_system_preset(name, sub_path, 'U1-', 'Snapmaker')
+                    else:
+                        print("Lamb " + str(sub_path))
+                        path = Path("lamb") / Path(sub_path)
+                        while not (path / "include").exists():
+                            if path == path.parent:
+                                raise Exception("Could not find includes directory for " + str(sub_path))
+                            path = path.parent
+                        json = read_json_and_handle_lamb_includes(path / "include", Path("lamb") / sub_path)
+                        if should_filter(json, filtered):
+                            filter = True
+                        else:
+                            write_json(system_dir / "lamb" / sub_path, json)
+                            if "type" in json and json["type"] == "filament":
+                                print("    Adding custom filament " + json["name"])
+                                new_filaments.append(json["name"])
+                    if filter:
+                        to_filter = str(sub_path)
+                        print("    skipping " + to_filter)
+                        to_filter = clean_name_for_filtering(to_filter)
+                        print("    skipping " + to_filter)
+                        filtered.append(to_filter)
+                    else:
+                        new_entry = {}
+                        new_entry["name"] = name
+                        new_entry["sub_path"] = str(sub_path)
+                        new_section.append(new_entry)
+            new_lamb[section] = new_section
+    write_json(system_dir / "lamb.json", new_lamb)
+    print(filtered)
+
+def do_it_all(config_fname):
+    global new_filaments
+
+    print()
+    print("**** Installing to: ", orca_root)
+    print()
+
+    if not system_dir.exists():
+        print("--- no installation found ---")
+        return
+
+    orcaslicer_conf = orca_root / config_fname
+    print("Removing our filaments from " + str(orcaslicer_conf))
+    config = read_json(orcaslicer_conf)
+    filaments = config["filaments"]
+    new_filaments = []
+    for filament in filaments:
+        if "@lamb" not in filament:
+            new_filaments.append(filament)
+        else:
+            print("    Removing " + filament)
+
+    install_lamb()
+
+    config["filaments"] = new_filaments
+    write_json(orcaslicer_conf, config)
 
 # --------------------------------------------------------------------------
 
-print()
-print("**** Installing to: ", orca_root)
-print()
+orca_root = Path("/cygdrive/c/Users/crpalmer/AppData/Roaming/OrcaSlicer")
+if not orca_root.exists():
+    orca_root = Path("/home/crpalmer/.config/OrcaSlicer/")
+system_dir = orca_root / "system"
 
-orcaslicer_conf = orca_root / "OrcaSlicer.conf"
-print("Removing our filaments from " + str(orcaslicer_conf))
-config = read_json(orcaslicer_conf)
-filaments = config["filaments"]
-new_filaments = []
-for filament in filaments:
-    if "@lamb" not in filament:
-        new_filaments.append(filament)
-    else:
-        print("    Removing " + filament)
+has_BBL = (system_dir / "BBL").exists()
+if has_BBL:
+    do_it_all("OrcaSlicer.conf")
+else:
+    print("Bambu Lab printer is not installed, skipping this installation")
 
-install_lamb()
+orca_root = Path("/cygdrive/c/Users/crpalmer/AppData/Roaming/Snapmaker_Orca")
+if not orca_root.exists():
+    orca_root = Path("/home/crpalmer/.config/Snapmaker_Orca/")
+system_dir = orca_root / "system"
 
-config["filaments"] = new_filaments
-write_json(orcaslicer_conf, config)
+do_it_all("Snapmaker_Orca.conf")
+
