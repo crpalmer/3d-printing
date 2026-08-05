@@ -214,6 +214,10 @@
 	{
             "name": " 0.20mm normal @U1",
             "sub_path": "process/U1/0.20mm normal @U1.json"
+        },
+	{
+            "name": "0.20mm head @U1",
+            "sub_path": "process/U1/0.20mm head @U1.json"
         }
     ],
     "machine_list": [

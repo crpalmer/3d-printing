@@ -1,0 +1,7 @@
+
+{
+    "name": " 0.20mm head @U1",
+    "inherits": " 0.20mm normal @U1",
+    "instantiation": "true",
+    "lamb-includes": [ "0.4mm/head.json" ]
+}
