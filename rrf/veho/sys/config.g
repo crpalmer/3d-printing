@@ -40,14 +40,14 @@ M208 X0 Y0 Z0 S1                                          ; set axis minima
 M208 X625 Y600 Z650 S0                                    ; set axis maxima
 
 ; Endstops
-M574 X2 S1 P"!60.io0.in"                                  ; configure active-high endstop for low end on X
+M574 X2 S1 P"!io3.in"                                  ; configure active-high endstop for low end on X
 M574 Y2 S1 P"^0.io5.in+^0.io6.in"                         ; configure active-low endstop for high end on Y
 
 ; Z-Probe
-M558 P8 C"^!60.io1.in" A7 S0.01 R1.5 H5 F400 T24000 B0
+M558 P8 C"^!io1.in" A7 S0.02 R1.5 H5 F400 T24000 B0
 G31 X0 Y0 Z0 P100
-;M557 X100:500 Y100:500 P9                              ; define mesh grid for 500x500 bed
-M557 X25:575 Y25:575 P19                                  ; define mesh grid for 600x600 bed
+M557 X100:500 Y100:500 P9                              ; define mesh grid for 500x500 bed
+;M557 X25:575 Y25:575 P19                                  ; define mesh grid for 600x600 bed
 M376 H3
 
 ; Filament sensor (BTT SFS 2.0)
@@ -60,12 +60,19 @@ M106 P0 S0 H-1 C"part"                                    ; set fan value (off).
 M950 F1 C"60.out4" Q500                                   ; create fan and set its frequency
 M106 P1 S1 T45 H1 C"hotend"                               ; set fan value (on). Thermostatic control is turned on
 
-; Fans (board cooling)
+; Fans (main board cooling)
 M308 S10 Y"mcu-temp" A"MCU"                               ; defines sensor 10 as MCU temperature sensor
 M308 S11 Y"drivers" A"Duet stepper drivers"               ; defines sensor 11 as stepper driver temperature sensor
 M950 F2 C"out5" Q500                                      ; create fan and set its frequency
 M106 P2 S1 H-1  C"board"                                  ; set fan value (on).  Thermostatic control is turned off
 M106 P2 H10:11 T33 C"board"                               ; set fan 2 value
+
+; Fans (secondary board cooling)
+M308 P"60.dummy" S12 Y"mcu-temp" A"MCU2"                  ; defines sensor 12 as MCU temperature sensor
+M308 P"60.dummy" S13 Y"drivers" A"Duet stepper drivers 2" ; defines sensor 13 as stepper driver temperature sensor
+M950 F3 C"60.out5" Q500                                   ; create fan and set its frequency
+M106 P3 S1 H-1  C"board2"                                 ; set fan value (on).  Thermostatic control is turned off
+M106 P3 H12:13 T33 C"board2"                              ; set fan 2 value
 
 ; Bed Heater
 ;M308 S0 P"temp0" Y"thermistor" T100000 B4734 C1.153746e-7 ; configure sensor
@@ -76,8 +83,8 @@ M140 H0                                                   ; map heated bed to he
 M143 H0 S120                                              ; set temperature limit for heater 0 to 120C
 
 ; thermistor (e3d)
-M308 S1 P"60.temp0" Y"thermistor" T100000 B4725 C7.06e-8 ; configure sensor
-M950 H1 C"60.out1" T1                                    ; create nozzle heater output and map it to sensor 1
+M308 S1 P"temp1" Y"thermistor" T100000 B4725 C7.06e-8     ; configure sensor
+M950 H1 C"out1" T1                                        ; create nozzle heater output and map it to sensor 1
 
 ; revo 40w
 M307 H1 R4.042 K0.586:0.400 D2.02 E1.35 S1.00 B0 V23.8    ; ender-5 tuned (3.6.0) at 220, 5mm off the bed with part cooling fan
