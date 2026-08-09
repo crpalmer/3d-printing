@@ -4,6 +4,7 @@
     "instantiation": "false",
     "printer_model": "veho",
     "inherits": "base @lamb",
+    "lamb-includes": [ "klipper.json" ],
     "print_host": "veho",
     "printable_area": "0x0,600x0,600x600,0x600",
     "printable_height": "650"

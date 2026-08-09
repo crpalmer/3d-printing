@@ -1,0 +1,6 @@
+{
+    "gcode_flavor": "klipper",
+    "host_type": "octoprint",
+    "machine_end_gcode": "PRINT_END",
+    "machine_start_gcode": "VEHO_PRINT_START hotend={first_layer_temperature[0]} bed={first_layer_bed_temperature[0]} MESH=1"
+}

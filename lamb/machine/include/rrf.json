@@ -1,0 +1,8 @@
+{
+    "gcode_flavor": "reprapfirmware",
+    "host_type": "duet",
+    "before_layer_change_gcode": "{if layer_num == 1}\\n{if is_extruder_used[0] and is_extruder_used[1]}\\n; Desired bed temperatures: {bed_temperature[0]} and {bed_temperature[1]}\\nM140 S{bed_temperature[0] > bed_temperature[1] ? bed_temperature[0] : bed_temperature[1]}\\n{else}\\n{if is_extruder_used[0]}\\nM140 S{bed_temperature[0]}\\n{else}\\nM140 S{bed_temperature[1]}\\n{endif}\\n{endif}\\n{endif}\\n",
+    "change_filament_gcode": "M98 P\"0:/sys/prusaslicer-toolchange.g\" E{next_extruder}\\nM98 P\"0:/sys/wipe.g\" E{retract_length_toolchange[next_extruder] + 4} X{(filament_soluble[next_extruder]?5:3)} R{retract_length_toolchange[next_extruder] + retract_restart_extra_toolchange[next_extruder]}\\n",
+    "machine_end_gcode": "G91\\nG1 E-1 F1800       ; Retract some extra filament\\nG90\\nM2\\n",
+    "machine_start_gcode": "M190\nG10\n\nM83          ; Relative Extruder mode\\n\\nM98 P\"/sys/prepare-to-print.g\" {if is_extruder_used[0]}H{first_layer_temperature[0]} B{first_layer_bed_temperature[0]} T\"{filament_type[0]}\"{endif} {if is_extruder_used[1]} I{first_layer_temperature[1]} C{first_layer_bed_temperature[1]} U\"{filament_type[1]}\"{endif}\\n\\nT{initial_tool}\\n"
+}

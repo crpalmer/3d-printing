@@ -1,0 +1,50 @@
+{
+    "type": "filament",
+    "inherits": "Bambu Support For PLA @System",
+    "name": "PolySupport @lamb",
+    "filament_vendor": "Polymaker",
+    "filament_id": "LMB_007",
+    "instantiation": "true",
+    "eng_plate_temp": [
+        "60"
+    ],
+    "eng_plate_temp_initial_layer": [
+        "60"
+    ],
+    "hot_plate_temp": [
+        "60"
+    ],
+    "hot_plate_temp_initial_layer": [
+        "60"
+    ],
+    "textured_plate_temp": [
+        "60"
+    ],
+    "textured_plate_temp_initial_layer": [
+        "60"
+    ],
+    "filament_cost": [
+        "39.98"
+    ],
+    "filament_density": [
+        "1.22"
+    ],
+    "nozzle_temperature": [
+        "230"
+    ],
+    "nozzle_temperature_initial_layer": [
+        "230"
+    ],
+    "nozzle_temperature_range_high": [
+        "230"
+    ],
+    "filament_flow_ratio": [
+        "1.02"
+    ],
+    "slow_down_layer_time": [
+        "11"
+    ],
+    "slow_down_min_speed": [
+        "20"
+    ]
+}

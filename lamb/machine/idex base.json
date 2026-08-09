@@ -4,6 +4,7 @@
     "instantiation": "false",
     "printer_model": "idex",
     "inherits": "base @lamb",
+    "lamb-includes": [ "rrf.json" ],
     "print_host": "idex",
     "printable_area": "0x0,300x0,300x356,0x356",
     "printable_height": "410",
