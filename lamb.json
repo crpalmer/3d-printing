@@ -304,6 +304,10 @@
 	    "sub_path": "filament/pla.json"
 	},
 	{
+	    "name": "Polysupport @lamb",
+	    "sub_path": "filament/polymaker/polysupport.json"
+	},
+	{
 	    "name": "CMYK Cyan (Panchroma) @lamb",
 	    "sub_path": "filament/polymaker/cmyk-cyan.json"
 	},
