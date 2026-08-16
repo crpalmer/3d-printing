@@ -5,6 +5,8 @@
     "printer_model": "v-king",
     "inherits": "base @lamb",
     "lamb-includes": [ "klipper.json" ],
+    "best_object_pos": "0.50,0.531",
+    "machine_start_gcode": "VKING_PRINT_START hotend={first_layer_temperature[0]} bed={first_layer_bed_temperature[0]} MESH=1",
     "print_host": "v-king",
     "printable_area": "0x0,345x0,345x370,0x370",
     "printable_height": "390"
