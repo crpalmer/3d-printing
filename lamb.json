@@ -324,16 +324,8 @@
 	    "sub_path": "filament/snapspeed-pearl-white.json"
 	},
 	{
-	    "name": "CMYK Cyan (Biqu) @lamb",
-	    "sub_path": "filament/biqu/cmyk-cyan.json"
-	},
-	{
-	    "name": "CMYK Magenta (Biqu) @lamb",
-	    "sub_path": "filament/biqu/cmyk-magenta.json"
-	},
-	{
-	    "name": "CMYK Yellow (Biqu) @lamb",
-	    "sub_path": "filament/biqu/cmyk-yellow.json"
+	    "name": "CMYK @lamb",
+	    "sub_path": "filament/biqu/cmyk.json"
 	}
     ]
 }

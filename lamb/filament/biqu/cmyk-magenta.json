@@ -1,7 +1,0 @@
-{
-    "name": "CMYK Magenta (Biqu) @lamb",
-    "lamb-includes": [ "not-rrf.json", "pla.json" ],
-    "filament_vendor": "Biqu",
-    "filament_id": "LMB_105",
-    "default_filament_colour": "#FF00FF"
-}
