@@ -1,0 +1,21 @@
+#00FFFF 8 cyan
+#FF00FF 4 magenta
+#FFF200 5 yellow
+#E2DEDB 6.6 Pearl White
+#5F6244 0.1 Army Green
+#F9B0BD 9.5 Elegoo
+#8F949B 11.5 Elegoo
+#FBEC07 4 Elegoo
+#4EFF5A 1 Elegoo
+#F64E00 4 Elegoo
+#B80000 6 Elegoo
+#603BA0 5.3 Elegoo
+#9E6A4B 5 Elegoo
+#FFFFFF 5.4 Elegoo
+#F5EC00 1 SnapSpeed
+#69350F 1 SnapSpeed
+#616469 0.4 Panchroma
+#EED1A8 1.5 Panchroma
+#FF0000 1 SnapSpeed
+#000000 0.1 black
+#FFFFFF 4.5 Snapspeed
