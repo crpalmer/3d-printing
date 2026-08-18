@@ -14,7 +14,7 @@
 #FFFFFF 5.4 Elegoo
 #F5EC00 1 SnapSpeed
 #69350F 1 SnapSpeed
-#616469 0.4 Panchroma
+#616469 0.6 Panchroma
 #EED1A8 1.5 Panchroma
 #FF0000 1 SnapSpeed
 #000000 0.1 black
