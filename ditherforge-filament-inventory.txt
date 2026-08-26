@@ -1,21 +1,21 @@
-#00FFFF 4 biqu cyan
-#FF00FF 4 biqu magenta
-#FFF200 4 biqu yellow
-#E2DEDB 6.6 snapspeed pearl white
+#00FFFF 2.1 biqu cyan
+#FF00FF 3.0 biqu magenta
+#FFF200 6.0 biqu yellow
+#9E6A4B 1.8 elegoo brown
+#8F949B 1.6 elegoo grey
+#4EFF5A 4.1 elegoo neon green
+#F64E00 5.7 elegoo orange
+#F9B0BD 4.0 elegoo pink
+#603BA0 1.7 elegoo purple
+#B80000 4.4 elegoo red
+#FBEC07 5.8 elegoo yellow
+#FFFFFF 4.7 elegoo white
+#C2BAA7 4.0 esun bone white
 #5F6244 0.1 panchroma army green matte
-#F9B0BD 4.4 elegoo pink
-#8F949B 2.2 elegoo grey
-#FBEC07 5.6 elegoo yellow
-#4EFF5A 3.4 elegoo neon green
-#F64E00 5.6 elegoo orange
-#B80000 4.3 elegoo red
-#603BA0 1.3 elegoo purple
-#9E6A4B 1 elegoo brown
-#FFFFFF 5.4 elegoo white
-#F5EC00 1 snapspeed yellow
-#69350F 1 snapspeed brown
-#616469 0.6 panchroma steel grey
 #EED1A8 1.5 panchroma parchment
-#FF0000 1 snapspeed red
+#616469 0.6 panchroma steel grey
+#69350F 0.2 snapspeed brown
+#E2DEDB 6.6 snapspeed pearl white
+#FF0000 1.9 snapspeed red
+#F5EC00 5.0 snapspeed yellow
 #000000 0.1 black
-#FFFFFF 4.5 snapspeed white
