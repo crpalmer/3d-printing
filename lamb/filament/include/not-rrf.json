@@ -1,4 +1,0 @@
-{
-    "lamb-includes": [ "base.json" ],
-    "compatible_printers_condition": "gcode_flavor != \"reprapfirmware\""
-}

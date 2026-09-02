@@ -1,0 +1,6 @@
+{
+    "name": "Elegoo PLA+ @lamb",
+    "inherits": "Elegoo PLA+ @System",
+    "filament_id": "LMBE00",
+    "filament_vendor": "Elegoo"
+}

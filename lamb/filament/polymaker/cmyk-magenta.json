@@ -1,7 +1,0 @@
-{
-    "name": "CMYK Magenta (Panchroma) @lamb",
-    "lamb-includes": [ "not-rrf.json" ],
-    "inherits": "Panchroma PLA Translucent @System",
-    "filament_id": "LMB_101",
-    "default_filament_colour": "#D93B90"
-}

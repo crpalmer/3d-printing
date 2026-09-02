@@ -292,36 +292,16 @@
     ],
     "filament_list": [
 	{
-	    "name": "PC Max @lamb",
-	    "sub_path": "filament/rrf/pc-max.json"
-	},
-	{
-	    "name": "PETG @lamb",
-	    "sub_path": "filament/rrf/petg.json"
-	},
-	{
-	    "name": "PLA @lamb",
-	    "sub_path": "filament/pla.json"
+	    "name": "Elegoo PLA+ @lamb",
+	    "sub_path": "filament/elegoo/pla+.json"
 	},
 	{
 	    "name": "Polysupport @lamb",
 	    "sub_path": "filament/polymaker/polysupport.json"
 	},
 	{
-	    "name": "CMYK Cyan (Panchroma) @lamb",
-	    "sub_path": "filament/polymaker/cmyk-cyan.json"
-	},
-	{
-	    "name": "CMYK Magenta (Panchroma) @lamb",
-	    "sub_path": "filament/polymaker/cmyk-magenta.json"
-	},
-	{
-	    "name": "CMYK Yellow (Panchroma) @lamb",
-	    "sub_path": "filament/polymaker/cmyk-yellow.json"
-	},
-	{
-	    "name": "CMYK Pearl White (Snapspeed) @lamb",
-	    "sub_path": "filament/snapspeed-pearl-white.json"
+	    "name": "Polymaker PC Max @lamb",
+	    "sub_path": "filament/polymaker/pc-max.json"
 	},
 	{
 	    "name": "CMYK @lamb",

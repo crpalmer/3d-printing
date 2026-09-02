@@ -1,0 +1,48 @@
+{
+    "type": "filament",
+    "name": "PolyMax PC @lamb",
+    "inherits": "Generic PC @System",
+    "filament_id": "LBMP01",
+    "chamber_temperatures": [
+        "70"
+    ],
+    "fan_max_speed": [
+        "50"
+    ],
+    "filament_density": [
+        "1.19"
+    ],
+    "filament_flow_ratio": [
+        "0.96"
+    ],
+    "filament_max_volumetric_speed": [
+        "8"
+    ],
+    "filament_vendor": [
+        "Polymaker"
+    ],
+    "nozzle_temperature": [
+        "270"
+    ],
+    "nozzle_temperature_range_high": [
+        "270"
+    ],
+    "nozzle_temperature_range_low": [
+        "250"
+    ],
+    "slow_down_layer_time": [
+        "6"
+    ],
+    "textured_plate_temp": [
+        "105"
+    ],
+    "textured_plate_temp_initial_layer": [
+        "105"
+    ],
+    "temperature_vitrification": [
+        "117"
+    ],
+    "filament_adhesiveness_category": [
+        "500"
+    ]
+}
