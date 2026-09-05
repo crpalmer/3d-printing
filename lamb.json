@@ -292,8 +292,16 @@
     ],
     "filament_list": [
 	{
+	    "name": "Elegoo PETG @lamb",
+	    "sub_path": "filament/elegoo/petg.json"
+	},
+	{
 	    "name": "Elegoo PLA+ @lamb",
 	    "sub_path": "filament/elegoo/pla+.json"
+	},
+	{
+	    "name": "Elegoo Rapid TPU @lamb",
+	    "sub_path": "filament/elegoo/rapid-tpu.json"
 	},
 	{
 	    "name": "Polysupport @lamb",

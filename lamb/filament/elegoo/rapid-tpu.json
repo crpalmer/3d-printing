@@ -1,0 +1,7 @@
+{
+    "name": "Elegoo Rapid TPU @lamb",
+    "lamb-includes": [ "base.json" ],
+    "inherits": "Elegoo Rapid TPU 95A @System",
+    "filament_id": "LMBE01",
+    "filament_vendor": "Elegoo"
+}

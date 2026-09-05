@@ -1,6 +1,7 @@
 {
     "type": "filament",
     "name": "PolyMax PC @lamb",
+    "lamb-includes": [ "base.json" ],
     "inherits": "Generic PC @System",
     "filament_id": "LBMP01",
     "chamber_temperatures": [

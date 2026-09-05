@@ -1,5 +1,6 @@
 {
     "name": "Elegoo PLA+ @lamb",
+    "lamb-includes": [ "base.json" ],
     "inherits": "Elegoo PLA+ @System",
     "filament_id": "LMBE00",
     "filament_vendor": "Elegoo"

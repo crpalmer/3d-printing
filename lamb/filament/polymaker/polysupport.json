@@ -1,10 +1,9 @@
 {
-    "type": "filament",
+    "lamb-includes": [ "base.json" ],
     "inherits": "Bambu Support For PLA @System",
     "name": "PolySupport @lamb",
     "filament_vendor": "Polymaker",
     "filament_id": "LMBP00",
-    "instantiation": "true",
     "eng_plate_temp": [
         "60"
     ],

@@ -1,0 +1,7 @@
+{
+    "name": "Elegoo PETG @lamb",
+    "lamb-includes": [ "base.json" ],
+    "inherits": "Elegoo PETG @System",
+    "filament_id": "LMBE02",
+    "filament_vendor": "Elegoo"
+}
