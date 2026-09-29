@@ -1,0 +1,9 @@
+{
+    "name": "0.30mm normal @lamb",
+    "inherits": "base @lamb",
+    "instantiation": "true",
+    "lamb-includes": [ "rrf.json" ],
+    "compatible_printers_condition": "nozzle_diameter[0] > 0.4",
+    "layer_height": "0.3",
+    "initial_layer_print_height": "0.3"
+}

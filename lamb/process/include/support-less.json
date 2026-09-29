@@ -1,0 +1,7 @@
+{
+    "enable_support": "0",
+    "extra_perimeters_on_overhangs": "1",
+    "make_overhang_printable": "1",
+    "make_overhang_printable_angle": "50",
+    "unsupported_wall_last": "1"
+}

@@ -68,6 +68,18 @@
             "name": "0.20mm fast popper @lamb",
             "sub_path": "process/rrf/0.20mm fast popper @lamb.json"
         },
+        {
+            "name": "0.30mm normal @lamb",
+            "sub_path": "process/rrf/0.30mm normal @lamb.json"
+        },
+	{
+            "name": "0.30mm head @lamb",
+            "sub_path": "process/rrf/0.30mm head @lamb.json"
+        },
+	{
+            "name": "0.30mm tombstone @lamb",
+            "sub_path": "process/rrf/0.30mm tombstone @lamb.json"
+        },
 
 	{ "comment": "----------------------------- BBL dependencies -------------------------------" },
 
