@@ -1,6 +1,6 @@
 {
     "name": "lamb",
-    "version": "01.00.00.01",
+    "version": "01.00.00.05",
     "force_update": "0",
     "description": "Lam-B's printers",
     "machine_model_list": [
