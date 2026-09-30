@@ -1,6 +1,6 @@
 {
     "name": "lamb",
-    "version": "01.00.00.05",
+    "version": "01.00.00.06",
     "force_update": "0",
     "description": "Lam-B's printers",
     "machine_model_list": [
@@ -153,6 +153,10 @@
 	{
             "name": " 0.20mm head @H2D",
             "sub_path": "process/H2D/0.20mm head @H2D.json"
+        },
+	{
+            "name": " 0.20mm head support-less @H2D",
+            "sub_path": "process/H2D/0.20mm head support-less @H2D.json"
         },
 	{
             "name": " 0.20mm popper @H2D",
