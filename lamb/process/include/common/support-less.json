@@ -3,5 +3,6 @@
     "extra_perimeters_on_overhangs": "1",
     "make_overhang_printable": "1",
     "make_overhang_printable_angle": "50",
+    "make_overhang_printable_hole_size": "1000",
     "unsupported_wall_last": "1"
 }
