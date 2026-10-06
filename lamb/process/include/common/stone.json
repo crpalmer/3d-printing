@@ -1,0 +1,7 @@
+{
+    "fuzzy_skin": "external",
+    "fuzzy_skin_mode": "combined",
+    "fuzzy_skin_noise_type": "ridgedmulti",
+    "fuzzy_skin_point_distance": "0.45",
+    "fuzzy_skin_thickness": "0.4"
+}
