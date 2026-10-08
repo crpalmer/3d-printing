@@ -194,6 +194,7 @@ if len(sys.argv) == 1:
     do_it_all(Path("/cygdrive/c/Users/crpalmer/AppData/Roaming/Snapmaker_Orca"))
     do_it_all(Path("/home/crpalmer/.config/OrcaSlicer"))
     do_it_all(Path("/home/crpalmer/.config/Snapmaker_Orca"))
+    do_it_all(Path("/home/crpalmer/.var/app/com.orcaslicer.OrcaSlicer/config/OrcaSlicer"))
 else:
     for i in range(1, len(sys.argv)):
         do_it_all(Path(sys.argv[i]))
