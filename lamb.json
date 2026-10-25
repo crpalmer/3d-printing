@@ -1,6 +1,6 @@
 {
     "name": "lamb",
-    "version": "01.00.00.10",
+    "version": "01.00.00.13",
     "force_update": "0",
     "description": "Lam-B's printers",
     "machine_model_list": [
@@ -322,6 +322,10 @@
 	{
 	    "name": "Elegoo Rapid TPU @lamb",
 	    "sub_path": "filament/elegoo/rapid-tpu.json"
+	},
+	{
+	    "name": "Elegoo TPU 72D @lamb",
+	    "sub_path": "filament/elegoo/tpu-72d.json"
 	},
 	{
 	    "name": "Polysupport @lamb",

@@ -1,0 +1,14 @@
+{
+    "name": "Elegoo TPU 72D @lamb",
+    "lamb-includes": [ "base.json" ],
+    "inherits": "Elegoo PLA+ @lamb",
+    "filament_id": "LMBE03",
+    "filament_vendor": "Elegoo",
+    "nozzle_temperature_initial_layer": "230",
+    "nozzle_temperature": "230",
+    "hot_plate_temp_initial_layer": "45",
+    "hot_plate_temp": "45",
+    "textured_plate_temp_initial_layer": "45",
+    "textured_plate_temp": "45",
+    "filament_max_volumetric_speed": "13"
+}
