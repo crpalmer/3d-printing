@@ -3,5 +3,5 @@
     "enable_support": "1",
     "raft_first_layer_expansion": "20",
     "sparse_infill_density": "3%",
-    "sparse_infill_pattern": "crosszag"
+    "sparse_infill_pattern": "gyroid"
 }
