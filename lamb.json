@@ -346,10 +346,6 @@
 	{
 	    "name": "Polymaker PC Max @lamb",
 	    "sub_path": "filament/polymaker/pc-max.json"
-	},
-	{
-	    "name": "CMYK @lamb",
-	    "sub_path": "filament/biqu/cmyk.json"
 	}
     ]
 }

@@ -1,7 +1,0 @@
-{
-    "name": "CMYK @lamb",
-    "lamb-includes": [ "pla.json" ],
-    "instantiation": "true",
-    "filament_vendor": "BIQU",
-    "filament_id": "LMB_107"
-}
