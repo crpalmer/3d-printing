@@ -1,0 +1,15 @@
+
+{
+    "name": " 0.06mm miniature @U1 (0.2 nozzle)",
+    "inherits": "0.06 High Quality @Snapmaker U1 (0.2 nozzle) @lamb",
+    "instantiation": "true",
+    "lamb-includes": [ "u1.json", "common/support-less.json" ],
+    "compatible-printers": [
+	"Snapmaker U1 (0.2 nozzle)"
+    ],
+    "enable_support": "1",
+    "prime_tower_width": "20",
+    "sparse_infill_pattern": "gyroid",
+    "support_on_build_plate_only": "1",
+    "wall_loops": "6"
+}

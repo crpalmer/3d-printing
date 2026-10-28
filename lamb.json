@@ -1,6 +1,6 @@
 {
     "name": "lamb",
-    "version": "01.00.00.13",
+    "version": "01.00.00.20",
     "force_update": "0",
     "description": "Lam-B's printers",
     "machine_model_list": [
@@ -209,12 +209,20 @@
 	    "sub_path": "U1-process/fdm_process_U1_common.json"
 	},
 	{
+	    "name": "fdm_process_U1_0.06_nozzle_0.2 @lamb",
+	    "sub_path": "U1-process/fdm_process_U1_0.06_nozzle_0.2.json"
+	},
+	{
 	    "name": "fdm_process_U1_0.08 @lamb",
 	    "sub_path": "U1-process/fdm_process_U1_0.08.json"
 	},
 	{
 	    "name": "fdm_process_U1_0.20 @lamb",
 	    "sub_path": "U1-process/fdm_process_U1_0.20.json"
+	},
+	{
+	    "name": "0.06 High Quality @Snapmaker U1 (0.2 nozzle) @lamb",
+	    "sub_path": "U1-process/0.06 High Quality @Snapmaker U1 (0.2 nozzle).json"
 	},
 	{
 	    "name": "0.08 High Quality @Snapmaker U1 (0.4 nozzle) @lamb",
@@ -227,6 +235,10 @@
 
 	{ "comment": "----------------------------- U1 profiles  -------------------------------" },
 
+	{
+            "name": " 0.06mm miniature @U1 (0.2 nozzle)",
+            "sub_path": "process/U1/0.06mm miniature @U1 (0.2 nozzle).json"
+        },
 	{
             "name": " 0.08mm miniature @U1",
             "sub_path": "process/U1/0.08mm miniature @U1.json"
