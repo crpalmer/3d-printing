@@ -1,0 +1,7 @@
+{
+    "name": "Panchroma PLA @lamb",
+    "lamb-includes": [ "base.json", "minimal-purge.json" ],
+    "inherits": "Panchroma PLA @System",
+    "filament_id": "LMBP03",
+    "filament_vendor": "Polymaker"
+}

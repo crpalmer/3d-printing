@@ -340,8 +340,16 @@
 	    "sub_path": "filament/elegoo/tpu-72d.json"
 	},
 	{
+	    "name": "Panchroma PLA @lamb",
+	    "sub_path": "filament/polymaker/panchroma.json"
+	},
+	{
 	    "name": "Polysupport @lamb",
 	    "sub_path": "filament/polymaker/polysupport.json"
+	},
+	{
+	    "name": "Polydissolve S1 @lamb",
+	    "sub_path": "filament/polymaker/polydissolve.json"
 	},
 	{
 	    "name": "Polymaker PC Max @lamb",
