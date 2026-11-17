@@ -1,0 +1,25 @@
+
+{
+    "name": " 0.08mm miniature PVA @U1 (0.2 and 0.4 nozzle)",
+    "inherits": "0.08 High Quality @Snapmaker U1 (0.2 nozzle) @lamb",
+    "instantiation": "true",
+    "compatible-printers": [
+	"Snapmaker U1 (0.2 and 0.4 nozzle)"
+    ],
+    "lamb-includes": [ "u1.json", "0.2mm/line-widths.json" ],
+    "enable_support": "1",
+    "initial_layer_print_height": "0.12",
+    "prime_tower_width": "20",
+    "raft_first_layer_expansion": "5",
+    "sparse_infill_density": "0",
+    "support_filament": "4",
+    "support_interface_filament": "4",
+    "support_interface_pattern": "concentric",
+    "support_top_z_distance": "0",
+    "support_bottom_z_distance": "0",
+    "support_interface_spacing": "0",
+    "support_bottom_interface_spacing": "0",
+    "support_object_xy_distance": "0.2",
+    "tree_support_branch_diameter_organic": "1",
+    "wall_loops": "4"
+}
