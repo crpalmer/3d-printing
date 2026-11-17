@@ -1,8 +1,8 @@
 {
     "name": "Elegoo PLA+ @lamb",
-    "lamb-includes": [ "base.json" ],
+    "lamb-includes": [ "base.json", "minimal-purge.json" ],
     "inherits": "Elegoo PLA+ @System",
-    "fan_min_speed": [ "100" ],
     "filament_id": "LMBE00",
-    "filament_vendor": "Elegoo"
+    "filament_vendor": "Elegoo",
+    "fan_min_speed": [ "100" ]
 }
