@@ -11,6 +11,11 @@ set global.probe_at_temperature_delta = 70
 set global.use_mesh_compensation = true
 set global.use_true_bed_leveling = true
 
+; From T0
+;set global.skew_AC = 141.5
+;set global.skew_BD = 140.7
+;set global.skew_AD = 99.7
+; From T1
 set global.skew_AC = 141.45
 set global.skew_BD = 140.75
 set global.skew_AD = 99.5
