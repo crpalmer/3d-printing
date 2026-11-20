@@ -1,4 +1,4 @@
 {
-    "compatible_printers_condition": "gcode_flavor == \"reprapfirmware\" or gcode_flavor == \"klipper\"",
-    "vendor": "lamb"
+    "lamb-includes": [ "base.json" ],
+    "compatible_printers_condition": "gcode_flavor == \"reprapfirmware\" or gcode_flavor == \"klipper\""
 }
