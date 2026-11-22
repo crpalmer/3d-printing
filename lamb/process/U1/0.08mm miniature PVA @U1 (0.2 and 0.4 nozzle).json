@@ -14,12 +14,11 @@
     "sparse_infill_density": "0",
     "support_filament": "4",
     "support_interface_filament": "4",
-    "support_interface_pattern": "concentric",
+    "support_interface_pattern": "rectilinear_interlaced",
     "support_top_z_distance": "0",
     "support_bottom_z_distance": "0",
     "support_interface_spacing": "0",
     "support_bottom_interface_spacing": "0",
     "support_object_xy_distance": "0.2",
-    "tree_support_branch_diameter_organic": "1",
     "wall_loops": "4"
 }
