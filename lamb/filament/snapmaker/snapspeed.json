@@ -3,5 +3,6 @@
     "lamb-includes": [ "base.json", "minimal-purge.json" ],
     "inherits": "Snapmaker PLA SnapSpeed @lamb base",
     "filament_id": "LMBS00",
-    "filament_vendor": "Snapmaker"
+    "filament_vendor": "Snapmaker",
+    "compatible_printers_condition": "nozzle_diameter[0] != 0.2"
 }

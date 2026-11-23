@@ -67,9 +67,10 @@ def read_json_and_handle_lamb_includes(includes_path, filename):
 
 def handle_system_preset(name, sub_path, prefix, vendor_dir):
     src_path = system_dir /vendor_dir 
+    dir_prefix = prefix + '-'
     for p in sub_path.parts:
-        if p.startswith(prefix):
-            src_path /= p[len(prefix):]
+        if p.startswith(dir_prefix):
+            src_path /= p[len(dir_prefix):]
         else:
             src_path /= p
     print("   " + vendor_dir + " " + str(src_path) + " to " + str(sub_path))
@@ -77,8 +78,14 @@ def handle_system_preset(name, sub_path, prefix, vendor_dir):
     json = read_json(src_path)
     json["name"] = name
     json["instantiation"] = "false"
-    if "inherits" in json:
-        json["inherits"] += " @lamb"
+    inherits = json.get('inherits')
+    if inherits:
+        vendor = '@' + prefix
+        if vendor in inherits:
+            inherits = inherits.replace(vendor, '@lamb')
+        else:
+            inherits += " @lamb"
+        json['inherits'] = inherits
 
     write_json(system_dir / 'lamb' / sub_path, json)
 
@@ -116,13 +123,13 @@ def install_lamb():
                     mkdir_recursive(system_dir / sub_path)
                     if "BBL-process" in sub_path.parts:
                         if has_BBL:
-                            handle_system_preset(name, sub_path, 'BBL-', 'BBL')
+                            handle_system_preset(name, sub_path, 'BBL', 'BBL')
                         else:
                             filter = True
                     elif 'U1-process' in sub_path.parts:
-                        handle_system_preset(name, sub_path, 'U1-', 'Snapmaker')
+                        handle_system_preset(name, sub_path, 'U1', 'Snapmaker')
                     elif 'U1-filament' in sub_path.parts:
-                        handle_system_preset(name, sub_path, 'U1-', 'Snapmaker')
+                        handle_system_preset(name, sub_path, 'U1', 'Snapmaker')
                     else:
                         print("Lamb " + str(sub_path))
                         path = Path("lamb") / Path(sub_path)

@@ -1,6 +1,6 @@
 {
     "name": "lamb",
-    "version": "01.00.00.51",
+    "version": "01.00.00.58",
     "force_update": "0",
     "description": "Lam-B's printers",
     "machine_model_list": [
@@ -360,8 +360,20 @@
 	    "sub_path": "U1-filament/Snapmaker PLA SnapSpeed @U1 base.json"
 	},
 	{
+	    "name": "Snapmaker PLA SnapSpeed @lamb base2",
+	    "sub_path": "U1-filament/Snapmaker PLA SnapSpeed @U1 base2.json"
+	},
+	{
+	    "name": "Snapmaker PLA SnapSpeed @lamb 0.2 nozzle",
+	    "sub_path": "U1-filament/Snapmaker PLA SnapSpeed @U1 0.2 nozzle.json"
+	},
+	{
 	    "name": "Snapmaker SnapSpeed PLA @lamb",
 	    "sub_path": "filament/snapmaker/snapspeed.json"
+	},
+	{
+	    "name": "Snapmaker SnapSpeed PLA @lamb 0.2 nozzle",
+	    "sub_path": "filament/snapmaker/snapspeed-0.2.json"
 	}
     ]
 }
