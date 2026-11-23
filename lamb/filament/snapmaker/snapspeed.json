@@ -1,6 +1,6 @@
 {
     "name": "Snapmaker PLA SnapSpeed @lamb",
-    "lamb-includes": [ "base.json", "minimal-purge.json" ],
+    "lamb-includes": [ "base.json", "minimal-purge.json", "pla-flow.json" ],
     "inherits": "Snapmaker PLA SnapSpeed @lamb base",
     "filament_id": "LMBS00",
     "filament_vendor": "Snapmaker",

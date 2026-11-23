@@ -1,6 +1,6 @@
 {
     "name": "eSUN PLA+ @lamb",
-    "lamb-includes": [ "base.json", "minimal-purge.json" ],
+    "lamb-includes": [ "base.json", "minimal-purge.json", "pla-flow.json" ],
     "inherits": "eSUN PLA+ @System",
     "filament_id": "LMBN00",
     "filament_vendor": "eSUN"
