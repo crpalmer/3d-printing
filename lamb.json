@@ -1,6 +1,6 @@
 {
     "name": "lamb",
-    "version": "01.00.00.58",
+    "version": "01.00.00.63",
     "force_update": "0",
     "description": "Lam-B's printers",
     "machine_model_list": [
@@ -338,6 +338,10 @@
 	{
 	    "name": "Elegoo TPU 72D @lamb",
 	    "sub_path": "filament/elegoo/tpu-72d.json"
+	},
+	{
+	    "name": "eSUN PLA= @lamb",
+	    "sub_path": "filament/esun/pla+.json"
 	},
 	{
 	    "name": "Panchroma PLA @lamb",
