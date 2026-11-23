@@ -121,6 +121,8 @@ def install_lamb():
                             filter = True
                     elif 'U1-process' in sub_path.parts:
                         handle_system_preset(name, sub_path, 'U1-', 'Snapmaker')
+                    elif 'U1-filament' in sub_path.parts:
+                        handle_system_preset(name, sub_path, 'U1-', 'Snapmaker')
                     else:
                         print("Lamb " + str(sub_path))
                         path = Path("lamb") / Path(sub_path)

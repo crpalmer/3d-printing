@@ -1,6 +1,6 @@
 {
     "name": "lamb",
-    "version": "01.00.00.46",
+    "version": "01.00.00.51",
     "force_update": "0",
     "description": "Lam-B's printers",
     "machine_model_list": [
@@ -328,10 +328,6 @@
     ],
     "filament_list": [
 	{
-	    "name": "Elegoo PETG @lamb",
-	    "sub_path": "filament/elegoo/petg.json"
-	},
-	{
 	    "name": "Elegoo PLA+ @lamb",
 	    "sub_path": "filament/elegoo/pla+.json"
 	},
@@ -358,6 +354,14 @@
 	{
 	    "name": "Polymaker PC Max @lamb",
 	    "sub_path": "filament/polymaker/pc-max.json"
+	},
+	{
+	    "name": "Snapmaker PLA SnapSpeed @lamb base",
+	    "sub_path": "U1-filament/Snapmaker PLA SnapSpeed @U1 base.json"
+	},
+	{
+	    "name": "Snapmaker SnapSpeed PLA @lamb",
+	    "sub_path": "filament/snapmaker/snapspeed.json"
 	}
     ]
 }
