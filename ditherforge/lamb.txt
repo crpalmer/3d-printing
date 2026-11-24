@@ -13,6 +13,8 @@
 #C2BAA7 4.0 esun bone white
 #5F6244 0.1 panchroma army green matte
 #EED1A8 1.5 panchroma parchment
+#BF9573 0.7 panchroma pastel peanut
+#0163A6 0.1 panchroma sapphire blue
 #616469 0.6 panchroma steel grey
 #69350F 0.2 snapspeed brown
 #E2DEDB 6.6 snapspeed pearl white
