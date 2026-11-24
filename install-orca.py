@@ -2,6 +2,7 @@
 
 import json
 from pathlib import Path
+import re
 import subprocess
 import shutil
 import sys
@@ -105,6 +106,7 @@ def should_filter(json, filtered):
 
 def install_lamb():
     global new_filaments
+    global remove_filaments
 
     lamb = read_json('lamb.json')
     filtered = []
@@ -145,6 +147,9 @@ def install_lamb():
                             if "type" in json and json["type"] == "filament":
                                 print("    Adding custom filament " + json["name"])
                                 new_filaments.append(json["name"])
+                                inherits = json.get('inherits')
+                                if inherits and not "@lamb" in inherits:
+                                    remove_filaments.append(re.sub(' @.*', '', inherits))
                     if filter:
                         to_filter = str(sub_path)
                         print("    skipping " + to_filter)
@@ -160,6 +165,7 @@ def install_lamb():
     write_json(system_dir / "lamb.json", new_lamb)
 
 def do_it_all(root):
+    global remove_filaments
     global new_filaments
     global orca_root
     global system_dir
@@ -177,6 +183,10 @@ def do_it_all(root):
     print("**** Installing to: ", orca_root)
     print()
 
+    remove_filaments = []
+    new_filaments = []
+    install_lamb()
+
     orcaslicer_conf = orca_root / "OrcaSlicer.conf"
     if not orcaslicer_conf.exists():
         orcaslicer_conf = orca_root / "Snapmaker_Orca.conf"
@@ -184,14 +194,13 @@ def do_it_all(root):
     print("Removing our filaments from " + str(orcaslicer_conf))
     config = read_json(orcaslicer_conf)
     filaments = config["filaments"]
-    new_filaments = []
     for filament in filaments:
-        if "@lamb" not in filament:
-            new_filaments.append(filament)
-        else:
+        if '@lamb' in filament:
             print("    Removing " + filament)
-
-    install_lamb()
+        elif re.sub(' @.*', '', filament) in remove_filaments:
+            print("    Removing inherits " + filament)
+        else:
+            new_filaments.append(filament)
 
     config["filaments"] = new_filaments
     write_json(orcaslicer_conf, config)
