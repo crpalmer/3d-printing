@@ -1,6 +1,6 @@
 {
     "name": "lamb",
-    "version": "01.00.00.64",
+    "version": "01.00.00.65",
     "force_update": "0",
     "description": "Lam-B's printers",
     "machine_model_list": [
@@ -346,6 +346,10 @@
 	{
 	    "name": "Panchroma PLA @lamb",
 	    "sub_path": "filament/polymaker/panchroma.json"
+	},
+	{
+	    "name": "Panchroma PLA Matte @lamb",
+	    "sub_path": "filament/polymaker/panchroma-matte.json"
 	},
 	{
 	    "name": "Polysupport @lamb",
