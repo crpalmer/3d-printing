@@ -1,5 +1,5 @@
 {
-    "lamb-includes": [ "base.json" ],
+    "lamb-includes": [ "base.json", "minimal-purge.json" ],
     "inherits": "Bambu Support For PLA @System",
     "name": "PolySupport @lamb",
     "filament_vendor": "Polymaker",
